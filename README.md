@@ -3869,897 +3869,249 @@ Se presenta un diccionario detallado de clases para el Bounded Context Communica
 
 **1. `NotificationRequest` (Aggregate Root)**
 
-Representa una solicitud de notificación con capacidad de programación, entrega multi-canal, seguimiento de intentos y gestión de estados del ciclo de vida de notificaciones.
+Representa una solicitud de notificación generada por otro módulo del sistema. Define el destinatario, canal, prioridad y plantilla a utilizar para enviar mensajes por correo, SMS o notificaciones push.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único de la solicitud. |
-| `requestId` | `NotificationRequestId` | `private` | Identificador de dominio de la solicitud. |
-| `sourceContext` | `SourceContext` | `private` | Contexto de origen de la notificación. |
-| `recipientId` | `RecipientId` | `private` | Identificador del destinatario. |
-| `recipientType` | `RecipientType` | `private` | Tipo de destinatario de la notificación. |
-| `messageType` | `MessageType` | `private` | Tipo de mensaje de la notificación. |
-| `priority` | `Priority` | `private` | Prioridad de la notificación. |
-| `channels` | `List<DeliveryChannel>` | `private` | Lista de canales de entrega. |
-| `templateId` | `TemplateId` | `private` | Identificador de la plantilla asociada. |
-| `templateData` | `TemplateData` | `private` | Datos para renderizar la plantilla. |
-| `scheduledDate` | `LocalDateTime` | `private` | Fecha programada de entrega. |
-| `expiryDate` | `LocalDateTime` | `private` | Fecha de expiración de la notificación. |
-| `status` | `RequestStatus` | `private` | Estado actual de la solicitud. |
-| `deliveryAttempts` | `List<DeliveryAttempt>` | `private` | Lista de intentos de entrega. |
-| `createdAt` | `LocalDateTime` | `private` | Fecha de creación de la solicitud. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
+| Atributo         | Tipo                        | Visibilidad  | Descripción                                                      |
+|------------------|-----------------------------|--------------|------------------------------------------------------------------|
+| `id`             | `String`                    | `private`    | Identificador único de la solicitud de notificación.             |
+| `sourceContext`  | `SourceContext`             | `private`    | Contexto o módulo del sistema que generó la solicitud.           |
+| `recipientId`    | `RecipientId`               | `private`    | Identificador del destinatario de la notificación.               |
+| `recipientType`  | `RecipientType`             | `private`    | Tipo de destinatario (ciudadano, conductor o administrador).     |
+| `recipientEmail` | `EmailAddress`              | `private`    | Correo electrónico del destinatario.                             |
+| `recipientPhone` | `PhoneNumber`               | `private`    | Número telefónico del destinatario.                              |
+| `messageType`    | `MessageType`               | `private`    | Tipo de mensaje según su propósito (alerta, recordatorio, etc.). |
+| `templateId`     | `TemplateId`                | `private`    | Identificador de la plantilla de mensaje asociada.               |
+| `templateData`   | `Map<String, String>`       | `private`    | Datos dinámicos utilizados para personalizar el mensaje.         |
+| `channels`       | `List<NotificationChannel>` | `private`    | Canales de comunicación seleccionados para el envío.             |
+| `priority`       | `NotificationPriority`      | `private`    | Nivel de prioridad de la notificación.                           |
+| `scheduledFor`   | `LocalDateTime`             | `private`    | Fecha y hora programada para el envío.                           |
+| `expiresAt`      | `LocalDateTime`             | `private`    | Fecha de expiración del mensaje.                                 |
+| `status`         | `RequestStatus`             | `private`    | Estado actual de la solicitud.                                   |
+| `sentAt`         | `LocalDateTime`             | `private`    | Fecha y hora en que fue enviada la notificación.                 |
+| `createdAt`      | `LocalDateTime`             | `private`    | Fecha y hora de creación del registro.                           |
+| `failureReason`  | `String`                    | `private`    | Motivo del fallo si la notificación no fue enviada.              |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `NotificationRequest()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `NotificationRequest(sourceContext, recipientId, messageType)` | `Constructor` | `public` | Constructor que instancia una solicitud con datos básicos. |
-| `addDeliveryChannel(channel)` | `void` | `public` | Agrega un canal de entrega a la solicitud. |
-| `scheduleDelivery(scheduledDate)` | `void` | `public` | Programa la entrega para una fecha específica. |
-| `processDelivery()` | `DeliveryResult` | `public` | Procesa la entrega de la notificación. |
-| `markAsDelivered(channel, deliveryId)` | `void` | `public` | Marca la notificación como entregada. |
-| `markAsFailed(channel, reason)` | `void` | `public` | Marca la notificación como fallida. |
-| `canBeRetried()` | `boolean` | `public` | Determina si la notificación puede ser reintentada. |
-| `isExpired()` | `boolean` | `public` | Determina si la notificación ha expirado. |
-| `isScheduled()` | `boolean` | `public` | Determina si la notificación está programada. |
-| `canBeProcessed()` | `boolean` | `public` | Determina si la notificación puede ser procesada. |
-| `canBeCancelled()` | `boolean` | `public` | Determina si la notificación puede ser cancelada. |
-| `getPreferredChannel()` | `DeliveryChannel` | `public` | Obtiene el canal preferido de entrega. |
-| `requiresImmediateDelivery()` | `boolean` | `public` | Determina si requiere entrega inmediata. |
-| `getAvailableActions()` | `List<NotificationAction>` | `public` | Obtiene las acciones disponibles según el estado. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
-
-**2. `MessageTemplate` (Aggregate Root)**
-
-Representa una plantilla de mensaje reutilizable con soporte multi-idioma, variables dinámicas, validaciones y gestión de versiones para diferentes canales de comunicación.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único de la plantilla. |
-| `templateId` | `TemplateId` | `private` | Identificador de dominio de la plantilla. |
-| `name` | `String` | `private` | Nombre descriptivo de la plantilla. |
-| `category` | `TemplateCategory` | `private` | Categoría de la plantilla. |
-| `messageType` | `MessageType` | `private` | Tipo de mensaje de la plantilla. |
-| `channels` | `List<DeliveryChannel>` | `private` | Lista de canales compatibles. |
-| `subject` | `String` | `private` | Asunto de la plantilla. |
-| `bodyTemplate` | `String` | `private` | Cuerpo de la plantilla con variables. |
-| `variables` | `List<TemplateVariable>` | `private` | Lista de variables de la plantilla. |
-| `localization` | `Map<Language, LocalizedContent>` | `private` | Contenido localizado por idioma. |
-| `version` | `TemplateVersion` | `private` | Versión de la plantilla. |
-| `status` | `TemplateStatus` | `private` | Estado actual de la plantilla. |
-| `metadata` | `TemplateMetadata` | `private` | Metadatos de la plantilla. |
-| `createdAt` | `LocalDateTime` | `private` | Fecha de creación de la plantilla. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `MessageTemplate()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `MessageTemplate(name, category, messageType)` | `Constructor` | `public` | Constructor que instancia una plantilla con datos básicos. |
-| `updateContent(subject, body)` | `void` | `public` | Actualiza el contenido de la plantilla. |
-| `addLocalization(language, content)` | `void` | `public` | Agrega localización en un idioma específico. |
-| `addVariable(variable)` | `void` | `public` | Agrega una variable a la plantilla. |
-| `renderMessage(data, language)` | `RenderedMessage` | `public` | Renderiza el mensaje con datos específicos. |
-| `isCompatibleWith(channel)` | `boolean` | `public` | Determina si es compatible con un canal. |
-| `validateTemplate()` | `ValidationResult` | `public` | Valida la consistencia de la plantilla. |
-| `activate()` | `void` | `public` | Activa la plantilla para uso. |
-| `deactivate()` | `void` | `public` | Desactiva la plantilla. |
-| `canBeModified()` | `boolean` | `public` | Determina si la plantilla puede ser modificada. |
-| `canBeActivated()` | `boolean` | `public` | Determina si la plantilla puede ser activada. |
-| `canBeDeactivated()` | `boolean` | `public` | Determina si la plantilla puede ser desactivada. |
-| `getAvailableActions()` | `List<TemplateAction>` | `public` | Obtiene las acciones disponibles según el estado. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
-
-**3. `DeliveryRecord` (Aggregate Root)**
-
-Representa un registro de entrega de notificación con seguimiento de estado, costos, metadatos de proveedor y capacidades de confirmación y reintento.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del registro. |
-| `recordId` | `DeliveryRecordId` | `private` | Identificador de dominio del registro. |
-| `requestId` | `NotificationRequestId` | `private` | Identificador de la solicitud asociada. |
-| `recipientId` | `RecipientId` | `private` | Identificador del destinatario. |
-| `channel` | `DeliveryChannel` | `private` | Canal de entrega utilizado. |
-| `providerTransactionId` | `String` | `private` | Identificador de transacción del proveedor. |
-| `status` | `DeliveryStatus` | `private` | Estado actual de la entrega. |
-| `attemptNumber` | `Integer` | `private` | Número de intento de entrega. |
-| `deliveryDate` | `LocalDateTime` | `private` | Fecha de entrega. |
-| `confirmationDate` | `LocalDateTime` | `private` | Fecha de confirmación de entrega. |
-| `failureReason` | `FailureReason` | `private` | Razón del fallo si aplica. |
-| `cost` | `MonetaryAmount` | `private` | Costo de la entrega. |
-| `metadata` | `DeliveryMetadata` | `private` | Metadatos adicionales de la entrega. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `DeliveryRecord()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `DeliveryRecord(requestId, channel)` | `Constructor` | `public` | Constructor que instancia un registro con datos básicos. |
-| `markAsDelivered(providerTransactionId)` | `void` | `public` | Marca la entrega como exitosa. |
-| `markAsFailed(reason)` | `void` | `public` | Marca la entrega como fallida. |
-| `markAsConfirmed()` | `void` | `public` | Marca la entrega como confirmada. |
-| `calculateDeliveryTime()` | `Duration` | `public` | Calcula el tiempo de entrega. |
-| `isSuccessful()` | `boolean` | `public` | Determina si la entrega fue exitosa. |
-| `canBeRetried()` | `boolean` | `public` | Determina si la entrega puede ser reintentada. |
-| `canBeUpdated()` | `boolean` | `public` | Determina si el registro puede ser actualizado. |
-| `getAvailableActions()` | `List<DeliveryAction>` | `public` | Obtiene las acciones disponibles según el estado. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
+| Método                 | Tipo de Retorno  | Visibilidad  | Descripción                                                      |
+|------------------------|------------------|--------------|------------------------------------------------------------------|
+| `send()`               | `void`           | `public`     | Envía la notificación por los canales definidos.                 |
+| `fail(reason: String)` | `void`           | `public`     | Marca la solicitud como fallida con una razón específica.        |
+| `expire()`             | `void`           | `public`     | Expira la solicitud si supera su tiempo límite.                  |
+| `isExpired()`          | `boolean`        | `public`     | Indica si la solicitud ha expirado.                              |
+| `shouldSendNow()`      | `boolean`        | `public`     | Determina si la notificación debe enviarse en el momento actual. |
+| `isPending()`          | `boolean`        | `public`     | Verifica si la solicitud aún está pendiente de envío.            |
 
 ---
 
-**Entities**
+**2. `DeliveryAttempt` (Aggregate Root)**
 
-**4. `DeliveryAttempt` (Entity)**
-
-Representa un intento individual de entrega de notificación con información de canal, estado, respuesta del proveedor y programación de reintentos.
+Registra cada intento de entrega asociado a una solicitud de notificación. Controla el canal, proveedor, costo y resultado del intento.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del intento. |
-| `attemptId` | `AttemptId` | `private` | Identificador de dominio del intento. |
-| `requestId` | `NotificationRequestId` | `private` | Identificador de la solicitud asociada. |
-| `channel` | `DeliveryChannel` | `private` | Canal de entrega utilizado. |
-| `attemptNumber` | `Integer` | `private` | Número de intento. |
-| `attemptDate` | `LocalDateTime` | `private` | Fecha del intento. |
-| `status` | `AttemptStatus` | `private` | Estado del intento. |
-| `providerResponse` | `ProviderResponse` | `private` | Respuesta del proveedor de entrega. |
-| `errorCode` | `String` | `private` | Código de error si aplica. |
-| `errorMessage` | `String` | `private` | Mensaje de error si aplica. |
-| `retryDate` | `LocalDateTime` | `private` | Fecha programada para reintento. |
+| Atributo            | Tipo                    | Visibilidad   | Descripción                                                    |
+|---------------------|-------------------------|---------------|----------------------------------------------------------------|
+| `id`                | `String`                | `private`     | Identificador único del intento de entrega.                    |
+| `requestId`         | `NotificationRequestId` | `private`     | Identificador de la solicitud de notificación asociada.        |
+| `channel`           | `NotificationChannel`   | `private`     | Canal utilizado para el intento de entrega (Email, SMS, Push). |
+| `provider`          | `ProviderType`          | `private`     | Proveedor de envío empleado (SendGrid, Twilio, Firebase).      |
+| `providerMessageId` | `String`                | `private`     | Identificador del mensaje en el sistema del proveedor.         |
+| `status`            | `AttemptStatus`         | `private`     | Estado actual del intento.                                     |
+| `attemptNumber`     | `Integer`               | `private`     | Número de intento realizado.                                   |
+| `canRetry`          | `Boolean`               | `private`     | Indica si el intento puede reintentarse.                       |
+| `sentAt`            | `LocalDateTime`         | `private`     | Fecha y hora de envío.                                         |
+| `deliveredAt`       | `LocalDateTime`         | `private`     | Fecha y hora de entrega exitosa.                               |
+| `errorCode`         | `String`                | `private`     | Código de error retornado por el proveedor.                    |
+| `errorMessage`      | `String`                | `private`     | Mensaje descriptivo del error.                                 |
+| `cost`              | `Money`                 | `private`     | Costo asociado al intento de envío.                            |
+| `createdAt`         | `LocalDateTime`         | `private`     | Fecha y hora de creación del registro.                         |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `DeliveryAttempt(requestId, channel)` | `Constructor` | `public` | Constructor que instancia un intento con datos básicos. |
-| `isSuccessful()` | `boolean` | `public` | Determina si el intento fue exitoso. |
-| `canRetry()` | `boolean` | `public` | Determina si el intento puede ser reintentado. |
-| `getNextRetryDate()` | `LocalDateTime` | `public` | Obtiene la fecha del próximo reintento. |
+| Método                                                | Tipo de Retorno  | Visibilidad   | Descripción                                                   |
+|-------------------------------------------------------|------------------|---------------|---------------------------------------------------------------|
+| `markAsDelivered(providerMessageId: String)`          | `void`           | `public`      | Marca el intento como exitosamente entregado.                 |
+| `markAsFailed(errorCode: String, retryable: boolean)` | `void`           | `public`      | Marca el intento como fallido e indica si puede reintentarse. |
+| `canBeRetried()`                                      | `boolean`        | `public`      | Indica si el intento puede ser reintentado.                   |
+| `calculateDeliveryTime()`                             | `Duration`       | `public`      | Calcula la duración entre el envío y la entrega.              |
 
-**5. `RecipientPreference` (Entity)**
+---
 
-Representa las preferencias de notificación de un destinatario con configuración de canales, horarios de silencio, idioma y frecuencia de notificaciones.
+**3. `MessageTemplate` (Aggregate Root)**
 
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único de la preferencia. |
-| `preferenceId` | `PreferenceId` | `private` | Identificador de dominio de la preferencia. |
-| `recipientId` | `RecipientId` | `private` | Identificador del destinatario. |
-| `recipientType` | `RecipientType` | `private` | Tipo de destinatario. |
-| `preferredChannels` | `List<DeliveryChannel>` | `private` | Lista de canales preferidos. |
-| `blockedChannels` | `List<DeliveryChannel>` | `private` | Lista de canales bloqueados. |
-| `quietHours` | `QuietHours` | `private` | Horarios de silencio configurados. |
-| `language` | `Language` | `private` | Idioma preferido del destinatario. |
-| `timezone` | `Timezone` | `private` | Zona horaria del destinatario. |
-| `frequency` | `NotificationFrequency` | `private` | Frecuencia de notificaciones. |
-| `isActive` | `boolean` | `private` | Indica si las preferencias están activas. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `RecipientPreference(recipientId, recipientType)` | `Constructor` | `public` | Constructor que instancia preferencias con datos básicos. |
-| `getPreferredChannel(messageType)` | `DeliveryChannel` | `public` | Obtiene el canal preferido para un tipo de mensaje. |
-| `isChannelAllowed(channel)` | `boolean` | `public` | Determina si un canal está permitido. |
-| `isInQuietHours(timestamp)` | `boolean` | `public` | Determina si está en horario de silencio. |
-| `shouldReceiveNotification(messageType)` | `boolean` | `public` | Determina si debe recibir un tipo de notificación. |
-
-**6. `TemplateVariable` (Entity)**
-
-Representa una variable de plantilla con tipo de datos, validaciones, valor por defecto y reglas de formateo.
+Define las plantillas de mensaje preconfiguradas utilizadas por el sistema para enviar notificaciones personalizadas por diferentes canales (correo, SMS o push).
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único de la variable. |
-| `variableId` | `VariableId` | `private` | Identificador de dominio de la variable. |
-| `name` | `String` | `private` | Nombre de la variable. |
-| `dataType` | `VariableDataType` | `private` | Tipo de datos de la variable. |
-| `isRequired` | `boolean` | `private` | Indica si la variable es requerida. |
-| `defaultValue` | `String` | `private` | Valor por defecto de la variable. |
-| `validation` | `ValidationRule` | `private` | Regla de validación de la variable. |
-| `description` | `String` | `private` | Descripción de la variable. |
+| Atributo            | Tipo                        | Visibilidad   | Descripción                                         |
+|---------------------|-----------------------------|---------------|-----------------------------------------------------|
+| `id`                | `String`                    | `private`     | Identificador único de la plantilla.                |
+| `name`              | `String`                    | `private`     | Nombre descriptivo de la plantilla.                 |
+| `category`          | `TemplateCategory`          | `private`     | Categoría funcional de la plantilla.                |
+| `supportedChannels` | `List<NotificationChannel>` | `private`     | Canales en los que puede utilizarse esta plantilla. |
+| `emailSubject`      | `String`                    | `private`     | Asunto del correo electrónico.                      |
+| `emailBody`         | `String`                    | `private`     | Cuerpo del mensaje de correo.                       |
+| `smsBody`           | `String`                    | `private`     | Contenido del mensaje SMS.                          |
+| `pushTitle`         | `String`                    | `private`     | Título de la notificación push.                     |
+| `pushBody`          | `String`                    | `private`     | Cuerpo de la notificación push.                     |
+| `variables`         | `List<String>`              | `private`     | Variables dinámicas utilizadas en la plantilla.     |
+| `isActive`          | `Boolean`                   | `private`     | Indica si la plantilla está activa.                 |
+| `createdAt`         | `LocalDateTime`             | `private`     | Fecha y hora de creación del registro.              |
+| `updatedAt`         | `LocalDateTime`             | `private`     | Fecha y hora de la última actualización.            |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `TemplateVariable(name, dataType)` | `Constructor` | `public` | Constructor que instancia una variable con datos básicos. |
-| `validate(value)` | `ValidationResult` | `public` | Valida un valor contra las reglas. |
-| `getFormattedValue(value, format)` | `String` | `public` | Obtiene el valor formateado según especificación. |
+| Método                                                                      | Tipo de Retorno  | Visibilidad  | Descripción                                                   |
+|-----------------------------------------------------------------------------|------------------|--------------|---------------------------------------------------------------|
+| `renderForChannel(channel: NotificationChannel, data: Map<String, String>)` | `String`         | `public`     | Genera el mensaje final sustituyendo las variables dinámicas. |
+| `supportsChannel(channel: NotificationChannel)`                             | `boolean`        | `public`     | Verifica si la plantilla admite un canal específico.          |
+| `activate()`                                                                | `void`           | `public`     | Activa la plantilla para su uso.                              |
+| `deactivate()`                                                              | `void`           | `public`     | Desactiva la plantilla temporalmente.                         |
 
 ---
 
 **Value Objects**
 
-**7. `NotificationRequestId` (Value Object)**
+**4. `RecipientId` (Value Object)**
 
-Identificador único inmutable para una solicitud de notificación en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `requestId` | `String` | `private` | Valor alfanumérico del identificador de solicitud. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isValid()` | `Boolean` | `public` | Valida que el identificador sea válido. |
-
-**8. `TemplateId` (Value Object)**
-
-Identificador único inmutable para una plantilla de mensaje en el sistema.
+Identificador único que representa al destinatario de una notificación.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `templateId` | `String` | `private` | Valor alfanumérico del identificador de plantilla. |
-
-**9. `DeliveryRecordId` (Value Object)**
-
-Identificador único inmutable para un registro de entrega en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `recordId` | `String` | `private` | Valor alfanumérico del identificador de registro. |
-
-**10. `DeliveryChannel` (Value Object)**
-
-Canal de entrega de notificaciones con capacidades de identificación y categorización.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `channel` | `String` | `private` | Nombre del canal de entrega. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isEmail()` | `boolean` | `public` | Determina si es canal de email. |
-| `isSMS()` | `boolean` | `public` | Determina si es canal de SMS. |
-| `isPush()` | `boolean` | `public` | Determina si es canal de push notification. |
-| `isInApp()` | `boolean` | `public` | Determina si es canal in-app. |
-| `getChannelName()` | `String` | `public` | Obtiene el nombre del canal. |
-
-**11. `Priority` (Value Object)**
-
-Prioridad de notificación con nivel numérico y capacidades de comparación.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `level` | `Integer` | `private` | Nivel numérico de prioridad. |
-| `description` | `String` | `private` | Descripción textual de la prioridad. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isHighPriority()` | `boolean` | `public` | Determina si es de alta prioridad. |
-| `isCritical()` | `boolean` | `public` | Determina si es crítica. |
-| `compareTo(other)` | `int` | `public` | Compara con otra prioridad. |
-
-**12. `TemplateData` (Value Object)**
-
-Datos utilizados para renderizar plantillas con variables dinámicas.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `data` | `Map<String, Object>` | `private` | Mapa de datos clave-valor. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getValue(key)` | `Object` | `public` | Obtiene el valor de una clave. |
-| `containsKey(key)` | `boolean` | `public` | Determina si contiene una clave. |
-| `merge(other)` | `TemplateData` | `public` | Combina con otros datos de plantilla. |
-
-**13. `RenderedMessage` (Value Object)**
-
-Mensaje renderizado listo para entrega con contenido formateado y metadatos.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `subject` | `String` | `private` | Asunto del mensaje renderizado. |
-| `body` | `String` | `private` | Cuerpo del mensaje renderizado. |
-| `channel` | `DeliveryChannel` | `private` | Canal de entrega del mensaje. |
-| `metadata` | `MessageMetadata` | `private` | Metadatos adicionales del mensaje. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getSubject()` | `String` | `public` | Obtiene el asunto del mensaje. |
-| `getBody()` | `String` | `public` | Obtiene el cuerpo del mensaje. |
-| `getMetadata()` | `MessageMetadata` | `public` | Obtiene los metadatos del mensaje. |
-
-**14. `MessageType` (Value Object)**
-
-Tipo de mensaje con categorización y capacidades de clasificación.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `type` | `String` | `private` | Tipo específico del mensaje. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAlert()` | `boolean` | `public` | Determina si es un mensaje de alerta. |
-| `isNotification()` | `boolean` | `public` | Determina si es una notificación. |
-| `isMarketing()` | `boolean` | `public` | Determina si es un mensaje de marketing. |
-| `isTransactional()` | `boolean` | `public` | Determina si es un mensaje transaccional. |
-
-**15. `QuietHours` (Value Object)**
-
-Horarios de silencio configurados para un destinatario con zona horaria.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `startTime` | `LocalTime` | `private` | Hora de inicio del período de silencio. |
-| `endTime` | `LocalTime` | `private` | Hora de fin del período de silencio. |
-| `timezone` | `Timezone` | `private` | Zona horaria del período. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isInQuietPeriod(timestamp)` | `boolean` | `public` | Determina si una marca de tiempo está en período silencioso. |
-| `getDuration()` | `Duration` | `public` | Obtiene la duración del período de silencio. |
-
-**16. `SourceContext` (Value Object)**
-
-Contexto de origen de una notificación con identificación y metadatos.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `contextName` | `String` | `private` | Nombre del contexto de origen. |
-| `contextId` | `String` | `private` | Identificador del contexto. |
-| `metadata` | `Map<String, String>` | `private` | Metadatos adicionales del contexto. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getFullContext()` | `String` | `public` | Obtiene el contexto completo formateado. |
+| Atributo  | Tipo     | Visibilidad  | Descripción                           |
+|-----------|----------|--------------|---------------------------------------|
+| `value`   | `String` | `private`    | Identificador único del destinatario. |
 
 ---
 
-**Enums**
+**5. `TemplateId` (Value Object)**
 
-**17. `RequestStatus` (Enum)**
-
-Estados posibles de una solicitud de notificación durante su ciclo de vida.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `DRAFT` | Solicitud en estado de borrador. |
-| `SCHEDULED` | Solicitud programada para entrega. |
-| `PROCESSING` | Solicitud en proceso de entrega. |
-| `DELIVERED` | Solicitud entregada exitosamente. |
-| `FAILED` | Solicitud fallida en la entrega. |
-| `CANCELLED` | Solicitud cancelada. |
-| `EXPIRED` | Solicitud expirada. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canTransitionTo(newStatus)` | `boolean` | `public` | Valida si puede transicionar al nuevo estado. |
-| `isDelivered()` | `boolean` | `public` | Determina si está entregado. |
-| `isFailed()` | `boolean` | `public` | Determina si falló. |
-| `canBeRetried()` | `boolean` | `public` | Determina si puede ser reintentado. |
-| `canBeCancelled()` | `boolean` | `public` | Determina si puede ser cancelado. |
-| `getAvailableTransitions()` | `List<RequestStatus>` | `public` | Obtiene las transiciones disponibles. |
-
-**18. `TemplateStatus` (Enum)**
-
-Estados posibles de una plantilla de mensaje durante su ciclo de vida.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `DRAFT` | Plantilla en estado de borrador. |
-| `ACTIVE` | Plantilla activa y disponible. |
-| `INACTIVE` | Plantilla inactiva temporalmente. |
-| `DEPRECATED` | Plantilla obsoleta. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canTransitionTo(newStatus)` | `boolean` | `public` | Valida si puede transicionar al nuevo estado. |
-| `isActive()` | `boolean` | `public` | Determina si está activa. |
-| `canBeModified()` | `boolean` | `public` | Determina si puede ser modificada. |
-| `canBeActivated()` | `boolean` | `public` | Determina si puede ser activada. |
-| `getAvailableTransitions()` | `List<TemplateStatus>` | `public` | Obtiene las transiciones disponibles. |
-
-**19. `DeliveryStatus` (Enum)**
-
-Estados posibles de un registro de entrega durante su procesamiento.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `PENDING` | Entrega pendiente de procesamiento. |
-| `IN_PROGRESS` | Entrega en progreso. |
-| `DELIVERED` | Entrega completada exitosamente. |
-| `FAILED` | Entrega fallida. |
-| `CONFIRMED` | Entrega confirmada por el destinatario. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canTransitionTo(newStatus)` | `boolean` | `public` | Valida si puede transicionar al nuevo estado. |
-| `isDelivered()` | `boolean` | `public` | Determina si está entregado. |
-| `isFailed()` | `boolean` | `public` | Determina si falló. |
-| `canBeUpdated()` | `boolean` | `public` | Determina si puede ser actualizado. |
-| `getAvailableTransitions()` | `List<DeliveryStatus>` | `public` | Obtiene las transiciones disponibles. |
-
-**20. `NotificationAction` (Enum)**
-
-Acciones disponibles que se pueden realizar sobre una solicitud de notificación.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `SCHEDULE` | Programar la notificación. |
-| `SEND` | Enviar la notificación. |
-| `RETRY` | Reintentar la notificación. |
-| `CANCEL` | Cancelar la notificación. |
-| `UPDATE_PRIORITY` | Actualizar la prioridad. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAllowedForStatus(status)` | `boolean` | `public` | Determina si la acción está permitida para el estado. |
-| `requiresChannel()` | `boolean` | `public` | Determina si requiere especificación de canal. |
-
-**21. `TemplateAction` (Enum)**
-
-Acciones disponibles que se pueden realizar sobre una plantilla de mensaje.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `ACTIVATE` | Activar la plantilla. |
-| `DEACTIVATE` | Desactivar la plantilla. |
-| `UPDATE_CONTENT` | Actualizar el contenido. |
-| `ADD_LOCALIZATION` | Agregar localización. |
-| `DEPRECATE` | Marcar como obsoleta. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAllowedForStatus(status)` | `boolean` | `public` | Determina si la acción está permitida para el estado. |
-| `requiresValidation()` | `boolean` | `public` | Determina si requiere validación. |
-
-**22. `DeliveryAction` (Enum)**
-
-Acciones disponibles que se pueden realizar sobre un registro de entrega.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `RETRY` | Reintentar la entrega. |
-| `CONFIRM` | Confirmar la entrega. |
-| `UPDATE_STATUS` | Actualizar el estado. |
-| `CANCEL` | Cancelar la entrega. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAllowedForStatus(status)` | `boolean` | `public` | Determina si la acción está permitida para el estado. |
-| `requiresProvider()` | `boolean` | `public` | Determina si requiere interacción con proveedor. |
-
----
-
-**Application Services**
-
-**23. `NotificationApplicationService` (Application Service)**
-
-Servicio de aplicación que coordina las operaciones de negocio relacionadas con solicitudes de notificación y su procesamiento.
+Identificador único de una plantilla de mensaje registrada en el sistema.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `notificationRepository` | `NotificationRepository` | `private` | Repositorio para persistencia de notificaciones. |
-| `notificationDomainService` | `NotificationDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `notificationFactory` | `NotificationFactory` | `private` | Factory para creación de notificaciones. |
-| `deliveryOrchestrationService` | `DeliveryOrchestrationService` | `private` | Servicio de orquestación de entregas. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createNotification(sourceContext, recipientId, recipientType, messageType, templateId, templateData, priority)` | `NotificationRequest` | `public` | Crea una nueva solicitud de notificación. |
-| `scheduleNotification(requestId, scheduledDate)` | `void` | `public` | Programa una notificación para entrega futura. |
-| `sendNotification(requestId, forceDelivery, overrideChannels)` | `DeliveryResult` | `public` | Envía una notificación inmediatamente. |
-| `retryNotification(requestId, channel)` | `DeliveryResult` | `public` | Reintenta una notificación fallida. |
-| `cancelNotification(requestId)` | `void` | `public` | Cancela una notificación pendiente. |
-| `getNotificationById(requestId)` | `Optional<NotificationRequest>` | `public` | Obtiene una notificación por su identificador. |
-| `getNotificationsByRecipient(recipientId, status, dateRange)` | `List<NotificationRequest>` | `public` | Obtiene notificaciones de un destinatario. |
-
-**24. `TemplateApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de plantillas de mensaje y renderizado de contenido.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `templateRepository` | `TemplateRepository` | `private` | Repositorio para persistencia de plantillas. |
-| `templateDomainService` | `TemplateDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `templateFactory` | `TemplateFactory` | `private` | Factory para creación de plantillas. |
-| `messageRenderingService` | `MessageRenderingService` | `private` | Servicio de renderizado de mensajes. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createTemplate(name, category, messageType, channels, subject, bodyTemplate, variables)` | `MessageTemplate` | `public` | Crea una nueva plantilla de mensaje. |
-| `updateTemplate(templateId, subject, bodyTemplate, variables)` | `void` | `public` | Actualiza el contenido de una plantilla. |
-| `activateTemplate(templateId)` | `void` | `public` | Activa una plantilla para uso. |
-| `deactivateTemplate(templateId)` | `void` | `public` | Desactiva una plantilla. |
-| `addLocalization(templateId, language, content)` | `void` | `public` | Agrega localización a una plantilla. |
-| `getTemplateById(templateId)` | `Optional<MessageTemplate>` | `public` | Obtiene una plantilla por su identificador. |
-| `getTemplatesByType(messageType, channel, activeOnly)` | `List<MessageTemplate>` | `public` | Obtiene plantillas por tipo y canal. |
-| `renderPreview(templateId, data, language)` | `RenderedMessage` | `public` | Genera vista previa de una plantilla. |
-
-**25. `DeliveryApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de registros de entrega y análisis de rendimiento.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `deliveryRepository` | `DeliveryRepository` | `private` | Repositorio para persistencia de entregas. |
-| `deliveryDomainService` | `DeliveryDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `deliveryRecordFactory` | `DeliveryRecordFactory` | `private` | Factory para creación de registros. |
-| `deliveryAnalyticsService` | `DeliveryAnalyticsService` | `private` | Servicio de análisis de entregas. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `recordDeliveryAttempt(requestId, channel, attemptNumber)` | `DeliveryRecord` | `public` | Registra un intento de entrega. |
-| `markDeliveryAsSuccessful(recordId, providerTransactionId)` | `void` | `public` | Marca una entrega como exitosa. |
-| `markDeliveryAsFailed(recordId, reason)` | `void` | `public` | Marca una entrega como fallida. |
-| `getDeliveryRecord(recordId)` | `Optional<DeliveryRecord>` | `public` | Obtiene un registro de entrega. |
-| `getDeliveryHistory(requestId)` | `List<DeliveryRecord>` | `public` | Obtiene historial de entregas de una solicitud. |
-| `getDeliveryAnalytics(startDate, endDate, channel)` | `DeliveryAnalytics` | `public` | Obtiene análisis de entregas. |
-| `getChannelPerformance(channel, period)` | `ChannelPerformance` | `public` | Obtiene rendimiento de un canal. |
-
-**26. `PreferenceApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de preferencias de destinatarios y verificación de elegibilidad.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `notificationRepository` | `NotificationRepository` | `private` | Repositorio para acceso a notificaciones. |
-| `preferenceDomainService` | `PreferenceDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getRecipientPreferences(recipientId)` | `Optional<RecipientPreference>` | `public` | Obtiene preferencias de un destinatario. |
-| `updatePreferences(recipientId, preferredChannels, blockedChannels, language, timezone, frequency)` | `void` | `public` | Actualiza preferencias de un destinatario. |
-| `setQuietHours(recipientId, quietHours)` | `void` | `public` | Configura horarios de silencio. |
-| `checkNotificationEligibility(recipientId, messageType, timestamp)` | `Boolean` | `public` | Verifica elegibilidad para recibir notificación. |
+| Atributo  | Tipo     | Visibilidad  | Descripción                          |
+|-----------|----------|--------------|--------------------------------------|
+| `value`   | `String` | `private`    | Identificador único de la plantilla. |
 
 ---
 
-**Domain Services**
+**Enumerations**
 
-**27. `NotificationDomainService` (Domain Service)**
+**6. `SourceContext` (Enumeration)**
 
-Servicio de dominio que implementa lógica de negocio compleja relacionada con notificaciones.
+Identifica el módulo del sistema que originó la solicitud de notificación.
 
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateNotificationCreation(request)` | `ValidationResult` | `public` | Valida la creación de una nueva notificación. |
-| `determineOptimalDeliveryChannels(request, preferences)` | `List<DeliveryChannel>` | `public` | Determina los canales óptimos de entrega. |
-| `calculateDeliverySchedule(request, preferences)` | `LocalDateTime` | `public` | Calcula la programación de entrega. |
-| `checkRecipientEligibility(recipientId, messageType)` | `Boolean` | `public` | Verifica elegibilidad del destinatario. |
-| `estimateDeliveryCost(request, channels)` | `MonetaryAmount` | `public` | Estima el costo de entrega. |
-
-**28. `TemplateDomainService` (Domain Service)**
-
-Servicio de dominio para lógica compleja relacionada con plantillas de mensaje.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateTemplateCreation(template)` | `ValidationResult` | `public` | Valida la creación de una nueva plantilla. |
-| `validateTemplateVariables(variables)` | `ValidationResult` | `public` | Valida las variables de una plantilla. |
-| `optimizeTemplateContent(template, channel)` | `String` | `public` | Optimiza el contenido para un canal específico. |
-| `checkTemplateDuplication(template, existingTemplates)` | `ValidationResult` | `public` | Verifica duplicación de plantillas. |
-| `generateTemplateMetrics(template, usage)` | `TemplateMetrics` | `public` | Genera métricas de uso de plantilla. |
-
-**29. `DeliveryDomainService` (Domain Service)**
-
-Servicio de dominio para lógica compleja relacionada con entregas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateDeliveryAttempt(record)` | `ValidationResult` | `public` | Valida un intento de entrega. |
-| `calculateRetrySchedule(record, attempt)` | `LocalDateTime` | `public` | Calcula programación de reintentos. |
-| `estimateDeliveryTime(channel, messageType)` | `Duration` | `public` | Estima tiempo de entrega. |
-| `checkProviderCapacity(channel, timestamp)` | `Boolean` | `public` | Verifica capacidad del proveedor. |
-| `calculateDeliveryCost(channel, messageType)` | `MonetaryAmount` | `public` | Calcula costo de entrega. |
-
-**30. `DeliveryOrchestrationService` (Domain Service)**
-
-Servicio de orquestación para gestión integral de entregas usando estrategias configurables.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `channelStrategy` | `ChannelSelectionStrategy` | `private` | Estrategia de selección de canales actual. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `orchestrateDelivery(request, preferences)` | `DeliveryResult` | `public` | Orquesta la entrega de una notificación. |
-| `handleDeliveryFailure(record, request)` | `RetryStrategy` | `public` | Maneja fallos de entrega. |
-| `optimizeDeliverySequence(requests)` | `List<DeliveryPlan>` | `public` | Optimiza secuencia de entregas. |
-| `setChannelStrategy(strategy)` | `void` | `public` | Establece la estrategia de selección de canales. |
-| `monitorDeliveryProgress(requests)` | `DeliveryProgress` | `public` | Monitorea el progreso de entregas. |
-
-**31. `MessageRenderingService` (Domain Service)**
-
-Servicio especializado en renderizado y procesamiento de plantillas de mensaje.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `renderMessage(template, data, channel)` | `RenderedMessage` | `public` | Renderiza un mensaje desde plantilla. |
-| `validateTemplateData(template, data)` | `ValidationResult` | `public` | Valida datos contra plantilla. |
-| `processTemplateVariables(template, data)` | `String` | `public` | Procesa variables en plantilla. |
-| `optimizeMessageForChannel(message, channel)` | `RenderedMessage` | `public` | Optimiza mensaje para canal específico. |
-| `generatePreview(template, data)` | `RenderedMessage` | `public` | Genera vista previa de mensaje. |
-
-**32. `DeliveryAnalyticsService` (Domain Service)**
-
-Servicio para análisis y generación de reportes de entregas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `generateDeliveryReport(startDate, endDate)` | `DeliveryReport` | `public` | Genera reporte de entregas. |
-| `calculateChannelPerformance(channel, period)` | `ChannelPerformance` | `public` | Calcula rendimiento de canal. |
-| `analyzeDeliveryTrends(records)` | `DeliveryTrends` | `public` | Analiza tendencias de entregas. |
-| `calculateSuccessRates(channel, messageType)` | `Double` | `public` | Calcula tasas de éxito. |
-| `generateCostAnalysis(period)` | `CostAnalysis` | `public` | Genera análisis de costos. |
-
-**33. `PreferenceDomainService` (Domain Service)**
-
-Servicio de dominio para lógica compleja relacionada con preferencias de destinatarios.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validatePreferences(preferences)` | `ValidationResult` | `public` | Valida configuración de preferencias. |
-| `mergePreferences(existing, updates)` | `RecipientPreference` | `public` | Combina preferencias existentes con actualizaciones. |
-| `determineDefaultPreferences(recipientType)` | `RecipientPreference` | `public` | Determina preferencias por defecto. |
-| `checkConsentCompliance(preferences, messageType)` | `Boolean` | `public` | Verifica cumplimiento de consentimiento. |
-| `optimizePreferences(preferences, usage)` | `RecipientPreference` | `public` | Optimiza preferencias basado en uso. |
+| Valor                  | Descripción                                             |
+|------------------------|---------------------------------------------------------|
+| `CONTAINER_MONITORING` | Solicitudes generadas por el monitoreo de contenedores. |
+| `ROUTE_PLANNING`       | Solicitudes generadas por planificación de rutas.       |
+| `COMMUNITY_RELATIONS`  | Solicitudes de comunicación comunitaria.                |
+| `PAYMENT`              | Solicitudes relacionadas con pagos y facturas.          |
+| `MUNICIPAL_OPS`        | Notificaciones generadas por operaciones municipales.   |
 
 ---
 
-**Strategies**
+**7. `NotificationChannel` (Enumeration)**
 
-**34. `ChannelSelectionStrategy` (Strategy Interface)**
+Define los canales disponibles para enviar notificaciones al usuario.
 
-Interfaz que define el contrato para diferentes estrategias de selección de canales de entrega.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `selectOptimalChannel(request, preferences)` | `DeliveryChannel` | `public` | Selecciona el canal óptimo para entrega. |
-| `getFallbackChannels(primaryChannel)` | `List<DeliveryChannel>` | `public` | Obtiene canales de respaldo. |
-| `isChannelAvailable(channel, timestamp)` | `boolean` | `public` | Verifica disponibilidad de canal. |
-
-**35. `PriorityBasedStrategy` (Strategy)**
-
-Implementación de estrategia basada en prioridad de notificación.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `selectOptimalChannel(request, preferences)` | `DeliveryChannel` | `public` | Selecciona canal basado en prioridad. |
-| `getFallbackChannels(primaryChannel)` | `List<DeliveryChannel>` | `public` | Obtiene canales de respaldo por prioridad. |
-| `isChannelAvailable(channel, timestamp)` | `boolean` | `public` | Verifica disponibilidad considerando prioridad. |
-
-**36. `CostOptimizedStrategy` (Strategy)**
-
-Implementación de estrategia optimizada por costo de entrega.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `selectOptimalChannel(request, preferences)` | `DeliveryChannel` | `public` | Selecciona canal más económico. |
-| `getFallbackChannels(primaryChannel)` | `List<DeliveryChannel>` | `public` | Obtiene canales de respaldo por costo. |
-| `isChannelAvailable(channel, timestamp)` | `boolean` | `public` | Verifica disponibilidad considerando costo. |
-
-**37. `ReliabilityBasedStrategy` (Strategy)**
-
-Implementación de estrategia basada en confiabilidad de canales.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `selectOptimalChannel(request, preferences)` | `DeliveryChannel` | `public` | Selecciona canal más confiable. |
-| `getFallbackChannels(primaryChannel)` | `List<DeliveryChannel>` | `public` | Obtiene canales de respaldo por confiabilidad. |
-| `isChannelAvailable(channel, timestamp)` | `boolean` | `public` | Verifica disponibilidad considerando confiabilidad. |
+| Valor   | Descripción                                          |
+|---------|------------------------------------------------------|
+| `EMAIL` | Envío por correo electrónico.                        |
+| `SMS`   | Envío mediante mensaje de texto.                     |
+| `PUSH`  | Envío como notificación push a dispositivos móviles. |
 
 ---
 
-**Factories**
+**8. `RequestStatus` (Enumeration)**
 
-**38. `NotificationFactory` (Factory)**
+Indica el estado actual de la solicitud de notificación.
 
-Factory para la creación de diferentes tipos de solicitudes de notificación.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createUrgentNotification(recipientId, messageType, data)` | `NotificationRequest` | `public` | Crea notificación urgente. |
-| `createScheduledNotification(recipientId, messageType, scheduledDate)` | `NotificationRequest` | `public` | Crea notificación programada. |
-| `createBulkNotification(recipients, messageType)` | `List<NotificationRequest>` | `public` | Crea notificaciones en lote. |
-| `createNotification(sourceContext, recipientId, messageType)` | `NotificationRequest` | `public` | Crea notificación con contexto específico. |
-
-**39. `TemplateFactory` (Factory)**
-
-Factory para la creación de plantillas según diferentes tipos de canal.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createEmailTemplate(name, subject, body)` | `MessageTemplate` | `public` | Crea plantilla para email. |
-| `createSMSTemplate(name, body)` | `MessageTemplate` | `public` | Crea plantilla para SMS. |
-| `createPushTemplate(name, title, body)` | `MessageTemplate` | `public` | Crea plantilla para push notification. |
-| `createTemplate(name, category, messageType)` | `MessageTemplate` | `public` | Crea plantilla con configuración específica. |
-
-**40. `DeliveryRecordFactory` (Factory)**
-
-Factory para la creación de registros de entrega según diferentes escenarios.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createDeliveryRecord(request, channel)` | `DeliveryRecord` | `public` | Crea registro para una entrega. |
-| `createRetryRecord(originalRecord)` | `DeliveryRecord` | `public` | Crea registro de reintento. |
-| `createBulkRecords(requests)` | `List<DeliveryRecord>` | `public` | Crea registros en lote. |
+| Valor     | Descripción                            |
+|-----------|----------------------------------------|
+| `PENDING` | Solicitud creada y pendiente de envío. |
+| `SENT`    | Notificación enviada correctamente.    |
+| `FAILED`  | Envío fallido.                         |
+| `EXPIRED` | Solicitud expirada por tiempo límite.  |
 
 ---
 
-**Repository Interfaces**
+**9. `NotificationPriority` (Enumeration)**
 
-**41. `NotificationRepository` (Repository Interface)**
+Define la urgencia o prioridad de la notificación.
 
-Interfaz de repositorio para la persistencia y consulta de solicitudes de notificación.
+| Valor    | Descripción                    |
+|----------|--------------------------------|
+| `LOW`    | Prioridad baja.                |
+| `NORMAL` | Prioridad normal.              |
+| `HIGH`   | Alta prioridad.                |
+| `URGENT` | Prioridad crítica o inmediata. |
 
-**Métodos principales:**
+---
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(requestId)` | `Optional<NotificationRequest>` | `public` | Busca una solicitud por su identificador. |
-| `findByRecipient(recipientId)` | `List<NotificationRequest>` | `public` | Busca solicitudes de un destinatario. |
-| `findByStatus(status)` | `List<NotificationRequest>` | `public` | Busca solicitudes por estado. |
-| `findByDateRange(startDate, endDate)` | `List<NotificationRequest>` | `public` | Busca solicitudes en un rango de fechas. |
-| `findScheduledNotifications(beforeDate)` | `List<NotificationRequest>` | `public` | Busca notificaciones programadas. |
-| `findExpiredNotifications()` | `List<NotificationRequest>` | `public` | Busca notificaciones expiradas. |
-| `save(request)` | `NotificationRequest` | `public` | Persiste o actualiza una solicitud. |
-| `delete(requestId)` | `void` | `public` | Elimina una solicitud del sistema. |
-| `existsById(requestId)` | `boolean` | `public` | Verifica si existe una solicitud. |
+**10. `RecipientType` (Enumeration)**
 
-**42. `TemplateRepository` (Repository Interface)**
+Especifica el tipo de destinatario de la notificación.
 
-Interfaz de repositorio para la persistencia y consulta de plantillas de mensaje.
+| Valor           | Descripción                          |
+|-----------------|--------------------------------------|
+| `CITIZEN`       | Ciudadano o usuario final.           |
+| `DRIVER`        | Conductor o personal de operaciones. |
+| `ADMINISTRATOR` | Administrador o autoridad municipal. |
 
-**Métodos principales:**
+---
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(templateId)` | `Optional<MessageTemplate>` | `public` | Busca una plantilla por su identificador. |
-| `findByMessageType(messageType)` | `List<MessageTemplate>` | `public` | Busca plantillas por tipo de mensaje. |
-| `findByChannel(channel)` | `List<MessageTemplate>` | `public` | Busca plantillas por canal. |
-| `findActiveTemplates()` | `List<MessageTemplate>` | `public` | Busca plantillas activas. |
-| `findByCategory(category)` | `List<MessageTemplate>` | `public` | Busca plantillas por categoría. |
-| `save(template)` | `MessageTemplate` | `public` | Persiste o actualiza una plantilla. |
-| `delete(templateId)` | `void` | `public` | Elimina una plantilla del sistema. |
-| `existsById(templateId)` | `boolean` | `public` | Verifica si existe una plantilla. |
+**11. `MessageType` (Enumeration)**
 
-**43. `DeliveryRepository` (Repository Interface)**
+Clasifica el tipo de mensaje según su propósito o contexto.
 
-Interfaz de repositorio para la persistencia y consulta de registros de entrega.
+| Valor       | Descripción                                |
+|-------------|--------------------------------------------|
+| `ALERT`     | Mensaje de alerta o emergencia.            |
+| `INFO`      | Notificación informativa.                  |
+| `REMINDER`  | Recordatorio programado.                   |
+| `MARKETING` | Mensaje de tipo promocional o de difusión. |
 
-**Métodos principales:**
+---
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(recordId)` | `Optional<DeliveryRecord>` | `public` | Busca un registro por su identificador. |
-| `findByRequestId(requestId)` | `List<DeliveryRecord>` | `public` | Busca registros de una solicitud. |
-| `findByChannel(channel)` | `List<DeliveryRecord>` | `public` | Busca registros por canal. |
-| `findByStatus(status)` | `List<DeliveryRecord>` | `public` | Busca registros por estado. |
-| `findByDateRange(startDate, endDate)` | `List<DeliveryRecord>` | `public` | Busca registros en un rango de fechas. |
-| `findFailedDeliveries()` | `List<DeliveryRecord>` | `public` | Busca entregas fallidas. |
-| `save(record)` | `DeliveryRecord` | `public` | Persiste o actualiza un registro. |
-| `delete(recordId)` | `void` | `public` | Elimina un registro del sistema. |
-| `existsById(recordId)` | `boolean` | `public` | Verifica si existe un registro. |
+**12. `ProviderType` (Enumeration)**
+
+Identifica el proveedor externo responsable del envío de la notificación.
+
+| Valor      | Descripción                       |
+|------------|-----------------------------------|
+| `SENDGRID` | Proveedor de correo electrónico.  |
+| `TWILIO`   | Proveedor de mensajería SMS.      |
+| `FIREBASE` | Proveedor de notificaciones push. |
+
+---
+
+**13. `AttemptStatus` (Enumeration)**
+
+Define el estado actual del intento de entrega.
+
+| Valor       | Descripción                                        |
+|-------------|----------------------------------------------------|
+| `PENDING`   | Intento pendiente de ejecución.                    |
+| `DELIVERED` | Intento exitosamente entregado.                    |
+| `FAILED`    | Intento fallido.                                   |
+| `BOUNCED`   | Intento rechazado o no entregado por el proveedor. |
+
+---
+
+**14. `TemplateCategory` (Enumeration)**
+
+Clasifica las plantillas de mensajes según su función dentro del sistema.
+
+| Valor            | Descripción                                     |
+|------------------|-------------------------------------------------|
+| `OPERATIONAL`    | Plantillas para notificaciones operativas.      |
+| `ADMINISTRATIVE` | Plantillas para comunicaciones administrativas. |
+| `MARKETING`      | Plantillas destinadas a campañas o difusión.    |
 
 ---
 
