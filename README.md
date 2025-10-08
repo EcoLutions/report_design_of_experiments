@@ -4195,702 +4195,143 @@ Se presenta un diccionario detallado de clases para el Bounded Context de Gesti�
 
 **1. `User` (Aggregate Root)**
 
-Representa un usuario del sistema con capacidad de autenticación, gestión de roles, información personal, configuraciones de seguridad y seguimiento de intentos de inicio de sesión.
+Representa a un usuario autenticable dentro del sistema. Gestiona sus credenciales, roles, estado de cuenta, y operaciones relacionadas con autenticación, recuperación y bloqueo de acceso.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del usuario. |
-| `userId` | `UserId` | `private` | Identificador de dominio del usuario. |
-| `username` | `Username` | `private` | Nombre de usuario único en el sistema. |
-| `email` | `EmailAddress` | `private` | Dirección de correo electrónico del usuario. |
-| `hashedPassword` | `HashedPassword` | `private` | Contraseña hasheada del usuario. |
-| `status` | `UserStatus` | `private` | Estado actual del usuario. |
-| `personalInfo` | `PersonalInfo` | `private` | Información personal del usuario. |
-| `securityInfo` | `SecurityInfo` | `private` | Información de seguridad del usuario. |
-| `roles` | `Set<Role>` | `private` | Conjunto de roles asignados al usuario. |
-| `createdAt` | `LocalDateTime` | `private` | Fecha de creación del usuario. |
-| `lastLoginAt` | `LocalDateTime` | `private` | Fecha del último inicio de sesión. |
-| `failedLoginAttempts` | `Integer` | `private` | Número de intentos fallidos de inicio de sesión. |
-| `lockoutTime` | `LocalDateTime` | `private` | Fecha de bloqueo de la cuenta. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
+| Atributo                   | Tipo             | Visibilidad  | Descripción                                          |
+|----------------------------|------------------|--------------|------------------------------------------------------|
+| `id`                       | `String`         | `private`    | Identificador único del usuario.                     |
+| `username`                 | `Username`       | `private`    | Nombre de usuario utilizado para autenticación.      |
+| `email`                    | `EmailAddress`   | `private`    | Correo electrónico asociado al usuario.              |
+| `hashedPassword`           | `HashedPassword` | `private`    | Contraseña almacenada de forma segura mediante hash. |
+| `accountStatus`            | `AccountStatus`  | `private`    | Estado actual de la cuenta.                          |
+| `roles`                    | `Set<RoleId>`    | `private`    | Conjunto de roles asignados al usuario.              |
+| `failedLoginAttempts`      | `Integer`        | `private`    | Número de intentos fallidos de inicio de sesión.     |
+| `lastLoginAt`              | `LocalDateTime`  | `private`    | Fecha y hora del último inicio de sesión exitoso.    |
+| `passwordChangedAt`        | `LocalDateTime`  | `private`    | Fecha y hora del último cambio de contraseña.        |
+| `activationToken`          | `String`         | `private`    | Token de activación de cuenta.                       |
+| `activationTokenExpiresAt` | `LocalDateTime`  | `private`    | Fecha y hora de expiración del token de activación.  |
+| `createdAt`                | `LocalDateTime`  | `private`    | Fecha y hora de creación del registro.               |
+| `updatedAt`                | `LocalDateTime`  | `private`    | Fecha y hora de la última actualización.             |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `User()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `User(username, email, hashedPassword, userType)` | `Constructor` | `public` | Constructor que instancia un usuario con datos básicos. |
-| `authenticate(password)` | `AuthenticationResult` | `public` | Autentica al usuario con contraseña proporcionada. |
-| `changePassword(oldPassword, newPassword, policy)` | `void` | `public` | Cambia la contraseña del usuario. |
-| `assignRole(role)` | `void` | `public` | Asigna un rol al usuario. |
-| `removeRole(role)` | `void` | `public` | Elimina un rol del usuario. |
-| `activate()` | `void` | `public` | Activa el usuario. |
-| `deactivate(reason)` | `void` | `public` | Desactiva el usuario por una razón específica. |
-| `suspend()` | `void` | `public` | Suspende temporalmente el usuario. |
-| `updatePersonalInfo(personalInfo)` | `void` | `public` | Actualiza la información personal del usuario. |
-| `recordLogin()` | `void` | `public` | Registra un inicio de sesión exitoso. |
-| `recordFailedLogin()` | `void` | `public` | Registra un intento fallido de inicio de sesión. |
-| `isLocked()` | `boolean` | `public` | Determina si la cuenta está bloqueada. |
-| `unlock()` | `void` | `public` | Desbloquea la cuenta del usuario. |
-| `hasRole(roleName)` | `boolean` | `public` | Determina si el usuario tiene un rol específico. |
-| `hasPermission(permissionName)` | `boolean` | `public` | Determina si el usuario tiene un permiso específico. |
-| `canPerformAction(action)` | `boolean` | `public` | Determina si el usuario puede realizar una acción. |
-| `isActive()` | `boolean` | `public` | Determina si el usuario está activo. |
-| `canBeModified()` | `boolean` | `public` | Determina si el usuario puede ser modificado. |
-| `canBeDeactivated()` | `boolean` | `public` | Determina si el usuario puede ser desactivado. |
-| `getAvailableActions()` | `List<UserAction>` | `public` | Obtiene las acciones disponibles según el estado. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
-
-**2. `Role` (Aggregate Root)**
-
-Representa un rol del sistema con permisos asociados, capacidades de gestión jerárquica y validaciones de dependencias para control de acceso basado en roles.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del rol. |
-| `roleId` | `RoleId` | `private` | Identificador de dominio del rol. |
-| `name` | `String` | `private` | Nombre único del rol. |
-| `description` | `String` | `private` | Descripción del rol. |
-| `permissions` | `Set<Permission>` | `private` | Conjunto de permisos del rol. |
-| `isDefault` | `boolean` | `private` | Indica si es un rol por defecto. |
-| `isSystemRole` | `boolean` | `private` | Indica si es un rol del sistema. |
-| `createdAt` | `LocalDateTime` | `private` | Fecha de creación del rol. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `Role()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `Role(name, description)` | `Constructor` | `public` | Constructor que instancia un rol con datos básicos. |
-| `addPermission(permission)` | `void` | `public` | Agrega un permiso al rol. |
-| `removePermission(permission)` | `void` | `public` | Elimina un permiso del rol. |
-| `updateDescription(description)` | `void` | `public` | Actualiza la descripción del rol. |
-| `hasPermission(permissionName)` | `boolean` | `public` | Determina si el rol tiene un permiso específico. |
-| `canBeDeleted()` | `boolean` | `public` | Determina si el rol puede ser eliminado. |
-| `canBeModified()` | `boolean` | `public` | Determina si el rol puede ser modificado. |
-| `getAvailableActions()` | `List<RoleAction>` | `public` | Obtiene las acciones disponibles según el estado. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
+| Método                                                     | Tipo de Retorno        | Visibilidad  | Descripción                                                           |
+|------------------------------------------------------------|------------------------|--------------|-----------------------------------------------------------------------|
+| `authenticate(rawPassword: String)`                        | `AuthenticationResult` | `public`     | Verifica las credenciales ingresadas contra la contraseña almacenada. |
+| `changePassword(oldPassword: String, newPassword: String)` | `void`                 | `public`     | Permite al usuario cambiar su contraseña.                             |
+| `resetPassword(newPassword: String)`                       | `void`                 | `public`     | Restablece la contraseña sin requerir la anterior.                    |
+| `assignRole(roleId: RoleId)`                               | `void`                 | `public`     | Asigna un nuevo rol al usuario.                                       |
+| `removeRole(roleId: RoleId)`                               | `void`                 | `public`     | Elimina un rol previamente asignado.                                  |
+| `hasPermission(permission: Permission)`                    | `boolean`              | `public`     | Verifica si el usuario posee un permiso específico.                   |
+| `lockAccount()`                                            | `void`                 | `public`     | Bloquea la cuenta del usuario.                                        |
+| `unlockAccount()`                                          | `void`                 | `public`     | Desbloquea la cuenta del usuario.                                     |
+| `recordSuccessfulLogin()`                                  | `void`                 | `public`     | Registra un inicio de sesión exitoso.                                 |
+| `recordFailedLogin()`                                      | `void`                 | `public`     | Incrementa el conteo de intentos fallidos.                            |
+| `generateActivationToken()`                                | `String`               | `public`     | Genera un token único de activación.                                  |
+| `activateAccount(token: String)`                           | `void`                 | `public`     | Activa la cuenta mediante el token de activación.                     |
+| `isAccountLocked()`                                        | `boolean`              | `public`     | Indica si la cuenta está bloqueada.                                   |
+| `requiresPasswordChange()`                                 | `boolean`              | `public`     | Determina si el usuario debe cambiar su contraseña.                   |
 
 ---
 
-**Entities**
+**2. `Role` (Aggregate Root)**
 
-**3. `Permission` (Entity)**
-
-Representa un permiso del sistema con información de recurso, acción, alcance y validaciones para control granular de acceso.
+Representa un rol del sistema con un conjunto de permisos asociados. Puede ser un rol del sistema o un rol personalizado, y controla los privilegios de acceso de los usuarios.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del permiso. |
-| `permissionId` | `PermissionId` | `private` | Identificador de dominio del permiso. |
-| `name` | `String` | `private` | Nombre único del permiso. |
-| `description` | `String` | `private` | Descripción del permiso. |
-| `resource` | `String` | `private` | Recurso sobre el cual aplica el permiso. |
-| `action` | `String` | `private` | Acción que permite el permiso. |
-| `scope` | `PermissionScope` | `private` | Alcance del permiso. |
+| Atributo      | Tipo              | Visibilidad   | Descripción                                      |
+|---------------|-------------------|---------------|--------------------------------------------------|
+| `id`          | `String`          | `private`     | Identificador único del rol.                     |
+| `name`        | `RoleName`        | `private`     | Nombre del rol.                                  |
+| `description` | `String`          | `private`     | Descripción del propósito o alcance del rol.     |
+| `permissions` | `Set<Permission>` | `private`     | Conjunto de permisos asociados al rol.           |
+| `roleType`    | `RoleType`        | `private`     | Indica si el rol es del sistema o personalizado. |
+| `isActive`    | `Boolean`         | `private`     | Indica si el rol está activo.                    |
+| `createdAt`   | `LocalDateTime`   | `private`     | Fecha y hora de creación.                        |
+| `updatedAt`   | `LocalDateTime`   | `private`     | Fecha y hora de la última actualización.         |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `Permission(name, description, resource, action)` | `Constructor` | `public` | Constructor que instancia un permiso con datos básicos. |
-| `getPermissionKey()` | `String` | `public` | Obtiene la clave única del permiso. |
-| `isSystemPermission()` | `boolean` | `public` | Determina si es un permiso del sistema. |
-| `canBeDeleted()` | `boolean` | `public` | Determina si el permiso puede ser eliminado. |
-
-**4. `AuthToken` (Entity)**
-
-Representa un token de autenticación con información de tipo, expiración, revocación y validación para gestión de sesiones y seguridad.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del token. |
-| `tokenId` | `TokenId` | `private` | Identificador de dominio del token. |
-| `userId` | `UserId` | `private` | Identificador del usuario asociado. |
-| `tokenValue` | `String` | `private` | Valor del token de autenticación. |
-| `tokenType` | `TokenType` | `private` | Tipo de token. |
-| `expiryDate` | `LocalDateTime` | `private` | Fecha de expiración del token. |
-| `isRevoked` | `boolean` | `private` | Indica si el token ha sido revocado. |
-| `createdAt` | `LocalDateTime` | `private` | Fecha de creación del token. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `AuthToken(userId, tokenType, expiryDate)` | `Constructor` | `public` | Constructor que instancia un token con datos básicos. |
-| `isExpired()` | `boolean` | `public` | Determina si el token ha expirado. |
-| `revoke()` | `void` | `public` | Revoca el token. |
-| `isValid()` | `boolean` | `public` | Determina si el token es válido. |
-| `getRemainingTime()` | `Duration` | `public` | Obtiene el tiempo restante de validez. |
+| Método                                     | Tipo de Retorno  | Visibilidad  | Descripción                                     |
+|--------------------------------------------|------------------|--------------|-------------------------------------------------|
+| `addPermission(permission: Permission)`    | `void`           | `public`     | Agrega un permiso al rol.                       |
+| `removePermission(permission: Permission)` | `void`           | `public`     | Elimina un permiso existente.                   |
+| `hasPermission(permission: Permission)`    | `boolean`        | `public`     | Verifica si el rol posee un permiso específico. |
+| `canBeModified()`                          | `boolean`        | `public`     | Indica si el rol puede ser modificado.          |
+| `activate()`                               | `void`           | `public`     | Activa el rol para su uso.                      |
+| `deactivate()`                             | `void`           | `public`     | Desactiva temporalmente el rol.                 |
 
 ---
 
 **Value Objects**
 
-**5. `UserId` (Value Object)**
+**3. `Username` (Value Object)**
 
-Identificador único inmutable para un usuario en el sistema.
+Define el nombre de usuario único utilizado para la autenticación.
 
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `userId` | `String` | `private` | Valor alfanumérico del identificador del usuario. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getValue()` | `String` | `public` | Obtiene el valor del identificador. |
-| `isValid()` | `boolean` | `public` | Valida que el identificador sea válido. |
-
-**6. `RoleId` (Value Object)**
-
-Identificador único inmutable para un rol en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `roleId` | `String` | `private` | Valor alfanumérico del identificador del rol. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getValue()` | `String` | `public` | Obtiene el valor del identificador. |
-
-**7. `PermissionId` (Value Object)**
-
-Identificador único inmutable para un permiso en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `permissionId` | `String` | `private` | Valor alfanumérico del identificador del permiso. |
-
-**8. `TokenId` (Value Object)**
-
-Identificador único inmutable para un token en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `tokenId` | `String` | `private` | Valor alfanumérico del identificador del token. |
-
-**9. `Username` (Value Object)**
-
-Nombre de usuario único con validaciones de formato y disponibilidad.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `username` | `String` | `private` | Valor del nombre de usuario. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getValue()` | `String` | `public` | Obtiene el valor del nombre de usuario. |
-| `isValid()` | `boolean` | `public` | Valida el formato del nombre de usuario. |
-| `meetsRequirements()` | `boolean` | `public` | Verifica que cumple los requerimientos. |
-
-**10. `HashedPassword` (Value Object)**
-
-Contraseña hasheada con información de algoritmo, sal y capacidades de verificación y rehashing.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `hash` | `String` | `private` | Hash de la contraseña. |
-| `salt` | `String` | `private` | Sal utilizada en el hash. |
-| `algorithm` | `String` | `private` | Algoritmo de hash utilizado. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `matches(password)` | `boolean` | `public` | Verifica si una contraseña coincide con el hash. |
-| `needsRehashing()` | `boolean` | `public` | Determina si necesita ser rehasheada. |
-
-**11. `PersonalInfo` (Value Object)**
-
-Información personal del usuario con datos de identificación, nombre completo y avatar.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `firstName` | `String` | `private` | Nombre del usuario. |
-| `lastName` | `String` | `private` | Apellido del usuario. |
-| `displayName` | `String` | `private` | Nombre para mostrar del usuario. |
-| `avatarUrl` | `String` | `private` | URL del avatar del usuario. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getFullName()` | `String` | `public` | Obtiene el nombre completo del usuario. |
-| `hasAvatar()` | `boolean` | `public` | Determina si el usuario tiene avatar. |
-
-**12. `SecurityInfo` (Value Object)**
-
-Información de seguridad del usuario con configuraciones de autenticación de dos factores, historial de contraseñas y preguntas de seguridad.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `twoFactorEnabled` | `boolean` | `private` | Indica si la autenticación de dos factores está habilitada. |
-| `lastPasswordChange` | `LocalDateTime` | `private` | Fecha del último cambio de contraseña. |
-| `passwordHistory` | `List<String>` | `private` | Historial de contraseñas utilizadas. |
-| `securityQuestions` | `List<SecurityQuestion>` | `private` | Lista de preguntas de seguridad. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `needsPasswordChange()` | `boolean` | `public` | Determina si necesita cambio de contraseña. |
-| `hasUsedPassword(password)` | `boolean` | `public` | Determina si ha usado una contraseña anteriormente. |
-
-**13. `AuthenticationResult` (Value Object)**
-
-Resultado de un proceso de autenticación con información de éxito, razón de fallo y requerimientos adicionales.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `isSuccessful` | `boolean` | `private` | Indica si la autenticación fue exitosa. |
-| `failureReason` | `AuthFailureReason` | `private` | Razón del fallo si aplica. |
-| `user` | `User` | `private` | Usuario autenticado si es exitoso. |
-| `requiresTwoFactor` | `boolean` | `private` | Indica si requiere autenticación de dos factores. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isSuccessful()` | `boolean` | `public` | Determina si la autenticación fue exitosa. |
-| `getFailureReason()` | `AuthFailureReason` | `public` | Obtiene la razón del fallo. |
+| Atributo  | Tipo     | Visibilidad  | Descripción                  |
+|-----------|----------|--------------|------------------------------|
+| `value`   | `String` | `private`    | Valor del nombre de usuario. |
 
 ---
 
-**Enums**
+**4. `HashedPassword` (Value Object)**
 
-**14. `UserStatus` (Enum)**
+Contiene la contraseña del usuario en formato encriptado para garantizar seguridad.
 
-Estados posibles de un usuario durante su ciclo de vida en el sistema.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `PENDING_VERIFICATION` | Usuario pendiente de verificación. |
-| `ACTIVE` | Usuario activo y funcional. |
-| `SUSPENDED` | Usuario suspendido temporalmente. |
-| `LOCKED` | Usuario bloqueado por intentos fallidos. |
-| `DEACTIVATED` | Usuario desactivado. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canTransitionTo(newStatus)` | `boolean` | `public` | Valida si puede transicionar al nuevo estado. |
-| `isActive()` | `boolean` | `public` | Determina si está activo. |
-| `canLogin()` | `boolean` | `public` | Determina si puede iniciar sesión. |
-| `canBeModified()` | `boolean` | `public` | Determina si puede ser modificado. |
-| `getAvailableTransitions()` | `List<UserStatus>` | `public` | Obtiene las transiciones disponibles. |
-
-**15. `UserAction` (Enum)**
-
-Acciones disponibles que se pueden realizar sobre un usuario según su estado.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `ACTIVATE` | Activar el usuario. |
-| `DEACTIVATE` | Desactivar el usuario. |
-| `SUSPEND` | Suspender el usuario. |
-| `UNLOCK` | Desbloquear el usuario. |
-| `CHANGE_PASSWORD` | Cambiar contraseña del usuario. |
-| `ASSIGN_ROLE` | Asignar rol al usuario. |
-| `REMOVE_ROLE` | Eliminar rol del usuario. |
-| `UPDATE_INFO` | Actualizar información del usuario. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAllowedForStatus(status)` | `boolean` | `public` | Determina si la acción está permitida para el estado. |
-| `requiresSpecialPermission()` | `boolean` | `public` | Determina si requiere permisos especiales. |
-
-**16. `RoleAction` (Enum)**
-
-Acciones disponibles que se pueden realizar sobre un rol.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `ADD_PERMISSION` | Agregar permiso al rol. |
-| `REMOVE_PERMISSION` | Eliminar permiso del rol. |
-| `UPDATE_DESCRIPTION` | Actualizar descripción del rol. |
-| `DELETE_ROLE` | Eliminar el rol. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAllowedForRole(role)` | `boolean` | `public` | Determina si está permitida para el rol. |
-| `requiresAdminPermission()` | `boolean` | `public` | Determina si requiere permisos de administrador. |
-
-**17. `TokenType` (Enum)**
-
-Tipos de tokens disponibles en el sistema con diferentes propósitos y configuraciones.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `ACCESS_TOKEN` | Token de acceso para autenticación. |
-| `REFRESH_TOKEN` | Token para renovar sesión. |
-| `RESET_TOKEN` | Token para reseteo de contraseña. |
-| `VERIFICATION_TOKEN` | Token para verificación de cuenta. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getExpiryDuration()` | `Duration` | `public` | Obtiene la duración de expiración. |
-| `canBeRefreshed()` | `boolean` | `public` | Determina si puede ser renovado. |
+| Atributo  | Tipo     | Visibilidad   | Descripción                      |
+|-----------|----------|---------------|----------------------------------|
+| `value`   | `String` | `private`     | Valor de la contraseña hasheada. |
 
 ---
 
-**Application Services**
+**5. `RoleName` (Value Object)**
 
-**18. `UserApplicationService` (Application Service)**
+Representa el nombre único de un rol dentro del sistema.
 
-Servicio de aplicación que coordina las operaciones de negocio relacionadas con usuarios, autenticación y gestión de roles.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `userRepository` | `UserRepository` | `private` | Repositorio para persistencia de usuarios. |
-| `userDomainService` | `UserDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `userFactory` | `UserFactory` | `private` | Factory para creación de usuarios. |
-| `passwordPolicyService` | `PasswordPolicyService` | `private` | Servicio de políticas de contraseña. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `registerUser(username, email, password, userType)` | `User` | `public` | Registra un nuevo usuario en el sistema. |
-| `authenticateUser(email, password)` | `AuthenticationResult` | `public` | Autentica un usuario con email y contraseña. |
-| `updateUser(userId, personalInfo)` | `void` | `public` | Actualiza información de un usuario. |
-| `activateUser(userId)` | `void` | `public` | Activa un usuario. |
-| `deactivateUser(userId, reason)` | `void` | `public` | Desactiva un usuario. |
-| `changePassword(userId, oldPassword, newPassword)` | `void` | `public` | Cambia la contraseña de un usuario. |
-| `assignRole(userId, roleId)` | `void` | `public` | Asigna un rol a un usuario. |
-| `removeRole(userId, roleId)` | `void` | `public` | Elimina un rol de un usuario. |
-| `getUserById(userId)` | `Optional<User>` | `public` | Obtiene un usuario por su identificador. |
-| `getUserByEmail(email)` | `Optional<User>` | `public` | Obtiene un usuario por su email. |
-| `getUsersByRole(roleId)` | `List<User>` | `public` | Obtiene usuarios con un rol específico. |
-
-**19. `RoleApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de roles y permisos del sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `roleRepository` | `RoleRepository` | `private` | Repositorio para persistencia de roles. |
-| `roleDomainService` | `RoleDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `roleFactory` | `RoleFactory` | `private` | Factory para creación de roles. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createRole(name, description, permissions)` | `Role` | `public` | Crea un nuevo rol en el sistema. |
-| `updateRole(roleId, description)` | `void` | `public` | Actualiza la descripción de un rol. |
-| `addPermission(roleId, permissionId)` | `void` | `public` | Agrega un permiso a un rol. |
-| `removePermission(roleId, permissionId)` | `void` | `public` | Elimina un permiso de un rol. |
-| `getRoleById(roleId)` | `Optional<Role>` | `public` | Obtiene un rol por su identificador. |
-| `getRoleByName(name)` | `Optional<Role>` | `public` | Obtiene un rol por su nombre. |
-| `getAllRoles()` | `List<Role>` | `public` | Obtiene todos los roles del sistema. |
-| `deleteRole(roleId)` | `void` | `public` | Elimina un rol del sistema. |
-
-**20. `AuthApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de autenticación, tokens y seguridad de sesiones.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `userRepository` | `UserRepository` | `private` | Repositorio para acceso a usuarios. |
-| `tokenService` | `TokenDomainService` | `private` | Servicio de dominio para tokens. |
-| `authenticationService` | `AuthenticationDomainService` | `private` | Servicio de dominio para autenticación. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `login(email, password)` | `AuthToken` | `public` | Inicia sesión de usuario. |
-| `logout(token)` | `void` | `public` | Cierra sesión de usuario. |
-| `refreshToken(refreshToken)` | `AuthToken` | `public` | Renueva un token de acceso. |
-| `verifyToken(token)` | `TokenValidationResult` | `public` | Verifica la validez de un token. |
-| `requestPasswordReset(email)` | `void` | `public` | Solicita reseteo de contraseña. |
-| `resetPassword(resetToken, newPassword)` | `void` | `public` | Resetea la contraseña con token. |
+| Atributo   | Tipo     | Visibilidad  | Descripción           |
+|------------|----------|--------------|-----------------------|
+| `value`    | `String` | `private`    | Nombre único del rol. |
 
 ---
 
-**Domain Services**
+**6. `Permission` (Value Object)**
 
-**21. `UserDomainService` (Domain Service)**
+Define un permiso individual compuesto por una acción y un recurso.
 
-Servicio de dominio que implementa lógica de negocio compleja relacionada con usuarios.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateUserRegistration(user)` | `ValidationResult` | `public` | Valida el registro de un nuevo usuario. |
-| `checkUsernameAvailability(username)` | `boolean` | `public` | Verifica disponibilidad de nombre de usuario. |
-| `checkEmailAvailability(email)` | `boolean` | `public` | Verifica disponibilidad de email. |
-| `calculateUserPermissions(user)` | `Set<Permission>` | `public` | Calcula permisos efectivos del usuario. |
-| `determineDefaultRoles(userType)` | `Set<Role>` | `public` | Determina roles por defecto según tipo de usuario. |
-| `validateRoleAssignment(user, role)` | `ValidationResult` | `public` | Valida asignación de rol a usuario. |
-
-**22. `RoleDomainService` (Domain Service)**
-
-Servicio de dominio para lógica compleja relacionada con roles y permisos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateRoleCreation(role)` | `ValidationResult` | `public` | Valida la creación de un nuevo rol. |
-| `checkRoleNameAvailability(name)` | `boolean` | `public` | Verifica disponibilidad de nombre de rol. |
-| `validatePermissionAssignment(role, permission)` | `ValidationResult` | `public` | Valida asignación de permiso a rol. |
-| `calculateRoleHierarchy(role)` | `RoleHierarchy` | `public` | Calcula la jerarquía del rol. |
-| `checkRoleDependencies(role)` | `List<RoleDependency>` | `public` | Verifica dependencias del rol. |
-
-**23. `AuthenticationDomainService` (Domain Service)**
-
-Servicio de dominio especializado en autenticación y seguridad de acceso.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `authenticateUser(email, password, users)` | `AuthenticationResult` | `public` | Autentica usuario con credenciales. |
-| `validateLoginAttempt(user)` | `ValidationResult` | `public` | Valida intento de inicio de sesión. |
-| `handleFailedLogin(user)` | `void` | `public` | Maneja intento fallido de inicio de sesión. |
-| `checkAccountLockout(user)` | `boolean` | `public` | Verifica si la cuenta está bloqueada. |
-| `validateTwoFactorAuthentication(user, code)` | `boolean` | `public` | Valida autenticación de dos factores. |
-
-**24. `TokenDomainService` (Domain Service)**
-
-Servicio de dominio para gestión de tokens de autenticación.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `generateToken(userId, tokenType)` | `AuthToken` | `public` | Genera un token para un usuario. |
-| `validateToken(token)` | `TokenValidationResult` | `public` | Valida un token de autenticación. |
-| `revokeToken(token)` | `void` | `public` | Revoca un token. |
-| `refreshToken(refreshToken)` | `AuthToken` | `public` | Renueva un token de acceso. |
-| `cleanupExpiredTokens()` | `void` | `public` | Limpia tokens expirados. |
-
-**25. `PasswordPolicyService` (Domain Service)**
-
-Servicio de dominio para gestión de políticas de contraseña usando estrategias configurables.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `passwordStrategy` | `PasswordPolicyStrategy` | `private` | Estrategia de política de contraseña actual. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validatePassword(password)` | `ValidationResult` | `public` | Valida una contraseña según la política. |
-| `generatePassword()` | `String` | `public` | Genera una contraseña segura. |
-| `checkPasswordHistory(user, password)` | `boolean` | `public` | Verifica historial de contraseñas. |
-| `setPasswordStrategy(strategy)` | `void` | `public` | Establece la estrategia de política. |
-| `calculatePasswordStrength(password)` | `PasswordStrength` | `public` | Calcula la fortaleza de una contraseña. |
-
-**26. `PermissionManagementService` (Domain Service)**
-
-Servicio de dominio para gestión de permisos y control de acceso.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validatePermission(permission)` | `ValidationResult` | `public` | Valida un permiso. |
-| `checkPermissionConflicts(permissions)` | `List<PermissionConflict>` | `public` | Verifica conflictos entre permisos. |
-| `calculateEffectivePermissions(user)` | `Set<Permission>` | `public` | Calcula permisos efectivos de un usuario. |
-| `checkResourceAccess(user, resource, action)` | `boolean` | `public` | Verifica acceso a recurso. |
-| `groupPermissionsByResource(permissions)` | `Map<String, List<Permission>>` | `public` | Agrupa permisos por recurso. |
+| Atributo   | Tipo     | Visibilidad   | Descripción                                   |
+|------------|----------|---------------|-----------------------------------------------|
+| `resource` | `String` | `private`     | Recurso del sistema al que aplica el permiso. |
+| `action`   | `String` | `private`     | Acción permitida sobre el recurso.            |
 
 ---
 
-**Strategies**
+**Enumerations**
 
-**27. `PasswordPolicyStrategy` (Strategy Interface)**
+**7. `AccountStatus` (Enumeration)**
 
-Interfaz que define el contrato para diferentes estrategias de política de contraseñas.
+Indica el estado de la cuenta de un usuario.
 
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validate(password)` | `ValidationResult` | `public` | Valida una contraseña según la estrategia. |
-| `generateStrengthScore(password)` | `PasswordStrength` | `public` | Genera puntuación de fortaleza. |
-| `suggestImprovements(password)` | `List<String>` | `public` | Sugiere mejoras para la contraseña. |
-
-**28. `BasicPasswordStrategy` (Strategy)**
-
-Implementación de estrategia básica de política de contraseñas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validate(password)` | `ValidationResult` | `public` | Valida contraseña con reglas básicas. |
-| `generateStrengthScore(password)` | `PasswordStrength` | `public` | Genera puntuación básica de fortaleza. |
-| `suggestImprovements(password)` | `List<String>` | `public` | Sugiere mejoras básicas. |
-
-**29. `EnhancedPasswordStrategy` (Strategy)**
-
-Implementación de estrategia mejorada de política de contraseñas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validate(password)` | `ValidationResult` | `public` | Valida contraseña con reglas mejoradas. |
-| `generateStrengthScore(password)` | `PasswordStrength` | `public` | Genera puntuación mejorada de fortaleza. |
-| `suggestImprovements(password)` | `List<String>` | `public` | Sugiere mejoras avanzadas. |
-
-**30. `EnterprisePasswordStrategy` (Strategy)**
-
-Implementación de estrategia empresarial de política de contraseñas con máxima seguridad.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validate(password)` | `ValidationResult` | `public` | Valida contraseña con reglas empresariales. |
-| `generateStrengthScore(password)` | `PasswordStrength` | `public` | Genera puntuación empresarial de fortaleza. |
-| `suggestImprovements(password)` | `List<String>` | `public` | Sugiere mejoras de nivel empresarial. |
+| Valor                | Descripción                                           |
+|----------------------|-------------------------------------------------------|
+| `ACTIVE`             | Cuenta activa y operativa.                            |
+| `LOCKED`             | Cuenta bloqueada temporalmente por intentos fallidos. |
+| `PENDING_ACTIVATION` | Cuenta pendiente de activación.                       |
+| `DISABLED`           | Cuenta deshabilitada permanentemente.                 |
 
 ---
 
-**Factories**
+**8. `RoleType` (Enumeration)**
 
-**31. `UserFactory` (Factory)**
+Define el origen o tipo del rol.
 
-Factory para la creación de diferentes tipos de usuarios con configuraciones específicas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createUser(username, email, password, userType)` | `User` | `public` | Crea usuario con tipo específico. |
-| `createAdminUser(username, email, password)` | `User` | `public` | Crea usuario administrador. |
-| `createSystemUser(username, email)` | `User` | `public` | Crea usuario del sistema. |
-
-**32. `RoleFactory` (Factory)**
-
-Factory para la creación de roles con diferentes configuraciones y permisos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createRole(name, description, permissions)` | `Role` | `public` | Crea rol con permisos específicos. |
-| `createDefaultRole(userType)` | `Role` | `public` | Crea rol por defecto según tipo de usuario. |
-| `createSystemRole(name, permissions)` | `Role` | `public` | Crea rol del sistema. |
-
-**33. `TokenFactory` (Factory)**
-
-Factory para la creación de tokens de diferentes tipos y propósitos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createAccessToken(userId)` | `AuthToken` | `public` | Crea token de acceso. |
-| `createRefreshToken(userId)` | `AuthToken` | `public` | Crea token de renovación. |
-| `createResetToken(userId)` | `AuthToken` | `public` | Crea token de reseteo. |
-| `createVerificationToken(userId)` | `AuthToken` | `public` | Crea token de verificación. |
-
----
-
-**Repository Interfaces**
-
-**34. `UserRepository` (Repository Interface)**
-
-Interfaz de repositorio para la persistencia y consulta de usuarios.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(userId)` | `Optional<User>` | `public` | Busca un usuario por su identificador. |
-| `findByUsername(username)` | `Optional<User>` | `public` | Busca usuario por nombre de usuario. |
-| `findByEmail(email)` | `Optional<User>` | `public` | Busca usuario por email. |
-| `findByStatus(status)` | `List<User>` | `public` | Busca usuarios por estado. |
-| `findByRole(roleId)` | `List<User>` | `public` | Busca usuarios por rol. |
-| `findActiveUsers()` | `List<User>` | `public` | Busca usuarios activos. |
-| `save(user)` | `User` | `public` | Persiste o actualiza un usuario. |
-| `delete(userId)` | `void` | `public` | Elimina un usuario del sistema. |
-| `existsById(userId)` | `boolean` | `public` | Verifica si existe un usuario. |
-| `existsByUsername(username)` | `boolean` | `public` | Verifica si existe un nombre de usuario. |
-| `existsByEmail(email)` | `boolean` | `public` | Verifica si existe un email. |
-
-**35. `RoleRepository` (Repository Interface)**
-
-Interfaz de repositorio para la persistencia y consulta de roles.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(roleId)` | `Optional<Role>` | `public` | Busca un rol por su identificador. |
-| `findByName(name)` | `Optional<Role>` | `public` | Busca rol por nombre. |
-| `findDefaultRoles()` | `List<Role>` | `public` | Busca roles por defecto. |
-| `findSystemRoles()` | `List<Role>` | `public` | Busca roles del sistema. |
-| `findAll()` | `List<Role>` | `public` | Busca todos los roles. |
-| `save(role)` | `Role` | `public` | Persiste o actualiza un rol. |
-| `delete(roleId)` | `void` | `public` | Elimina un rol del sistema. |
-| `existsById(roleId)` | `boolean` | `public` | Verifica si existe un rol. |
-| `existsByName(name)` | `boolean` | `public` | Verifica si existe un nombre de rol. |
+| Valor    | Descripción                                        |
+|----------|----------------------------------------------------|
+| `SYSTEM` | Rol interno del sistema, no editable por usuarios. |
+| `CUSTOM` | Rol personalizado creado por un administrador.     |
 
 ---
 
