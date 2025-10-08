@@ -2650,6 +2650,209 @@ Encapsula toda la lógica de negocio relacionada con la gestión de identidades,
 
 En esta sección se presenta el diccionario de clases, que proporciona descripciones detalladas de cada clase, incluyendo sus atributos, métodos y responsabilidades. Este diccionario sirve como referencia para los desarrolladores y facilita la comprensión del diseño orientado a objetos del sistema.
 
+**Diccionario de Clases del Shared Kernel:**
+
+Se presenta un diccionario detallado de las clases que componen el Shared Kernel, incluyendo sus atributos, métodos y relaciones clave. Este diccionario sirve como referencia para los desarrolladores y facilita la comprensión del diseño orientado a objetos del sistema.
+
+**Value Objects**
+
+**1. `DistrictId` (Value Object)**
+
+Identificador único que representa un distrito dentro del sistema.
+
+**Atributos Principales:**
+
+| Atributo  | Tipo     | Visibilidad   | Descripción                        |
+|-----------|----------|---------------|------------------------------------|
+| `value`   | `String` | `private`     | Código único asignado al distrito. |
+
+---
+
+**2. `ContainerId` (Value Object)**
+
+Identificador único e inmutable asignado a cada contenedor de residuos.
+
+**Atributos Principales:**
+
+| Atributo  | Tipo     | Visibilidad  | Descripción                                |
+|-----------|----------|--------------|--------------------------------------------|
+| `value`   | `String` | `private`    | Código único que identifica un contenedor. |
+
+---
+
+**3. `VehicleId` (Value Object)**
+
+Identificador único asignado a un vehículo dentro del sistema de gestión de rutas o recolección.
+
+**Atributos Principales:**
+
+| Atributo  | Tipo     | Visibilidad  | Descripción                              |
+|-----------|----------|--------------|------------------------------------------|
+| `value`   | `String` | `private`    | Código único que representa al vehículo. |
+
+---
+
+**4. `DriverId` (Value Object)**
+
+Identificador único del conductor dentro del sistema.
+
+**Atributos Principales:**
+
+| Atributo  | Tipo     | Visibilidad  | Descripción                          |
+|-----------|----------|--------------|--------------------------------------|
+| `value`   | `String` | `private`    | Identificador asignado al conductor. |
+
+---
+
+**5. `UserId` (Value Object)**
+
+Identificador único que representa a un usuario dentro del dominio compartido.
+
+**Atributos Principales:**
+
+| Atributo  | Tipo     | Visibilidad  | Descripción               |
+|-----------|----------|--------------|---------------------------|
+| `value`   | `String` | `private`    | Código único del usuario. |
+
+---
+
+**6. `CitizenId` (Value Object)**
+
+Identificador único de un ciudadano en el sistema.
+
+**Atributos Principales:**
+
+| Atributo  | Tipo     | Visibilidad  | Descripción                           |
+|-----------|----------|--------------|---------------------------------------|
+| `value`   | `String` | `private`    | Código único asignado a un ciudadano. |
+
+---
+
+**7. `SubscriptionId` (Value Object)**
+
+Identificador único asociado a una suscripción o contrato dentro del sistema.
+
+**Atributos Principales:**
+
+| Atributo   | Tipo     | Visibilidad  | Descripción                     |
+|------------|----------|--------------|---------------------------------|
+| `value`    | `String` | `private`    | Código único de la suscripción. |
+
+---
+
+**8. `EmailAddress` (Value Object)**
+
+Representa la dirección de correo electrónico validada de un usuario o entidad.
+
+**Atributos Principales:**
+
+| Atributo  | Tipo     | Visibilidad  | Descripción                             |
+|-----------|----------|--------------|-----------------------------------------|
+| `value`   | `String` | `private`    | Dirección de correo electrónico válida. |
+
+---
+
+**9. `DocumentNumber` (Value Object)**
+
+Representa el número de documento de identidad o registro de una persona o entidad.
+
+**Atributos Principales:**
+
+| Atributo  | Tipo     | Visibilidad   | Descripción                                   |
+|-----------|----------|---------------|-----------------------------------------------|
+| `value`   | `String` | `private`     | Número de documento o identificación oficial. |
+
+---
+
+**10. `PhoneNumber` (Value Object)**
+
+Representa un número telefónico válido y registrado en el sistema.
+
+**Atributos Principales:**
+
+| Atributo  | Tipo     | Visibilidad   | Descripción                             |
+|-----------|----------|---------------|-----------------------------------------|
+| `value`   | `String` | `private`     | Número telefónico con formato estándar. |
+
+---
+
+**11. `NotificationRequestId` (Value Object)**
+
+Identificador único de una solicitud de notificación dentro del sistema.
+
+**Atributos Principales:**
+
+| Atributo  | Tipo     | Visibilidad  | Descripción                                          |
+|-----------|----------|--------------|------------------------------------------------------|
+| `value`   | `String` | `private`    | Código que identifica una solicitud de notificación. |
+
+---
+
+**12. `PaymentMethodId` (Value Object)**
+
+Identificador de un método de pago registrado por el usuario o entidad.
+
+**Atributos Principales:**
+
+| Atributo  | Tipo     | Visibilidad  | Descripción                             |
+|-----------|----------|--------------|-----------------------------------------|
+| `value`   | `String` | `private`    | Identificador único del método de pago. |
+
+---
+
+**13. `RoleId` (Value Object)**
+
+Identificador que representa el rol o perfil asignado a un usuario.
+
+**Atributos Principales:**
+
+| Atributo  | Tipo     | Visibilidad   | Descripción                      |
+|-----------|----------|---------------|----------------------------------|
+| `value`   | `String` | `private`     | Código único del rol de usuario. |
+
+---
+
+**14. `Location` (Value Object)**
+
+Representa una ubicación geográfica detallada, incluyendo coordenadas y dirección.
+
+**Atributos Principales:**
+
+| Atributo       | Tipo         | Visibilidad  | Descripción                                        |
+|----------------|--------------|--------------|----------------------------------------------------|
+| `latitude`     | `BigDecimal` | `private`    | Coordenada de latitud.                             |
+| `longitude`    | `BigDecimal` | `private`    | Coordenada de longitud.                            |
+| `address`      | `String`     | `private`    | Dirección textual asociada a la ubicación.         |
+| `districtCode` | `String`     | `private`    | Código del distrito al que pertenece la ubicación. |
+
+---
+
+**15. `FullName` (Value Object)**
+
+Representa el nombre completo de una persona, compuesto por nombres y apellidos.
+
+**Atributos Principales:**
+
+| Atributo    | Tipo     | Visibilidad  | Descripción             |
+|-------------|----------|--------------|-------------------------|
+| `firstName` | `String` | `private`    | Nombre de la persona.   |
+| `lastName`  | `String` | `private`    | Apellido de la persona. |
+
+---
+
+**16. `Money` (Value Object)**
+
+Representa una cantidad monetaria junto con su tipo de moneda.
+
+**Atributos Principales:**
+
+| Atributo   | Tipo         | Visibilidad  | Descripción                                       |
+|------------|--------------|--------------|---------------------------------------------------|
+| `amount`   | `BigDecimal` | `private`    | Monto monetario expresado en la moneda indicada.  |
+| `currency` | `String`     | `private`    | Código de la moneda (por ejemplo, PEN, USD, EUR). |
+
+---
+
 **Diccionario de Clases del Bounded Context Container Monitoring:**
 
 Se presenta un diccionario detallado de clases para el Bounded Context "Container Monitoring" en un sistema de gestión de residuos con contenedores inteligentes equipados con sensores IoT. Este diccionario incluye entidades, objetos de valor, servicios de dominio, servicios de aplicación, fábricas e interfaces de repositorio, proporcionando una visión completa de la estructura del dominio y sus interacciones.
