@@ -2861,349 +2861,178 @@ Se presenta un diccionario detallado de clases para el Bounded Context "Containe
 
 **1. `Container` (Aggregate Root)**
 
-Representa un contenedor de residuos inteligente con capacidad de monitoreo en tiempo real, incluyendo sensores, ubicación, nivel de llenado y estado de recolección.
+Representa un contenedor inteligente con capacidad de monitoreo en tiempo real. Gestiona su ubicación, tipo, nivel de llenado, estado operativo y frecuencia de recolección, además de las lecturas de sensores asociadas.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del contenedor. |
-| `containerId` | `ContainerId` | `private` | Identificador de dominio del contenedor. |
-| `location` | `Location` | `private` | Ubicación geográfica del contenedor. |
-| `capacity` | `ContainerCapacity` | `private` | Capacidad máxima del contenedor. |
-| `currentFillLevel` | `FillLevel` | `private` | Nivel actual de llenado del contenedor. |
-| `status` | `ContainerStatus` | `private` | Estado operacional del contenedor. |
-| `type` | `ContainerType` | `private` | Tipo de residuos que acepta el contenedor. |
-| `lastCollectionDate` | `LocalDateTime` | `private` | Fecha y hora de la última recolección. |
-| `sensorReadings` | `List<SensorReading>` | `private` | Lista de lecturas de sensores asociadas. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
+| Atributo               | Tipo                  | Visibilidad   | Descripción                                              |
+|------------------------|-----------------------|---------------|----------------------------------------------------------|
+| `id`                   | `String`              | `private`     | Identificador único del contenedor.                      |
+| `location`             | `Location`            | `private`     | Ubicación geográfica del contenedor.                     |
+| `capacity`             | `ContainerCapacity`   | `private`     | Capacidad máxima en volumen y peso del contenedor.       |
+| `containerType`        | `ContainerType`       | `private`     | Tipo de residuos que acepta el contenedor.               |
+| `currentFillLevel`     | `FillLevel`           | `private`     | Nivel actual de llenado del contenedor.                  |
+| `status`               | `ContainerStatus`     | `private`     | Estado operacional del contenedor.                       |
+| `sensorId`             | `SensorId`            | `private`     | Identificador del sensor instalado.                      |
+| `lastReadingTimestamp` | `LocalDateTime`       | `private`     | Fecha y hora de la última lectura recibida.              |
+| `districtId`           | `DistrictId`          | `private`     | Identificador del distrito donde se ubica el contenedor. |
+| `lastCollectionDate`   | `LocalDateTime`       | `private`     | Fecha y hora de la última recolección realizada.         |
+| `collectionFrequency`  | `CollectionFrequency` | `private`     | Frecuencia programada de recolección.                    |
+| `createdAt`            | `LocalDateTime`       | `private`     | Fecha y hora de creación del registro.                   |
+| `updatedAt`            | `LocalDateTime`       | `private`     | Fecha y hora de la última actualización.                 |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `Container()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `Container(location, capacity, type)` | `Constructor` | `public` | Constructor que instancia un contenedor con ubicación, capacidad y tipo. |
-| `addSensorReading(reading)` | `void` | `public` | Agrega una nueva lectura de sensor al contenedor. |
-| `updateFillLevel(newLevel)` | `void` | `public` | Actualiza el nivel de llenado del contenedor. |
-| `markAsCollected()` | `void` | `public` | Marca el contenedor como recolectado y actualiza la fecha. |
-| `isOverflowing()` | `boolean` | `public` | Determina si el contenedor está desbordándose. |
-| `needsCollection()` | `boolean` | `public` | Determina si el contenedor necesita ser recolectado. |
-| `calculateFillRate()` | `double` | `public` | Calcula la tasa de llenado del contenedor. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
+| Método                                                           | Tipo de Retorno   | Visibilidad   | Descripción                                                      |
+|------------------------------------------------------------------|-------------------|---------------|------------------------------------------------------------------|
+| `updateFillLevel(newLevel: FillLevel, timestamp: LocalDateTime)` | `void`            | `public`      | Actualiza el nivel de llenado del contenedor y registra la hora. |
+| `markAsCollected(collectedAt: LocalDateTime)`                    | `void`            | `public`      | Marca el contenedor como recolectado en una fecha específica.    |
+| `requiresCollection()`                                           | `boolean`         | `public`      | Determina si el contenedor necesita ser vaciado.                 |
+| `isOverflowing()`                                                | `boolean`         | `public`      | Indica si el contenedor ha superado su capacidad máxima.         |
+| `assignSensor(sensorId: SensorId)`                               | `void`            | `public`      | Asocia un sensor físico al contenedor.                           |
+| `scheduleMaintenanceDueToSensorFailure()`                        | `void`            | `public`      | Programa mantenimiento por falla del sensor.                     |
 
 ---
 
-**Entities**
+**2. `SensorReading` (Aggregate Root)**
 
-**2. `SensorReading` (Entity)**
-
-Representa una lectura individual de un sensor instalado en un contenedor, incluyendo datos de nivel de llenado, temperatura y estado del sensor.
+Representa una lectura individual registrada por un sensor instalado en un contenedor, incluyendo nivel de llenado, temperatura, batería y validación de datos.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único de la lectura. |
-| `readingId` | `SensorReadingId` | `private` | Identificador de dominio de la lectura. |
-| `containerId` | `ContainerId` | `private` | Identificador del contenedor asociado. |
-| `sensorId` | `SensorId` | `private` | Identificador del sensor que tomó la lectura. |
-| `timestamp` | `LocalDateTime` | `private` | Marca de tiempo de la lectura. |
-| `fillLevel` | `FillLevel` | `private` | Nivel de llenado registrado. |
-| `temperature` | `Temperature` | `private` | Temperatura registrada por el sensor. |
-| `sensorHealth` | `SensorHealth` | `private` | Estado de salud del sensor. |
-| `isValidated` | `boolean` | `private` | Indica si la lectura ha sido validada. |
+| Atributo           | Tipo               | Visibilidad  | Descripción                                              |
+|--------------------|--------------------|--------------|----------------------------------------------------------|
+| `id`               | `String`           | `private`    | Identificador único de la lectura.                       |
+| `containerId`      | `ContainerId`      | `private`    | Identificador del contenedor asociado.                   |
+| `fillLevel`        | `FillLevel`        | `private`    | Nivel de llenado registrado por el sensor.               |
+| `temperature`      | `Temperature`      | `private`    | Temperatura medida en el momento de la lectura.          |
+| `batteryLevel`     | `BatteryLevel`     | `private`    | Nivel de batería del sensor al momento de la lectura.    |
+| `recordedAt`       | `LocalDateTime`    | `private`    | Fecha y hora en que se registró la lectura.              |
+| `isValidated`      | `boolean`          | `private`    | Indica si la lectura fue validada correctamente.         |
+| `validationStatus` | `ValidationStatus` | `private`    | Estado del proceso de validación de la lectura.          |
+| `receivedAt`       | `LocalDateTime`    | `private`    | Fecha y hora en que se recibió la lectura en el sistema. |
+| `createdAt`        | `LocalDateTime`    | `private`    | Fecha y hora de creación del registro.                   |
+| `updatedAt`        | `LocalDateTime`    | `private`    | Fecha y hora de la última modificación.                  |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `SensorReading()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `SensorReading(containerId, sensorId, fillLevel)` | `Constructor` | `public` | Constructor que instancia una lectura con datos básicos. |
-| `validate()` | `ValidationResult` | `public` | Valida la consistencia y precisión de la lectura. |
-| `isAnomalous()` | `boolean` | `public` | Determina si la lectura presenta anomalías. |
+| Método        | Tipo de Retorno    | Visibilidad  | Descripción                                                      |
+|---------------|--------------------|--------------|------------------------------------------------------------------|
+| `validate()`  | `ValidationResult` | `public`     | Valida los valores de la lectura según los umbrales del sistema. |
+| `isAnomaly()` | `boolean`          | `public`     | Determina si la lectura presenta una anomalía o error de sensor. |
 
 ---
 
 **Value Objects**
 
-**3. `ContainerId` (Value Object)**
+**3. `ContainerCapacity` (Value Object)**
 
-Identificador único inmutable para un contenedor en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `containerId` | `Long` | `private` | Valor numérico del identificador. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isValid()` | `boolean` | `public` | Valida que el identificador sea válido. |
-
-**4. `FillLevel` (Value Object)**
-
-Representa el nivel de llenado de un contenedor como porcentaje y timestamp.
+Define la capacidad física de un contenedor en términos de volumen y peso máximos.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `percentage` | `double` | `private` | Porcentaje de llenado (0-100). |
-| `lastUpdated` | `LocalDateTime` | `private` | Fecha y hora de la última actualización. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isCritical()` | `boolean` | `public` | Determina si el nivel es crítico (requiere recolección urgente). |
-| `isNearFull()` | `boolean` | `public` | Determina si el contenedor está cerca de llenarse. |
-
-**5. `ContainerCapacity` (Value Object)**
-
-Define la capacidad máxima de un contenedor en volumen y peso.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `volumeInLiters` | `double` | `private` | Capacidad en litros del contenedor. |
-| `maxWeight` | `double` | `private` | Peso máximo soportado en kilogramos. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `calculateUtilization(currentFill)` | `double` | `public` | Calcula el porcentaje de utilización actual. |
-
-**6. `ContainerStatus` (Value Object)**
-
-Estado operacional del contenedor con historial de cambios.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `status` | `String` | `private` | Estado actual del contenedor. |
-| `lastStatusChange` | `LocalDateTime` | `private` | Fecha del último cambio de estado. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isActive()` | `boolean` | `public` | Determina si el contenedor está activo. |
-| `canTransitionTo(newStatus)` | `boolean` | `public` | Valida si puede cambiar al nuevo estado. |
-
-**7. `SensorHealth` (Value Object)**
-
-Estado de salud y diagnóstico de un sensor IoT.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `healthStatus` | `String` | `private` | Estado de salud del sensor. |
-| `batteryLevel` | `double` | `private` | Nivel de batería del sensor (0-100). |
-| `signalStrength` | `double` | `private` | Intensidad de señal de comunicación. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isHealthy()` | `boolean` | `public` | Determina si el sensor está funcionando correctamente. |
-| `needsMaintenance()` | `boolean` | `public` | Determina si el sensor requiere mantenimiento. |
-
-**8. `Temperature` (Value Object)**
-
-Medición de temperatura con capacidades de conversión y validación.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `celsius` | `double` | `private` | Temperatura en grados Celsius. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `toFahrenheit()` | `double` | `public` | Convierte la temperatura a Fahrenheit. |
-| `isWithinNormalRange()` | `boolean` | `public` | Verifica si está dentro del rango normal. |
-
-**9. `SensorReadingId` (Value Object)**
-
-Identificador único inmutable para una lectura de sensor en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `readingId` | `Long` | `private` | Valor numérico del identificador de lectura. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isValid()` | `boolean` | `public` | Valida que el identificador sea válido. |
-
-**10. `SensorId` (Value Object)**
-
-Identificador único inmutable para un sensor IoT en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `sensorId` | `Long` | `private` | Valor numérico del identificador del sensor. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isValid()` | `boolean` | `public` | Valida que el identificador sea válido. |
+| Atributo       | Tipo      | Visibilidad  | Descripción                     |
+|----------------|-----------|--------------|---------------------------------|
+| `volumeLiters` | `Integer` | `private`    | Capacidad máxima en litros.     |
+| `maxWeightKg`  | `Integer` | `private`    | Capacidad máxima en kilogramos. |
 
 ---
 
-**Application Services**
+**4. `SensorId` (Value Object)**
 
-**11. `ContainerApplicationService` (Application Service)**
-
-Servicio de aplicación que coordina las operaciones de negocio relacionadas con contenedores.
+Identificador único que representa un sensor físico conectado al sistema.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `containerRepository` | `ContainerRepository` | `private` | Repositorio para persistencia de contenedores. |
-| `containerDomainService` | `ContainerDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `containerFactory` | `ContainerFactory` | `private` | Factory para creación de contenedores. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
+| Atributo  | Tipo     | Visibilidad  | Descripción                        |
+|-----------|----------|--------------|------------------------------------|
+| `value`   | `String` | `private`    | Código o identificador del sensor. |
 
-**Métodos principales:**
+---
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createContainer(location, capacity, type, municipalityId)` | `Container` | `public` | Crea un nuevo contenedor en el sistema. |
-| `updateFillLevel(containerId, fillLevel, sensorId)` | `void` | `public` | Actualiza el nivel de llenado de un contenedor. |
-| `markContainerAsCollected(containerId, driverId)` | `void` | `public` | Marca un contenedor como recolectado. |
-| `getContainerById(containerId)` | `Optional<Container>` | `public` | Obtiene un contenedor por su identificador. |
-| `getContainersByLocation(location, radiusKm)` | `List<Container>` | `public` | Obtiene contenedores en un radio específico. |
-| `getOverflowingContainers(municipalityId)` | `List<Container>` | `public` | Obtiene contenedores que están desbordándose. |
+**5. `CollectionFrequency` (Value Object)**
 
-**12. `SensorApplicationService` (Application Service)**
-
-Servicio de aplicación para procesamiento y validación de datos de sensores.
+Determina la frecuencia con la que debe realizarse la recolección de residuos en el contenedor.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `containerRepository` | `ContainerRepository` | `private` | Repositorio para acceso a contenedores. |
-| `sensorValidationService` | `SensorValidationService` | `private` | Servicio para validación de datos de sensores. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `processSensorReading(containerId, sensorId, fillLevel, temperature)` | `void` | `public` | Procesa una nueva lectura de sensor. |
-| `validateSensorReadings(containerId)` | `ValidationResult` | `public` | Valida las lecturas de sensores de un contenedor. |
-| `getSensorReadings(containerId, startDate, endDate)` | `List<SensorReading>` | `public` | Obtiene lecturas de sensores en un período. |
+| Atributo  | Tipo      | Visibilidad  | Descripción                                       |
+|-----------|-----------|--------------|---------------------------------------------------|
+| `days`    | `Integer` | `private`    | Número de días entre cada recolección programada. |
 
 ---
 
-**Domain Services**
+**6. `FillLevel` (Value Object)**
 
-**13. `ContainerDomainService` (Domain Service)**
-
-Servicio de dominio que implementa lógica de negocio compleja relacionada con contenedores.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `calculateOptimalCollectionRoute(containers)` | `CollectionRoute` | `public` | Calcula la ruta óptima de recolección. |
-| `determineMaintenancePriority(containers)` | `List<Container>` | `public` | Determina prioridad de mantenimiento de contenedores. |
-| `validateContainerPlacement(location, type)` | `ValidationResult` | `public` | Valida la ubicación propuesta para un contenedor. |
-
-**14. `SensorValidationService` (Domain Service)**
-
-Servicio especializado en validación y análisis de datos de sensores.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateReading(reading)` | `ValidationResult` | `public` | Valida una lectura individual de sensor. |
-| `detectAnomalies(readings)` | `List<Anomaly>` | `public` | Detecta anomalías en un conjunto de lecturas. |
-| `calibrateSensor(sensorId, referenceValue)` | `CalibrationResult` | `public` | Calibra un sensor con un valor de referencia. |
-
-**15. `ContainerAnalyticsService` (Domain Service)**
-
-Servicio para análisis predictivo y generación de reportes de contenedores.
+Representa el nivel actual de llenado de un contenedor en porcentaje.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `predictionStrategy` | `FillLevelPredictionStrategy` | `private` | Estrategia de predicción de niveles de llenado. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `calculateFillTrend(container)` | `FillTrend` | `public` | Calcula la tendencia de llenado de un contenedor. |
-| `generateUsageReport(containers, period)` | `UsageReport` | `public` | Genera reporte de uso de contenedores. |
-| `setPredictionStrategy(strategy)` | `void` | `public` | Establece la estrategia de predicción a usar. |
+| Atributo     | Tipo      | Visibilidad   | Descripción                                  |
+|--------------|-----------|---------------|----------------------------------------------|
+| `percentage` | `Integer` | `private`     | Porcentaje de llenado actual del contenedor. |
 
 ---
 
-**Factories**
+**7. `Temperature` (Value Object)**
 
-**16. `ContainerFactory` (Factory)**
+Representa la temperatura medida por un sensor en grados Celsius.
 
-Factory para la creación de instancias de Container con validaciones y configuraciones por defecto.
+**Atributos Principales:**
 
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createContainer(location, capacity, type, municipalityId)` | `Container` | `public` | Crea un contenedor con parámetros específicos. |
-| `createWithDefaults(location, type)` | `Container` | `public` | Crea un contenedor con valores por defecto. |
-
-**17. `SensorReadingFactory` (Factory)**
-
-Factory para la creación de lecturas de sensores desde diferentes fuentes de datos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createFromSensorData(containerId, sensorData)` | `SensorReading` | `public` | Crea lectura desde datos raw del sensor. |
-| `createFromIoTMessage(message)` | `SensorReading` | `public` | Crea lectura desde mensaje IoT estructurado. |
+| Atributo  | Tipo         | Visibilidad  | Descripción                               |
+|-----------|--------------|--------------|-------------------------------------------|
+| `celsius` | `BigDecimal` | `private`    | Temperatura registrada en grados Celsius. |
 
 ---
 
-**Repository Interfaces**
+**8. `BatteryLevel` (Value Object)**
 
-**18. `ContainerRepository` (Repository Interface)**
+Representa el nivel de batería restante del sensor.
 
-Interfaz de repositorio para la persistencia y consulta de contenedores.
+**Atributos Principales:**
 
-**Métodos principales:**
+| Atributo     | Tipo      | Visibilidad  | Descripción                               |
+|--------------|-----------|--------------|-------------------------------------------|
+| `percentage` | `Integer` | `private`    | Porcentaje actual de carga de la batería. |
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(containerId)` | `Optional<Container>` | `public` | Busca un contenedor por su identificador. |
-| `findByLocation(location, radiusKm)` | `List<Container>` | `public` | Busca contenedores en un área geográfica. |
-| `findByMunicipality(municipalityId)` | `List<Container>` | `public` | Busca contenedores de una municipalidad. |
-| `findOverflowing()` | `List<Container>` | `public` | Busca contenedores que están desbordándose. |
-| `findByStatus(status)` | `List<Container>` | `public` | Busca contenedores por estado. |
-| `save(container)` | `Container` | `public` | Persiste o actualiza un contenedor. |
-| `delete(containerId)` | `void` | `public` | Elimina un contenedor del sistema. |
-| `existsById(containerId)` | `boolean` | `public` | Verifica si existe un contenedor. |
+---
+
+**Enumerations**
+
+**9. `ContainerType` (Enumeration)**
+
+Clasifica los tipos de contenedores según el tipo de residuo que almacenan.
+
+| Valor        | Descripción                             |
+|--------------|-----------------------------------------|
+| `ORGANIC`    | Contenedor para residuos orgánicos.     |
+| `RECYCLABLE` | Contenedor para materiales reciclables. |
+| `GENERAL`    | Contenedor para desechos generales.     |
+
+---
+
+**10. `ContainerStatus` (Enumeration)**
+
+Indica el estado operativo de un contenedor dentro del sistema.
+
+| Valor            | Descripción                                                   |
+|------------------|---------------------------------------------------------------|
+| `ACTIVE`         | Contenedor operativo y disponible para uso.                   |
+| `MAINTENANCE`    | Contenedor temporalmente fuera de servicio por mantenimiento. |
+| `DECOMMISSIONED` | Contenedor retirado del servicio.                             |
+
+---
+
+**11. `ValidationStatus` (Enumeration)**
+
+Define el resultado de la validación de una lectura de sensor.
+
+| Valor          | Descripción                                    |
+|----------------|------------------------------------------------|
+| `VALID`        | Lectura válida sin errores detectados.         |
+| `ANOMALY`      | Lectura con valores atípicos o inconsistentes. |
+| `SENSOR_ERROR` | Error en el sensor durante la lectura.         |
 
 ---
 
