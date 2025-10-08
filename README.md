@@ -3444,872 +3444,169 @@ Se presenta un diccionario detallado de las clases principales que componen el B
 
 **1. `Citizen` (Aggregate Root)**
 
-Representa un ciudadano participante en el sistema de gestión comunitaria con capacidad de reportar incidencias, ganar recompensas, recibir notificaciones y mantener un perfil de participación activa.
+Representa a un ciudadano registrado en el sistema, capaz de reportar incidencias, acumular puntos por participación y pertenecer a distintos niveles de membresía dentro del programa comunitario.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del ciudadano. |
-| `citizenId` | `CitizenId` | `private` | Identificador de dominio del ciudadano. |
-| `personalInfo` | `PersonalInfo` | `private` | Información personal del ciudadano. |
-| `contactInfo` | `ContactInfo` | `private` | Información de contacto del ciudadano. |
-| `address` | `Address` | `private` | Dirección de residencia del ciudadano. |
-| `registrationDate` | `LocalDateTime` | `private` | Fecha y hora de registro en el sistema. |
-| `membershipStatus` | `MembershipStatus` | `private` | Estado de membresía del ciudadano. |
-| `engagementLevel` | `EngagementLevel` | `private` | Nivel de participación del ciudadano. |
-| `preferences` | `CitizenPreferences` | `private` | Preferencias del ciudadano. |
-| `rewardsAccount` | `RewardsAccount` | `private` | Cuenta de recompensas del ciudadano. |
-| `notifications` | `List<Notification>` | `private` | Lista de notificaciones del ciudadano. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
+| Atributo                | Tipo              | Visibilidad  | Descripción                                         |
+|-------------------------|-------------------|--------------|-----------------------------------------------------|
+| `id`                    | `String`          | `private`    | Identificador único del ciudadano.                  |
+| `userId`                | `UserId`          | `private`    | Identificador del usuario asociado.                 |
+| `districtId`            | `DistrictId`      | `private`    | Distrito al que pertenece el ciudadano.             |
+| `fullName`              | `FullName`        | `private`    | Nombre completo del ciudadano.                      |
+| `email`                 | `EmailAddress`    | `private`    | Dirección de correo electrónico del ciudadano.      |
+| `phoneNumber`           | `PhoneNumber`     | `private`    | Número de teléfono del ciudadano.                   |
+| `totalPoints`           | `RewardPoints`    | `private`    | Puntos acumulados por participación.                |
+| `membershipLevel`       | `MembershipLevel` | `private`    | Nivel de membresía actual del ciudadano.            |
+| `totalReportsSubmitted` | `Integer`         | `private`    | Número total de reportes enviados por el ciudadano. |
+| `lastActivityDate`      | `LocalDateTime`   | `private`    | Fecha de la última actividad registrada.            |
+| `createdAt`             | `LocalDateTime`   | `private`    | Fecha y hora de creación del registro.              |
+| `updatedAt`             | `LocalDateTime`   | `private`    | Fecha y hora de la última actualización.            |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `Citizen()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `Citizen(personalInfo, contactInfo, address)` | `Constructor` | `public` | Constructor que instancia un ciudadano con datos básicos. |
-| `updateProfile(personalInfo, contactInfo)` | `void` | `public` | Actualiza el perfil del ciudadano. |
-| `updatePreferences(preferences)` | `void` | `public` | Actualiza las preferencias del ciudadano. |
-| `addNotification(notification)` | `void` | `public` | Agrega una notificación al ciudadano. |
-| `earnRewardPoints(points, reason)` | `void` | `public` | Otorga puntos de recompensa al ciudadano. |
-| `redeemRewards(redemption)` | `void` | `public` | Redime recompensas del ciudadano. |
-| `updateEngagementLevel()` | `void` | `public` | Actualiza el nivel de participación. |
-| `canSubmitReport()` | `boolean` | `public` | Determina si puede enviar reportes. |
-| `calculateTotalRewardPoints()` | `RewardPoints` | `public` | Calcula el total de puntos de recompensa. |
-| `isActiveInDistrict(districtId)` | `boolean` | `public` | Determina si está activo en un distrito. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
+| Método                                        | Tipo de Retorno  | Visibilidad  | Descripción                                       |
+|-----------------------------------------------|------------------|--------------|---------------------------------------------------|
+| `earnPoints(points: Integer, reason: String)` | `void`           | `public`     | Añade puntos al ciudadano por una acción válida.  |
+| `redeemPoints(points: Integer)`               | `void`           | `public`     | Permite canjear puntos acumulados.                |
+| `submitReport()`                              | `void`           | `public`     | Registra el envío de un nuevo reporte.            |
+| `updateMembershipLevel()`                     | `void`           | `public`     | Actualiza el nivel de membresía según los puntos. |
+| `isActive()`                                  | `boolean`        | `public`     | Indica si el ciudadano está activo en el sistema. |
+
+---
 
 **2. `Report` (Aggregate Root)**
 
-Representa un reporte de incidencia enviado por un ciudadano con información detallada, imágenes, estado de resolución y asignación a contenedores específicos.
+Representa un reporte ciudadano sobre incidencias relacionadas con el servicio de recolección o estado de los contenedores. Incluye el tipo de reporte, estado, descripción, resolución y evidencias asociadas.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del reporte. |
-| `reportId` | `ReportId` | `private` | Identificador de dominio del reporte. |
-| `citizenId` | `CitizenId` | `private` | Identificador del ciudadano que envió el reporte. |
-| `reportType` | `ReportType` | `private` | Tipo de reporte enviado. |
-| `description` | `String` | `private` | Descripción detallada del reporte. |
-| `location` | `Location` | `private` | Ubicación geográfica del reporte. |
-| `priority` | `Priority` | `private` | Prioridad asignada al reporte. |
-| `status` | `ReportStatus` | `private` | Estado actual del reporte. |
-| `images` | `List<ReportImage>` | `private` | Lista de imágenes adjuntas al reporte. |
-| `assignedContainerId` | `ContainerId` | `private` | Identificador del contenedor asignado. |
-| `submissionDate` | `LocalDateTime` | `private` | Fecha y hora de envío del reporte. |
-| `resolutionDate` | `LocalDateTime` | `private` | Fecha y hora de resolución del reporte. |
-| `feedback` | `CitizenFeedback` | `private` | Retroalimentación del ciudadano. |
-| `administratorNotes` | `String` | `private` | Notas del administrador. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
+| Atributo         | Tipo                     | Visibilidad  | Descripción                                      |
+|------------------|--------------------------|--------------|--------------------------------------------------|
+| `id`             | `String`                 | `private`    | Identificador único del reporte.                 |
+| `citizenId`      | `CitizenId`              | `private`    | Identificador del ciudadano que creó el reporte. |
+| `location`       | `Location`               | `private`    | Ubicación donde ocurrió la incidencia.           |
+| `containerId`    | `ContainerId (opcional)` | `private`    | Contenedor afectado en el reporte, si aplica.    |
+| `reportType`     | `ReportType`             | `private`    | Tipo de incidente reportado.                     |
+| `description`    | `String`                 | `private`    | Descripción detallada de la incidencia.          |
+| `status`         | `ReportStatus`           | `private`    | Estado actual del reporte.                       |
+| `resolutionNote` | `String`                 | `private`    | Nota de resolución asociada.                     |
+| `resolvedAt`     | `LocalDateTime`          | `private`    | Fecha y hora en que se resolvió el reporte.      |
+| `resolvedBy`     | `UserId`                 | `private`    | Usuario que resolvió el reporte.                 |
+| `submittedAt`    | `LocalDateTime`          | `private`    | Fecha de creación del reporte.                   |
+| `acknowledgedAt` | `LocalDateTime`          | `private`    | Fecha en que se reconoció el reporte.            |
+| `createdAt`      | `LocalDateTime`          | `private`    | Fecha y hora de registro.                        |
+| `updatedAt`      | `LocalDateTime`          | `private`    | Fecha y hora de la última actualización.         |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `Report()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `Report(citizenId, reportType, description, location)` | `Constructor` | `public` | Constructor que instancia un reporte con datos básicos. |
-| `addImage(image)` | `void` | `public` | Agrega una imagen al reporte. |
-| `assignToContainer(containerId)` | `void` | `public` | Asigna el reporte a un contenedor específico. |
-| `updateStatus(newStatus, notes)` | `void` | `public` | Actualiza el estado del reporte. |
-| `provideResolution(resolution, resolvedBy)` | `void` | `public` | Proporciona resolución al reporte. |
-| `submitFeedback(feedback)` | `void` | `public` | Envía retroalimentación sobre el reporte. |
-| `calculateResolutionTime()` | `Duration` | `public` | Calcula el tiempo de resolución del reporte. |
-| `isOverdue()` | `boolean` | `public` | Determina si el reporte está atrasado. |
-| `canBeUpdated()` | `boolean` | `public` | Determina si el reporte puede ser actualizado. |
-| `canAddComments()` | `boolean` | `public` | Determina si se pueden agregar comentarios. |
-| `canProvideResolution()` | `boolean` | `public` | Determina si se puede proporcionar resolución. |
-| `getAvailableActions()` | `List<ReportAction>` | `public` | Obtiene las acciones disponibles según el estado. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
-
-**3. `RewardsProgram` (Aggregate Root)**
-
-Representa un programa de recompensas con reglas específicas, opciones de redención y gestión de participantes para incentivar la participación ciudadana.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del programa. |
-| `programId` | `RewardsProgramId` | `private` | Identificador de dominio del programa. |
-| `name` | `String` | `private` | Nombre del programa de recompensas. |
-| `description` | `String` | `private` | Descripción detallada del programa. |
-| `isActive` | `Boolean` | `private` | Indica si el programa está activo. |
-| `startDate` | `LocalDateTime` | `private` | Fecha de inicio del programa. |
-| `endDate` | `LocalDateTime` | `private` | Fecha de finalización del programa. |
-| `rules` | `List<RewardRule>` | `private` | Lista de reglas del programa. |
-| `redemptionOptions` | `List<RedemptionOption>` | `private` | Opciones de redención disponibles. |
-| `participants` | `List<CitizenId>` | `private` | Lista de participantes del programa. |
-| `totalPointsAwarded` | `RewardPoints` | `private` | Total de puntos otorgados. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `RewardsProgram()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `RewardsProgram(name, description, rules)` | `Constructor` | `public` | Constructor que instancia un programa con datos básicos. |
-| `addRule(rule)` | `void` | `public` | Agrega una regla al programa. |
-| `addRedemptionOption(option)` | `void` | `public` | Agrega una opción de redención. |
-| `calculatePoints(action)` | `RewardPoints` | `public` | Calcula puntos según una acción ciudadana. |
-| `enrollCitizen(citizenId)` | `void` | `public` | Inscribe un ciudadano al programa. |
-| `isEligibleForRedemption(citizenId, option)` | `boolean` | `public` | Determina elegibilidad para redención. |
-| `deactivateProgram()` | `void` | `public` | Desactiva el programa. |
-| `isActive()` | `boolean` | `public` | Determina si el programa está activo. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
+| Método                                       | Tipo de Retorno   | Visibilidad  | Descripción                                                |
+|----------------------------------------------|-------------------|--------------|------------------------------------------------------------|
+| `acknowledge()`                              | `void`            | `public`     | Marca el reporte como reconocido por el sistema.           |
+| `startProcessing()`                          | `void`            | `public`     | Inicia el procesamiento del reporte.                       |
+| `resolve(note: String, resolvedBy: UserId)`  | `void`            | `public`     | Resuelve el reporte con nota y usuario responsable.        |
+| `reject(reason: String, rejectedBy: UserId)` | `void`            | `public`     | Rechaza el reporte con justificación.                      |
+| `calculateResolutionTime()`                  | `Duration`        | `public`     | Calcula la duración entre la creación y la resolución.     |
+| `isOverdue()`                                | `boolean`         | `public`     | Indica si el reporte excedió el tiempo máximo de atención. |
 
 ---
 
 **Entities**
 
-**4. `ReportImage` (Entity)**
+**3. `Evidence` (Entity)**
 
-Representa una imagen adjunta a un reporte con metadatos de archivo, validaciones de formato y capacidades de gestión de contenido multimedia.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único de la imagen. |
-| `imageId` | `ReportImageId` | `private` | Identificador de dominio de la imagen. |
-| `reportId` | `ReportId` | `private` | Identificador del reporte asociado. |
-| `fileName` | `String` | `private` | Nombre del archivo de imagen. |
-| `filePath` | `String` | `private` | Ruta del archivo en el sistema. |
-| `fileSize` | `Long` | `private` | Tamaño del archivo en bytes. |
-| `mimeType` | `String` | `private` | Tipo MIME del archivo. |
-| `uploadedDate` | `LocalDateTime` | `private` | Fecha de subida de la imagen. |
-| `description` | `String` | `private` | Descripción de la imagen. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `ReportImage(reportId, fileName, filePath)` | `Constructor` | `public` | Constructor que instancia una imagen con datos básicos. |
-| `getFileUrl()` | `String` | `public` | Obtiene la URL del archivo. |
-| `isValidImageType()` | `Boolean` | `public` | Valida si es un tipo de imagen válido. |
-
-**5. `Notification` (Entity)**
-
-Representa una notificación enviada a un ciudadano con información sobre reportes, recompensas y actualizaciones del sistema.
+Representa una evidencia asociada a un reporte ciudadano, como una foto, video o documento que respalda la información enviada.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único de la notificación. |
-| `notificationId` | `NotificationId` | `private` | Identificador de dominio de la notificación. |
-| `citizenId` | `CitizenId` | `private` | Identificador del ciudadano destinatario. |
-| `type` | `NotificationType` | `private` | Tipo de notificación. |
-| `title` | `String` | `private` | Título de la notificación. |
-| `message` | `String` | `private` | Mensaje de la notificación. |
-| `priority` | `NotificationPriority` | `private` | Prioridad de la notificación. |
-| `channel` | `NotificationChannel` | `private` | Canal de envío de la notificación. |
-| `status` | `NotificationStatus` | `private` | Estado de la notificación. |
-| `scheduledDate` | `LocalDateTime` | `private` | Fecha programada de envío. |
-| `sentDate` | `LocalDateTime` | `private` | Fecha de envío real. |
-| `readDate` | `LocalDateTime` | `private` | Fecha de lectura por el ciudadano. |
+| Atributo       | Tipo           | Visibilidad  | Descripción                                  |
+|----------------|----------------|--------------|----------------------------------------------|
+| `id`           | `String`       | `private`    | Identificador único de la evidencia.         |
+| `type`         | `EvidenceType` | `private`    | Tipo de evidencia (foto, video o documento). |
+| `filePath`     | `String`       | `private`    | Ruta del archivo almacenado.                 |
+| `originalName` | `String`       | `private`    | Nombre original del archivo cargado.         |
+| `description`  | `String`       | `private`    | Descripción opcional de la evidencia.        |
+| `fileSize`     | `Long`         | `private`    | Tamaño del archivo en bytes.                 |
+| `mimeType`     | `String`       | `private`    | Tipo MIME del archivo.                       |
+| `thumbnailUrl` | `String`       | `private`    | URL del thumbnail generado (si aplica).      |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `Notification(citizenId, type, message)` | `Constructor` | `public` | Constructor que instancia una notificación con datos básicos. |
-| `markAsRead()` | `void` | `public` | Marca la notificación como leída. |
-| `markAsSent()` | `void` | `public` | Marca la notificación como enviada. |
-| `isExpired()` | `Boolean` | `public` | Determina si la notificación ha expirado. |
-| `canBeRead()` | `Boolean` | `public` | Determina si la notificación puede ser leída. |
+| Método                                    | Tipo de Retorno  | Visibilidad   | Descripción                                        |
+|-------------------------------------------|------------------|---------------|----------------------------------------------------|
+| `isImage()`                               | `boolean`        | `public`      | Determina si la evidencia es una imagen.           |
+| `isVideo()`                               | `boolean`        | `public`      | Determina si la evidencia es un video.             |
+| `isLargeFile()`                           | `boolean`        | `public`      | Indica si el archivo excede un tamaño determinado. |
+| `updateDescription(description: String)`  | `void`           | `public`      | Actualiza la descripción del archivo.              |
+| `generateThumbnail(thumbnailUrl: String)` | `void`           | `public`      | Genera una miniatura asociada al archivo.          |
 
 ---
 
 **Value Objects**
 
-**6. `CitizenId` (Value Object)**
+**4. `RewardPoints` (Value Object)**
 
-Identificador único inmutable para un ciudadano en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `citizenId` | `Long` | `private` | Valor numérico del identificador del ciudadano. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isValid()` | `Boolean` | `public` | Valida que el identificador sea válido. |
-
-**7. `ReportId` (Value Object)**
-
-Identificador único inmutable para un reporte en el sistema.
+Representa la cantidad de puntos obtenidos o canjeados por un ciudadano según sus interacciones en el sistema.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `reportId` | `Long` | `private` | Valor numérico del identificador del reporte. |
-
-**8. `RewardsProgramId` (Value Object)**
-
-Identificador único inmutable para un programa de recompensas en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `programId` | `Long` | `private` | Valor numérico del identificador del programa. |
-
-**9. `NotificationId` (Value Object)**
-
-Identificador único inmutable para una notificación en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `notificationId` | `Long` | `private` | Valor numérico del identificador de la notificación. |
-
-**10. `ReportImageId` (Value Object)**
-
-Identificador único inmutable para una imagen de reporte en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `imageId` | `Long` | `private` | Valor numérico del identificador de la imagen. |
-
-**11. `PersonalInfo` (Value Object)**
-
-Información personal de un ciudadano con datos de identificación y validaciones correspondientes.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `firstName` | `String` | `private` | Nombre del ciudadano. |
-| `lastName` | `String` | `private` | Apellido del ciudadano. |
-| `documentType` | `DocumentType` | `private` | Tipo de documento de identidad. |
-| `documentNumber` | `String` | `private` | Número de documento de identidad. |
-| `birthDate` | `LocalDate` | `private` | Fecha de nacimiento. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getFullName()` | `String` | `public` | Obtiene el nombre completo. |
-| `getAge()` | `Integer` | `public` | Calcula la edad actual. |
-
-**12. `ContactInfo` (Value Object)**
-
-Información de contacto de un ciudadano con validaciones de formato para email y teléfono.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `email` | `EmailAddress` | `private` | Dirección de correo electrónico. |
-| `phoneNumber` | `PhoneNumber` | `private` | Número de teléfono principal. |
-| `alternativePhone` | `PhoneNumber` | `private` | Número de teléfono alternativo. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isValidEmail()` | `Boolean` | `public` | Valida el formato del email. |
-| `isValidPhone()` | `Boolean` | `public` | Valida el formato del teléfono. |
-
-**13. `EngagementLevel` (Value Object)**
-
-Nivel de participación de un ciudadano con cálculos de actividad y métricas de compromiso.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `level` | `String` | `private` | Nivel de participación del ciudadano. |
-| `score` | `Double` | `private` | Puntuación de participación. |
-| `lastCalculation` | `LocalDateTime` | `private` | Fecha del último cálculo. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isHighEngagement()` | `Boolean` | `public` | Determina si tiene alta participación. |
-| `calculateNewLevel(recentActivity)` | `EngagementLevel` | `public` | Calcula nuevo nivel basado en actividad. |
-
-**14. `RewardPoints` (Value Object)**
-
-Puntos de recompensa otorgados a ciudadanos con capacidades de cálculo y gestión de expiración.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `points` | `Integer` | `private` | Cantidad de puntos de recompensa. |
-| `earnedDate` | `LocalDateTime` | `private` | Fecha de obtención de los puntos. |
-| `expiryDate` | `LocalDateTime` | `private` | Fecha de expiración de los puntos. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isExpired()` | `Boolean` | `public` | Determina si los puntos han expirado. |
-| `add(other)` | `RewardPoints` | `public` | Suma otros puntos de recompensa. |
-| `subtract(other)` | `RewardPoints` | `public` | Resta otros puntos de recompensa. |
-
-**15. `CitizenPreferences` (Value Object)**
-
-Preferencias configurables de un ciudadano para notificaciones, idioma y temas de interés.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `language` | `Language` | `private` | Idioma preferido del ciudadano. |
-| `notificationChannels` | `Set<NotificationChannel>` | `private` | Canales de notificación preferidos. |
-| `topicInterests` | `Set<TopicInterest>` | `private` | Temas de interés del ciudadano. |
-| `privacySettings` | `PrivacySettings` | `private` | Configuraciones de privacidad. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `allowsNotificationType(type)` | `Boolean` | `public` | Determina si permite un tipo de notificación. |
-
-**16. `RewardsAccount` (Value Object)**
-
-Cuenta de recompensas de un ciudadano con gestión de puntos disponibles y histórico de actividad.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `totalPoints` | `RewardPoints` | `private` | Total de puntos acumulados. |
-| `availablePoints` | `RewardPoints` | `private` | Puntos disponibles para redención. |
-| `lifetimeEarned` | `RewardPoints` | `private` | Total de puntos ganados históricos. |
-| `lastActivity` | `LocalDateTime` | `private` | Fecha de última actividad. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canRedeem(amount)` | `Boolean` | `public` | Determina si puede redimir una cantidad. |
-| `addPoints(points)` | `RewardsAccount` | `public` | Agrega puntos a la cuenta. |
-| `redeemPoints(amount)` | `RewardsAccount` | `public` | Redime puntos de la cuenta. |
-
-**17. `CitizenFeedback` (Value Object)**
-
-Retroalimentación proporcionada por un ciudadano sobre un reporte con calificación y comentarios.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `rating` | `Integer` | `private` | Calificación numérica del ciudadano. |
-| `comments` | `String` | `private` | Comentarios del ciudadano. |
-| `submissionDate` | `LocalDateTime` | `private` | Fecha de envío de la retroalimentación. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isPositive()` | `Boolean` | `public` | Determina si la retroalimentación es positiva. |
-| `isValid()` | `Boolean` | `public` | Valida la retroalimentación. |
-
-**18. `ReportType` (Value Object)**
-
-Tipo de reporte con categorización, requerimientos especiales y configuraciones específicas.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `type` | `String` | `private` | Tipo específico del reporte. |
-| `category` | `String` | `private` | Categoría del reporte. |
-| `requiresImages` | `Boolean` | `private` | Indica si requiere imágenes. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isEmergency()` | `Boolean` | `public` | Determina si es un reporte de emergencia. |
-| `isContainerRelated()` | `Boolean` | `public` | Determina si está relacionado con contenedores. |
+| Atributo  | Tipo     | Visibilidad  | Descripción                                               |
+|-----------|----------|--------------|-----------------------------------------------------------|
+| `value`   | `String` | `private`    | Valor numérico o representación de los puntos acumulados. |
 
 ---
 
-**Enums**
+**Enumerations**
 
-**19. `ReportStatus` (Enum)**
+**5. `MembershipLevel` (Enumeration)**
 
-Estados posibles de un reporte durante su ciclo de vida y procesamiento.
+Clasifica el nivel de membresía del ciudadano de acuerdo con su nivel de participación o puntos acumulados.
 
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `SUBMITTED` | Reporte enviado por el ciudadano. |
-| `IN_REVIEW` | Reporte en proceso de revisión. |
-| `IN_PROGRESS` | Reporte en proceso de resolución. |
-| `RESOLVED` | Reporte resuelto exitosamente. |
-| `CLOSED` | Reporte cerrado. |
-| `REJECTED` | Reporte rechazado. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canTransitionTo(newStatus)` | `boolean` | `public` | Valida si puede transicionar al nuevo estado. |
-| `isResolved()` | `boolean` | `public` | Determina si está resuelto. |
-| `allowsUpdates()` | `boolean` | `public` | Determina si permite actualizaciones. |
-| `allowsComments()` | `boolean` | `public` | Determina si permite comentarios. |
-| `requiresResolution()` | `boolean` | `public` | Determina si requiere resolución. |
-| `getAvailableTransitions()` | `List<ReportStatus>` | `public` | Obtiene las transiciones disponibles. |
-
-**20. `MembershipStatus` (Enum)**
-
-Estados de membresía de un ciudadano en el sistema comunitario.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `GUEST` | Ciudadano invitado sin membresía. |
-| `BASIC` | Membresía básica estándar. |
-| `PREMIUM` | Membresía premium con beneficios. |
-| `VIP` | Membresía VIP con máximos beneficios. |
-| `SUSPENDED` | Membresía suspendida temporalmente. |
-| `INACTIVE` | Membresía inactiva. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isActive()` | `boolean` | `public` | Determina si está activo. |
-| `canUpgrade()` | `boolean` | `public` | Determina si puede mejorar membresía. |
-| `canSubmitReports()` | `boolean` | `public` | Determina si puede enviar reportes. |
-| `getMaxReportsPerDay()` | `Integer` | `public` | Obtiene el máximo de reportes por día. |
-
-**21. `NotificationStatus` (Enum)**
-
-Estados posibles de una notificación durante su ciclo de vida.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `SCHEDULED` | Notificación programada para envío. |
-| `SENT` | Notificación enviada al destinatario. |
-| `DELIVERED` | Notificación entregada exitosamente. |
-| `READ` | Notificación leída por el destinatario. |
-| `FAILED` | Notificación falló en el envío. |
-| `EXPIRED` | Notificación expirada. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isDelivered()` | `boolean` | `public` | Determina si fue entregada. |
-| `canBeRead()` | `boolean` | `public` | Determina si puede ser leída. |
-| `hasExpired()` | `boolean` | `public` | Determina si ha expirado. |
-
-**22. `ReportAction` (Enum)**
-
-Acciones disponibles que se pueden realizar sobre un reporte según su estado.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `UPDATE_STATUS` | Actualizar estado del reporte. |
-| `ADD_COMMENT` | Agregar comentarios al reporte. |
-| `ADD_IMAGE` | Agregar imágenes al reporte. |
-| `ASSIGN_TO_CONTAINER` | Asignar reporte a contenedor. |
-| `PROVIDE_RESOLUTION` | Proporcionar resolución. |
-| `SUBMIT_FEEDBACK` | Enviar retroalimentación. |
-| `CLOSE_REPORT` | Cerrar el reporte. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAllowedForStatus(status)` | `boolean` | `public` | Determina si la acción está permitida para el estado. |
-| `requiresAdminPrivileges()` | `boolean` | `public` | Determina si requiere privilegios de administrador. |
+| Valor    | Descripción                             |
+|----------|-----------------------------------------|
+| `BRONZE` | Nivel inicial de membresía.             |
+| `SILVER` | Nivel intermedio de membresía.          |
+| `GOLD`   | Nivel avanzado o de alta participación. |
 
 ---
 
-**Application Services**
+**6. `ReportType` (Enumeration)**
 
-**23. `CitizenApplicationService` (Application Service)**
+Define el tipo de reporte ciudadano según el tipo de incidencia registrada.
 
-Servicio de aplicación que coordina las operaciones de negocio relacionadas con ciudadanos y su participación comunitaria.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `citizenRepository` | `CitizenRepository` | `private` | Repositorio para persistencia de ciudadanos. |
-| `citizenDomainService` | `CitizenDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `citizenFactory` | `CitizenFactory` | `private` | Factory para creación de ciudadanos. |
-| `rewardsManagementService` | `RewardsManagementService` | `private` | Servicio de gestión de recompensas. |
-| `engagementAnalysisService` | `EngagementAnalysisService` | `private` | Servicio de análisis de participación. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `registerCitizen(personalInfo, contactInfo, address, preferences)` | `Citizen` | `public` | Registra un nuevo ciudadano en el sistema. |
-| `updateProfile(citizenId, personalInfo, contactInfo)` | `void` | `public` | Actualiza el perfil de un ciudadano. |
-| `updatePreferences(citizenId, preferences)` | `void` | `public` | Actualiza las preferencias de un ciudadano. |
-| `earnRewardPoints(citizenId, points, reason)` | `void` | `public` | Otorga puntos de recompensa a un ciudadano. |
-| `redeemRewards(citizenId, redemption)` | `void` | `public` | Procesa redención de recompensas. |
-| `getCitizenById(citizenId)` | `Optional<Citizen>` | `public` | Obtiene un ciudadano por su identificador. |
-| `getCitizensByDistrict(districtId, status)` | `List<Citizen>` | `public` | Obtiene ciudadanos de un distrito por estado. |
-| `updateEngagementLevel(citizenId)` | `void` | `public` | Actualiza el nivel de participación. |
-
-**24. `ReportApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de reportes ciudadanos y su procesamiento.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `reportRepository` | `ReportRepository` | `private` | Repositorio para persistencia de reportes. |
-| `reportDomainService` | `ReportDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `reportFactory` | `ReportFactory` | `private` | Factory para creación de reportes. |
-| `reportRoutingService` | `ReportRoutingService` | `private` | Servicio de enrutamiento de reportes. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `submitReport(citizenId, reportType, description, location, priority, images)` | `Report` | `public` | Envía un nuevo reporte al sistema. |
-| `updateReportStatus(reportId, newStatus, adminNotes)` | `void` | `public` | Actualiza el estado de un reporte. |
-| `addReportImage(reportId, image)` | `void` | `public` | Agrega una imagen a un reporte. |
-| `provideResolution(reportId, resolution, resolvedBy)` | `void` | `public` | Proporciona resolución a un reporte. |
-| `submitFeedback(reportId, feedback)` | `void` | `public` | Envía retroalimentación sobre un reporte. |
-| `getReportById(reportId)` | `Optional<Report>` | `public` | Obtiene un reporte por su identificador. |
-| `getCitizenReports(citizenId, status, dateRange)` | `List<Report>` | `public` | Obtiene reportes de un ciudadano. |
-| `getReportsByLocation(location, radius, reportType)` | `List<Report>` | `public` | Obtiene reportes por ubicación geográfica. |
-| `getActiveReports(priority, districtId)` | `List<Report>` | `public` | Obtiene reportes activos por prioridad y distrito. |
-
-**25. `RewardsProgramApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de programas de recompensas y participación ciudadana.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `rewardsProgramRepository` | `RewardsProgramRepository` | `private` | Repositorio para persistencia de programas. |
-| `rewardsProgramDomainService` | `RewardsProgramDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `rewardsProgramFactory` | `RewardsProgramFactory` | `private` | Factory para creación de programas. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createProgram(name, description, rules, redemptionOptions)` | `RewardsProgram` | `public` | Crea un nuevo programa de recompensas. |
-| `addRewardRule(programId, rule)` | `void` | `public` | Agrega una regla a un programa. |
-| `addRedemptionOption(programId, option)` | `void` | `public` | Agrega una opción de redención. |
-| `enrollCitizen(programId, citizenId)` | `void` | `public` | Inscribe un ciudadano al programa. |
-| `deactivateProgram(programId)` | `void` | `public` | Desactiva un programa de recompensas. |
-| `getProgramById(programId)` | `Optional<RewardsProgram>` | `public` | Obtiene un programa por su identificador. |
-| `getActivePrograms()` | `List<RewardsProgram>` | `public` | Obtiene programas activos. |
-| `calculatePoints(programId, action)` | `RewardPoints` | `public` | Calcula puntos según acción ciudadana. |
-
-**26. `NotificationApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de notificaciones ciudadanas y comunicación del sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `citizenRepository` | `CitizenRepository` | `private` | Repositorio para acceso a ciudadanos. |
-| `notificationFactory` | `NotificationFactory` | `private` | Factory para creación de notificaciones. |
-| `notificationDomainService` | `NotificationDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `sendNotification(citizenId, type, title, message, channel, priority)` | `void` | `public` | Envía una notificación a un ciudadano. |
-| `markNotificationAsRead(citizenId, notificationId)` | `void` | `public` | Marca una notificación como leída. |
-| `getCitizenNotifications(citizenId, status)` | `List<Notification>` | `public` | Obtiene notificaciones de un ciudadano. |
-| `createWelcomeNotification(citizenId)` | `void` | `public` | Crea notificación de bienvenida. |
-| `createReportStatusNotification(reportId, newStatus)` | `void` | `public` | Crea notificación de cambio de estado. |
-| `createRewardsNotification(citizenId, points)` | `void` | `public` | Crea notificación de recompensas. |
+| Valor               | Descripción                             |
+|---------------------|-----------------------------------------|
+| `CONTAINER_FULL`    | Reporte de contenedor lleno.            |
+| `CONTAINER_DAMAGED` | Reporte de contenedor dañado.           |
+| `GARBAGE_OUTSIDE`   | Reporte de basura fuera del contenedor. |
+| `MISSED_COLLECTION` | Reporte de recolección no realizada.    |
+| `OTHER`             | Reporte de tipo misceláneo.             |
 
 ---
 
-**Domain Services**
+**7. `ReportStatus` (Enumeration)**
 
-**27. `CitizenDomainService` (Domain Service)**
+Indica el estado del ciclo de vida de un reporte.
 
-Servicio de dominio que implementa lógica de negocio compleja relacionada con ciudadanos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateCitizenRegistration(citizen)` | `ValidationResult` | `public` | Valida el registro de un nuevo ciudadano. |
-| `calculateEngagementLevel(citizen, activities)` | `EngagementLevel` | `public` | Calcula el nivel de participación. |
-| `determineEligibilityForUpgrade(citizen)` | `MembershipUpgradeResult` | `public` | Determina elegibilidad para mejora de membresía. |
-| `validateRewardRedemption(citizen, redemption)` | `ValidationResult` | `public` | Valida redención de recompensas. |
-| `checkDuplicateRegistration(personalInfo)` | `ValidationResult` | `public` | Verifica registros duplicados. |
-
-**28. `ReportDomainService` (Domain Service)**
-
-Servicio de dominio para lógica compleja relacionada con reportes ciudadanos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateReportSubmission(report)` | `ValidationResult` | `public` | Valida el envío de un reporte. |
-| `calculatePriority(report, systemLoad)` | `Priority` | `public` | Calcula la prioridad del reporte. |
-| `estimateResolutionTime(report, workload)` | `Duration` | `public` | Estima tiempo de resolución. |
-| `checkDuplicateReports(report, existingReports)` | `ValidationResult` | `public` | Verifica reportes duplicados. |
-| `assignToNearestContainer(report, containers)` | `Optional<ContainerId>` | `public` | Asigna al contenedor más cercano. |
-
-**29. `RewardsProgramDomainService` (Domain Service)**
-
-Servicio de dominio para lógica compleja relacionada con programas de recompensas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateProgramCreation(program)` | `ValidationResult` | `public` | Valida la creación de un programa. |
-| `calculateProgramEffectiveness(program)` | `EffectivenessReport` | `public` | Calcula efectividad del programa. |
-| `optimizeRewardRules(program, usage)` | `List<RewardRule>` | `public` | Optimiza reglas de recompensas. |
-| `checkProgramEligibility(citizen, program)` | `EligibilityResult` | `public` | Verifica elegibilidad para el programa. |
-
-**30. `EngagementAnalysisService` (Domain Service)**
-
-Servicio especializado en análisis de participación y comportamiento ciudadano.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `calculateEngagementLevel(citizen)` | `EngagementLevel` | `public` | Calcula nivel de participación. |
-| `analyzeReportingPatterns(citizen)` | `ReportingPatterns` | `public` | Analiza patrones de reportes. |
-| `identifyInfluentialCitizens(district)` | `List<Citizen>` | `public` | Identifica ciudadanos influyentes. |
-| `generateEngagementReport(period)` | `EngagementReport` | `public` | Genera reporte de participación. |
-| `predictCitizenBehavior(citizen)` | `BehaviorPrediction` | `public` | Predice comportamiento ciudadano. |
-
-**31. `RewardsManagementService` (Domain Service)**
-
-Servicio para gestión integral de recompensas y estrategias de cálculo.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `rewardStrategy` | `RewardCalculationStrategy` | `private` | Estrategia de cálculo de recompensas actual. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `calculateRewards(citizen, action)` | `RewardPoints` | `public` | Calcula recompensas por acción ciudadana. |
-| `processRedemption(citizen, redemption)` | `RedemptionResult` | `public` | Procesa redención de recompensas. |
-| `expirePoints(citizen)` | `List<ExpiredPoints>` | `public` | Expira puntos vencidos. |
-| `setRewardStrategy(strategy)` | `void` | `public` | Establece estrategia de cálculo. |
-| `analyzeRewardUsage(program)` | `UsageAnalysis` | `public` | Analiza uso de recompensas. |
-
-**32. `ReportRoutingService` (Domain Service)**
-
-Servicio especializado en enrutamiento y asignación de reportes.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `routeReport(report)` | `RoutingResult` | `public` | Enruta reporte al departamento apropiado. |
-| `assignPriority(report)` | `Priority` | `public` | Asigna prioridad al reporte. |
-| `findNearestContainer(location)` | `Optional<ContainerId>` | `public` | Encuentra contenedor más cercano. |
-| `estimateResolutionTime(report)` | `Duration` | `public` | Estima tiempo de resolución. |
-| `distributeWorkload(reports, districts)` | `WorkloadDistribution` | `public` | Distribuye carga de trabajo. |
-
-**33. `NotificationDomainService` (Domain Service)**
-
-Servicio de dominio para lógica compleja relacionada con notificaciones.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateNotification(notification)` | `ValidationResult` | `public` | Valida una notificación. |
-| `determineOptimalChannel(citizen, notificationType)` | `NotificationChannel` | `public` | Determina canal óptimo de notificación. |
-| `scheduleNotification(notification, preferences)` | `ScheduleResult` | `public` | Programa envío de notificación. |
-| `prioritizeNotifications(notifications)` | `List<Notification>` | `public` | Prioriza lista de notificaciones. |
+| Valor          | Descripción                           |
+|----------------|---------------------------------------|
+| `SUBMITTED`    | Reporte enviado por el ciudadano.     |
+| `ACKNOWLEDGED` | Reporte reconocido por el sistema.    |
+| `IN_PROGRESS`  | Reporte actualmente en procesamiento. |
+| `RESOLVED`     | Reporte resuelto y cerrado.           |
+| `REJECTED`     | Reporte rechazado con justificación.  |
 
 ---
 
-**Strategies**
+**8. `EvidenceType` (Enumeration)**
 
-**34. `RewardCalculationStrategy` (Strategy Interface)**
+Clasifica los tipos de evidencia que puede adjuntar un ciudadano a un reporte.
 
-Interfaz que define el contrato para diferentes algoritmos de cálculo de recompensas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `calculatePoints(action, citizen)` | `RewardPoints` | `public` | Calcula puntos según acción y ciudadano. |
-| `getMultiplier(citizen)` | `Double` | `public` | Obtiene multiplicador según ciudadano. |
-
-**35. `BasicRewardStrategy` (Strategy)**
-
-Implementación de estrategia básica de cálculo de recompensas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `calculatePoints(action, citizen)` | `RewardPoints` | `public` | Calcula puntos usando estrategia básica. |
-| `getMultiplier(citizen)` | `Double` | `public` | Obtiene multiplicador básico. |
-
-**36. `TieredRewardStrategy` (Strategy)**
-
-Implementación de estrategia escalonada de recompensas según nivel de membresía.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `calculatePoints(action, citizen)` | `RewardPoints` | `public` | Calcula puntos usando estrategia escalonada. |
-| `getMultiplier(citizen)` | `Double` | `public` | Obtiene multiplicador según nivel. |
-
-**37. `SeasonalRewardStrategy` (Strategy)**
-
-Implementación de estrategia estacional con bonificaciones temporales.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `calculatePoints(action, citizen)` | `RewardPoints` | `public` | Calcula puntos usando estrategia estacional. |
-| `getMultiplier(citizen)` | `Double` | `public` | Obtiene multiplicador estacional. |
-
----
-
-**Factories**
-
-**38. `CitizenFactory` (Factory)**
-
-Factory para la creación de instancias de Citizen con diferentes configuraciones iniciales.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createCitizen(personalInfo, contactInfo, address, preferences)` | `Citizen` | `public` | Crea un ciudadano con configuración completa. |
-| `createCitizenWithDefaults(basicInfo, contact)` | `Citizen` | `public` | Crea ciudadano con configuración por defecto. |
-| `createGuestCitizen(tempId)` | `Citizen` | `public` | Crea ciudadano invitado temporal. |
-
-**39. `ReportFactory` (Factory)**
-
-Factory para la creación de reportes de diferentes tipos y configuraciones.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createReport(citizenId, reportType, description, location, priority)` | `Report` | `public` | Crea un reporte con parámetros específicos. |
-| `createEmergencyReport(citizenId, location, description)` | `Report` | `public` | Crea reporte de emergencia. |
-| `createContainerReport(citizenId, containerId, issue)` | `Report` | `public` | Crea reporte relacionado con contenedor. |
-
-**40. `RewardsProgramFactory` (Factory)**
-
-Factory para la creación de programas de recompensas con diferentes configuraciones.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createProgram(name, description, rules)` | `RewardsProgram` | `public` | Crea programa con reglas específicas. |
-| `createBasicProgram(name)` | `RewardsProgram` | `public` | Crea programa básico con reglas estándar. |
-| `createSeasonalProgram(name, season)` | `RewardsProgram` | `public` | Crea programa estacional. |
-
-**41. `NotificationFactory` (Factory)**
-
-Factory para la creación de notificaciones de diferentes tipos y propósitos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createWelcomeNotification(citizenId)` | `Notification` | `public` | Crea notificación de bienvenida. |
-| `createReportStatusNotification(reportId, newStatus)` | `Notification` | `public` | Crea notificación de cambio de estado. |
-| `createRewardsNotification(citizenId, points)` | `Notification` | `public` | Crea notificación de recompensas. |
-| `createSystemNotification(citizenId, message)` | `Notification` | `public` | Crea notificación del sistema. |
-
----
-
-**Repository Interfaces**
-
-**42. `CitizenRepository` (Repository Interface)**
-
-Interfaz de repositorio para la persistencia y consulta de ciudadanos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(citizenId)` | `Optional<Citizen>` | `public` | Busca un ciudadano por su identificador. |
-| `findByDocumentNumber(documentNumber)` | `Optional<Citizen>` | `public` | Busca ciudadano por número de documento. |
-| `findByEmail(email)` | `Optional<Citizen>` | `public` | Busca ciudadano por email. |
-| `findByDistrict(districtId)` | `List<Citizen>` | `public` | Busca ciudadanos de un distrito. |
-| `findByMembershipStatus(status)` | `List<Citizen>` | `public` | Busca ciudadanos por estado de membresía. |
-| `findByEngagementLevel(minLevel)` | `List<Citizen>` | `public` | Busca ciudadanos por nivel de participación. |
-| `save(citizen)` | `Citizen` | `public` | Persiste o actualiza un ciudadano. |
-| `delete(citizenId)` | `void` | `public` | Elimina un ciudadano del sistema. |
-| `existsById(citizenId)` | `boolean` | `public` | Verifica si existe un ciudadano. |
-
-**43. `ReportRepository` (Repository Interface)**
-
-Interfaz de repositorio para la persistencia y consulta de reportes ciudadanos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(reportId)` | `Optional<Report>` | `public` | Busca un reporte por su identificador. |
-| `findByCitizenId(citizenId)` | `List<Report>` | `public` | Busca reportes de un ciudadano. |
-| `findByStatus(status)` | `List<Report>` | `public` | Busca reportes por estado. |
-| `findByLocation(location, radius)` | `List<Report>` | `public` | Busca reportes por ubicación geográfica. |
-| `findByDateRange(startDate, endDate)` | `List<Report>` | `public` | Busca reportes en un rango de fechas. |
-| `findByPriority(priority)` | `List<Report>` | `public` | Busca reportes por prioridad. |
-| `findOverdueReports()` | `List<Report>` | `public` | Busca reportes atrasados. |
-| `save(report)` | `Report` | `public` | Persiste o actualiza un reporte. |
-| `delete(reportId)` | `void` | `public` | Elimina un reporte del sistema. |
-| `existsById(reportId)` | `boolean` | `public` | Verifica si existe un reporte. |
-
-**44. `RewardsProgramRepository` (Repository Interface)**
-
-Interfaz de repositorio para la persistencia y consulta de programas de recompensas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(programId)` | `Optional<RewardsProgram>` | `public` | Busca un programa por su identificador. |
-| `findActivePrograms()` | `List<RewardsProgram>` | `public` | Busca programas activos. |
-| `findByParticipant(citizenId)` | `List<RewardsProgram>` | `public` | Busca programas de un participante. |
-| `findByDateRange(startDate, endDate)` | `List<RewardsProgram>` | `public` | Busca programas en un rango de fechas. |
-| `save(program)` | `RewardsProgram` | `public` | Persiste o actualiza un programa. |
-| `delete(programId)` | `void` | `public` | Elimina un programa del sistema. |
-| `existsById(programId)` | `boolean` | `public` | Verifica si existe un programa. |
+| Valor      | Descripción                      |
+|------------|----------------------------------|
+| `PHOTO`    | Imagen o fotografía adjunta.     |
+| `VIDEO`    | Archivo de video como evidencia. |
+| `DOCUMENT` | Documento adjunto como respaldo. |
 
 ---
 
