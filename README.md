@@ -2601,6 +2601,11 @@ En esta sección se documenta el diseño orientado a objetos del software, propo
 
 Los diagramas de clases representan la estructura estática del sistema, mostrando las clases, sus atributos, métodos y las relaciones entre ellas. Estos diagramas ayudan a visualizar cómo se organiza el código y cómo interactúan los diferentes componentes del sistema.
 
+**Diagrama de clases del Shared Kernel**:
+Contiene las clases y estructuras compartidas entre los diferentes bounded contexts, como entidades comunes, objetos de valor, y servicios que son utilizados por múltiples contextos para asegurar la coherencia y reutilización de código.
+
+![Diagrama de Clases del Shared Kernel](assets/4.product-design/4.9.software-object-oriented-design/0.class-diagram-shared-kernel.png)
+
 **Diagrama de clases del Bounded Context Container Monitoring:**
 Encapsula toda la lógica de negocio relacionada con el monitoreo de contenedores de residuos mediante sensores IoT, la gestión de su estado operacional, y la generación de análisis predictivo para optimizar las operaciones de recolección municipal.
 
