@@ -3044,51 +3044,40 @@ Se presenta un diccionario detallado de las clases que componen el Bounded Conte
 
 **1. `Route` (Aggregate Root)**
 
-Representa una ruta de recolección de residuos que incluye secuencia de contenedores a visitar, conductor asignado, vehículo, y métricas de optimización.
+Representa una ruta de recolección planificada y ejecutada dentro de un distrito, asignada a un conductor y vehículo. Gestiona los puntos de parada (waypoints), el estado de la ejecución y las métricas de distancia y duración.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único de la ruta. |
-| `routeId` | `RouteId` | `private` | Identificador de dominio de la ruta. |
-| `name` | `String` | `private` | Nombre descriptivo de la ruta. |
-| `municipalityId` | `MunicipalityId` | `private` | Identificador de la municipalidad asociada. |
-| `driverId` | `DriverId` | `private` | Identificador del conductor asignado. |
-| `vehicleId` | `VehicleId` | `private` | Identificador del vehículo asignado. |
-| `routeType` | `RouteType` | `private` | Tipo de ruta (regular, emergencia, residuos especiales). |
-| `status` | `RouteStatus` | `private` | Estado actual de la ruta. |
-| `scheduledDate` | `LocalDateTime` | `private` | Fecha y hora programada para la ruta. |
-| `startTime` | `LocalDateTime` | `private` | Hora de inicio real de la ruta. |
-| `endTime` | `LocalDateTime` | `private` | Hora de finalización real de la ruta. |
-| `waypoints` | `List<Waypoint>` | `private` | Lista ordenada de puntos de parada. |
-| `estimatedDuration` | `Duration` | `private` | Duración estimada de la ruta. |
-| `actualDuration` | `Duration` | `private` | Duración real de la ruta. |
-| `totalDistance` | `Distance` | `private` | Distancia total de la ruta. |
-| `optimizationMetrics` | `OptimizationMetrics` | `private` | Métricas de optimización aplicadas. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
+| Atributo            | Tipo             | Visibilidad | Descripción                                          |
+|---------------------|------------------|-------------|------------------------------------------------------|
+| `id`                | `String`         | `private`   | Identificador único de la ruta.                      |
+| `districtId`        | `DistrictId`     | `private`   | Identificador del distrito donde se realiza la ruta. |
+| `vehicleId`         | `VehicleId`      | `private`   | Identificador del vehículo asignado.                 |
+| `driverId`          | `DriverId`       | `private`   | Identificador del conductor asignado.                |
+| `routeType`         | `RouteType`      | `private`   | Tipo de ruta (regular, de emergencia, optimizada).   |
+| `status`            | `RouteStatus`    | `private`   | Estado actual de la ruta.                            |
+| `scheduledDate`     | `LocalDate`      | `private`   | Fecha programada de ejecución.                       |
+| `startedAt`         | `LocalDateTime`  | `private`   | Fecha y hora de inicio de la ejecución.              |
+| `completedAt`       | `LocalDateTime`  | `private`   | Fecha y hora de finalización de la ruta.             |
+| `waypoints`         | `List<Waypoint>` | `private`   | Lista de puntos de parada que componen la ruta.      |
+| `totalDistance`     | `Distance`       | `private`   | Distancia total estimada de la ruta.                 |
+| `estimatedDuration` | `Duration`       | `private`   | Duración estimada del recorrido.                     |
+| `actualDuration`    | `Duration`       | `private`   | Duración real registrada al completar la ruta.       |
+| `createdAt`         | `LocalDateTime`  | `private`   | Fecha y hora de creación del registro.               |
+| `updatedAt`         | `LocalDateTime`  | `private`   | Fecha y hora de la última actualización.             |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `Route()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `Route(name, municipalityId, routeType)` | `Constructor` | `public` | Constructor que instancia una ruta con datos básicos. |
-| `addWaypoint(waypoint)` | `void` | `public` | Agrega un punto de parada a la ruta. |
-| `removeWaypoint(waypointId)` | `void` | `public` | Elimina un punto de parada de la ruta. |
-| `reorderWaypoints(newOrder)` | `void` | `public` | Reordena los puntos de parada según nueva secuencia. |
-| `startExecution()` | `void` | `public` | Inicia la ejecución de la ruta. |
-| `completeExecution()` | `void` | `public` | Finaliza la ejecución de la ruta. |
-| `updateProgress(currentLocation)` | `void` | `public` | Actualiza el progreso actual de la ruta. |
-| `optimizeWaypoints(strategy)` | `OptimizationResult` | `public` | Optimiza el orden de los puntos usando estrategia específica. |
-| `calculateEstimatedDuration()` | `Duration` | `public` | Calcula la duración estimada de la ruta. |
-| `isExecutable()` | `boolean` | `public` | Determina si la ruta puede ser ejecutada. |
-| `canBeModified()` | `boolean` | `public` | Determina si la ruta puede ser modificada. |
-| `canBeOptimized()` | `boolean` | `public` | Determina si la ruta puede ser optimizada. |
-| `canStartExecution()` | `boolean` | `public` | Determina si la ruta puede iniciar ejecución. |
-| `changeStatus(newStatus)` | `void` | `public` | Cambia el estado de la ruta. |
-| `getAvailableActions()` | `List<RouteAction>` | `public` | Obtiene las acciones disponibles según el estado actual. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
+| Método                                                                    | Tipo de Retorno | Visibilidad | Descripción                                                              |
+|---------------------------------------------------------------------------|-----------------|-------------|--------------------------------------------------------------------------|
+| `addWaypoint(containerId: ContainerId, priority: Priority)`               | `void`          | `public`    | Agrega un nuevo punto de parada a la ruta con prioridad asignada.        |
+| `removeWaypoint(waypointId: WaypointId)`                                  | `void`          | `public`    | Elimina un punto de parada de la ruta.                                   |
+| `assignToDriver(driverId: DriverId, vehicleId: VehicleId)`                | `void`          | `public`    | Asigna la ruta a un conductor y vehículo específicos.                    |
+| `startExecution()`                                                        | `void`          | `public`    | Inicia la ejecución de la ruta.                                          |
+| `completeExecution()`                                                     | `void`          | `public`    | Marca la ruta como completada.                                           |
+| `markWaypointAsVisited(waypointId: WaypointId, timestamp: LocalDateTime)` | `void`          | `public`    | Marca un punto de parada como visitado en una fecha y hora determinadas. |
+| `canBeModified()`                                                         | `boolean`       | `public`    | Verifica si la ruta puede ser modificada según su estado.                |
+| `isOverdue()`                                                             | `boolean`       | `public`    | Determina si la ruta ha superado su tiempo programado.                   |
 
 ---
 
@@ -3096,536 +3085,111 @@ Representa una ruta de recolección de residuos que incluye secuencia de contene
 
 **2. `Waypoint` (Entity)**
 
-Representa un punto de parada en una ruta, asociado a un contenedor específico con información de secuencia, tiempos y estado de visita.
+Representa un punto de parada dentro de una ruta de recolección. Cada waypoint corresponde a un contenedor o ubicación donde se debe realizar una acción (visita, omisión, etc.), e incluye información sobre tiempos y observaciones del conductor.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del punto de parada. |
-| `waypointId` | `WaypointId` | `private` | Identificador de dominio del punto de parada. |
-| `routeId` | `RouteId` | `private` | Identificador de la ruta asociada. |
-| `containerId` | `ContainerId` | `private` | Identificador del contenedor a visitar. |
-| `location` | `Location` | `private` | Ubicación geográfica del punto de parada. |
-| `priority` | `Priority` | `private` | Prioridad del punto de parada. |
-| `estimatedArrivalTime` | `LocalDateTime` | `private` | Hora estimada de llegada. |
-| `actualArrivalTime` | `LocalDateTime` | `private` | Hora real de llegada. |
-| `estimatedServiceTime` | `Duration` | `private` | Tiempo estimado de servicio. |
-| `actualServiceTime` | `Duration` | `private` | Tiempo real de servicio. |
-| `sequenceOrder` | `Integer` | `private` | Orden de secuencia en la ruta. |
-| `status` | `WaypointStatus` | `private` | Estado actual del punto de parada. |
-| `collectionInstructions` | `String` | `private` | Instrucciones especiales para la recolección. |
+| Atributo               | Tipo             | Visibilidad | Descripción                                                   |
+|------------------------|------------------|-------------|---------------------------------------------------------------|
+| `id`                   | `String`         | `private`   | Identificador único del waypoint.                             |
+| `containerId`          | `ContainerId`    | `private`   | Identificador del contenedor o punto de recolección asociado. |
+| `sequenceOrder`        | `Integer`        | `private`   | Orden secuencial del punto dentro de la ruta.                 |
+| `priority`             | `Priority`       | `private`   | Prioridad del punto según su urgencia o criticidad.           |
+| `status`               | `WaypointStatus` | `private`   | Estado actual del waypoint (pendiente, visitado, omitido).    |
+| `estimatedArrivalTime` | `LocalDateTime`  | `private`   | Hora estimada de llegada.                                     |
+| `actualArrivalTime`    | `LocalDateTime`  | `private`   | Hora real de llegada registrada.                              |
+| `serviceTime`          | `Duration`       | `private`   | Tiempo invertido en atender el punto.                         |
+| `driverNote`           | `String`         | `private`   | Nota o comentario del conductor sobre el punto.               |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `Waypoint()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `Waypoint(containerId, location, priority)` | `Constructor` | `public` | Constructor que instancia un punto de parada con datos básicos. |
-| `markAsVisited()` | `void` | `public` | Marca el punto de parada como visitado. |
-| `updateServiceTime(duration)` | `void` | `public` | Actualiza el tiempo de servicio real. |
-| `updateSequenceOrder(order)` | `void` | `public` | Actualiza el orden de secuencia. |
-| `canBeVisited()` | `boolean` | `public` | Determina si el punto puede ser visitado. |
-| `isCompleted()` | `boolean` | `public` | Determina si el punto ha sido completado. |
-| `validateInstructions()` | `ValidationResult` | `public` | Valida las instrucciones de recolección. |
-
-**3. `OptimizationResult` (Entity)**
-
-Representa el resultado de un proceso de optimización de ruta, incluyendo métricas de eficiencia y detalles del algoritmo utilizado.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del resultado. |
-| `resultId` | `OptimizationResultId` | `private` | Identificador de dominio del resultado. |
-| `routeId` | `RouteId` | `private` | Identificador de la ruta optimizada. |
-| `algorithmUsed` | `OptimizationAlgorithm` | `private` | Algoritmo utilizado para la optimización. |
-| `executionTime` | `Duration` | `private` | Tiempo de ejecución del algoritmo. |
-| `totalDistance` | `Distance` | `private` | Distancia total de la ruta optimizada. |
-| `estimatedFuelConsumption` | `Double` | `private` | Consumo estimado de combustible. |
-| `co2Emissions` | `Double` | `private` | Emisiones de CO2 estimadas. |
-| `costEstimate` | `MonetaryAmount` | `private` | Estimación de costo de la ruta. |
-| `optimizationScore` | `Double` | `private` | Puntuación de optimización obtenida. |
-| `timestamp` | `LocalDateTime` | `private` | Marca de tiempo del resultado. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `OptimizationResult(routeId, algorithm)` | `Constructor` | `public` | Constructor que instancia un resultado con ruta y algoritmo. |
-| `calculateScore()` | `Double` | `public` | Calcula la puntuación de optimización. |
-| `compareWith(other)` | `ComparisonResult` | `public` | Compara con otro resultado de optimización. |
-| `isValidResult()` | `boolean` | `public` | Determina si el resultado es válido. |
+| Método                                                              | Tipo de Retorno | Visibilidad | Descripción                                                                  |
+|---------------------------------------------------------------------|-----------------|-------------|------------------------------------------------------------------------------|
+| `markAsVisited(arrivalTime: LocalDateTime, serviceTime: Duration)`  | `void`          | `public`    | Marca el punto como visitado, registrando hora y duración del servicio.      |
+| `markAsSkipped(reason: String)`                                     | `void`          | `public`    | Marca el punto como omitido, indicando la razón.                             |
+| `isCompleted()`                                                     | `boolean`       | `public`    | Determina si el punto ha sido completado (visitado u omitido).               |
+| `canBeVisited()`                                                    | `boolean`       | `public`    | Indica si el punto está habilitado para ser visitado según su estado actual. |
 
 ---
 
 **Value Objects**
 
-**4. `RouteId` (Value Object)**
+**3. `Distance` (Value Object)**
 
-Identificador único inmutable para una ruta en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `routeId` | `Long` | `private` | Valor numérico del identificador de ruta. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isValid()` | `Boolean` | `public` | Valida que el identificador sea válido. |
-
-**5. `WaypointId` (Value Object)**
-
-Identificador único inmutable para un punto de parada en el sistema.
+Representa la distancia total o parcial medida en una ruta.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `waypointId` | `Long` | `private` | Valor numérico del identificador del punto de parada. |
-
-**6. `OptimizationResultId` (Value Object)**
-
-Identificador único inmutable para un resultado de optimización en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `resultId` | `Long` | `private` | Valor numérico del identificador del resultado. |
-
-**7. `Priority` (Value Object)**
-
-Representa el nivel de prioridad de un punto de parada o ruta.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `level` | `Integer` | `private` | Nivel numérico de prioridad. |
-| `description` | `String` | `private` | Descripción textual de la prioridad. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isHighPriority()` | `Boolean` | `public` | Determina si es de alta prioridad. |
-| `compareTo(other)` | `Integer` | `public` | Compara con otra prioridad. |
-
-**8. `Distance` (Value Object)**
-
-Representa una distancia con capacidades de conversión y operaciones aritméticas.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `kilometers` | `Double` | `private` | Distancia en kilómetros. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `toMeters()` | `Double` | `public` | Convierte la distancia a metros. |
-| `add(other)` | `Distance` | `public` | Suma otra distancia. |
-
-**9. `OptimizationMetrics` (Value Object)**
-
-Métricas consolidadas de optimización de una ruta.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `totalDistance` | `Distance` | `private` | Distancia total de la ruta. |
-| `estimatedFuelCost` | `MonetaryAmount` | `private` | Costo estimado de combustible. |
-| `co2Emissions` | `Double` | `private` | Emisiones de CO2 estimadas. |
-| `timeEfficiency` | `Double` | `private` | Eficiencia temporal de la ruta. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `calculateOverallScore()` | `Double` | `public` | Calcula la puntuación general de optimización. |
-
-**10. `OptimizationAlgorithm` (Value Object)**
-
-Representa un algoritmo de optimización con sus parámetros configurables.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `algorithmType` | `String` | `private` | Tipo de algoritmo de optimización. |
-| `parameters` | `Map<String, Object>` | `private` | Parámetros de configuración del algoritmo. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isTravelingSalesman()` | `boolean` | `public` | Determina si es algoritmo de vendedor viajero. |
-| `isGeneticAlgorithm()` | `boolean` | `public` | Determina si es algoritmo genético. |
-
-**11. `OptimizationConstraints` (Value Object)**
-
-Define las restricciones y limitaciones para el proceso de optimización de rutas.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `maxDuration` | `Duration` | `private` | Duración máxima permitida para la ruta. |
-| `maxDistance` | `Distance` | `private` | Distancia máxima permitida. |
-| `vehicleCapacity` | `Double` | `private` | Capacidad del vehículo asignado. |
-| `timeWindows` | `List<TimeWindow>` | `private` | Ventanas de tiempo para restricciones horarias. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isValid()` | `boolean` | `public` | Valida que las restricciones sean coherentes. |
+| Atributo     | Tipo         | Visibilidad  | Descripción                            |
+|--------------|--------------|--------------|----------------------------------------|
+| `kilometers` | `BigDecimal` | `private`    | Distancia medida en kilómetros.        |
+| `weight`     | `Integer`    | `private`    | Peso asociado al recorrido (opcional). |
 
 ---
 
-**Enums**
+**4. `Priority` (Value Object)**
 
-**12. `RouteStatus` (Enum)**
-
-Estados posibles de una ruta durante su ciclo de vida.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `DRAFT` | Ruta en estado de borrador. |
-| `OPTIMIZED` | Ruta optimizada lista para revisión. |
-| `READY_FOR_EXECUTION` | Ruta lista para ser ejecutada. |
-| `IN_PROGRESS` | Ruta en ejecución. |
-| `PAUSED` | Ruta pausada temporalmente. |
-| `COMPLETED` | Ruta completada exitosamente. |
-| `CANCELLED` | Ruta cancelada. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canTransitionTo(newStatus)` | `boolean` | `public` | Valida si puede transicionar al nuevo estado. |
-| `isExecutable()` | `boolean` | `public` | Determina si el estado permite ejecución. |
-| `allowsModification()` | `boolean` | `public` | Determina si permite modificaciones. |
-| `allowsOptimization()` | `boolean` | `public` | Determina si permite optimización. |
-| `requiresDriverAssignment()` | `boolean` | `public` | Determina si requiere asignación de conductor. |
-| `getAvailableTransitions()` | `List<RouteStatus>` | `public` | Obtiene las transiciones disponibles. |
-
-**13. `WaypointStatus` (Enum)**
-
-Estados posibles de un punto de parada durante la ejecución de una ruta.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `PENDING` | Punto de parada pendiente de visita. |
-| `IN_PROGRESS` | Punto de parada en proceso de servicio. |
-| `COMPLETED` | Punto de parada completado exitosamente. |
-| `SKIPPED` | Punto de parada omitido. |
-| `FAILED` | Punto de parada fallido. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canTransitionTo(newStatus)` | `boolean` | `public` | Valida si puede transicionar al nuevo estado. |
-| `isCompleted()` | `boolean` | `public` | Determina si está completado. |
-| `isPending()` | `boolean` | `public` | Determina si está pendiente. |
-| `requiresAction()` | `boolean` | `public` | Determina si requiere acción del conductor. |
-
-**14. `RouteAction` (Enum)**
-
-Acciones disponibles que se pueden realizar sobre una ruta según su estado actual.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `CREATE_WAYPOINT` | Crear nuevo punto de parada. |
-| `REMOVE_WAYPOINT` | Eliminar punto de parada existente. |
-| `REORDER_WAYPOINTS` | Reordenar secuencia de puntos. |
-| `OPTIMIZE_ROUTE` | Optimizar la ruta. |
-| `START_EXECUTION` | Iniciar ejecución de la ruta. |
-| `PAUSE_EXECUTION` | Pausar ejecución en curso. |
-| `RESUME_EXECUTION` | Reanudar ejecución pausada. |
-| `COMPLETE_ROUTE` | Completar la ruta. |
-| `CANCEL_ROUTE` | Cancelar la ruta. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAllowedForStatus(status)` | `boolean` | `public` | Determina si la acción está permitida para el estado. |
-| `getRequiredPermissions()` | `List<Permission>` | `public` | Obtiene los permisos requeridos para la acción. |
-
----
-
-**Application Services**
-
-**15. `RouteApplicationService` (Application Service)**
-
-Servicio de aplicación que coordina las operaciones de negocio relacionadas con rutas de recolección.
+Define la prioridad asignada a un punto de parada dentro de la ruta.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `routeRepository` | `RouteRepository` | `private` | Repositorio para persistencia de rutas. |
-| `routeDomainService` | `RouteDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `routeFactory` | `RouteFactory` | `private` | Factory para creación de rutas. |
-| `optimizationService` | `RouteOptimizationService` | `private` | Servicio de optimización de rutas. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createRoute(name, municipalityId, driverId, vehicleId, routeType, scheduledDate, containerIds)` | `Route` | `public` | Crea una nueva ruta en el sistema. |
-| `optimizeRoute(routeId, algorithm, constraints)` | `OptimizationResult` | `public` | Optimiza una ruta usando algoritmo específico. |
-| `startRouteExecution(routeId, driverId, startLocation)` | `void` | `public` | Inicia la ejecución de una ruta. |
-| `updateRouteProgress(routeId, currentLocation, completedWaypointId)` | `void` | `public` | Actualiza el progreso de una ruta en ejecución. |
-| `completeRoute(routeId, endLocation, totalCollectedVolume)` | `void` | `public` | Finaliza una ruta completada. |
-| `getRouteById(routeId)` | `Optional<Route>` | `public` | Obtiene una ruta por su identificador. |
-| `getRoutesByDriver(driverId, dateRange)` | `List<Route>` | `public` | Obtiene rutas asignadas a un conductor. |
-| `getActiveRoutes(municipalityId)` | `List<Route>` | `public` | Obtiene rutas activas de una municipalidad. |
-
-**16. `WaypointApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de puntos de parada en rutas.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `routeRepository` | `RouteRepository` | `private` | Repositorio para acceso a rutas. |
-| `waypointFactory` | `WaypointFactory` | `private` | Factory para creación de puntos de parada. |
-| `routeValidationService` | `RouteValidationService` | `private` | Servicio de validación de rutas. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `addWaypointToRoute(routeId, containerId, location, priority)` | `Waypoint` | `public` | Agrega un punto de parada a una ruta. |
-| `removeWaypointFromRoute(routeId, waypointId)` | `void` | `public` | Elimina un punto de parada de una ruta. |
-| `updateWaypointStatus(routeId, waypointId, status)` | `void` | `public` | Actualiza el estado de un punto de parada. |
-| `reorderWaypoints(routeId, newOrder)` | `void` | `public` | Reordena los puntos de parada de una ruta. |
-| `getWaypointsByRoute(routeId)` | `List<Waypoint>` | `public` | Obtiene todos los puntos de una ruta. |
+| Atributo  | Tipo            | Visibilidad  | Descripción                                       |
+|-----------|-----------------|--------------|---------------------------------------------------|
+| `level`   | `PriorityLevel` | `private`    | Nivel de prioridad (LOW, MEDIUM, HIGH, CRITICAL). |
 
 ---
 
-**Domain Services**
+**Enumerations**
 
-**17. `RouteDomainService` (Domain Service)**
+**5. `RouteType` (Enumeration)**
 
-Servicio de dominio que implementa lógica de negocio compleja relacionada con rutas.
+Define el tipo de planificación aplicada a la ruta según su propósito o urgencia.
 
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateRouteCreation(route)` | `ValidationResult` | `public` | Valida la creación de una nueva ruta. |
-| `calculateOptimalRouteSequence(waypoints)` | `List<Waypoint>` | `public` | Calcula la secuencia óptima de puntos. |
-| `determineRoutePriority(routes)` | `List<Route>` | `public` | Determina la prioridad entre múltiples rutas. |
-| `estimateRouteCompletion(route)` | `LocalDateTime` | `public` | Estima el tiempo de finalización de una ruta. |
-| `checkRouteConflicts(route, existingRoutes)` | `List<RouteConflict>` | `public` | Verifica conflictos con rutas existentes. |
-
-**18. `RouteOptimizationService` (Domain Service)**
-
-Servicio especializado en optimización de rutas usando diferentes estrategias.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `optimizationStrategy` | `OptimizationStrategy` | `private` | Estrategia de optimización actual. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `optimizeRoute(route, constraints)` | `OptimizationResult` | `public` | Optimiza una ruta con restricciones específicas. |
-| `compareOptimizations(results)` | `OptimizationComparison` | `public` | Compara múltiples resultados de optimización. |
-| `setOptimizationStrategy(strategy)` | `void` | `public` | Establece la estrategia de optimización a usar. |
-| `analyzeRouteEfficiency(route)` | `EfficiencyAnalysis` | `public` | Analiza la eficiencia de una ruta. |
-
-**19. `RouteValidationService` (Domain Service)**
-
-Servicio para validación de rutas y puntos de parada.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateRoute(route)` | `ValidationResult` | `public` | Valida una ruta completa. |
-| `validateWaypoint(waypoint)` | `ValidationResult` | `public` | Valida un punto de parada individual. |
-| `checkTimeConstraints(route)` | `List<TimeConstraintViolation>` | `public` | Verifica restricciones de tiempo. |
-| `checkVehicleCapacity(route, vehicle)` | `Boolean` | `public` | Verifica capacidad del vehículo. |
-| `validateWaypointSequence(waypoints)` | `ValidationResult` | `public` | Valida la secuencia de puntos de parada. |
-
-**20. `RouteAnalyticsService` (Domain Service)**
-
-Servicio para análisis y generación de reportes de rutas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `generateRouteReport(route)` | `RouteReport` | `public` | Genera reporte detallado de una ruta. |
-| `calculateRouteMetrics(route)` | `RouteMetrics` | `public` | Calcula métricas de rendimiento de una ruta. |
-| `analyzeRoutePerformance(routes, period)` | `PerformanceAnalysis` | `public` | Analiza rendimiento de rutas en un período. |
-| `predictRouteCompletion(route)` | `CompletionPrediction` | `public` | Predice el tiempo de finalización de una ruta. |
+| Valor       | Descripción                                        |
+|-------------|----------------------------------------------------|
+| `REGULAR`   | Ruta planificada con recorridos estándar.          |
+| `EMERGENCY` | Ruta creada para atender situaciones urgentes.     |
+| `OPTIMIZED` | Ruta ajustada mediante algoritmos de optimización. |
 
 ---
 
-**Strategies**
+**6. `RouteStatus` (Enumeration)**
 
-**21. `OptimizationStrategy` (Strategy Interface)**
+Representa el estado operativo de una ruta durante su ciclo de vida.
 
-Interfaz que define el contrato para diferentes algoritmos de optimización de rutas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `optimizeRoute(waypoints, constraints)` | `List<Waypoint>` | `public` | Optimiza el orden de los puntos de parada. |
-| `calculateScore(route)` | `Double` | `public` | Calcula la puntuación de una ruta. |
-
-**22. `TravelingSalesmanStrategy` (Strategy)**
-
-Implementación de estrategia basada en el algoritmo del vendedor viajero.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `optimizeRoute(waypoints, constraints)` | `List<Waypoint>` | `public` | Optimiza usando algoritmo del vendedor viajero. |
-| `calculateScore(route)` | `Double` | `public` | Calcula puntuación basada en distancia total. |
-
-**23. `NearestNeighborStrategy` (Strategy)**
-
-Implementación de estrategia basada en el algoritmo del vecino más cercano.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `optimizeRoute(waypoints, constraints)` | `List<Waypoint>` | `public` | Optimiza usando algoritmo del vecino más cercano. |
-| `calculateScore(route)` | `Double` | `public` | Calcula puntuación basada en proximidad. |
-
-**24. `GeneticAlgorithmStrategy` (Strategy)**
-
-Implementación de estrategia basada en algoritmos genéticos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `optimizeRoute(waypoints, constraints)` | `List<Waypoint>` | `public` | Optimiza usando algoritmo genético. |
-| `calculateScore(route)` | `Double` | `public` | Calcula puntuación basada en aptitud evolutiva. |
-
-**25. `HybridOptimizationStrategy` (Strategy)**
-
-Implementación de estrategia que combina múltiples algoritmos de optimización.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `strategies` | `List<OptimizationStrategy>` | `private` | Lista de estrategias a combinar. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `optimizeRoute(waypoints, constraints)` | `List<Waypoint>` | `public` | Optimiza combinando múltiples estrategias. |
-| `calculateScore(route)` | `Double` | `public` | Calcula puntuación promedio de todas las estrategias. |
+| Valor         | Descripción                                  |
+|---------------|----------------------------------------------|
+| `DRAFT`       | Ruta en borrador, pendiente de asignación.   |
+| `ASSIGNED`    | Ruta asignada a un conductor y vehículo.     |
+| `IN_PROGRESS` | Ruta en proceso de ejecución.                |
+| `COMPLETED`   | Ruta finalizada correctamente.               |
+| `CANCELLED`   | Ruta cancelada antes o durante su ejecución. |
 
 ---
 
-**Factories**
+**7. `WaypointStatus` (Enumeration)**
 
-**26. `RouteFactory` (Factory)**
+Indica el estado actual de un punto de parada dentro de la ruta.
 
-Factory para la creación de instancias de Route con validaciones y configuraciones por defecto.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createRoute(name, municipalityId, routeType)` | `Route` | `public` | Crea una ruta básica con parámetros mínimos. |
-| `createEmergencyRoute(containers, priority)` | `Route` | `public` | Crea una ruta de emergencia con alta prioridad. |
-| `createOptimizedRoute(containers, strategy)` | `Route` | `public` | Crea una ruta pre-optimizada usando estrategia específica. |
-
-**27. `WaypointFactory` (Factory)**
-
-Factory para la creación de puntos de parada desde diferentes fuentes de datos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createWaypoint(containerId, location, priority)` | `Waypoint` | `public` | Crea un punto de parada básico. |
-| `createWaypointsFromContainers(containers)` | `List<Waypoint>` | `public` | Crea múltiples puntos desde lista de contenedores. |
-| `createWithEstimatedTimes(containerId, location, estimatedArrival)` | `Waypoint` | `public` | Crea punto con tiempos estimados. |
-
-**28. `OptimizationResultFactory` (Factory)**
-
-Factory para la creación de resultados de optimización.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createResult(routeId, algorithm)` | `OptimizationResult` | `public` | Crea resultado básico de optimización. |
-| `createFromAnalysis(routeId, analysis)` | `OptimizationResult` | `public` | Crea resultado desde análisis completo. |
+| Valor     | Descripción                                 |
+|-----------|---------------------------------------------|
+| `PENDING` | Punto pendiente de visita.                  |
+| `VISITED` | Punto ya visitado durante la ruta.          |
+| `SKIPPED` | Punto omitido con justificación registrada. |
 
 ---
 
-**Repository Interfaces**
+**8. `PriorityLevel` (Enumeration)**
 
-**29. `RouteRepository` (Repository Interface)**
+Clasifica el nivel de prioridad asociado a un punto o tarea dentro de la ruta.
 
-Interfaz de repositorio para la persistencia y consulta de rutas.
+| Valor      | Descripción                                         |
+|------------|-----------------------------------------------------|
+| `LOW`      | Baja prioridad, puede ser atendido sin urgencia.    |
+| `MEDIUM`   | Prioridad intermedia, debe cumplirse en la jornada. |
+| `HIGH`     | Alta prioridad, requiere atención preferente.       |
+| `CRITICAL` | Prioridad máxima, atención inmediata obligatoria.   |
 
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(routeId)` | `Optional<Route>` | `public` | Busca una ruta por su identificador. |
-| `findByDriverId(driverId)` | `List<Route>` | `public` | Busca rutas asignadas a un conductor. |
-| `findByMunicipality(municipalityId)` | `List<Route>` | `public` | Busca rutas de una municipalidad. |
-| `findByStatus(status)` | `List<Route>` | `public` | Busca rutas por estado. |
-| `findByDateRange(startDate, endDate)` | `List<Route>` | `public` | Busca rutas en un rango de fechas. |
-| `findActiveRoutes(municipalityId)` | `List<Route>` | `public` | Busca rutas activas de una municipalidad. |
-| `save(route)` | `Route` | `public` | Persiste o actualiza una ruta. |
-| `delete(routeId)` | `void` | `public` | Elimina una ruta del sistema. |
-| `existsById(routeId)` | `boolean` | `public` | Verifica si existe una ruta. |
-| `findOptimizationHistory(routeId)` | `List<OptimizationResult>` | `public` | Obtiene historial de optimizaciones de una ruta. |
-
-**30. `OptimizationResultRepository` (Repository Interface)**
-
-Interfaz de repositorio para la persistencia de resultados de optimización.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findByRouteId(routeId)` | `List<OptimizationResult>` | `public` | Busca resultados por ruta. |
-| `findByAlgorithm(algorithm)` | `List<OptimizationResult>` | `public` | Busca resultados por algoritmo. |
-| `findBestResultForRoute(routeId)` | `Optional<OptimizationResult>` | `public` | Busca el mejor resultado para una ruta. |
-| `save(result)` | `OptimizationResult` | `public` | Persiste un resultado de optimización. |
-| `deleteOlderThan(date)` | `void` | `public` | Elimina resultados anteriores a una fecha. |
 
 ---
 
