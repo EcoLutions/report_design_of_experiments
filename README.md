@@ -3618,923 +3618,248 @@ Se presenta un diccionario detallado de clases para el Bounded Context de "Payme
 
 **1. `Subscription` (Aggregate Root)**
 
-Representa una suscripción municipal al sistema de gestión inteligente de residuos con capacidad de facturación automática, gestión de planes, métodos de pago y renovación automática.
+Representa la suscripción activa de un distrito a un plan del sistema. Controla los períodos de facturación, estado del servicio, método de pago predeterminado y ciclos de renovación o suspensión.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único de la suscripción. |
-| `subscriptionId` | `SubscriptionId` | `private` | Identificador de dominio de la suscripción. |
-| `municipalityId` | `MunicipalityId` | `private` | Identificador de la municipalidad asociada. |
-| `planId` | `PlanId` | `private` | Identificador del plan de suscripción. |
-| `status` | `SubscriptionStatus` | `private` | Estado actual de la suscripción. |
-| `startDate` | `LocalDateTime` | `private` | Fecha de inicio de la suscripción. |
-| `endDate` | `LocalDateTime` | `private` | Fecha de finalización de la suscripción. |
-| `nextBillingDate` | `LocalDateTime` | `private` | Fecha de la próxima facturación. |
-| `paymentMethodId` | `PaymentMethodId` | `private` | Identificador del método de pago asignado. |
-| `billingAddress` | `BillingAddress` | `private` | Dirección de facturación. |
-| `billingCycle` | `BillingCycle` | `private` | Ciclo de facturación de la suscripción. |
-| `trialEndDate` | `LocalDateTime` | `private` | Fecha de finalización del período de prueba. |
-| `autoRenewal` | `Boolean` | `private` | Indica si la renovación automática está habilitada. |
-| `gracePeriodEndDate` | `LocalDateTime` | `private` | Fecha de finalización del período de gracia. |
-| `createdAt` | `LocalDateTime` | `private` | Fecha de creación de la suscripción. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
+| Atributo                 | Tipo                 | Visibilidad  | Descripción                                        |
+|--------------------------|----------------------|--------------|----------------------------------------------------|
+| `id`                     | `String`             | `private`    | Identificador único de la suscripción.             |
+| `districtId`             | `DistrictId`         | `private`    | Distrito asociado a la suscripción.                |
+| `planId`                 | `PlanId`             | `private`    | Identificador del plan contratado.                 |
+| `planName`               | `String`             | `private`    | Nombre del plan actual.                            |
+| `monthlyPrice`           | `Money`              | `private`    | Costo mensual del plan.                            |
+| `status`                 | `SubscriptionStatus` | `private`    | Estado actual de la suscripción.                   |
+| `startDate`              | `LocalDate`          | `private`    | Fecha de inicio de la suscripción.                 |
+| `trialEndDate`           | `LocalDate`          | `private`    | Fecha de finalización del período de prueba.       |
+| `currentPeriodStart`     | `LocalDate`          | `private`    | Fecha de inicio del período de facturación actual. |
+| `currentPeriodEnd`       | `LocalDate`          | `private`    | Fecha de fin del período de facturación actual.    |
+| `nextBillingDate`        | `LocalDate`          | `private`    | Fecha del próximo ciclo de facturación.            |
+| `gracePeriodEndDate`     | `LocalDate`          | `private`    | Fecha límite del período de gracia.                |
+| `cancelledAt`            | `LocalDate`          | `private`    | Fecha de cancelación de la suscripción.            |
+| `defaultPaymentMethodId` | `PaymentMethodId`    | `private`    | Método de pago predeterminado.                     |
+| `createdAt`              | `LocalDateTime`      | `private`    | Fecha y hora de creación del registro.             |
+| `updatedAt`              | `LocalDateTime`      | `private`    | Fecha y hora de la última actualización.           |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `Subscription()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `Subscription(municipalityId, planId, billingCycle)` | `Constructor` | `public` | Constructor que instancia una suscripción con datos básicos. |
-| `activate()` | `void` | `public` | Activa la suscripción. |
-| `suspend(reason)` | `void` | `public` | Suspende la suscripción por una razón específica. |
-| `cancel(reason)` | `void` | `public` | Cancela la suscripción por una razón específica. |
-| `updatePlan(newPlanId)` | `void` | `public` | Actualiza el plan de la suscripción. |
-| `updatePaymentMethod(paymentMethodId)` | `void` | `public` | Actualiza el método de pago de la suscripción. |
-| `processPayment(amount)` | `PaymentResult` | `public` | Procesa un pago para la suscripción. |
-| `isActive()` | `boolean` | `public` | Determina si la suscripción está activa. |
-| `isInGracePeriod()` | `boolean` | `public` | Determina si está en período de gracia. |
-| `canBeUpgraded()` | `boolean` | `public` | Determina si puede ser actualizada a un plan superior. |
-| `canBeDowngraded()` | `boolean` | `public` | Determina si puede ser degradada a un plan inferior. |
-| `canBeCancelled()` | `boolean` | `public` | Determina si puede ser cancelada. |
-| `canBeActivated()` | `boolean` | `public` | Determina si puede ser activada. |
-| `calculateNextBilling()` | `LocalDateTime` | `public` | Calcula la fecha de la próxima facturación. |
-| `getAvailableActions()` | `List<SubscriptionAction>` | `public` | Obtiene las acciones disponibles según el estado. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
+| Método                       | Tipo de Retorno  | Visibilidad  | Descripción                                                     |
+|------------------------------|------------------|--------------|-----------------------------------------------------------------|
+| `activate()`                 | `void`           | `public`     | Activa la suscripción y comienza el ciclo de facturación.       |
+| `suspend(reason: String)`    | `void`           | `public`     | Suspende temporalmente la suscripción por una razón específica. |
+| `enterGracePeriod()`         | `void`           | `public`     | Coloca la suscripción en período de gracia.                     |
+| `cancel(reason: String)`     | `void`           | `public`     | Cancela la suscripción definitivamente.                         |
+| `renew()`                    | `void`           | `public`     | Renueva la suscripción al finalizar el ciclo actual.            |
+| `isInGracePeriod()`          | `boolean`        | `public`     | Verifica si la suscripción se encuentra en período de gracia.   |
+| `shouldBeBilledToday()`      | `boolean`        | `public`     | Determina si corresponde facturar hoy.                          |
+| `calculateNextBillingDate()` | `LocalDate`      | `public`     | Calcula la próxima fecha de facturación.                        |
+
+---
 
 **2. `Payment` (Aggregate Root)**
 
-Representa un pago realizado o programado para una suscripción con capacidad de reintentos, seguimiento de transacciones y gestión de fallos.
+Representa un intento de pago asociado a una suscripción. Gestiona el estado de la transacción, número de intentos, errores y validaciones con el gateway de pago.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del pago. |
-| `paymentId` | `PaymentId` | `private` | Identificador de dominio del pago. |
-| `subscriptionId` | `SubscriptionId` | `private` | Identificador de la suscripción asociada. |
-| `amount` | `MonetaryAmount` | `private` | Monto del pago. |
-| `currency` | `Currency` | `private` | Moneda del pago. |
-| `paymentMethod` | `PaymentMethodType` | `private` | Tipo de método de pago utilizado. |
-| `status` | `PaymentStatus` | `private` | Estado actual del pago. |
-| `transactionId` | `TransactionId` | `private` | Identificador de la transacción en el gateway. |
-| `gatewayResponse` | `GatewayResponse` | `private` | Respuesta del gateway de pagos. |
-| `attemptNumber` | `Integer` | `private` | Número de intento de pago. |
-| `scheduledDate` | `LocalDateTime` | `private` | Fecha programada del pago. |
-| `processedDate` | `LocalDateTime` | `private` | Fecha de procesamiento del pago. |
-| `failureReason` | `FailureReason` | `private` | Razón del fallo si aplica. |
-| `attempts` | `List<PaymentAttempt>` | `private` | Lista de intentos de pago realizados. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
+| Atributo               | Tipo              | Visibilidad   | Descripción                                    |
+|------------------------|-------------------|---------------|------------------------------------------------|
+| `id`                   | `String`          | `private`     | Identificador único del pago.                  |
+| `subscriptionId`       | `SubscriptionId`  | `private`     | Suscripción asociada al pago.                  |
+| `amount`               | `Money`           | `private`     | Monto total del pago.                          |
+| `paymentMethodId`      | `PaymentMethodId` | `private`     | Método de pago utilizado.                      |
+| `status`               | `PaymentStatus`   | `private`     | Estado actual del pago.                        |
+| `gatewayTransactionId` | `String`          | `private`     | Identificador de la transacción en el gateway. |
+| `gatewayResponse`      | `String`          | `private`     | Respuesta del gateway de pago.                 |
+| `scheduledAt`          | `LocalDateTime`   | `private`     | Fecha programada para el intento de pago.      |
+| `processedAt`          | `LocalDateTime`   | `private`     | Fecha de procesamiento del pago.               |
+| `succeededAt`          | `LocalDateTime`   | `private`     | Fecha de confirmación de éxito.                |
+| `attemptNumber`        | `Integer`         | `private`     | Número de intentos realizados.                 |
+| `failureReason`        | `String`          | `private`     | Motivo del fallo, si aplica.                   |
+| `canRetry`             | `Boolean`         | `private`     | Indica si el pago puede volver a intentarse.   |
+| `createdAt`            | `LocalDateTime`   | `private`     | Fecha y hora de creación del registro.         |
+| `updatedAt`            | `LocalDateTime`   | `private`     | Fecha y hora de la última actualización.       |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `Payment()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `Payment(subscriptionId, amount, paymentMethod)` | `Constructor` | `public` | Constructor que instancia un pago con datos básicos. |
-| `process()` | `PaymentResult` | `public` | Procesa el pago. |
-| `retry()` | `PaymentResult` | `public` | Reintenta el pago. |
-| `markAsSuccessful(transactionId)` | `void` | `public` | Marca el pago como exitoso. |
-| `markAsFailed(reason)` | `void` | `public` | Marca el pago como fallido. |
-| `canBeRetried()` | `boolean` | `public` | Determina si el pago puede ser reintentado. |
-| `isSuccessful()` | `boolean` | `public` | Determina si el pago fue exitoso. |
-| `canBeProcessed()` | `boolean` | `public` | Determina si el pago puede ser procesado. |
-| `canBeCancelled()` | `boolean` | `public` | Determina si el pago puede ser cancelado. |
-| `getAvailableActions()` | `List<PaymentAction>` | `public` | Obtiene las acciones disponibles según el estado. |
-| `getAttemptHistory()` | `List<PaymentAttempt>` | `public` | Obtiene el historial de intentos de pago. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
+| Método                                             | Tipo de Retorno  | Visibilidad   | Descripción                                                        |
+|----------------------------------------------------|------------------|---------------|--------------------------------------------------------------------|
+| `markAsProcessing()`                               | `void`           | `public`      | Marca el pago como en proceso.                                     |
+| `markAsSucceeded(transactionId: String)`           | `void`           | `public`      | Marca el pago como exitoso e incluye el identificador del gateway. |
+| `markAsFailed(reason: String, retryable: boolean)` | `void`           | `public`      | Marca el pago como fallido e indica si puede reintentarse.         |
+| `canBeRetried()`                                   | `boolean`        | `public`      | Verifica si el pago puede volver a intentarse.                     |
+| `shouldRetryAt()`                                  | `LocalDateTime`  | `public`      | Calcula la próxima fecha de reintento.                             |
+
+---
 
 **3. `Invoice` (Aggregate Root)**
 
-Representa una factura generada para una suscripción con líneas de detalle, cálculos de impuestos y seguimiento de pagos.
+Representa una factura generada automáticamente o manualmente para una suscripción. Incluye montos, fechas de emisión, vencimiento, impuestos y estado de pago.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único de la factura. |
-| `invoiceId` | `InvoiceId` | `private` | Identificador de dominio de la factura. |
-| `subscriptionId` | `SubscriptionId` | `private` | Identificador de la suscripción asociada. |
-| `invoiceNumber` | `InvoiceNumber` | `private` | Número de factura único. |
-| `billingPeriod` | `BillingPeriod` | `private` | Período de facturación. |
-| `issueDate` | `LocalDateTime` | `private` | Fecha de emisión de la factura. |
-| `dueDate` | `LocalDateTime` | `private` | Fecha de vencimiento de la factura. |
-| `subtotal` | `MonetaryAmount` | `private` | Subtotal antes de impuestos. |
-| `taxAmount` | `MonetaryAmount` | `private` | Monto de impuestos. |
-| `totalAmount` | `MonetaryAmount` | `private` | Monto total de la factura. |
-| `status` | `InvoiceStatus` | `private` | Estado actual de la factura. |
-| `paymentId` | `PaymentId` | `private` | Identificador del pago asociado. |
-| `lineItems` | `List<InvoiceLineItem>` | `private` | Lista de líneas de detalle de la factura. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
+| Atributo             | Tipo             | Visibilidad  | Descripción                                 |
+|----------------------|------------------|--------------|---------------------------------------------|
+| `id`                 | `String`         | `private`    | Identificador único de la factura.          |
+| `subscriptionId`     | `SubscriptionId` | `private`    | Identificador de la suscripción asociada.   |
+| `districtId`         | `DistrictId`     | `private`    | Distrito facturado.                         |
+| `invoiceNumber`      | `InvoiceNumber`  | `private`    | Número único de factura.                    |
+| `billingPeriodStart` | `LocalDate`      | `private`    | Fecha de inicio del período facturado.      |
+| `billingPeriodEnd`   | `LocalDate`      | `private`    | Fecha de fin del período facturado.         |
+| `subtotal`           | `Money`          | `private`    | Subtotal sin impuestos.                     |
+| `taxAmount`          | `Money`          | `private`    | Monto correspondiente al impuesto aplicado. |
+| `totalAmount`        | `Money`          | `private`    | Total final de la factura.                  |
+| `status`             | `InvoiceStatus`  | `private`    | Estado actual de la factura.                |
+| `issuedAt`           | `LocalDate`      | `private`    | Fecha de emisión de la factura.             |
+| `dueDate`            | `LocalDate`      | `private`    | Fecha límite de pago.                       |
+| `paidAt`             | `LocalDate`      | `private`    | Fecha de pago de la factura.                |
+| `paymentId`          | `PaymentId`      | `private`    | Identificador del pago asociado.            |
+| `createdAt`          | `LocalDateTime`  | `private`    | Fecha y hora de creación del registro.      |
+| `updatedAt`          | `LocalDateTime`  | `private`    | Fecha y hora de la última actualización.    |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `Invoice()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `Invoice(subscriptionId, billingPeriod)` | `Constructor` | `public` | Constructor que instancia una factura con datos básicos. |
-| `addLineItem(item)` | `void` | `public` | Agrega una línea de detalle a la factura. |
-| `calculateTotals()` | `void` | `public` | Calcula los totales de la factura. |
-| `markAsPaid(paymentId)` | `void` | `public` | Marca la factura como pagada. |
-| `markAsOverdue()` | `void` | `public` | Marca la factura como vencida. |
-| `isPaid()` | `boolean` | `public` | Determina si la factura está pagada. |
-| `isOverdue()` | `boolean` | `public` | Determina si la factura está vencida. |
-| `canBePaid()` | `boolean` | `public` | Determina si la factura puede ser pagada. |
-| `canBeVoided()` | `boolean` | `public` | Determina si la factura puede ser anulada. |
-| `getDaysOverdue()` | `Integer` | `public` | Obtiene los días de vencimiento. |
-| `getAvailableActions()` | `List<InvoiceAction>` | `public` | Obtiene las acciones disponibles según el estado. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
+| Método                             | Tipo de Retorno  | Visibilidad   | Descripción                            |
+|------------------------------------|------------------|---------------|----------------------------------------|
+| `issue()`                          | `void`           | `public`      | Emite formalmente la factura.          |
+| `markAsPaid(paymentId: PaymentId)` | `void`           | `public`      | Marca la factura como pagada.          |
+| `markAsOverdue()`                  | `void`           | `public`      | Marca la factura como vencida.         |
+| `void_invoice()`                   | `void`           | `public`      | Anula o invalida la factura.           |
+| `isOverdue()`                      | `boolean`        | `public`      | Determina si la factura está vencida.  |
+| `getDaysOverdue()`                 | `Integer`        | `public`      | Devuelve el número de días de retraso. |
+
+---
+
+**4. `PaymentMethod` (Aggregate Root)**
+
+Representa un método de pago registrado en el sistema, asociado a un distrito, que puede ser utilizado para procesar facturas o suscripciones.
+
+**Atributos Principales:**
+
+| Atributo         | Tipo                | Visibilidad  | Descripción                                   |
+|------------------|---------------------|--------------|-----------------------------------------------|
+| `id`             | `String`            | `private`    | Identificador único del método de pago.       |
+| `districtId`     | `DistrictId`        | `private`    | Distrito propietario del método de pago.      |
+| `type`           | `PaymentMethodType` | `private`    | Tipo de método de pago.                       |
+| `culqiTokenId`   | `String`            | `private`    | Token del gateway de pago (Culqi).            |
+| `cardBrand`      | `String`            | `private`    | Marca de la tarjeta (Visa, Mastercard, etc.). |
+| `lastFourDigits` | `String`            | `private`    | Últimos cuatro dígitos de la tarjeta.         |
+| `expiryMonth`    | `Integer`           | `private`    | Mes de expiración de la tarjeta.              |
+| `expiryYear`     | `Integer`           | `private`    | Año de expiración de la tarjeta.              |
+| `isDefault`      | `Boolean`           | `private`    | Indica si es el método predeterminado.        |
+| `isValid`        | `Boolean`           | `private`    | Indica si el método es válido para uso.       |
+| `registeredAt`   | `LocalDateTime`     | `private`    | Fecha de registro en el sistema.              |
+| `lastUsedAt`     | `LocalDateTime`     | `private`    | Fecha del último uso registrado.              |
+
+**Métodos Principales:**
+
+| Método           | Tipo de Retorno  | Visibilidad   | Descripción                                |
+|------------------|------------------|---------------|--------------------------------------------|
+| `isExpired()`    | `boolean`        | `public`      | Indica si la tarjeta ha expirado.          |
+| `markAsUsed()`   | `void`           | `public`      | Actualiza la fecha del último uso.         |
+| `setAsDefault()` | `void`           | `public`      | Establece este método como predeterminado. |
 
 ---
 
 **Entities**
 
-**4. `PaymentMethod` (Entity)**
+**5. `PlanCatalog` (Entity)**
 
-Representa un método de pago configurado para una municipalidad con información de tarjetas de crédito, cuentas bancarias y validaciones.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del método de pago. |
-| `paymentMethodId` | `PaymentMethodId` | `private` | Identificador de dominio del método de pago. |
-| `municipalityId` | `MunicipalityId` | `private` | Identificador de la municipalidad asociada. |
-| `type` | `PaymentMethodType` | `private` | Tipo de método de pago. |
-| `cardDetails` | `CardDetails` | `private` | Detalles de tarjeta de crédito. |
-| `bankAccountDetails` | `BankAccountDetails` | `private` | Detalles de cuenta bancaria. |
-| `isDefault` | `Boolean` | `private` | Indica si es el método de pago por defecto. |
-| `isActive` | `Boolean` | `private` | Indica si el método está activo. |
-| `expiryDate` | `LocalDateTime` | `private` | Fecha de expiración. |
-| `lastUsedDate` | `LocalDateTime` | `private` | Fecha de último uso. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `PaymentMethod(municipalityId, type)` | `Constructor` | `public` | Constructor que instancia un método de pago con datos básicos. |
-| `validate()` | `ValidationResult` | `public` | Valida el método de pago. |
-| `isExpired()` | `boolean` | `public` | Determina si el método de pago está vencido. |
-| `canProcess(amount)` | `boolean` | `public` | Determina si puede procesar un monto específico. |
-| `updateDetails(cardDetails, bankDetails)` | `void` | `public` | Actualiza los detalles del método de pago. |
-
-**5. `InvoiceLineItem` (Entity)**
-
-Representa una línea de detalle en una factura con información de producto, cantidad, precio e impuestos.
+Representa un plan de suscripción disponible en el catálogo, con su precio y límites de recursos asociados.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único de la línea. |
-| `lineItemId` | `LineItemId` | `private` | Identificador de dominio de la línea. |
-| `description` | `String` | `private` | Descripción del servicio o producto. |
-| `quantity` | `Integer` | `private` | Cantidad del servicio o producto. |
-| `unitPrice` | `MonetaryAmount` | `private` | Precio unitario. |
-| `totalPrice` | `MonetaryAmount` | `private` | Precio total de la línea. |
-| `taxRate` | `TaxRate` | `private` | Tasa de impuesto aplicada. |
-| `taxAmount` | `MonetaryAmount` | `private` | Monto de impuesto. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `InvoiceLineItem(description, quantity, unitPrice)` | `Constructor` | `public` | Constructor que instancia una línea con datos básicos. |
-| `calculateTotal()` | `MonetaryAmount` | `public` | Calcula el total de la línea. |
-| `applyTax(rate)` | `void` | `public` | Aplica una tasa de impuesto a la línea. |
-
-**6. `PaymentAttempt` (Entity)**
-
-Representa un intento de procesamiento de pago con información de respuesta del gateway y manejo de errores.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del intento. |
-| `attemptId` | `AttemptId` | `private` | Identificador de dominio del intento. |
-| `paymentId` | `PaymentId` | `private` | Identificador del pago asociado. |
-| `attemptNumber` | `Integer` | `private` | Número de intento. |
-| `attemptDate` | `LocalDateTime` | `private` | Fecha del intento. |
-| `status` | `AttemptStatus` | `private` | Estado del intento. |
-| `gatewayResponse` | `GatewayResponse` | `private` | Respuesta del gateway de pagos. |
-| `errorCode` | `String` | `private` | Código de error si aplica. |
-| `errorMessage` | `String` | `private` | Mensaje de error si aplica. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `PaymentAttempt(paymentId, attemptNumber)` | `Constructor` | `public` | Constructor que instancia un intento con datos básicos. |
-| `isSuccessful()` | `boolean` | `public` | Determina si el intento fue exitoso. |
-| `getResponseTime()` | `Duration` | `public` | Obtiene el tiempo de respuesta del intento. |
+| Atributo        | Tipo      | Visibilidad  | Descripción                       |
+|-----------------|-----------|--------------|-----------------------------------|
+| `id`            | `String`  | `private`    | Identificador único del plan.     |
+| `name`          | `String`  | `private`    | Nombre del plan ofrecido.         |
+| `monthlyPrice`  | `Money`   | `private`    | Costo mensual del plan.           |
+| `maxVehicles`   | `Integer` | `private`    | Límite de vehículos incluidos.    |
+| `maxDrivers`    | `Integer` | `private`    | Límite de conductores incluidos.  |
+| `maxContainers` | `Integer` | `private`    | Límite de contenedores incluidos. |
 
 ---
 
 **Value Objects**
 
-**7. `SubscriptionId` (Value Object)**
+**6. `InvoiceNumber` (Value Object)**
 
-Identificador único inmutable para una suscripción en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `subscriptionId` | `String` | `private` | Valor alfanumérico del identificador de suscripción. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isValid()` | `Boolean` | `public` | Valida que el identificador sea válido. |
-
-**8. `PaymentId` (Value Object)**
-
-Identificador único inmutable para un pago en el sistema.
+Define el número único y secuencial de una factura emitida.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `paymentId` | `String` | `private` | Valor alfanumérico del identificador de pago. |
-
-**9. `InvoiceId` (Value Object)**
-
-Identificador único inmutable para una factura en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `invoiceId` | `String` | `private` | Valor alfanumérico del identificador de factura. |
-
-**10. `PaymentMethodId` (Value Object)**
-
-Identificador único inmutable para un método de pago en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `paymentMethodId` | `String` | `private` | Valor alfanumérico del identificador del método de pago. |
-
-**11. `MonetaryAmount` (Value Object)**
-
-Representa un monto monetario con operaciones aritméticas y validaciones de moneda.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `amount` | `BigDecimal` | `private` | Valor numérico del monto. |
-| `currency` | `Currency` | `private` | Moneda del monto. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `add(other)` | `MonetaryAmount` | `public` | Suma otro monto monetario. |
-| `subtract(other)` | `MonetaryAmount` | `public` | Resta otro monto monetario. |
-| `multiply(factor)` | `MonetaryAmount` | `public` | Multiplica por un factor. |
-| `isZero()` | `boolean` | `public` | Determina si el monto es cero. |
-| `isPositive()` | `boolean` | `public` | Determina si el monto es positivo. |
-
-**12. `BillingAddress` (Value Object)**
-
-Dirección de facturación con validaciones de formato y completitud.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `street` | `String` | `private` | Calle de la dirección. |
-| `city` | `String` | `private` | Ciudad de la dirección. |
-| `state` | `String` | `private` | Estado o provincia. |
-| `postalCode` | `String` | `private` | Código postal. |
-| `country` | `String` | `private` | País de la dirección. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getFullAddress()` | `String` | `public` | Obtiene la dirección completa formateada. |
-
-**13. `BillingCycle` (Value Object)**
-
-Define el ciclo de facturación con tipo y frecuencia de facturación.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `type` | `BillingCycleType` | `private` | Tipo de ciclo de facturación. |
-| `intervalMonths` | `Integer` | `private` | Intervalo en meses entre facturaciones. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `calculateNextBilling(startDate)` | `LocalDateTime` | `public` | Calcula la fecha de la próxima facturación. |
-
-**14. `PaymentMethodType` (Value Object)**
-
-Tipo de método de pago con capacidades de validación y categorización.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `type` | `String` | `private` | Tipo específico del método de pago. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isCreditCard()` | `boolean` | `public` | Determina si es tarjeta de crédito. |
-| `isBankTransfer()` | `boolean` | `public` | Determina si es transferencia bancaria. |
-| `isDigitalWallet()` | `boolean` | `public` | Determina si es billetera digital. |
-
-**15. `CardDetails` (Value Object)**
-
-Detalles de tarjeta de crédito con validaciones de formato y expiración.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `cardNumber` | `String` | `private` | Número de tarjeta (enmascarado). |
-| `expiryDate` | `LocalDate` | `private` | Fecha de expiración. |
-| `cardHolderName` | `String` | `private` | Nombre del titular. |
-| `cvv` | `String` | `private` | Código de seguridad. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isExpired()` | `boolean` | `public` | Determina si la tarjeta está vencida. |
-| `isValid()` | `boolean` | `public` | Valida el formato de la tarjeta. |
-
-**16. `BankAccountDetails` (Value Object)**
-
-Detalles de cuenta bancaria con validaciones de formato y verificación.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `accountNumber` | `String` | `private` | Número de cuenta bancaria. |
-| `routingNumber` | `String` | `private` | Número de ruta bancaria. |
-| `accountHolderName` | `String` | `private` | Nombre del titular de la cuenta. |
-| `bankName` | `String` | `private` | Nombre del banco. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isValid()` | `boolean` | `public` | Valida el formato de la cuenta bancaria. |
-
-**17. `GatewayResponse` (Value Object)**
-
-Respuesta del gateway de pagos con código de respuesta y detalles de transacción.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `responseCode` | `String` | `private` | Código de respuesta del gateway. |
-| `responseMessage` | `String` | `private` | Mensaje de respuesta. |
-| `transactionId` | `String` | `private` | Identificador de transacción. |
-| `timestamp` | `LocalDateTime` | `private` | Marca de tiempo de la respuesta. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isSuccessful()` | `boolean` | `public` | Determina si la respuesta indica éxito. |
-
-**18. `BillingPeriod` (Value Object)**
-
-Período de facturación con fechas de inicio y fin para cálculos de prorateo.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `startDate` | `LocalDate` | `private` | Fecha de inicio del período. |
-| `endDate` | `LocalDate` | `private` | Fecha de fin del período. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getDurationInDays()` | `Integer` | `public` | Obtiene la duración en días del período. |
-| `contains(date)` | `boolean` | `public` | Determina si una fecha está dentro del período. |
-
-**19. `InvoiceNumber` (Value Object)**
-
-Número de factura único con formato y secuencia automática.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `number` | `String` | `private` | Número completo de la factura. |
-| `prefix` | `String` | `private` | Prefijo del número de factura. |
-| `sequence` | `Integer` | `private` | Secuencia numérica. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getFormattedNumber()` | `String` | `public` | Obtiene el número formateado completo. |
+| Atributo     | Tipo      | Visibilidad   | Descripción                           |
+|--------------|-----------|---------------|---------------------------------------|
+| `series`     | `String`  | `private`     | Serie de numeración de la factura.    |
+| `sequential` | `Integer` | `private`     | Número secuencial dentro de la serie. |
 
 ---
 
-**Enums**
+**7. `PlanId` (Value Object)**
 
-**20. `SubscriptionStatus` (Enum)**
-
-Estados posibles de una suscripción durante su ciclo de vida.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `TRIAL` | Suscripción en período de prueba. |
-| `ACTIVE` | Suscripción activa y funcional. |
-| `SUSPENDED` | Suscripción suspendida temporalmente. |
-| `CANCELLED` | Suscripción cancelada. |
-| `EXPIRED` | Suscripción vencida. |
-| `PENDING_ACTIVATION` | Suscripción pendiente de activación. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canTransitionTo(newStatus)` | `boolean` | `public` | Valida si puede transicionar al nuevo estado. |
-| `isActive()` | `boolean` | `public` | Determina si está activo. |
-| `isSuspended()` | `boolean` | `public` | Determina si está suspendido. |
-| `isCancelled()` | `boolean` | `public` | Determina si está cancelado. |
-| `canBeActivated()` | `boolean` | `public` | Determina si puede ser activado. |
-| `canBeUpgraded()` | `boolean` | `public` | Determina si puede ser actualizado. |
-| `getAvailableTransitions()` | `List<SubscriptionStatus>` | `public` | Obtiene las transiciones disponibles. |
-
-**21. `PaymentStatus` (Enum)**
-
-Estados posibles de un pago durante su procesamiento.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `PENDING` | Pago pendiente de procesamiento. |
-| `PROCESSING` | Pago en proceso. |
-| `SUCCESSFUL` | Pago procesado exitosamente. |
-| `FAILED` | Pago fallido. |
-| `CANCELLED` | Pago cancelado. |
-| `REFUNDED` | Pago reembolsado. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canTransitionTo(newStatus)` | `boolean` | `public` | Valida si puede transicionar al nuevo estado. |
-| `isPending()` | `boolean` | `public` | Determina si está pendiente. |
-| `isSuccessful()` | `boolean` | `public` | Determina si fue exitoso. |
-| `isFailed()` | `boolean` | `public` | Determina si falló. |
-| `canBeRetried()` | `boolean` | `public` | Determina si puede ser reintentado. |
-| `canBeCancelled()` | `boolean` | `public` | Determina si puede ser cancelado. |
-| `getAvailableTransitions()` | `List<PaymentStatus>` | `public` | Obtiene las transiciones disponibles. |
-
-**22. `InvoiceStatus` (Enum)**
-
-Estados posibles de una factura durante su ciclo de vida.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `DRAFT` | Factura en borrador. |
-| `ISSUED` | Factura emitida. |
-| `PAID` | Factura pagada. |
-| `OVERDUE` | Factura vencida. |
-| `CANCELLED` | Factura cancelada. |
-| `VOIDED` | Factura anulada. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canTransitionTo(newStatus)` | `boolean` | `public` | Valida si puede transicionar al nuevo estado. |
-| `isPaid()` | `boolean` | `public` | Determina si está pagada. |
-| `isOverdue()` | `boolean` | `public` | Determina si está vencida. |
-| `canBePaid()` | `boolean` | `public` | Determina si puede ser pagada. |
-| `canBeVoided()` | `boolean` | `public` | Determina si puede ser anulada. |
-| `getAvailableTransitions()` | `List<InvoiceStatus>` | `public` | Obtiene las transiciones disponibles. |
-
-**23. `SubscriptionAction` (Enum)**
-
-Acciones disponibles que se pueden realizar sobre una suscripción.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `ACTIVATE` | Activar la suscripción. |
-| `SUSPEND` | Suspender la suscripción. |
-| `CANCEL` | Cancelar la suscripción. |
-| `UPGRADE_PLAN` | Actualizar a un plan superior. |
-| `DOWNGRADE_PLAN` | Degradar a un plan inferior. |
-| `UPDATE_PAYMENT_METHOD` | Actualizar método de pago. |
-| `RENEW` | Renovar la suscripción. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAllowedForStatus(status)` | `boolean` | `public` | Determina si la acción está permitida para el estado. |
-| `requiresPaymentMethod()` | `boolean` | `public` | Determina si requiere método de pago. |
-
-**24. `PaymentAction` (Enum)**
-
-Acciones disponibles que se pueden realizar sobre un pago.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `PROCESS` | Procesar el pago. |
-| `RETRY` | Reintentar el pago. |
-| `CANCEL` | Cancelar el pago. |
-| `REFUND` | Reembolsar el pago. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAllowedForStatus(status)` | `boolean` | `public` | Determina si la acción está permitida para el estado. |
-| `requiresGatewayInteraction()` | `boolean` | `public` | Determina si requiere interacción con gateway. |
-
-**25. `InvoiceAction` (Enum)**
-
-Acciones disponibles que se pueden realizar sobre una factura.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `PAY` | Pagar la factura. |
-| `VOID` | Anular la factura. |
-| `SEND_REMINDER` | Enviar recordatorio de pago. |
-| `APPLY_DISCOUNT` | Aplicar descuento. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAllowedForStatus(status)` | `boolean` | `public` | Determina si la acción está permitida para el estado. |
-| `requiresPayment()` | `boolean` | `public` | Determina si requiere procesamiento de pago. |
-
----
-
-**Application Services**
-
-**26. `SubscriptionApplicationService` (Application Service)**
-
-Servicio de aplicación que coordina las operaciones de negocio relacionadas con suscripciones municipales.
+Identificador único que representa un plan dentro del catálogo de suscripciones.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `subscriptionRepository` | `SubscriptionRepository` | `private` | Repositorio para persistencia de suscripciones. |
-| `subscriptionDomainService` | `SubscriptionDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `subscriptionFactory` | `SubscriptionFactory` | `private` | Factory para creación de suscripciones. |
-| `billingService` | `BillingService` | `private` | Servicio de gestión de facturación. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createSubscription(municipalityId, planId, billingCycle, paymentMethodId, billingAddress, autoRenewal)` | `Subscription` | `public` | Crea una nueva suscripción en el sistema. |
-| `updateSubscription(subscriptionId, newPlanId, effectiveDate, prorationPolicy)` | `void` | `public` | Actualiza el plan de una suscripción. |
-| `activateSubscription(subscriptionId)` | `void` | `public` | Activa una suscripción. |
-| `suspendSubscription(subscriptionId, reason)` | `void` | `public` | Suspende una suscripción. |
-| `cancelSubscription(subscriptionId, reason)` | `void` | `public` | Cancela una suscripción. |
-| `updatePaymentMethod(subscriptionId, paymentMethodId)` | `void` | `public` | Actualiza el método de pago. |
-| `getSubscriptionById(subscriptionId)` | `Optional<Subscription>` | `public` | Obtiene una suscripción por su identificador. |
-| `getSubscriptionsByMunicipality(municipalityId, status)` | `List<Subscription>` | `public` | Obtiene suscripciones de una municipalidad. |
-
-**27. `PaymentApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de pagos y métodos de pago.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `paymentRepository` | `PaymentRepository` | `private` | Repositorio para persistencia de pagos. |
-| `paymentDomainService` | `PaymentDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `paymentFactory` | `PaymentFactory` | `private` | Factory para creación de pagos. |
-| `paymentProcessingService` | `PaymentProcessingService` | `private` | Servicio de procesamiento de pagos. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `processPayment(subscriptionId, amount, paymentMethodId, scheduledDate)` | `Payment` | `public` | Procesa un pago para una suscripción. |
-| `retryPayment(paymentId)` | `PaymentResult` | `public` | Reintenta un pago fallido. |
-| `addPaymentMethod(municipalityId, type, cardDetails, bankAccountDetails, isDefault)` | `PaymentMethod` | `public` | Agrega un método de pago. |
-| `updatePaymentMethod(paymentMethodId, cardDetails, bankAccountDetails)` | `void` | `public` | Actualiza un método de pago. |
-| `getPaymentById(paymentId)` | `Optional<Payment>` | `public` | Obtiene un pago por su identificador. |
-| `getPaymentHistory(subscriptionId, startDate, endDate)` | `List<Payment>` | `public` | Obtiene historial de pagos. |
-| `getPaymentMethods(municipalityId)` | `List<PaymentMethod>` | `public` | Obtiene métodos de pago de una municipalidad. |
-
-**28. `InvoiceApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de facturas y reportes financieros.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `invoiceRepository` | `InvoiceRepository` | `private` | Repositorio para persistencia de facturas. |
-| `invoiceDomainService` | `InvoiceDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `invoiceFactory` | `InvoiceFactory` | `private` | Factory para creación de facturas. |
-| `financialReportingService` | `FinancialReportingService` | `private` | Servicio de reportes financieros. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `generateInvoice(subscriptionId, billingPeriod, includeUsageCharges)` | `Invoice` | `public` | Genera una factura para una suscripción. |
-| `markInvoiceAsPaid(invoiceId, paymentId)` | `void` | `public` | Marca una factura como pagada. |
-| `markInvoiceAsOverdue(invoiceId)` | `void` | `public` | Marca una factura como vencida. |
-| `getInvoiceById(invoiceId)` | `Optional<Invoice>` | `public` | Obtiene una factura por su identificador. |
-| `getInvoicesBySubscription(subscriptionId)` | `List<Invoice>` | `public` | Obtiene facturas de una suscripción. |
-| `getOutstandingInvoices(municipalityId, overdueOnly)` | `List<Invoice>` | `public` | Obtiene facturas pendientes. |
-| `generateFinancialReport(municipalityId, period)` | `FinancialReport` | `public` | Genera reporte financiero. |
+| Atributo  | Tipo     | Visibilidad   | Descripción                        |
+|-----------|----------|---------------|------------------------------------|
+| `value`   | `String` | `private`     | Identificador del plan registrado. |
 
 ---
 
-**Domain Services**
+**Enumerations**
 
-**29. `SubscriptionDomainService` (Domain Service)**
+**8. `SubscriptionStatus` (Enumeration)**
 
-Servicio de dominio que implementa lógica de negocio compleja relacionada con suscripciones.
+Define el estado actual de una suscripción en su ciclo de vida.
 
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateSubscriptionCreation(subscription)` | `ValidationResult` | `public` | Valida la creación de una nueva suscripción. |
-| `calculateProrationAmount(subscription, change)` | `MonetaryAmount` | `public` | Calcula el monto de prorateo por cambios. |
-| `determineBillingDate(subscription, planChange)` | `LocalDateTime` | `public` | Determina la fecha de facturación. |
-| `checkMunicipalityEligibility(municipalityId, planId)` | `EligibilityResult` | `public` | Verifica elegibilidad de municipalidad. |
-| `calculateUpgradeDowngradeFee(currentPlan, newPlan)` | `MonetaryAmount` | `public` | Calcula tarifa de cambio de plan. |
-
-**30. `PaymentDomainService` (Domain Service)**
-
-Servicio de dominio para lógica compleja relacionada con pagos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validatePayment(payment, paymentMethod)` | `ValidationResult` | `public` | Valida un pago antes de procesarlo. |
-| `calculateRetrySchedule(payment)` | `List<LocalDateTime>` | `public` | Calcula horarios de reintentos. |
-| `determineFailureReason(gatewayResponse)` | `FailureReason` | `public` | Determina la razón de fallo. |
-| `checkFraudRisk(payment, paymentMethod)` | `FraudRiskResult` | `public` | Verifica riesgo de fraude. |
-| `calculateProcessingFee(amount, paymentMethod)` | `MonetaryAmount` | `public` | Calcula tarifa de procesamiento. |
-
-**31. `InvoiceDomainService` (Domain Service)**
-
-Servicio de dominio para lógica compleja relacionada con facturas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateInvoiceGeneration(subscription, period)` | `ValidationResult` | `public` | Valida la generación de una factura. |
-| `calculateInvoiceLineItems(subscription, period)` | `List<InvoiceLineItem>` | `public` | Calcula líneas de la factura. |
-| `applyDiscounts(invoice, discounts)` | `MonetaryAmount` | `public` | Aplica descuentos a una factura. |
-| `calculateTaxes(invoice, taxRules)` | `MonetaryAmount` | `public` | Calcula impuestos de una factura. |
-| `generateInvoiceNumber(subscription)` | `InvoiceNumber` | `public` | Genera número único de factura. |
-
-**32. `BillingService` (Domain Service)**
-
-Servicio especializado en gestión de facturación y ciclos de cobro.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `calculateNextBillingDate(subscription)` | `LocalDateTime` | `public` | Calcula próxima fecha de facturación. |
-| `generateBillingCycle(subscription)` | `BillingCycle` | `public` | Genera ciclo de facturación. |
-| `processScheduledBilling(subscriptions)` | `List<Invoice>` | `public` | Procesa facturación programada. |
-| `handlePaymentFailure(payment, subscription)` | `BillingAction` | `public` | Maneja fallos de pago. |
-| `calculateGracePeriod(subscription)` | `LocalDateTime` | `public` | Calcula período de gracia. |
-
-**33. `PaymentProcessingService` (Domain Service)**
-
-Servicio para procesamiento de pagos usando diferentes estrategias.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `processingStrategy` | `PaymentProcessingStrategy` | `private` | Estrategia de procesamiento actual. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `processPayment(payment, paymentMethod)` | `PaymentResult` | `public` | Procesa un pago usando la estrategia. |
-| `retryPayment(payment)` | `PaymentResult` | `public` | Reintenta un pago fallido. |
-| `refundPayment(payment, amount)` | `RefundResult` | `public` | Procesa un reembolso. |
-| `setProcessingStrategy(strategy)` | `void` | `public` | Establece la estrategia de procesamiento. |
-| `validatePaymentMethod(paymentMethod)` | `ValidationResult` | `public` | Valida un método de pago. |
-
-**34. `FinancialReportingService` (Domain Service)**
-
-Servicio para generación de reportes financieros y análisis.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `generateRevenueReport(municipalityId, period)` | `RevenueReport` | `public` | Genera reporte de ingresos. |
-| `calculateOutstandingBalance(municipalityId)` | `MonetaryAmount` | `public` | Calcula saldo pendiente. |
-| `generatePaymentAnalytics(subscriptions)` | `PaymentAnalytics` | `public` | Genera analíticas de pagos. |
-| `calculateChurnRate(municipalityId, period)` | `Double` | `public` | Calcula tasa de cancelación. |
-| `generateFinancialSummary(period)` | `FinancialSummary` | `public` | Genera resumen financiero. |
+| Valor       | Descripción                            |
+|-------------|----------------------------------------|
+| `TRIAL`     | En período de prueba gratuito.         |
+| `ACTIVE`    | Suscripción activa y en uso.           |
+| `SUSPENDED` | Suscripción suspendida temporalmente.  |
+| `CANCELLED` | Suscripción cancelada permanentemente. |
 
 ---
 
-**Strategies**
+**9. `PaymentStatus` (Enumeration)**
 
-**35. `PaymentProcessingStrategy` (Strategy Interface)**
+Representa los diferentes estados por los que puede pasar un pago.
 
-Interfaz que define el contrato para diferentes estrategias de procesamiento de pagos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `processPayment(payment, paymentMethod)` | `PaymentResult` | `public` | Procesa un pago según la estrategia. |
-| `validatePayment(payment)` | `ValidationResult` | `public` | Valida un pago antes de procesarlo. |
-| `canProcess(paymentMethod)` | `boolean` | `public` | Determina si puede procesar el tipo de método. |
-
-**36. `CreditCardStrategy` (Strategy)**
-
-Implementación de estrategia para procesamiento de pagos con tarjeta de crédito.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `processPayment(payment, paymentMethod)` | `PaymentResult` | `public` | Procesa pago con tarjeta de crédito. |
-| `validatePayment(payment)` | `ValidationResult` | `public` | Valida pago con tarjeta. |
-| `canProcess(paymentMethod)` | `boolean` | `public` | Verifica si es tarjeta de crédito. |
-
-**37. `BankTransferStrategy` (Strategy)**
-
-Implementación de estrategia para procesamiento de transferencias bancarias.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `processPayment(payment, paymentMethod)` | `PaymentResult` | `public` | Procesa transferencia bancaria. |
-| `validatePayment(payment)` | `ValidationResult` | `public` | Valida transferencia bancaria. |
-| `canProcess(paymentMethod)` | `boolean` | `public` | Verifica si es transferencia bancaria. |
-
-**38. `DigitalWalletStrategy` (Strategy)**
-
-Implementación de estrategia para procesamiento de pagos con billetera digital.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `processPayment(payment, paymentMethod)` | `PaymentResult` | `public` | Procesa pago con billetera digital. |
-| `validatePayment(payment)` | `ValidationResult` | `public` | Valida pago con billetera digital. |
-| `canProcess(paymentMethod)` | `boolean` | `public` | Verifica si es billetera digital. |
+| Valor        | Descripción                  |
+|--------------|------------------------------|
+| `PENDING`    | Pago pendiente de ejecución. |
+| `PROCESSING` | Pago en proceso.             |
+| `SUCCEEDED`  | Pago realizado exitosamente. |
+| `FAILED`     | Pago fallido.                |
+| `REFUNDED`   | Pago reembolsado.            |
 
 ---
 
-**Factories**
+**10. `InvoiceStatus` (Enumeration)**
 
-**39. `SubscriptionFactory` (Factory)**
+Indica el estado actual de una factura.
 
-Factory para la creación de diferentes tipos de suscripciones con configuraciones específicas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createTrialSubscription(municipalityId, planId)` | `Subscription` | `public` | Crea suscripción de prueba. |
-| `createPaidSubscription(municipalityId, planId, paymentMethod)` | `Subscription` | `public` | Crea suscripción pagada. |
-| `createSubscription(municipalityId, planId, billingCycle, paymentMethodId)` | `Subscription` | `public` | Crea suscripción con configuración específica. |
-
-**40. `PaymentFactory` (Factory)**
-
-Factory para la creación de pagos según diferentes escenarios.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createScheduledPayment(subscription, amount)` | `Payment` | `public` | Crea pago programado. |
-| `createRetryPayment(originalPayment)` | `Payment` | `public` | Crea pago de reintento. |
-| `createPayment(subscriptionId, amount, paymentMethod)` | `Payment` | `public` | Crea pago con parámetros específicos. |
-
-**41. `InvoiceFactory` (Factory)**
-
-Factory para la creación de facturas según diferentes tipos de facturación.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createMonthlyInvoice(subscription, period)` | `Invoice` | `public` | Crea factura mensual. |
-| `createProrationInvoice(subscription, adjustment)` | `Invoice` | `public` | Crea factura de prorateo. |
-| `createInvoice(subscriptionId, billingPeriod)` | `Invoice` | `public` | Crea factura con período específico. |
-
-**42. `PaymentMethodFactory` (Factory)**
-
-Factory para la creación de métodos de pago según diferentes tipos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createCreditCard(municipalityId, cardDetails)` | `PaymentMethod` | `public` | Crea método de tarjeta de crédito. |
-| `createBankAccount(municipalityId, bankDetails)` | `PaymentMethod` | `public` | Crea método de cuenta bancaria. |
-| `createDigitalWallet(municipalityId, walletDetails)` | `PaymentMethod` | `public` | Crea método de billetera digital. |
+| Valor     | Descripción                   |
+|-----------|-------------------------------|
+| `DRAFT`   | Factura en borrador.          |
+| `ISSUED`  | Factura emitida oficialmente. |
+| `PAID`    | Factura pagada.               |
+| `OVERDUE` | Factura vencida sin pago.     |
+| `VOID`    | Factura anulada.              |
 
 ---
 
-**Repository Interfaces**
+**11. `PaymentMethodType` (Enumeration)**
 
-**43. `SubscriptionRepository` (Repository Interface)**
+Clasifica los tipos de métodos de pago disponibles.
 
-Interfaz de repositorio para la persistencia y consulta de suscripciones.
+| Valor           | Descripción                                |
+|-----------------|--------------------------------------------|
+| `CREDIT_CARD`   | Pago mediante tarjeta de crédito o débito. |
+| `BANK_TRANSFER` | Pago mediante transferencia bancaria.      |
 
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(subscriptionId)` | `Optional<Subscription>` | `public` | Busca una suscripción por su identificador. |
-| `findByMunicipality(municipalityId)` | `List<Subscription>` | `public` | Busca suscripciones de una municipalidad. |
-| `findByStatus(status)` | `List<Subscription>` | `public` | Busca suscripciones por estado. |
-| `findByPlan(planId)` | `List<Subscription>` | `public` | Busca suscripciones por plan. |
-| `findActiveSubscriptions()` | `List<Subscription>` | `public` | Busca suscripciones activas. |
-| `findExpiringSubscriptions(withinDays)` | `List<Subscription>` | `public` | Busca suscripciones próximas a vencer. |
-| `save(subscription)` | `Subscription` | `public` | Persiste o actualiza una suscripción. |
-| `delete(subscriptionId)` | `void` | `public` | Elimina una suscripción del sistema. |
-| `existsById(subscriptionId)` | `boolean` | `public` | Verifica si existe una suscripción. |
-
-**44. `PaymentRepository` (Repository Interface)**
-
-Interfaz de repositorio para la persistencia y consulta de pagos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(paymentId)` | `Optional<Payment>` | `public` | Busca un pago por su identificador. |
-| `findBySubscription(subscriptionId)` | `List<Payment>` | `public` | Busca pagos de una suscripción. |
-| `findByStatus(status)` | `List<Payment>` | `public` | Busca pagos por estado. |
-| `findByDateRange(startDate, endDate)` | `List<Payment>` | `public` | Busca pagos en un rango de fechas. |
-| `findFailedPayments()` | `List<Payment>` | `public` | Busca pagos fallidos. |
-| `findPaymentsForRetry()` | `List<Payment>` | `public` | Busca pagos pendientes de reintento. |
-| `save(payment)` | `Payment` | `public` | Persiste o actualiza un pago. |
-| `delete(paymentId)` | `void` | `public` | Elimina un pago del sistema. |
-| `existsById(paymentId)` | `boolean` | `public` | Verifica si existe un pago. |
-
-**45. `InvoiceRepository` (Repository Interface)**
-
-Interfaz de repositorio para la persistencia y consulta de facturas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(invoiceId)` | `Optional<Invoice>` | `public` | Busca una factura por su identificador. |
-| `findBySubscription(subscriptionId)` | `List<Invoice>` | `public` | Busca facturas de una suscripción. |
-| `findByStatus(status)` | `List<Invoice>` | `public` | Busca facturas por estado. |
-| `findByMunicipality(municipalityId)` | `List<Invoice>` | `public` | Busca facturas de una municipalidad. |
-| `findOverdueInvoices()` | `List<Invoice>` | `public` | Busca facturas vencidas. |
-| `findByDateRange(startDate, endDate)` | `List<Invoice>` | `public` | Busca facturas en un rango de fechas. |
-| `save(invoice)` | `Invoice` | `public` | Persiste o actualiza una factura. |
-| `delete(invoiceId)` | `void` | `public` | Elimina una factura del sistema. |
-| `existsById(invoiceId)` | `boolean` | `public` | Verifica si existe una factura. |
+---
 
 **Diccionario de Clases del Bounded Context Communication Hub:**
 
