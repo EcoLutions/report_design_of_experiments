@@ -8961,13 +8961,64 @@ Vista final con deploy logs en estado completado
 
 ### 5.2.4. Implemented Native-Mobile Application Evidence
 
+#### Generar apk
+Para la compilación de la aplicación y la generación del archivo de instalación de Android (.apk), se siguieron los siguientes pasos utilizando el entorno de desarrollo Android Studio.
+
+**Apertura del Terminal**
+Dentro del proyecto de Flutter, se abrió el terminal integrado en Android Studio para tener acceso a la línea de comandos.
+
+**Ejecución del Comando de Compilación**
+Se procedió a ejecutar el comando para construir la versión de lanzamiento de la aplicación. Se utilizó el flag --release para asegurar que el APK generado estuviera optimizado para producción, ofuscado y sin información de depuración.
+
+flutter build apk --release
+
+**Ubicación del Archivo Generado**
+Una vez finalizado el proceso de compilación, el archivo app-release.apk fue localizado en el directorio de salida correspondiente dentro de la estructura del proyecto:
+
+build/app/outputs/flutter-apk/app-release.apk
+
+Este archivo es la versión final que fue utilizada para las pruebas de despliegue y la distribución.
+
+#### WasteTrack Citizen mobile app
+
+![splashImage.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/splashImage.png)
+
+![welcomeView.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/welcomeView.png)
+
+![selectMunicipality1.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/selectMunicipality1.png)
+
+![selectMunicipality2.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/selectMunicipality2.png)
+
+![home_view.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/home_view.png)
+
+![changeMunicipality.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/changeMunicipality.png)
+
+![notifications.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/notifications.png)
+
+![report.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/report.png)
+
 ### 5.2.5. Implemented Restful API and/or Serverless Backend Evidence
 
 ### 5.2.6. Restful API documentation
 
 ### 5.2.7. Team Collaboration Insights
 
+#### Fronted insights
+#### Municipality Admin Web Application
+![frontendMunicipalityAdmin.png](assets/5.product-implementation/insights/frontendMunicipalityAdmin.png)
+
+#### WasteTrack Citizen Mobile Application
+![wasteTrackCitizenMobileApp.png](assets/5.product-implementation/insights/wasteTrackCitizenMobileApp.png)
+
+#### Backend insights
+![backend.png](assets/5.product-implementation/insights/backend.png)
+
 ## 5.3. Video About-the-Product
+A continuación, la primera version del video About The Product
+
+![img.png](assets/5.product-implementation/aboutTheProduct/img.png)
+
+[Enlace video About the Product](https://upcedupe-my.sharepoint.com/personal/u20221c857_upc_edu_pe/_layouts/15/stream.aspx?id=%2Fpersonal%2Fu20221c857%5Fupc%5Fedu%5Fpe%2FDocuments%2FVideo%2DAbout%2DTheProduct%2DWasteTrack%2Emp4&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&ga=1&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview%2E614163d2%2D3f0f%2D42e6%2Da913%2Dfb143ec665dc)
 
 # Capítulo VI: Product Verification & Validation
 
