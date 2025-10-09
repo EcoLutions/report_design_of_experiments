@@ -105,6 +105,81 @@ Actividad de desarrollo constante durante el período, con pico de 12.5k adicion
 **Conclusión**
 Todos los miembros del equipo contribuyeron activamente al desarrollo del informe TB1, demostrando una colaboración efectiva y organizada según evidencian los analíticos de GitHub.
 
+**TP (Trabajo Parcial) - Análisis de Colaboración**
+
+**Desarrollo de Actividades**
+Para la entrega TP, el equipo trabajó de manera colaborativa con participación activa de todos los miembros en la elaboración del informe del proyecto. Se implementó una estrategia de ramas por funcionalidades específicas, permitiendo el desarrollo paralelo y la integración continua de cambios.
+
+**Evidencias de Colaboración en GitHub**
+
+*Network Graph*
+
+![network-graph](assets/0.cover/0.1.collaboration-insights/0.1.1.tp/network-graph.png)
+
+El grafo de red muestra un flujo de trabajo colaborativo altamente estructurado con múltiples ramas especializadas:
+- **feature/login-guide**: Rama dedicada al desarrollo de guías de autenticación
+- **feature/municipal-guide**: Rama para funcionalidades de administración municipal
+- **feature/citizen-guide**: Rama para características orientadas al ciudadano
+- **feature/landing-page-guide**: Rama específica para el desarrollo de la landing page
+- **feature/backend-guide**: Rama para el desarrollo del backend
+- **develop**: Rama principal de integración
+- **main**: Rama de producción estable
+
+El patrón muestra una estrategia de branching bien definida con merges frecuentes hacia develop y despliegues controlados hacia main.
+
+*Frecuencia de Código*
+
+![code-frequency](assets/0.cover/0.1.collaboration-insights/0.1.1.tp/code-frequency.png)
+
+El gráfico de frecuencia de código revela una actividad de desarrollo intensa y concentrada, con un pico extraordinario de **14,871 adiciones netas** en la semana del 22 de septiembre. Este patrón indica:
+
+- **Período de alta productividad**: La semana más intensa registró 14,871 líneas de código agregadas
+- **Actividad sostenida**: Desarrollo constante durante todo el período analizado
+- **Calidad del trabajo**: Mínimas deleciones (-18 líneas), indicando código bien planificado y ejecutado
+- **Distribución temporal**: La mayor actividad se concentró en la tercera semana de septiembre
+
+*Contribuciones por Miembro*
+
+![contributors](assets/0.cover/0.1.collaboration-insights/0.1.1.tp/contributors.png)
+
+**Participación del equipo:**
+
+| Miembro          | Commits    | Adiciones | Deleciones | Posición |
+|------------------|------------|-----------|------------|----------|
+| **salimramirez** | 47 commits | 14,128++  | 5,871-     | #1       |
+| **elmer-riva**   | 33 commits | 978+      | 18-        | #2       |
+| **Eric396**      | 33 commits | 2,054+    | 492-       | #3       |
+| **Kyrubi**       | 9 commits  | 415+      | 27-        | #4       |
+| **jhosepmyr**    | 7 commits  | 618+      | 7-         | #5       |
+
+**Análisis de Contribuciones:**
+
+- **Salim Ramirez** lideró significativamente con 47 commits y 14,128 adiciones, representando aproximadamente el 40% del total de contribuciones
+- **Elmer Riva y Eric Hernández** mostraron consistencia con 33 commits cada uno, manteniendo un ritmo de desarrollo equilibrado
+- **Distribución equilibrada**: Todos los miembros mantuvieron actividad constante durante el período
+- **Calidad de contribuciones**: Bajo número de deleciones indica planificación cuidadosa y revisión de código
+
+*Resumen del Período*
+
+**Métricas (Septiembre 2025):**
+- **129 commits totales** al repositorio
+- **5 autores activos** con contribuciones significativas
+- **Pico de actividad**: 47 commits en una sola semana (22-28 Septiembre)
+- **Tasa de commits promedio**: 25.8 commits por semana
+- **Líneas de código neto**: +11,323 líneas agregadas
+- **Issues pendientes**: 0 (gestión proactiva de tareas)
+
+**Conclusión**
+
+El análisis de colaboración del TP demuestra una participación altamente efectiva y organizada de todos los miembros del equipo. La distribución equilibrada de commits, el pico de productividad coordinado y la estrategia de branching implementada reflejan:
+
+1. **Compromiso individual**: Cada miembro mantuvo una participación activa y consistente
+2. **Coordinación efectiva**: La estrategia de ramas especializadas permitió desarrollo paralelo sin conflictos
+3. **Calidad del proceso**: Bajo número de deleciones y zero issues pendientes indican planificación y ejecución cuidadosa
+4. **Productividad excepcional**: El pico de 14,871 adiciones en una semana muestra la capacidad del equipo para manejar cargas de trabajo intensivas
+
+Este patrón de colaboración sienta las bases para el éxito continuo del proyecto, demostrando madurez en las prácticas de desarrollo colaborativo y gestión de versiones.
+
 <div style="page-break-before: always"></div>
 
 # Contenido
@@ -136,45 +211,177 @@ Todos los miembros del equipo contribuyeron activamente al desarrollo del inform
     * [2.2.3. Análisis de entrevistas](#223-análisis-de-entrevistas)
   * [2.3. Need finding](#23-need-finding)
     * [2.3.1. User personas](#231-user-personas)
+    * [Administrador Municipal](#administrador-municipal)
+    * [Conductor de Recoleccion](#conductor-de-recoleccion-)
+    * [Ciudadano Residente](#ciudadano-residente)
     * [2.3.2. User Task Matrix](#232-user-task-matrix)
     * [2.3.3. User Journey Mapping](#233-user-journey-mapping)
+    * [Administrador Municipal](#administrador-municipal-1)
+    * [Conductor de Recoleccion](#conductor-de-recoleccion)
+    * [Ciudadano Residente](#ciudadano-residente-1)
     * [2.3.4. Empathy Mapping](#234-empathy-mapping)
+    * [Administrador Municipal](#administrador-municipal-2)
+    * [Conductor de Recoleccion](#conductor-de-recoleccion-1)
+    * [Ciudadano Residente](#ciudadano-residente-2)
     * [2.3.5. As-is Scenario Mapping](#235-as-is-scenario-mapping)
+    * [Administrador Municipal](#administrador-municipal-3)
+    * [Conductor de Recoleccion](#conductor-de-recoleccion-2)
+    * [Ciudadano Residente](#ciudadano-residente-3)
   * [2.4. Ubiquitous Language](#24-ubiquitous-language)
+    * [Términos del Dominio](#términos-del-dominio)
 * [Capítulo III: Requirements Specification](#capítulo-iii-requirements-specification)
   * [3.1. To-Be Scenario Mapping](#31-to-be-scenario-mapping)
+    * [Administrador Municipal](#administrador-municipal-4)
+    * [Conductor de Recolección](#conductor-de-recolección)
+    * [Ciudadano Residente](#ciudadano-residente-4)
   * [3.2. User Stories](#32-user-stories)
   * [3.3. Product Backlog](#33-product-backlog)
   * [3.4. Impact Mapping](#34-impact-mapping)
 * [Capítulo IV: Product Design](#capítulo-iv-product-design)
   * [4.1. Style Guidelines](#41-style-guidelines)
     * [4.1.1. General Style Guidelines](#411-general-style-guidelines)
+    * [Branding](#branding)
+      * [Descripción general de la marca](#descripción-general-de-la-marca)
+      * [Misión:](#misión)
+      * [Visión:](#visión)
+      * [Producto](#producto)
+      * [Nombre del producto](#nombre-del-producto)
+      * [Logo del producto](#logo-del-producto)
+      * [Color](#color)
+      * [Tipografía](#tipografía)
+      * [Tono de comunicación](#tono-de-comunicación)
     * [4.1.2. Web Style Guidelines](#412-web-style-guidelines)
+      * [Componentes](#componentes)
+      * [Tipografía](#tipografía-1)
+      * [Botones](#botones)
+      * [Campos de formulario](#campos-de-formulario)
+      * [Barra lateral (Administrador)](#barra-lateral-administrador)
+      * [Encabezado de página](#encabezado-de-página)
+      * [Tabla de datos](#tabla-de-datos)
+      * [Ventana modal](#ventana-modal)
+      * [Notificación toast](#notificación-toast)
+      * [Tarjeta de métrica](#tarjeta-de-métrica)
+      * [Tarjeta de gráfico](#tarjeta-de-gráfico)
+      * [Tarjeta de estado vacío](#tarjeta-de-estado-vacío)
     * [4.1.3. Mobile Style Guidelines](#413-mobile-style-guidelines)
       * [4.1.3.1. iOS Mobile Style Guidelines](#4131-ios-mobile-style-guidelines)
       * [4.1.3.2. Android Mobile Style Guidelines](#4132-android-mobile-style-guidelines)
+      * [4.1.3.3. IoT Style Guidelines](#4133-iot-style-guidelines)
+      * [Diseño físico y carcasa](#diseño-físico-y-carcasa)
+      * [Componentes visuales en campo](#componentes-visuales-en-campo)
+      * [Montaje e instalación](#montaje-e-instalación)
   * [4.2. Information Architecture](#42-information-architecture)
     * [4.2.1. Organization Systems](#421-organization-systems)
+      * [Ciudadanos](#ciudadanos)
+      * [Administradores municipales](#administradores-municipales)
+      * [Choferes de camión de basura](#choferes-de-camión-de-basura)
+      * [Organización visual del contenido](#organización-visual-del-contenido)
+      * [Esquemas de categorización de contenido](#esquemas-de-categorización-de-contenido)
     * [4.2.2. Labeling Systems](#422-labeling-systems)
+      * [**Etiquetas de navegación principal**](#etiquetas-de-navegación-principal)
+      * [**Etiquetas de acciones (Botones y enlaces)**](#etiquetas-de-acciones-botones-y-enlaces)
+      * [**Etiquetas de contenido y datos**](#etiquetas-de-contenido-y-datos)
+    * [Etiquetas del Dispositivo Físico (IoT)](#etiquetas-del-dispositivo-físico-iot)
+      * [**Identificador Único (QR / ID Numérico)**](#identificador-único-qr--id-numérico)
+      * [**Indicadores de Estado (LED)**](#indicadores-de-estado-led)
     * [4.2.3. SEO Tags and Meta Tags](#423-seo-tags-and-meta-tags)
+      * [1. Landing Page](#1-landing-page)
+      * [2. Aplicación Web](#2-aplicación-web)
     * [4.2.4. Searching Systems](#424-searching-systems)
+      * [**1. Aplicación Web del Ciudadano**](#1-aplicación-web-del-ciudadano)
+      * [**2. Aplicación Web de Administración**](#2-aplicación-web-de-administración)
     * [4.2.5. Navigation Systems](#425-navigation-systems)
+      * [**Sistemas de Navegación Global**](#sistemas-de-navegación-global)
+      * [**Sistemas de Navegación Local y Contextual**](#sistemas-de-navegación-local-y-contextual)
+      * [**Navegación en el Landing Page**](#navegación-en-el-landing-page)
   * [4.3. Landing Page UI Design](#43-landing-page-ui-design)
     * [4.3.1. Landing Page Wireframe](#431-landing-page-wireframe)
     * [4.3.2. Landing Page Mock-up](#432-landing-page-mock-up)
   * [4.4. Mobile Applications UX/UI Design](#44-mobile-applications-uxui-design)
     * [4.4.1. Mobile Applications Wireframes](#441-mobile-applications-wireframes)
+    * [Flujo de usuario: Ciudadano](#flujo-de-usuario-ciudadano)
+      * [Pantallas de bienvenida e integración (Onboarding)](#pantallas-de-bienvenida-e-integración-onboarding)
+      * [Vista principal (Mapa)](#vista-principal-mapa)
+      * [Menú de municipalidad](#menú-de-municipalidad)
+      * [Reporte de incidencia](#reporte-de-incidencia)
+      * [Centro de notificaciones](#centro-de-notificaciones)
+    * [Flujo de usuario: Colaborador municipal (Chofer)](#flujo-de-usuario-colaborador-municipal-chofer)
+      * [Pantallas de bienvenida e integración (Onboarding)](#pantallas-de-bienvenida-e-integración-onboarding-1)
+      * [Acceso de colaborador](#acceso-de-colaborador)
+      * [Estado de acceso](#estado-de-acceso)
+      * [Hoja de ruta del día](#hoja-de-ruta-del-día)
+      * [Detalle de parada](#detalle-de-parada)
+      * [Navegación GPS](#navegación-gps)
+      * [Reporte de incidencia (Conductor)](#reporte-de-incidencia-conductor)
+      * [Pantalla de confirmación](#pantalla-de-confirmación)
+      * [Perfil y opciones del Conductor](#perfil-y-opciones-del-conductor)
+      * [Resumen de jornada](#resumen-de-jornada)
+      * [Pantalla "Todo en Orden"](#pantalla-todo-en-orden)
     * [4.4.2. Mobile Applications Wire flow Diagrams](#442-mobile-applications-wire-flow-diagrams)
     * [4.4.3. Mobile Applications Mock-ups](#443-mobile-applications-mock-ups)
+    * [Flujo de usuario: Ciudadano](#flujo-de-usuario-ciudadano-1)
+      * [Pantallas de bienvenida e integración (Onboarding)](#pantallas-de-bienvenida-e-integración-onboarding-2)
+      * [Vista principal (Mapa)](#vista-principal-mapa-1)
+      * [Menú de municipalidad](#menú-de-municipalidad-1)
+      * [Reporte de incidencia](#reporte-de-incidencia-1)
+      * [Centro de notificaciones](#centro-de-notificaciones-1)
+    * [Flujo de usuario: Colaborador municipal (Chofer)](#flujo-de-usuario-colaborador-municipal-chofer-1)
+      * [Pantallas de bienvenida e integración (Onboarding)](#pantallas-de-bienvenida-e-integración-onboarding-3)
+      * [Acceso de colaborador](#acceso-de-colaborador-1)
+      * [Estado de acceso](#estado-de-acceso-1)
+      * [Hoja de ruta del día](#hoja-de-ruta-del-día-1)
+      * [Detalle de parada](#detalle-de-parada-1)
+      * [Navegación GPS](#navegación-gps-1)
+      * [Reporte de incidencia (Conductor)](#reporte-de-incidencia-conductor-1)
+      * [Pantalla de confirmación](#pantalla-de-confirmación-1)
+      * [Perfil y opciones del Conductor](#perfil-y-opciones-del-conductor-1)
+      * [Resumen de jornada](#resumen-de-jornada-1)
+      * [Pantalla "Todo en Orden"](#pantalla-todo-en-orden-1)
     * [4.4.4. Mobile Applications User Flow Diagrams](#444-mobile-applications-user-flow-diagrams)
+      * [Flujo de usuario: Ciudadano](#flujo-de-usuario-ciudadano-2)
+      * [Flujo de usuario: Colaborador municipal (Chofer)](#flujo-de-usuario-colaborador-municipal-chofer-2)
   * [4.5. Mobile Applications Prototyping](#45-mobile-applications-prototyping)
-    * [4.5.1. Android Mobile Applications Prototyping](#451-android-mobile-applications-prototyping)
-    * [4.5.2. iOS Mobile Applications Prototyping](#452-ios-mobile-applications-prototyping)
   * [4.6. Web Applications UX/UI Design](#46-web-applications-uxui-design)
     * [4.6.1. Web Applications Wireframes](#461-web-applications-wireframes)
+    * [Flujo de Super Administrador](#flujo-de-super-administrador)
+      * [Acceso de Super Administrador](#acceso-de-super-administrador)
+      * [Dashboard de Municipalidades](#dashboard-de-municipalidades)
+      * [Creación de Cuenta Municipal](#creación-de-cuenta-municipal)
+      * [Gestión de Cuenta Municipal](#gestión-de-cuenta-municipal)
+      * [Modal de Confirmación](#modal-de-confirmación)
+      * [Notificación toast](#notificación-toast-1)
+    * [Flujo de Colaborador Municipal (Administrador)](#flujo-de-colaborador-municipal-administrador)
+      * [Acceso de Administrador Municipal](#acceso-de-administrador-municipal)
+      * [Dashboard Principal](#dashboard-principal)
+      * [Gestión de Flota (Vehículos)](#gestión-de-flota-vehículos)
+      * [Gestión de Colaboradores](#gestión-de-colaboradores)
+      * [Gestión de Dispositivos IoT](#gestión-de-dispositivos-iot)
+      * [Gestión de Rutas (Multi-Conductor)](#gestión-de-rutas-multi-conductor)
+      * [Reportes Ciudadanos](#reportes-ciudadanos)
+      * [Perfil y Configuración](#perfil-y-configuración)
+      * [Notificación toast](#notificación-toast-2)
     * [4.6.2. Web Applications Wire flow Diagrams](#462-web-applications-wire-flow-diagrams)
+      * [Flujo de usuario: Municipalidad (Administrador)](#flujo-de-usuario-municipalidad-administrador)
     * [4.6.3. Web Applications Mock-ups](#463-web-applications-mock-ups)
+    * [Flujo de Super Administrador](#flujo-de-super-administrador-1)
+      * [Acceso de Super Administrador](#acceso-de-super-administrador-1)
+      * [Dashboard de Municipalidades](#dashboard-de-municipalidades-1)
+      * [Creación de Cuenta Municipal](#creación-de-cuenta-municipal-1)
+      * [Gestión de Cuenta Municipal](#gestión-de-cuenta-municipal-1)
+      * [Modal de Confirmación](#modal-de-confirmación-1)
+      * [Notificación toast](#notificación-toast-3)
+    * [Flujo de Colaborador Municipal (Administrador)](#flujo-de-colaborador-municipal-administrador-1)
+      * [Acceso de Administrador Municipal](#acceso-de-administrador-municipal-1)
+      * [Dashboard Principal](#dashboard-principal-1)
+      * [Gestión de Flota (Vehículos)](#gestión-de-flota-vehículos-1)
+      * [Gestión de Colaboradores](#gestión-de-colaboradores-1)
+      * [Gestión de Dispositivos IoT](#gestión-de-dispositivos-iot-1)
+      * [Gestión de Rutas (Multi-Conductor)](#gestión-de-rutas-multi-conductor-1)
+      * [Reportes Ciudadanos](#reportes-ciudadanos-1)
+      * [Perfil y Configuración](#perfil-y-configuración-1)
+      * [Notificación toast](#notificación-toast-4)
     * [4.6.4. Web Applications User Flow Diagrams](#464-web-applications-user-flow-diagrams)
+    * [Flujo de usuario: Municipalidad (Administrador)](#flujo-de-usuario-municipalidad-administrador-1)
   * [4.7. Web Applications Prototyping](#47-web-applications-prototyping)
   * [4.8. Domain-Driven Software Architecture](#48-domain-driven-software-architecture)
     * [4.8.1. Software Architecture Context Diagram](#481-software-architecture-context-diagram)
@@ -195,30 +402,41 @@ Todos los miembros del equipo contribuyeron activamente al desarrollo del inform
     * [5.2.1. Sprint Backlogs](#521-sprint-backlogs)
     * [5.2.2. Implemented Landing Page Evidence](#522-implemented-landing-page-evidence)
     * [5.2.3. Implemented Frontend-Web Application Evidence](#523-implemented-frontend-web-application-evidence)
+      * [Pasos de despliegue en Netlify](#pasos-de-despliegue-en-netlify)
+      * [Imagenes de la aplicación web para administrador municipal](#imagenes-de-la-aplicación-web-para-administrador-municipal)
     * [5.2.4. Implemented Native-Mobile Application Evidence](#524-implemented-native-mobile-application-evidence)
+      * [Generar apk](#generar-apk)
+      * [WasteTrack Citizen mobile app](#wastetrack-citizen-mobile-app)
     * [5.2.5. Implemented Restful API and/or Serverless Backend Evidence](#525-implemented-restful-api-andor-serverless-backend-evidence)
+      * [Evidencia de Implementación de Backend y API RESTful](#evidencia-de-implementación-de-backend-y-api-restful)
     * [5.2.6. Restful API documentation](#526-restful-api-documentation)
+      * [Documentación de la API RESTful](#documentación-de-la-api-restful)
     * [5.2.7. Team Collaboration Insights](#527-team-collaboration-insights)
+      * [Fronted insights](#fronted-insights)
+      * [Municipality Admin Web Application](#municipality-admin-web-application)
+      * [WasteTrack Citizen Mobile Application](#wastetrack-citizen-mobile-application)
+      * [Backend insights](#backend-insights)
   * [5.3. Video About-the-Product](#53-video-about-the-product)
-* [Capítulo VI: Product Verification & Validation](#capítulo-vi-testing-suites--validation)
+* [Capítulo VI: Product Verification & Validation](#capítulo-vi-product-verification--validation)
   * [6.1. Testing Suites & Validation](#61-testing-suites--validation)
     * [6.1.1. Core Entities Unit Tests](#611-core-entities-unit-tests)
     * [6.1.2. Core Integration Tests](#612-core-integration-tests)
     * [6.1.3. Core Behavior-Driven Development](#613-core-behavior-driven-development)
     * [6.1.4. Core System Tests](#614-core-system-tests)
-  * [Capítulo VII: DevOps Practices](#capítulo-vii-devops-practices)
-    * [7.1. Continuous Integration](#71-continuous-integration)
-      * [7.1.1. Tools and Practices](#711-tools-and-practices)
-      * [7.1.2. Build & Test Suite Pipeline Components](#712-build--test-suite-pipeline-components)
-    * [7.2. Continuous Delivery](#72-continuous-delivery)
-      * [7.2.1. Tools and Practices](#721-tools-and-practices)
-      * [7.2.2. Stages Deployment Pipeline Components](#722-stages-deployment-pipeline-components)
-    * [7.3. Continuous Deployment](#73-continuous-deployment)
-      * [7.3.1. Tools and Practices](#731-tools-and-practices)
-      * [7.3.2. Production Deployment Pipeline Components](#732-production-deployment-pipeline-components)
+* [Capítulo VII: DevOps Practices](#capítulo-vii-devops-practices)
+  * [7.1. Continuous Integration](#71-continuous-integration)
+    * [7.1.1. Tools and Practices](#711-tools-and-practices)
+    * [7.1.2. Build & Test Suite Pipeline Components](#712-build--test-suite-pipeline-components)
+  * [7.2. Continuous Delivery](#72-continuous-delivery)
+    * [7.2.1. Tools and Practices](#721-tools-and-practices)
+    * [7.2.2. Stages Deployment Pipeline Components](#722-stages-deployment-pipeline-components)
+  * [7.3. Continuous Deployment](#73-continuous-deployment)
+    * [7.3.1. Tools and Practices](#731-tools-and-practices)
+    * [7.3.2. Production Deployment Pipeline Components](#732-production-deployment-pipeline-components)
 * [Conclusiones](#conclusiones)
 * [Bibliografía](#bibliografía)
 * [Anexos](#anexos)
+  * [Anexo B: Entrevistas de needfinding TB1](#anexo-b-entrevistas-de-needfinding-tb1)
 <!-- TOC -->
 
 <div style="page-break-before: always"></div>
