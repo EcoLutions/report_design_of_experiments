@@ -8869,6 +8869,85 @@ Pasos para desplegar un landing page en Vercel
 ## 6.1. Testing Suites & Validation
 
 ### 6.1.1. Core Entities Unit Tests
+**Municipal Operations**
+
+Se validó el aggregate **Driver**, asegurando su correcto comportamiento en operaciones clave de gestión de conductores. Las pruebas siguieron el patrón **Arrange–Act–Assert (AAA)** y fueron ejecutadas con **JUnit 5**, confirmando la estabilidad del modelo de dominio.
+
+**User Story relacionada:**
+*US04 – Gestión de conductores por administrador*
+*Como administrador municipal, quiero crear y gestionar cuentas de conductores de mi distrito para que puedan acceder a la aplicación móvil de rutas.*
+
+**Resumen de pruebas:**
+
+* **Inicio de ruta:** cambia el estado del conductor a **ON_ROUTE**.
+* **Finalización de ruta:** retorna a **AVAILABLE**, suma horas y registra la fecha.
+* **Suspensión:** valida cambio de estado con motivo válido.
+* **Asignación/desasignación de vehículo:** mantiene integridad entre conductor y vehículo.
+
+**Evidencia de ejecución:**
+![DriverTest-Execution](assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.1.core-entities-unit-tests/driver-test-unit.png)
+
+Se validó el aggregate **Vehicle**, encargado de representar las propiedades y comportamientos de los vehículos de recolección dentro del sistema. Las pruebas unitarias siguieron el patrón **Arrange–Act–Assert (AAA)** y fueron ejecutadas con **JUnit 5**, confirmando la consistencia del dominio en la gestión de la flota.
+
+**User Stories relacionadas:**
+*US22 – Monitoreo de flota de vehículos*
+*US23 – Programación de mantenimiento preventivo*
+*US25 – Asignación automática de vehículos*
+
+**Resumen de pruebas:**
+
+* **Creación de placa válida:** valida el formato correcto de placas vehiculares.
+* **Formato inválido:** lanza excepción cuando el formato de placa no cumple el patrón establecido.
+* **Mantenimiento preventivo:** marca el vehículo como necesitado de mantenimiento al superar los **10 000 km**.
+* **Capacidad inválida:** arroja excepción si el volumen o peso son nulos o negativos.
+
+**Conclusión:**
+Las pruebas confirman que el agregado **Vehicle** cumple las reglas de negocio vinculadas al control y mantenimiento de la flota municipal, soportando la trazabilidad y confiabilidad requeridas por las *User Stories US22, US23 y US25.*
+
+**Evidencia de ejecución:**
+![VehicleTest-Execution](assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.1.core-entities-unit-tests/vehicle-test-unit.png)
+
+
+**Container Monitoring**
+
+Se validó el aggregate **Container**, encargado de gestionar la configuración y el estado operativo de los contenedores inteligentes dentro del sistema. Las pruebas siguieron el patrón **Arrange–Act–Assert (AAA)** y fueron ejecutadas con **JUnit 5**, garantizando el correcto funcionamiento de los parámetros de capacidad, ubicación y frecuencia de recolección.
+
+**User Story relacionada:**
+*US11 – Configuración de parámetros de contenedores*
+*Como administrador municipal, quiero configurar parámetros específicos de cada contenedor para personalizar alertas según su ubicación y tipo.*
+
+**Resumen de pruebas:**
+
+* **Creación de contenedor:** inicializa con estado **ACTIVE**, tipo de residuo y nivel vacío.
+* **Actualización de nivel:** actualiza porcentaje y fecha de lectura correctamente.
+* **Reinicio tras recolección:** restablece el nivel a **0%** y guarda la fecha de recolección.
+* **Requerimiento de recolección:** se activa por nivel alto o frecuencia excedida.
+* **Detección de desborde:** identifica cuando el contenedor supera su capacidad.
+* **Cambio de estado:** permite alternar entre **MAINTENANCE**, **ACTIVE** y **DECOMMISSIONED**.
+* **Asignación de sensor:** actualiza el identificador del sensor asociado al contenedor.
+
+**Evidencia de ejecución:**
+![ContainerTest-Execution](assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.1.core-entities-unit-tests/container-test-unit.png)
+
+
+Se validó el aggregate **SensorReading**, responsable de procesar y validar las lecturas de sensores IoT vinculadas a los contenedores. Las pruebas siguieron el patrón **Arrange–Act–Assert (AAA)** y fueron ejecutadas con **JUnit 5**, confirmando la integridad de los datos y la correcta detección de anomalías.
+
+**User Story relacionada:**
+*TS04 – API de datos de sensores IoT*
+*Como developer, quiero implementar endpoints para recibir y procesar datos de sensores IoT para mantener información actualizada de contenedores.*
+
+**Resumen de pruebas:**
+
+* **Creación de lectura:** genera registros válidos con fechas automáticas y estado **VALID**.
+* **Validación exitosa:** marca como válida una lectura dentro de los rangos permitidos.
+* **Batería baja:** identifica la lectura como **ANOMALY** y requiere mantenimiento.
+* **Valor fuera de rango:** lanza excepción al recibir un nivel de llenado inválido.
+
+**Conclusión:**
+Las pruebas confirman que el agregado **SensorReading** cumple con las reglas de validación de datos IoT, asegurando la precisión, consistencia y detección temprana de fallos en la red de monitoreo de contenedores.
+
+**Evidencia de ejecución:**
+![SensorReadingTest-Execution](assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.1.core-entities-unit-tests/sensor-reading-test-unit.png)
 
 ### 6.1.2. Core Integration Tests
 
