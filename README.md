@@ -8996,506 +8996,56 @@ En conjunto, estas pruebas aseguran que el WayPointControllerImpl maneje correct
 
 ### 6.1.3. Core Behavior-Driven Development
 
-**Container Monitoring**
+**Driver**
 
-**Feature 1: Registro de lecturas IoT de contenedores**
+Las pruebas a continuacion centran en el comportamiento del aggregate Driver dentro del bounded context de Municipal Operations.
 
-Descripción: El sistema debe registrar lecturas periódicas provenientes de los sensores IoT, almacenando datos de nivel de llenado, temperatura, batería y estado operativo.
+**User Story relacionada:**
+*TS04 – API de datos de sensores IoT*
+*Como developer, quiero implementar endpoints para recibir y procesar datos de sensores IoT para mantener información actualizada de contenedores.*
 
-Como administrador municipal
+**Resumen de scenarios**
 
-Quiero que el sistema reciba y almacene lecturas de los sensores IoT
+* **Creación de cuenta de conductor** Simula la creación de un nuevo conductor a partir de datos de registro. Verifica que se generen credenciales y que el estado inicial sea AVAILABLE.
 
-Para monitorear en tiempo real el estado de los contenedores en la ciudad
+* **Inicio de ruta**  Verifica que un conductor con estado AVAILABLE cambie a ON_ROUTE al iniciar una ruta.
 
---
+* **Finalización de ruta** Simula un conductor con una ruta activa y horas acumuladas. Al completar la ruta, el estado vuelve a AVAILABLE y se suma la duración al total de horas trabajadas.
 
-Scenario: Lectura válida registrada correctamente
+* **Suspensión de conductor** Permite suspender un conductor con un motivo. Verifica que su estado pase a SUSPENDED.
 
-Given un contenedor "C-101" tiene un sensor IoT activo
+* **Asignación y desasignación de vehículo** Comprueba que un vehículo puede ser asignado al conductor (guardando su VehicleId) y luego retirado, dejando el campo vacío (null).
 
-And el sensor envía una lectura con nivel 52%, temperatura 27°C y batería 92%
+**Evidencia de ejecucion**
 
-When el sistema recibe la lectura
+![DriverBDDTest](assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.3.core-behavior-driven-development/driver-bdd-test.png)
 
-Then el sistema debe almacenar el registro con su timestamp
 
-And actualizar el estado del contenedor a “Available”
+**Sensor Reading**
 
-And mostrar la información en el panel de monitoreo
+Las pruebas a continuacion centran en el comportamiento del aggregate SensorReading dentro del bounded context de Container Monitoring.
 
---
+**User Story relacionada:**
+*US04 – Gestión de conductores por administrador*
+*Como administrador municipal, quiero crear y gestionar cuentas de conductores de mi distrito para que puedan acceder a la aplicación móvil de rutas.*
 
-Scenario: Lectura inválida o con datos corruptos
+**Resumen de scenarios**
 
-Given un sensor IoT envía una lectura sin el valor de nivel de llenado
+* **Recepción y almacenamiento exitoso de lectura**  Simula el envío de una lectura IoT válida con encabezados correctos. Verifica que el sistema responda con código 201, marque la lectura como VALID, actualice el nivel del contenedor y publique un evento en tiempo real.
 
-When el sistema procesa la lectura
+* **Validación exitosa cuando los valores están en rango**  Comprueba que una lectura con valores normales (nivel, temperatura, batería) sea marcada como VALID sin anomalías ni errores de sensor.
 
-Then el sistema debe marcarla como “Invalid Reading”
+* **Anomalía por batería baja** Envía una lectura con batería menor al 10%. El sistema debe responder 201, marcar la lectura como ANOMALY, requerir mantenimiento y generar una alerta de mantenimiento.
 
-And registrar el evento en el log de errores
+* **Error por nivel de llenado inválido**  Envía una lectura con fillLevel fuera del rango permitido (mayor a 100). Se espera una respuesta 400 con el mensaje de error "Percentage must be between 0 and 100".
 
-And mantener el estado anterior del contenedor
+* **Autenticación requerida**  Verifica que el endpoint rechace solicitudes con autenticación inválida o ausente. Ambos casos deben responder con código 401 (Unauthorized).
 
-Examples:
+* **Actualización del estado del contenedor en tiempo real**  Simula el procesamiento de una lectura válida con nivel alto. El contenedor debe reflejar el nuevo nivel y estado, y confirmarse que se publicó un evento en tiempo real.
 
-| Sensor ID | Contenedor | Nivel (%) | Temperatura | Resultado esperado |
-|-----------|------------|-----------|-------------|--------------------|
-| S-001     | C-101      | 45        | 28°C        | Lectura válida     |
-| S-002     | C-102      | -         | 29°C        | Lectura inválida   |
+**Evidencia de ejecucion**
+![SensorReadingBDDTest](assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.3.core-behavior-driven-development/sensor-reading-bdd-test.png)
 
-
-**Feature 2: Generación automática de alertas por nivel de llenado**
-
-Descripción: Cuando un contenedor supera su umbral de llenado, el sistema debe generar una alerta visible para la municipalidad y marcar el contenedor como “Full”
-
-Como administrador municipal
-
-Quiero recibir alertas cuando un contenedor esté lleno
-
-Para priorizar su recolección
-
---
-
-Scenario: Contenedor supera el umbral de llenado
-
-Given un contenedor "C-101" con umbral de llenado 80%
-
-And la última lectura registrada indica 85%
-
-When el sistema procesa la lectura
-
-Then el contenedor debe cambiar su estado a "Full"
-
-And debe generarse una alerta tipo "HighFillLevel"
-
-And el evento debe registrarse en el historial de monitoreo
-
---
-
-Scenario: Nivel dentro del umbral permitido
-
-Given un contenedor "C-102" con umbral de llenado 80%
-
-And la última lectura registrada indica 60%
-
-When el sistema procesa la lectura
-
-Then no debe generarse ninguna alerta
-
-And el estado del contenedor se mantiene como "Available"
-
-Examples:
-
-| Contenedor | Umbral (%) | Nivel actual (%) | Estado esperado | Alerta Generada |
-|------------|------------|------------------|-----------------|-----------------|
-| C-101      | 80         | 85               | 28°C            | HighFillLevel   |
-| C-102      | 80         | 60               | 29°C            | Ninguna         |
-
-
-**Feature 3: Detección de anomalías técnicas**
-
-Descripción: El sistema debe detectar sensores inactivos o con batería baja y generar alertas de mantenimiento preventivo.
-
-Como administrador municipal
-
-Quiero que el sistema identifique sensores inactivos o con batería baja
-
-Para evitar fallas en la red de monitoreo
-
---
-
-Scenario: Batería baja detectada
-
-Given el sensor "S-009" envía una lectura con batería 7%
-
-When el sistema procesa la lectura
-
-Then debe marcar el sensor como “Mantenimiento requerido”
-
-And generar una alerta tipo “LowBattery”
-
---
-
-Scenario: Sensor sin conexión prolongada
-
-Given el sensor "S-011" no ha enviado lecturas en 70 minutos
-
-When el sistema ejecuta su tarea de verificación
-
-Then debe marcar el sensor como “Inactive”
-
-And generar una alerta tipo “SensorTimeout”
-
-Examples:
-
-| Sensor ID | Tiempo sin lectura | Nivel batería (%) | Alerta        | Estado resultante |
-|-----------|--------------------|-------------------|---------------|-------------------|
-| S-009     | 5 min              | 7                 | LowBattery    | Mantenimiento     |
-| S-011     | 70 min             | 60                | SensorTimeout | Inactivo          |
-
-
-**Feature 4: Notificación al ciudadano sobre estado de su zona**
-
-Descripción: Los ciudadanos deben poder visualizar el estado de los contenedores cercanos (lleno, disponible o en mantenimiento) para promover el uso adecuado y evitar acumulación de residuos.
-
-Como ciudadano residente
-
-Quiero ver el estado de los contenedores cercanos en un mapa
-
-Para saber si están disponibles antes de depositar mis residuos
-
---
-
-Scenario: Mostrar contenedores disponibles
-
-Given el ciudadano consulta el mapa de su zona “Miraflores”
-
-And existen tres contenedores con estados “Available”, “Full” y “Maintenance”
-
-When la aplicación carga la vista
-
-Then el sistema debe mostrar íconos verdes, rojos y grises respectivamente
-
-And permitir al usuario reportar incidencias visuales
-
---
-
-Scenario: Zona sin contenedores activos
-
-Given el ciudadano se encuentra en una zona sin sensores registrados
-
-When consulta el mapa
-
-Then el sistema debe mostrar el mensaje “Sin contenedores disponibles”
-
-And ofrecer la opción “Reportar ubicación para instalación futura”
-
-
-**Route Planning and Execution**
-
-**Feature 6: Generación automática de rutas de recolección**
-
-Descripción: El sistema debe generar rutas óptimas considerando contenedores llenos, capacidad de camiones y distancia geográfica.
-
-Como administrador municipal
-
-Quiero que el sistema genere rutas de recolección optimizadas
-
-Para reducir tiempo y costos operativos
-
---
-
-Scenario: Generación de ruta exitosa
-
-Given existen contenedores con estado “Full” en los distritos “Miraflores” y “Barranco”
-
-And hay dos camiones disponibles con capacidad 3 toneladas cada uno
-
-When el administrador solicita generar una nueva ruta
-
-Then el sistema debe calcular la ruta óptima considerando distancia y capacidad
-
-And asignar los contenedores a los vehículos disponibles
-
-And registrar la ruta con un identificador único
-
---
-
-Scenario: No hay contenedores llenos
-
-Given todos los contenedores registrados tienen estado “Available”
-
-When el administrador intenta generar una nueva ruta
-
-Then el sistema debe mostrar el mensaje “No hay contenedores pendientes de recolección”
-
-Examples:
-
-| Contenedores llenos | Camiones disponibles | Resultado esperado           |
-|---------------------|----------------------|------------------------------|
-| 5                   | 2                    | Rutas generadas exitosamente |
-| 0                   | 2                    | No hay recoleccion necesaria |
-
-
-**Feature 7: Visualización de rutas en el panel administrativo**
-
-Descripción: El administrador debe poder visualizar las rutas generadas con detalle y estado en tiempo real, y los ciudadanos podrán ver un mapa general del progreso.
-
-Como administrador municipal
-
-Quiero ver las rutas planificadas y su estado
-
-Para monitorear el avance de las operaciones de recolección
-
---
-
-Scenario: Visualización de rutas activas
-
-Given existen tres rutas activas con estados “En progreso”, “Completada” y “Pendiente”
-
-When el administrador abre el panel de rutas
-
-Then el sistema debe mostrar cada ruta con color y estado correspondiente
-
-And permitir hacer clic para ver los contenedores incluidos
-
---
-
-Scenario: Visualización pública para ciudadanos
-
-Given el ciudadano consulta el mapa general de limpieza
-
-When el sistema tiene rutas activas
-
-Then debe mostrar zonas con rutas en progreso con un indicador visual
-
-And permitir al ciudadano ver la hora estimada de recolección en su zona
-
-
-**Feature 8: Asignación de rutas a conductores**
-
-Descripción: Una vez generadas las rutas, el sistema debe asignarlas automáticamente a los conductores disponibles, teniendo en cuenta su zona y turno.
-
-Como administrador municipal
-
-Quiero que el sistema asigne rutas automáticamente a los conductores disponibles
-
-Para garantizar la ejecución eficiente de la recolección
-
---
-
-Scenario: Asignación automática exitosa
-
-Given existen conductores activos con turnos válidos
-
-And hay rutas pendientes de asignar
-
-When el sistema ejecuta la asignación automática
-
-Then cada ruta debe vincularse a un conductor disponible
-
-And el conductor debe recibir una notificación en su aplicación móvil
-
---
-
-Scenario: Sin conductores disponibles
-
-Given todos los conductores están marcados como “Ocupados”
-
-When el sistema intenta asignar una nueva ruta
-
-Then el sistema debe marcar las rutas como “En espera”
-
-And enviar una alerta al administrador
-
-Examples:
-
-| Conductores disponibles | Rutas pendientes | Resultado esperado |
-|-------------------------|------------------|--------------------|
-| 3                       | 2                | Rutas asignadas    |
-| 0                       | 2                | Rutas en espera    |
-
-
-
-**Feature 9: Ejecución de ruta y contenedores reportados por el conductor**
-
-Descripción: El conductor debe poder visualizar su ruta, marcar los contenedores recolectados y reportar incidencias durante la operación.
-
-Como conductor de recolección
-
-Quiero marcar los contenedores recolectados durante mi ruta
-
-Para mantener el sistema actualizado en tiempo real
-
---
-
-Scenario: Confirmar recolección de contenedor
-
-Given un conductor tiene una ruta activa con 10 contenedores asignados
-
-And el contenedor “C-050” está marcado como “Full”
-
-When el conductor lo marca como “Recolectado”
-
-Then el sistema debe actualizar su estado a “Empty”
-
-And registrar la fecha y hora de recolección
-
---
-
-Scenario: Reportar contenedor inaccesible
-
-Given un contenedor asignado está bloqueado por obras
-
-When el conductor lo marca como “Inaccesible”
-
-Then el sistema debe registrar un evento de incidencia
-
-And notificar al administrador para reprogramación
-
-Examples:
-
-| Contenedor | Accion      | Estado resultante | Notificacion |
-|------------|-------------|-------------------|--------------|
-| C-050      | Recolectado | Empty             | Ninguna      |
-| C-051      | Inaccesible | Pending           | Enviada      |
-
-
-**Municipal Operations**
-
-**Feature 10: Registro y disponibilidad de vehículos**
-
-Descripción: El sistema debe permitir registrar vehículos y actualizar su disponibilidad según el estado operativo.
-
-Como administrador municipal
-
-Quiero registrar vehículos y controlar su estado operativo
-
-Para asegurar la disponibilidad del parque automotor en cada distrito
-
---
-
-Scenario: Registrar nuevo camión compactador
-
-Given un distrito “D-101” con límite de 10 vehículos
-
-And el sistema indica que hay 9 vehículos activos
-
-When el administrador registra un nuevo vehículo tipo “COMPACTOR”
-
-Then el sistema debe agregarlo al listado del distrito
-
-And marcar su “VehicleStatus” como “AVAILABLE”
-
---
-
-Scenario: Cambiar estado de vehículo en mantenimiento
-
-Given el vehículo “V-305” tiene estado “IN_USE”
-
-When el administrador marca mantenimiento programado con fecha “2025-10-10”
-
-Then el sistema debe cambiar su estado a “MAINTENANCE”
-
-And registrar la fecha en el campo “nextMaintenanceDate”
-
-Examples:
-
-| Vehicle ID | Tipo      | Estado inicial | Nueva accion            | Estado final |
-|------------|-----------|----------------|-------------------------|--------------|
-| V-305      | COMPACTOR | IN_USE         | Programar mantenimiento | MANTAINANCE  |
-| V-102      | TRUCK     | AVAILABLE      | Ninguna                 | AVAILABLE    |
-
-
-**Feature 11: Asignación y gestión de conductores**
-
-Descripción: El administrador debe poder registrar conductores, asignarlos a vehículos disponibles y actualizar su estado según las rutas ejecutadas.
-
-Como administrador municipal
-
-Quiero asignar conductores a los vehículos de recolección
-
-Para asegurar que cada ruta tenga personal disponible
-
---
-
-Scenario: Asignar conductor a vehículo disponible
-
-Given un conductor “Carlos Gómez” con licencia válida y estado “AVAILABLE”
-
-And un vehículo “V-201” con estado “AVAILABLE”
-
-When el administrador asigna el vehículo al conductor
-
-Then el sistema debe cambiar el estado del conductor a “ON_ROUTE”
-
-And el vehículo a “IN_USE”
-
---
-
-Scenario: Suspender conductor por falta administrativa
-
-Given un conductor “Ana Torres” tiene estado “AVAILABLE”
-
-When el administrador registra una suspensión con motivo “Ausencia injustificada”
-
-Then el sistema debe cambiar su “DriverStatus” a “SUSPENDED”
-
-And registrar la fecha y razón de suspensión
-
-
-**Feature 12: Control de límites operativos por distrito**
-
-Descripción: El sistema debe validar que los vehículos y conductores asignados no excedan los límites establecidos por cada distrito.
-
-Como administrador municipal
-
-Quiero validar los límites de capacidad de vehículos y conductores en cada distrito
-
-Para mantener la operación dentro de los recursos autorizados
-
---
-
-Scenario: Distrito dentro de límites operativos
-
-Given el distrito “D-045” permite máximo 20 vehículos y 30 conductores
-
-And actualmente hay registrados 18 vehículos y 25 conductores
-
-When el sistema verifica los límites con la función “isWithinServiceLimits”
-
-Then debe retornar “true” indicando que el distrito sigue dentro del rango permitido
-
---
-
-Scenario: Distrito supera el límite de conductores
-
-Given el distrito “D-012” permite máximo 15 conductores
-
-And actualmente hay 16 registrados
-
-When el sistema ejecuta “isWithinServiceLimits”
-
-Then debe retornar “false”
-
-And generar una alerta administrativa
-
-
-**Feature 13: Validación de ubicación y cobertura geográfica**
-
-Descripción: El sistema debe validar si una ubicación específica se encuentra dentro del área geográfica de un distrito antes de asignar operaciones o registrar incidencias.
-
-Como administrador municipal
-
-Quiero verificar si una ubicación pertenece a un distrito específico
-
-Para asignar correctamente los recursos y evitar errores operativos
-
---
-
-Scenario: Ubicación dentro de los límites del distrito
-
-Given un distrito “D-030” tiene un polígono geográfico definido en “GeographicBoundaries”
-
-And la ubicación GPS (-12.110, -77.035) pertenece a ese polígono
-
-When el sistema ejecuta “isLocationWithinBoundaries”
-
-Then debe devolver “true”
-
---
-
-Scenario: Ubicación fuera de límites
-
-Given la ubicación GPS (-12.250, -77.110) no pertenece al polígono del distrito “D-030”
-
-When el sistema ejecuta “isLocationWithinBoundaries”
-
-Then debe devolver “false”
-
-And registrar una advertencia en el log “Ubicación fuera del distrito”
 
 ### 6.1.4. Core System Tests
 
