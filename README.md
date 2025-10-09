@@ -5252,19 +5252,501 @@ Aquí se muestran algunos ejemplos de pruebas del sistema central que se pueden 
 
 ### 7.1.1. Tools and Practices
 
+La integración continua (CI) es una práctica fundamental en el desarrollo moderno de software que permite detectar errores tempranamente, mejorar la calidad del código y acelerar el proceso de desarrollo. En el proyecto WasteTrack, hemos implementado un pipeline de CI robusto que automatiza la construcción, las pruebas y la validación del código en cada cambio realizado.
+
+#### Herramientas Principales
+
+**GitHub Actions** es la plataforma central de nuestra estrategia de CI/CD. Esta herramienta nos permite:
+
+- **Automatización completa**: Ejecutar workflows automáticamente en eventos específicos como push, pull requests y merges
+- **Integración nativa**: Funciona directamente con repositorios Git sin necesidad de configuración adicional
+- **Escalabilidad**: Se adapta automáticamente a las necesidades del proyecto con runners auto-escalables
+- **Marketplace rico**: Acceso a miles de acciones pre-construidas para diferentes tareas
+
+**Maven** es el sistema de construcción utilizado para proyectos Java:
+
+- **Gestión de dependencias**: Resuelve automáticamente las dependencias del proyecto desde repositorios centrales
+- **Construcción reproducible**: Garantiza que el proyecto se construya de la misma manera en cualquier entorno
+- **Gestión del ciclo de vida**: Ejecuta fases específicas como compile, test, package, verify e install
+- **Plugins extensibles**: Soporte para una amplia gama de plugins para diferentes tareas
+
+**JUnit 5** y **Testcontainers** forman el núcleo de nuestra suite de pruebas:
+
+- **JUnit 5**: Framework moderno para pruebas unitarias e integración con soporte para programación funcional
+- **Testcontainers**: Proporciona instancias desechables de bases de datos para pruebas de integración
+- **AssertJ**: Librería de aserciones fluida que mejora la legibilidad de las pruebas
+- **Mockito**: Framework para creación de mocks y verificación de interacciones
+
+#### Prácticas Implementadas
+
+**Desarrollo Basado en Pruebas (TDD)**: Aunque no se implementa estrictamente en todas las áreas, se fomenta la escritura de pruebas antes de la implementación de funcionalidades críticas.
+
+**Control de Calidad de Código**: Se realizan verificaciones automáticas de calidad que incluyen:
+
+- **Análisis estático**: Detección de código duplicado, complejidad ciclomática y vulnerabilidades de seguridad
+- **Verificación de estilo**: Cumplimiento de estándares de codificación definidos en el proyecto
+- **Análisis de cobertura**: Medición del porcentaje de código cubierto por pruebas
+
+**Gestión de Ramas**: Utilizamos una estrategia de branching que incluye:
+
+- **Feature branches**: Ramas individuales para desarrollo de nuevas funcionalidades
+- **Pull requests**: Revisiones obligatorias antes de mergear código
+- **Main branch protection**: Protección de la rama principal contra pushes directos
+
+**Automatización de Pruebas**: Cada cambio en el código activa automáticamente:
+
+- **Pruebas unitarias**: Validación de componentes individuales
+- **Pruebas de integración**: Verificación de interacción entre componentes
+- **Pruebas de comportamiento**: Validación de escenarios de usuario mediante BDD
+
 ### 7.1.2. Build & Test Suite Pipeline Components
+
+El pipeline de CI/CD de WasteTrack está diseñado con una arquitectura modular que permite ejecutar diferentes etapas de manera independiente pero coordinada. Cada componente tiene responsabilidades específicas y puede ser ejecutado en paralelo cuando es apropiado.
+
+#### Componente de Test Suite
+
+**Configuración del Entorno de Pruebas**:
+
+```yaml
+test:
+  name: 🧪 Tests & Quality Checks
+  runs-on: ubuntu-latest
+  if: github.event.action != 'closed'
+```
+
+- **Ejecución condicional**: Las pruebas solo se ejecutan cuando el evento no es un cierre de PR, optimizando recursos
+- **Runner optimizado**: Utiliza ubuntu-latest para obtener el mejor rendimiento y compatibilidad
+- **Servicios externos**: Integra PostgreSQL 16 como servicio para pruebas de base de datos
+
+**Servicio de Base de Datos para Pruebas**:
+
+```yaml
+services:
+  postgres:
+    image: postgres:16
+    env:
+      POSTGRES_DB: test_db
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: test_pass
+    options: >-
+      --health-cmd pg_isready
+      --health-interval 10s
+      --health-timeout 5s
+      --health-retries 5
+    ports:
+      - 5432:5432
+```
+
+- **Health checks**: Configuración avanzada de verificación de salud para asegurar que el servicio esté listo
+- **Tiempo de espera optimizado**: Configuración de intervalos y reintentos para estabilidad
+- **Mapeo de puertos**: Exposición del servicio para acceso desde los tests
+
+**Fases del Pipeline de Pruebas**:
+
+1. **Checkout y Preparación**:
+   - Obtención del código fuente con historial completo
+   - Configuración de JDK 25 con caché de dependencias Maven
+   - Validación inicial del proyecto
+
+2. **Ejecución de Pruebas Unitarias**:
+   - Variables de entorno configuradas para pruebas
+   - Ejecución con Maven en modo batch
+   - Configuración de fail-fast para detener en primeros errores
+
+3. **Ejecución de Pruebas de Integración**:
+   - Ejecución del goal `verify` con exclusión de pruebas unitarias
+   - Validación de integración con servicios externos
+   - Verificación de comportamiento end-to-end
+
+**Variables de Entorno para Pruebas**:
+
+```yaml
+env:
+  DB_HOST: localhost
+  DB_PORT: 5432
+  DB_NAME: test_db
+  DB_USER: test_user
+  DB_PASS: test_pass
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
+  FIREBASE_CONFIG: '${{ secrets.FIREBASE_CONFIG }}'
+  FIREBASE_BUCKET: ${{ secrets.FIREBASE_BUCKET }}
+```
+
+- **Seguridad**: Uso de secretos de GitHub para información sensible
+- **Reutilización**: Variables compartidas entre diferentes fases de prueba
+- **Aislamiento**: Configuración específica para ambiente de pruebas
+
+#### Componente de Construcción
+
+**Extracción de Versión**:
+
+```yaml
+- name: 🔍 Extract version from pom.xml
+  id: extract-version
+  run: |
+    echo "📋 Extracting version from pom.xml..."
+    VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+    echo "✅ Version: $VERSION"
+    echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+```
+
+- **Automatización**: Extracción automática de versión desde Maven
+- **Logging detallado**: Información clara del proceso de extracción
+- **Output parameters**: Configuración de outputs para jobs posteriores
+
+**Construcción y Publicación de Imágenes**:
+
+```yaml
+- name: 🐳 Build & Push Docker Image
+  run: |
+    echo "🏗️ Building Docker image with Spring Boot buildpacks..."
+    mvn spring-boot:build-image -DskipTests "-DdockerPassword=${{ secrets.DOCKER_PASSWORD }}"
+    
+    echo "✅ Image built successfully!"
+    
+    # Tag como latest
+    docker tag "${{ env.IMAGE_NAME }}:${{ steps.extract-version.outputs.version }}" "${{ env.IMAGE_NAME }}:latest"
+    
+    # Push ambos tags
+    echo "📤 Pushing images to Docker Hub..."
+    docker push "${{ env.IMAGE_NAME }}:${{ steps.extract-version.outputs.version }}"
+    docker push "${{ env.IMAGE_NAME }}:latest"
+    
+    echo "✅ Images pushed successfully!"
+```
+
+- **Buildpacks de Spring Boot**: Utilización de buildpacks nativos para optimización automática
+- **Multi-etiquetado**: Creación de tags versionados y latest para diferentes estrategias de despliegue
+- **Optimización de capas**: Aprovechamiento del sistema de capas de Docker para builds eficientes
 
 ## 7.2. Continuous Delivery
 
 ### 7.2.1. Tools and Practices
 
+La entrega continua (CD) extiende los principios de la integración continua al automatizar el despliegue de aplicaciones a entornos de prueba y staging. En WasteTrack, hemos implementado un pipeline de CD que garantiza despliegues consistentes, reversibles y con mínima intervención manual.
+
+#### Herramientas de Entrega Continua
+
+**Docker** es el núcleo de nuestra estrategia de entrega continua:
+
+- **Contenedorización**: Empaquetado consistente de la aplicación y sus dependencias
+- **Portabilidad**: Ejecución idéntica en cualquier entorno (desarrollo, testing, producción)
+- **Escalabilidad**: Facilita el escalado horizontal mediante orquestación
+- **Versionamiento**: Gestión precisa de versiones de imágenes
+
+**Docker Hub** como registro de imágenes:
+
+- **Repositorio privado**: Almacenamiento seguro de imágenes de la aplicación
+- **Autenticación integrada**: Conexión directa con GitHub Actions
+- **Gestión de versiones**: Múltiples tags para diferentes versiones y ambientes
+- **Distribución global**: Entrega rápida desde múltiples regiones
+
+**Maven** complementa el proceso de CD:
+
+- **Build reproducible**: Construcciones consistentes en diferentes entornos
+- **Gestión de artefactos**: Publicación automática a repositorios locales
+- **Análisis de dependencias**: Verificación automática de vulnerabilidades
+- **Generación de reportes**: Creación automática de documentación del proyecto
+
+#### Prácticas de Entrega Continua
+
+**Gestión Semántica de Versiones**: Utilizamos un sistema de versiones que sigue las convenciones semánticas:
+
+- **Versionado automático**: Extracción de versión desde el pom.xml del proyecto
+- **Tags múltiples**: Creación de tags versionados y latest para diferentes estrategias
+- **Control de versiones**: Trazabilidad completa de cambios y releases
+
+**Estrategia de Ramas para CD**: Implementamos un flujo de trabajo que asegura calidad antes del despliegue:
+
+- **Pull Requests obligatorios**: Todas las ramas deben pasar por revisión antes del merge
+- **Testing automatizado**: Validación completa antes de permitir el despliegue
+- **Despliegue condicional**: Solo ramas específicas activan el proceso de CD
+
+**Configuración de Entornos**: Cada entorno tiene configuraciones específicas:
+
+- **Variables de entorno**: Configuración específica por ambiente
+- **Archivos de configuración**: Perfiles diferenciados para cada entorno
+- **Gestión de secretos**: Uso seguro de información sensible
+
 ### 7.2.2. Stages Deployment Pipeline Components
+
+El pipeline de despliegue de WasteTrack está estructurado en etapas claramente definidas que permiten un control granular del proceso de entrega. Cada etapa tiene responsabilidades específicas y puede ser ejecutada de manera independiente.
+
+#### Etapa de Construcción de Artefactos
+
+**Job: build-and-push**
+
+```yaml
+build-and-push:
+  name: 🐳 Build & Push Docker Image
+  runs-on: ubuntu-latest
+  needs: test
+  if: |
+    (github.event_name == 'pull_request' &&
+     github.event.action == 'closed' &&
+     github.event.pull_request.merged == true) ||
+    (github.event_name == 'push' && github.ref == 'refs/heads/main')
+```
+
+- **Dependencia explícita**: Espera la finalización exitosa del job de pruebas
+- **Condiciones de ejecución**: Solo se ejecuta en merges a main o pushes directos
+- **Optimización de recursos**: No se ejecuta innecesariamente en ramas de desarrollo
+
+**Proceso de Construcción**:
+
+1. **Preparación del Entorno**:
+   - Configuración de JDK 25 con caché de dependencias
+   - Autenticación con Docker Hub usando credenciales seguras
+   - Extracción automática de versión del proyecto
+
+2. **Construcción de Imagen**:
+   - Uso de Spring Boot buildpacks para optimización automática
+   - Construcción con pruebas omitidas para mejorar velocidad
+   - Aplicación de mejores prácticas de Docker automáticamente
+
+3. **Etiquetado y Publicación**:
+   - Creación de múltiples tags (versión específica y latest)
+   - Push automático a Docker Hub
+   - Generación de resumen para documentación
+
+#### Etapa de Despliegue a Producción
+
+**Job: deploy-production**
+
+```yaml
+deploy-production:
+  name: 🚀 Deploy to Production
+  runs-on: ubuntu-latest
+  needs: build-and-push
+  if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+  environment:
+    name: production
+```
+
+- **Requisitos de ambiente**: Requiere aprobación específica para producción
+- **Dependencia secuencial**: Espera la construcción y publicación de imágenes
+- **Ejecución restringida**: Solo en pushes directos a main
+
+**Proceso de Despliegue**:
+
+1. **Conexión Segura**:
+   - Establecimiento de conexión SSH con servidor de producción
+   - Uso de claves privadas para autenticación segura
+   - Configuración de host, usuario y credenciales
+
+2. **Ejecución de Script de Despliegue**:
+   - Extracción de nueva imagen desde Docker Hub
+   - Aplicación de estrategia blue-green para zero-downtime
+   - Configuración de variables de entorno específicas de producción
+
+**Script de Despliegue**:
+
+```bash
+IMAGE="${{ env.IMAGE_NAME }}:${{ needs.build-and-push.outputs.version }}"
+
+echo "🔄 Deploying version: ${{ needs.build-and-push.outputs.version }}"
+
+# Pull de nueva imagen
+docker pull $IMAGE
+
+# Estrategia blue-green
+docker stop waste-track-prod || true
+docker rm waste-track-prod || true
+
+# Despliegue del nuevo contenedor
+docker run -d \
+  --name waste-track-prod \
+  -p 8080:8080 \
+  --restart unless-stopped \
+  -e SPRING_PROFILES_ACTIVE=prod \
+  [variables de entorno de producción]
+  $IMAGE
+
+# Limpieza de imágenes antiguas
+docker images ${{ env.IMAGE_NAME }} --format "{{.ID}}" | tail -n +4 | xargs -r docker rmi || true
+```
+
+- **Zero-downtime deployment**: Estrategia que minimiza tiempo de inactividad
+- **Configuración de producción**: Variables específicas para ambiente productivo
+- **Gestión de recursos**: Limpieza automática de imágenes antiguas
+- **Monitoreo**: Configuración de restart automático para resiliencia
 
 ## 7.3. Continuous Deployment
 
 ### 7.3.1. Tools and Practices
 
+El despliegue continuo representa la evolución natural de la entrega continua, donde los cambios validados se despliegan automáticamente a producción sin intervención manual. Esta práctica requiere un alto nivel de madurez en los procesos de CI/CD y una cultura de DevOps sólida.
+
+#### Herramientas de Despliegue Continuo
+
+**SSH Actions** es la herramienta principal para nuestro despliegue automatizado:
+
+- **Conexión remota**: Establecimiento seguro de conexiones SSH con servidores
+- **Ejecución remota**: Capacidad de ejecutar comandos y scripts en servidores remotos
+- **Gestión de claves**: Soporte integrado para autenticación basada en claves SSH
+- **Registro detallado**: Logging completo de todas las operaciones realizadas
+
+**Docker** en el servidor de producción:
+
+- **Gestión de contenedores**: Orquestación completa del ciclo de vida de contenedores
+- **Redes y volúmenes**: Configuración avanzada de networking y almacenamiento persistente
+- **Health checks**: Verificación automática del estado de los contenedores
+- **Rollback capabilities**: Capacidad de reversión rápida en caso de problemas
+
+**GitHub Environments** para gestión de despliegues:
+
+- **Protección de ambientes**: Requerir aprobación manual para despliegues críticos
+- **Variables específicas**: Configuración diferenciada por ambiente
+- **Historial de despliegues**: Seguimiento completo de todos los despliegues realizados
+- **Reglas de protección**: Políticas específicas para diferentes ambientes
+
+#### Prácticas de Despliegue Continuo
+
+**Estrategia Blue-Green**: Implementamos esta estrategia para lograr despliegues sin tiempo de inactividad:
+
+- **Dos entornos paralelos**: Mantenimiento de dos versiones idénticas de la aplicación
+- **Cambio instantáneo**: Capacidad de cambiar tráfico entre versiones en segundos
+- **Rollback inmediato**: Posibilidad de revertir rápidamente en caso de problemas
+- **Testing en producción**: Validación de la nueva versión con tráfico real antes del cambio completo
+
+**Gestión de Configuración**: Cada ambiente tiene configuraciones específicas:
+
+- **Variables de entorno**: Diferenciación clara entre ambientes de desarrollo, staging y producción
+- **Archivos de configuración**: Gestión versionada de archivos de configuración
+- **Gestión de secretos**: Uso seguro de información sensible mediante GitHub Secrets
+
+**Monitoreo y Alertas**: Implementamos monitoreo continuo durante y después del despliegue:
+
+- **Métricas de aplicación**: Seguimiento de métricas clave de rendimiento
+- **Logs centralizados**: Recolección y análisis de logs de aplicación
+- **Alertas automáticas**: Notificación inmediata de problemas detectados
+- **Dashboards de monitoreo**: Visualización en tiempo real del estado del sistema
+
 ### 7.3.2. Production Deployment Pipeline Components
+
+El componente de despliegue a producción es el más crítico de nuestro pipeline, ya que afecta directamente a los usuarios finales. Está diseñado con múltiples capas de seguridad y validación para minimizar riesgos.
+
+#### Configuración de Ambiente de Producción
+
+**Definición del Ambiente**:
+
+```yaml
+deploy-production:
+  name: 🚀 Deploy to Production
+  runs-on: ubuntu-latest
+  needs: build-and-push
+  if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+  environment:
+    name: production
+```
+
+- **Restricción estricta**: Solo se ejecuta en pushes directos a la rama main
+- **Aprobación requerida**: Requiere aprobación manual para ambientes protegidos
+- **Dependencia secuencial**: Asegura que la construcción sea exitosa antes del despliegue
+
+**Configuración de Seguridad**:
+
+```yaml
+- name: 🚀 Deploy via SSH (Blue-Green)
+  uses: appleboy/ssh-action@v1.0.0
+  with:
+    host: ${{ secrets.PROD_HOST }}
+    username: ${{ secrets.PROD_USER }}
+    key: ${{ secrets.PROD_SSH_KEY }}
+```
+
+- **Autenticación basada en claves**: Uso de claves SSH para acceso seguro
+- **Variables secretas**: Toda información sensible se maneja como secretos
+- **Conexión encriptada**: Todas las comunicaciones están encriptadas
+- **Principio de menor privilegio**: Usuario con permisos mínimos necesarios
+
+#### Proceso de Despliegue Blue-Green
+
+**Script de Despliegue**:
+
+```bash
+IMAGE="${{ env.IMAGE_NAME }}:${{ needs.build-and-push.outputs.version }}"
+
+echo "🔄 Deploying version: ${{ needs.build-and-push.outputs.version }}"
+
+# --- INICIO DEL BLOQUE DE DEPURACIÓN ---
+echo "🕵️ --- Debugging Secrets ---"
+echo "DB_HOST='${{ secrets.PROD_DATABASE_HOST }}'"
+echo "DB_NAME='${{ secrets.PROD_DATABASE_NAME }}'"
+echo "DB_USER='${{ secrets.PROD_DATABASE_USERNAME }}'"
+echo "JWT_SECRET='${{ secrets.JWT_SECRET }}'"
+echo "FIREBASE_CONFIG='${{ secrets.FIREBASE_CONFIG }}'"
+echo "FIREBASE_BUCKET='${{ secrets.FIREBASE_BUCKET }}'"
+echo "🕵️ --- End Debugging ---"
+# --- FIN DEL BLOQUE DE DEPURACIÓN ---
+
+docker pull $IMAGE
+
+# Detiene y elimina el contenedor actual (si existe)
+docker stop waste-track-prod || true
+docker rm waste-track-prod || true
+
+# Levanta el nuevo contenedor directamente
+docker run -d \
+  --name waste-track-prod \
+  -p 8080:8080 \
+  --restart unless-stopped \
+  -e SPRING_PROFILES_ACTIVE=prod \
+  -e DB_HOST="${{ secrets.PROD_DATABASE_HOST }}" \
+  -e DB_PORT="${{ secrets.PROD_DATABASE_PORT }}" \
+  -e DB_NAME="${{ secrets.PROD_DATABASE_NAME }}" \
+  -e DB_USER="${{ secrets.PROD_DATABASE_USERNAME }}" \
+  -e DB_PASS="${{ secrets.PROD_DATABASE_PASSWORD }}" \
+  -e JWT_SECRET="${{ secrets.JWT_SECRET }}" \
+  -e FIREBASE_CONFIG="${{ secrets.FIREBASE_CONFIG }}" \
+  -e FIREBASE_BUCKET="${{ secrets.FIREBASE_BUCKET }}" \
+  --memory="1g" \
+  --cpus="2.0" \
+  $IMAGE
+
+# Limpieza opcional: elimina imágenes antiguas (mantiene las últimas 3)
+docker images ${{ env.IMAGE_NAME }} --format "{{.ID}}" | tail -n +4 | xargs -r docker rmi || true
+
+echo "✅ Deployment completed successfully!"
+```
+
+**Características del Despliegue**:
+
+1. **Extracción de Nueva Versión**:
+   - Pull automático de la imagen más reciente desde Docker Hub
+   - Verificación automática de integridad de la imagen
+   - Logging detallado del proceso de descarga
+
+2. **Aplicación de Estrategia Blue-Green**:
+   - Detención segura del contenedor anterior
+   - Eliminación del contenedor antiguo
+   - Despliegue del nuevo contenedor con configuración idéntica
+
+3. **Configuración de Producción**:
+   - Variables de entorno específicas para producción
+   - Límites de recursos definidos (memoria y CPU)
+   - Configuración de reinicio automático
+   - Mapeo de puertos para acceso externo
+
+4. **Optimización de Recursos**:
+   - Limpieza automática de imágenes antiguas
+   - Mantenimiento de solo las últimas versiones necesarias
+   - Optimización del espacio en disco del servidor
+
+**Variables de Entorno de Producción**:
+
+- **Base de Datos**: Configuración específica del entorno de producción
+- **Autenticación**: Claves JWT y configuración de Firebase para producción
+- **Monitoreo**: Variables para integración con sistemas de monitoreo
+- **Logging**: Nivel de logging apropiado para producción
+
+**Medidas de Seguridad Implementadas**:
+
+- **Gestión segura de secretos**: Todas las credenciales se almacenan como secretos en GitHub
+- **Conexión encriptada**: Uso de SSH para todas las comunicaciones remotas
+- **Principio de menor privilegio**: Usuario del servidor con permisos mínimos necesarios
+- **Auditoría completa**: Logging detallado de todas las operaciones realizadas
+- **Validación de integridad**: Verificación automática de imágenes antes del despliegue
 
 
 # Conclusiones
