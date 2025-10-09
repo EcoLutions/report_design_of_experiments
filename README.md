@@ -8835,6 +8835,58 @@ El despliegue de WasteTrack se ejecuta de forma automatizada en entornos en la n
 | US35          | Sección específica para ciudadanos      | T4      | Sección Ciudadanos       | Crear sección que muestre opciones de participación ciudadana.           | 4                  | Hernández Tuiro, Eric Ernesto     | Done   |
 | US36          | Casos de éxito y testimonios            | T5      | Casos de Éxito           | Diseñar e implementar sección con testimonios e indicadores de impacto.  | 4                  | Gutiérrez Soto, Jhosepmyr Orlando | Done   |
 
+
+**Sprint Backlog – Sprint 2**
+
+<table border="1" cellspacing="0" cellpadding="6" style="border-collapse:collapse; width:100%; font-family:Arial, sans-serif; font-size:13px;">
+  <thead style=" font-weight:bold; text-align:center;">
+    <tr>
+      <th>User Story ID</th>
+      <th>User Story Title</th>
+      <th>Task ID</th>
+      <th>Task Title</th>
+      <th>Description</th>
+      <th>Estimation (Hours)</th>
+      <th>Assigned To</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>US07</td><td>Visualización de contenedores en mapa</td><td>T07</td><td>Implementar vista y servicio de contenedores</td><td>Desarrollo del endpoint y vista de mapa interactivo que muestra la ubicación y estado actual de cada contenedor.</td><td>8</td><td>Riva Rodríguez, Elmer Augusto</td><td>Done</td></tr>
+    <tr><td>US08</td><td>Alertas de contenedores críticos</td><td>T08</td><td>Configurar alertas automáticas</td><td>Implementación del servicio backend que genera alertas según umbrales de llenado y muestra notificaciones en el panel admin.</td><td>6</td><td>Hernández Tuiro, Eric Ernesto</td><td>Done</td></tr>
+    <tr><td>US09</td><td>Historial de llenado de contenedores</td><td>T09</td><td>CRUD de historial de llenado</td><td>Creación del servicio para almacenar, consultar y visualizar el historial de llenado con filtros de fecha y ubicación.</td><td>5</td><td>Sulca Gonzales, Paul Fernando</td><td>Done</td></tr>
+    <tr><td>US10</td><td>Estado de contenedores para ciudadanos</td><td>T10</td><td>MVP de vista ciudadana</td><td>Desarrollo del módulo ciudadano que consulta el contenedor más cercano y muestra su estado de llenado.</td><td>5</td><td>Ramirez Mestanza, Salim Ignacio</td><td>Done</td></tr>
+    <tr><td>US11</td><td>Configuración de parámetros de contenedores</td><td>T11</td><td>CRUD de parámetros configurables</td><td>Implementación del backend para modificar umbrales y parámetros específicos de contenedores desde el panel admin.</td><td>6</td><td>Gutiérrez Soto, Jhosepmyr Orlando</td><td>Done</td></tr>
+    <tr><td>US12</td><td>Generación automática de rutas optimizadas</td><td>T12</td><td>Servicio de cálculo de rutas</td><td>Creación del endpoint de optimización que usa datos de contenedores y genera rutas de recolección dinámicas.</td><td>8</td><td>Riva Rodríguez, Elmer Augusto</td><td>Done</td></tr>
+    <tr><td>US13</td><td>Visualización de rutas en conductor móvil</td><td>T13</td><td>MVP de vista conductor</td><td>Implementar vista móvil básica para que los conductores visualicen la ruta asignada paso a paso.</td><td>5</td><td>Hernández Tuiro, Eric Ernesto</td><td>Done</td></tr>
+    <tr><td>US14</td><td>Modificación dinámica de rutas</td><td>T14</td><td>Endpoint de actualización de rutas</td><td>Desarrollar servicio para reconfigurar rutas activas en tiempo real ante alertas de contenedores críticos.</td><td>7</td><td>Sulca Gonzales, Paul Fernando</td><td>Done</td></tr>
+    <tr><td>US15</td><td>Reporte de eficiencia de rutas</td><td>T15</td><td>Módulo de analítica de rutas</td><td>Implementar servicio que calcule métricas de eficiencia por ruta (tiempo, distancia, llenado promedio).</td><td>6</td><td>Ramirez Mestanza, Salim Ignacio</td><td>Done</td></tr>
+    <tr><td>US16</td><td>Confirmación de recolección por conductor</td><td>T16</td><td>Servicio de confirmación de recolección</td><td>Endpoint que permite al conductor marcar contenedores como recolectados, actualizando el estado del sistema.</td><td>4</td><td>Gutiérrez Soto, Jhosepmyr Orlando</td><td>Done</td></tr>
+    <tr><td>US17</td><td>Reporte de problemas por ciudadanos</td><td>T17</td><td>MVP de reportes ciudadanos</td><td>Implementación básica del formulario de reporte con persistencia y estado inicial en el backend.</td><td>5</td><td>Hernández Tuiro, Eric Ernesto</td><td>Done</td></tr>
+    <tr><td>US18</td><td>Seguimiento de reportes ciudadanos</td><td>T18</td><td>Módulo de seguimiento de reportes</td><td>Endpoint que permite consultar el estado de reportes ciudadanos (pendiente, en revisión, resuelto).</td><td>5</td><td>Sulca Gonzales, Paul Fernando</td><td>Done</td></tr>
+    <tr><td>US19</td><td>Notificaciones de recolección programada</td><td>T19</td><td>Servicio de notificaciones</td><td>Implementación del servicio que envía notificaciones push sobre horarios de recolección.</td><td>6</td><td>Ramirez Mestanza, Salim Ignacio</td><td>Done</td></tr>
+    <tr><td>US20</td><td>Información educativa sobre reciclaje</td><td>T20</td><td>MVP informativo</td><td>MVP con contenido estático y editable desde el backend para mostrar consejos y prácticas de reciclaje.</td><td>4</td><td>Gutiérrez Soto, Jhosepmyr Orlando</td><td>Done</td></tr>
+    <tr><td>US21</td><td>Sistema de puntos por buen comportamiento</td><td>T21</td><td>Backend de gamificación</td><td>Servicio que registra acciones del ciudadano y asigna puntos por participación y reportes útiles.</td><td>6</td><td>Riva Rodríguez, Elmer Augusto</td><td>Done</td></tr>
+    <tr><td>US22</td><td>Monitoreo de flota de vehículos</td><td>T22</td><td>Servicio de tracking vehicular</td><td>Desarrollo del servicio que recibe posiciones GPS de vehículos y las muestra en panel de monitoreo.</td><td>7</td><td>Hernández Tuiro, Eric Ernesto</td><td>Done</td></tr>
+    <tr><td>US23</td><td>Programación de mantenimiento preventivo</td><td>T23</td><td>CRUD de mantenimiento preventivo</td><td>Implementar backend para registrar mantenimientos por kilometraje o fecha y alertar próximos eventos.</td><td>5</td><td>Sulca Gonzales, Paul Fernando</td><td>Done</td></tr>
+    <tr><td>US24</td><td>Control de combustible y gastos operativos</td><td>T24</td><td>Servicio de registro de gastos</td><td>Implementar módulo backend que almacene y calcule consumo y costos operativos por vehículo.</td><td>5</td><td>Ramirez Mestanza, Salim Ignacio</td><td>Done</td></tr>
+    <tr><td>US25</td><td>Asignación automática de vehículos</td><td>T25</td><td>Algoritmo de asignación por capacidad</td><td>Implementación del servicio que asigna vehículos automáticamente según capacidad y disponibilidad.</td><td>7</td><td>Gutiérrez Soto, Jhosepmyr Orlando</td><td>Done</td></tr>
+    <tr><td>US26</td><td>Generación automática de reportes MINAM</td><td>T26</td><td>Servicio de reportes normativos</td><td>Backend que genera reportes automáticos requeridos por el MINAM a partir de los datos operativos.</td><td>6</td><td>Riva Rodríguez, Elmer Augusto</td><td>Done</td></tr>
+    <tr><td>US27</td><td>Dashboard de cumplimiento regulatorio</td><td>T27</td><td>MVP de dashboard regulatorio</td><td>Implementación inicial de visualización con KPIs de cumplimiento ambiental.</td><td>6</td><td>Hernández Tuiro, Eric Ernesto</td><td>Done</td></tr>
+    <tr><td>US28</td><td>Trazabilidad de residuos peligrosos</td><td>T28</td><td>Servicio de trazabilidad</td><td>Desarrollo de módulo backend que registra y rastrea residuos hospitalarios y peligrosos.</td><td>7</td><td>Sulca Gonzales, Paul Fernando</td><td>Done</td></tr>
+    <tr><td>US29</td><td>Predicción de llenado de contenedores</td><td>T29</td><td>Servicio de predicción IoT</td><td>Implementación del servicio que usa datos históricos para predecir llenado futuro de contenedores.</td><td>8</td><td>Ramirez Mestanza, Salim Ignacio</td><td>Done</td></tr>
+    <tr><td>US30</td><td>Análisis de patrones de generación</td><td>T30</td><td>Módulo analítico de generación</td><td>Implementación del backend que calcula patrones de generación de residuos por zona y tiempo.</td><td>6</td><td>Gutiérrez Soto, Jhosepmyr Orlando</td><td>Done</td></tr>
+    <tr><td>US31</td><td>Dashboard ejecutivo con KPIs</td><td>T31</td><td>MVP de dashboard ejecutivo</td><td>Crear vista ejecutiva con indicadores globales del sistema (rutas, contenedores, alertas).</td><td>6</td><td>Riva Rodríguez, Elmer Augusto</td><td>Done</td></tr>
+    <tr><td>TS01</td><td>API de autenticación y autorización</td><td>T32</td><td>Implementar Auth API</td><td>Desarrollo del endpoint seguro de login, registro y autorización JWT.</td><td>7</td><td>Hernández Tuiro, Eric Ernesto</td><td>Done</td></tr>
+    <tr><td>TS02</td><td>API de gestión de contenedores</td><td>T33</td><td>Implementar Contenedor CRUD</td><td>Crear endpoints CRUD para entidades de contenedores, con filtros por distrito y estado.</td><td>6</td><td>Sulca Gonzales, Paul Fernando</td><td>Done</td></tr>
+    <tr><td>TS03</td><td>API de optimización de rutas</td><td>T34</td><td>Implementar Route Optimization API</td><td>Implementación del servicio de optimización que provee rutas eficientes al sistema.</td><td>8</td><td>Ramirez Mestanza, Salim Ignacio</td><td>Done</td></tr>
+    <tr><td>TS04</td><td>API de datos de sensores IoT</td><td>T35</td><td>Implementar IoT Data API</td><td>Endpoint que recibe y procesa datos en tiempo real de sensores.</td><td>7</td><td>Gutiérrez Soto, Jhosepmyr Orlando</td><td>Done</td></tr>
+    <tr><td>TS05</td><td>API de reportes y analytics</td><td>T36</td><td>Implementar Reports API</td><td>Endpoint de generación de reportes estadísticos del sistema.</td><td>6</td><td>Riva Rodríguez, Elmer Augusto</td><td>Done</td></tr>
+    <tr><td>TS08</td><td>Edge API para procesamiento local</td><td>T37</td><td>Implementar Edge Processing API</td><td>Servicio que procesa localmente datos críticos de sensores para operaciones offline.</td><td>8</td><td>Hernández Tuiro, Eric Ernesto</td><td>Done</td></tr>
+    <tr><td>TS09</td><td>Sincronización Edge-Cloud</td><td>T38</td><td>Implementar Edge-Cloud Sync Service</td><td>Mecanismo de sincronización bidireccional entre Edge API y nube para coherencia de datos.</td><td>7</td><td>Sulca Gonzales, Paul Fernando</td><td>Done</td></tr>
+  </tbody>
+</table>
+
 ### 5.2.2. Implemented Landing Page Evidence
 
 **Enlace de la landing page:** [https://wastetracklanding.vercel.app/](https://wastetracklanding.vercel.app/)
@@ -8854,15 +8906,224 @@ Pasos para desplegar un landing page en Vercel
 
 ### 5.2.3. Implemented Frontend-Web Application Evidence
 
+#### Pasos de despliegue en Netlify
+
+Elegir a GitHub como Git provider
+
+![connectToGit.png](assets/5.product-implementation/web-application/deploy/connectToGit.png)
+
+Conectar con la organización EcoLutions de GitHub
+
+![selectRepo.png](assets/5.product-implementation/web-application/deploy/selectRepo.png)
+
+Configurar proyecto y deploy command
+
+![lastStep.png](assets/5.product-implementation/web-application/deploy/lastStep.png)
+![lastStep2.png](assets/5.product-implementation/web-application/deploy/lastStep2.png)
+
+Vista final con deploy logs en estado completado
+
+![deployLogs.png](assets/5.product-implementation/web-application/deploy/deployLogs.png)
+
+**Enlace de la aplicacion web de administrador municipal** [https://waste-track-admin-app.netlify.app/dashboard](https://waste-track-admin-app.netlify.app/dashboard)
+
+#### Imagenes de la aplicación web para administrador municipal
+
+![dashboard.png](assets/5.product-implementation/web-application/dashboard.png)
+
+![collaborator_list.png](assets/5.product-implementation/web-application/collaborator_list.png)
+
+![add_collaborator.png](assets/5.product-implementation/web-application/add_collaborator.png)
+
+![edit_collaborator.png](assets/5.product-implementation/web-application/edit_collaborator.png)
+
+![deactivate_collaborator.png](assets/5.product-implementation/web-application/deactivate_collaborator.png)
+
+![no_registered_vehicles.png](assets/5.product-implementation/web-application/no_registered_vehicles.png)
+
+![fleet_list.png](assets/5.product-implementation/web-application/fleet_list.png)
+
+![add_vehicle.png](assets/5.product-implementation/web-application/add_vehicle.png)
+
+![edit_vehicle.png](assets/5.product-implementation/web-application/edit_vehicle.png)
+
+![deleteVehicle.png](assets/5.product-implementation/web-application/deleteVehicle.png)
+
+![no_iot_device.png](assets/5.product-implementation/web-application/no_iot_device.png)
+
+![iot_list.png](assets/5.product-implementation/web-application/iot_list.png)
+
+![add_iot_device.png](assets/5.product-implementation/web-application/add_iot_device.png)
+
+![configure_iot_device.png](assets/5.product-implementation/web-application/configure_iot_device.png)
+
+![deleteIotDevice.png](assets/5.product-implementation/web-application/deleteIotDevice.png)
+
 ### 5.2.4. Implemented Native-Mobile Application Evidence
+
+#### Generar apk
+Para la compilación de la aplicación y la generación del archivo de instalación de Android (.apk), se siguieron los siguientes pasos utilizando el entorno de desarrollo Android Studio.
+
+**Apertura del Terminal**
+Dentro del proyecto de Flutter, se abrió el terminal integrado en Android Studio para tener acceso a la línea de comandos.
+
+**Ejecución del Comando de Compilación**
+Se procedió a ejecutar el comando para construir la versión de lanzamiento de la aplicación. Se utilizó el flag --release para asegurar que el APK generado estuviera optimizado para producción, ofuscado y sin información de depuración.
+
+flutter build apk --release
+
+**Ubicación del Archivo Generado**
+Una vez finalizado el proceso de compilación, el archivo app-release.apk fue localizado en el directorio de salida correspondiente dentro de la estructura del proyecto:
+
+build/app/outputs/flutter-apk/app-release.apk
+
+Este archivo es la versión final que fue utilizada para las pruebas de despliegue y la distribución.
+
+#### WasteTrack Citizen mobile app
+
+![splashImage.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/splashImage.png)
+
+![welcomeView.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/welcomeView.png)
+
+![selectMunicipality1.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/selectMunicipality1.png)
+
+![selectMunicipality2.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/selectMunicipality2.png)
+
+![home_view.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/home_view.png)
+
+![changeMunicipality.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/changeMunicipality.png)
+
+![notifications.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/notifications.png)
+
+![report.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/report.png)
 
 ### 5.2.5. Implemented Restful API and/or Serverless Backend Evidence
 
+#### Evidencia de Implementación de Backend y API RESTful
+Para el proyecto WasteTrack, se ha implementado una infraestructura de backend robusta y escalable en la nube, utilizando servicios de Microsoft Azure. El proceso abarcó desde el aprovisionamiento de un servidor virtual hasta su configuración para el despliegue automatizado de la API RESTful mediante contenedores.
+
+A continuación, se detalla el proceso realizado, respaldado por la evidencia visual adjunta.
+
+1. Aprovisionamiento de la Infraestructura en la Nube
+
+El primer paso fue crear los recursos necesarios en Microsoft Azure. Se configuró una máquina virtual (VM) con las siguientes especificaciones para alojar el backend:
+
+Nombre del Recurso: waste-track-platform
+
+Sistema Operativo: Linux (Ubuntu 22.04 LTS)
+
+Capacidad: 4 vCPUs y 16 GB de RAM
+
+Región: Sur de Brasil (South America)
+
+IP Pública Asignada: 20.206.240.65
+
+Este proceso, visible en las capturas del portal de Azure, estableció la base del servidor donde se ejecutará nuestra aplicación.
+
+![1.jpeg](assets/5.product-implementation/backend/implementation/1.jpeg)
+
+![4.jpeg](assets/5.product-implementation/backend/implementation/4.jpeg)
+
+2. Configuración y Acceso Seguro al Servidor
+
+Una vez creada la VM, se estableció una conexión segura desde un equipo local utilizando el protocolo SSH (Secure Shell). Para ello, se gestionó una clave privada (.pem) con los permisos adecuados (chmod 400) para garantizar un acceso restringido y seguro al servidor.
+
+Inmediatamente después de la conexión, se actualizaron todos los paquetes del sistema operativo con sudo apt update && sudo apt upgrade para asegurar que el entorno base estuviera actualizado y protegido.
+
+![3.jpeg](assets/5.product-implementation/backend/implementation/3.jpeg)
+
+![6.jpeg](assets/5.product-implementation/backend/implementation/6.jpeg)
+
+3. Implementación del Entorno de Contenedores con Docker
+
+Para asegurar un despliegue consistente, aislado y escalable de la API, se instaló y configuró un entorno de containerización.
+
+Se instaló Docker y Docker Compose en el servidor Ubuntu.
+
+Se habilitó el servicio de Docker para que se inicie automáticamente con el sistema (systemctl enable docker).
+
+Se configuraron los permisos de usuario para gestionar Docker sin necesidad de privilegios de superusuario en cada comando.
+
+Este entorno permite empaquetar la API RESTful y todas sus dependencias en contenedores, facilitando su despliegue y gestión.
+
+![7.jpeg](assets/5.product-implementation/backend/implementation/7.jpeg)
+
+![9.jpeg](assets/5.product-implementation/backend/implementation/9.jpeg)
+
+4. Preparación para el Despliegue Automatizado (CI/CD)
+
+Finalmente, se preparó el terreno para la Integración y Despliegue Continuo (CI/CD) utilizando GitHub Actions. Se configuraron los "Secrets" en el repositorio del proyecto en GitHub, que incluyen:
+
+Credenciales del servidor (PROD_HOST, PROD_USER, PROD_SSH_KEY): Para que GitHub Actions pueda conectarse al servidor de Azure y desplegar nuevas versiones.
+
+Variables de entorno de la aplicación (PROD_DATABASE_*, JWT_SECRET): Para configurar la aplicación en el entorno de producción de forma segura sin exponer datos sensibles en el código.
+
+Esta configuración es la pieza clave que permite automatizar el despliegue de la API RESTful, haciendo que cualquier cambio en la rama principal del repositorio se refleje automáticamente en el servidor de producción.
+
+![8.jpeg](assets/5.product-implementation/backend/implementation/8.jpeg)
+
 ### 5.2.6. Restful API documentation
+
+#### Documentación de la API RESTful
+Para garantizar la correcta integración, escalabilidad y mantenimiento de los servicios del backend, se ha documentado exhaustivamente la API RESTful del proyecto Waste Track Platform. Se utilizó el estándar OpenAPI 3.0 y la herramienta Swagger UI para generar una documentación interactiva que no solo describe los endpoints, sino que también permite probarlos directamente desde el navegador.
+
+Esta documentación sirve como un contrato claro entre el backend y cualquier cliente que consuma la API (como la aplicación móvil o futuras integraciones).
+
+![1.jpeg](assets/5.product-implementation/backend/apiDocumentation/1.jpeg)
+
+Estructura y Endpoints Disponibles
+La API está organizada en controladores que agrupan funcionalidades relacionadas con los recursos principales del sistema. Cada recurso cuenta con un conjunto completo de operaciones CRUD (Crear, Leer, Actualizar, Eliminar), siguiendo las convenciones estándar de los métodos HTTP (POST, GET, PUT, DELETE).
+
+A continuación, se presenta una visión general de los endpoints documentados:
+
+1. Gestión de Autenticación y Usuarios (/authentication, /users, /roles)
+
+Endpoints cruciales para la seguridad y la gestión de acceso. Permiten el registro (sign-up), inicio de sesión (sign-in) y la obtención de información sobre usuarios y sus roles.
+
+![2.jpeg](assets/5.product-implementation/backend/apiDocumentation/2.jpeg)
+
+2. Gestión de Entidades Centrales (/containers, /vehicles, /routes)
+
+Manejan la lógica de negocio principal, incluyendo la administración de contenedores de residuos, vehículos de recolección y las rutas que estos siguen.
+
+![3.jpeg](assets/5.product-implementation/backend/apiDocumentation/3.jpeg)
+
+![4.jpeg](assets/5.product-implementation/backend/apiDocumentation/4.jpeg)
+
+3. Gestión de Datos Geográficos y Operativos (/districts, /waypoints, /sensor-readings)
+
+Endpoints dedicados a la gestión de distritos, puntos de referencia en las rutas (waypoints) y la recolección de datos de sensores.
+
+![5.jpeg](assets/5.product-implementation/backend/apiDocumentation/5.jpeg)
+
+![6.jpeg](assets/5.product-implementation/backend/apiDocumentation/6.jpeg)
+
+4. Gestión de Perfiles y Actores (/citizens, /drivers, /user-profiles)
+
+Permiten administrar la información de los diferentes tipos de usuarios que interactúan con la plataforma, como ciudadanos, conductores y sus perfiles detallados.
+
+![7.jpeg](assets/5.product-implementation/backend/apiDocumentation/7.jpeg)
+
+![8.jpeg](assets/5.product-implementation/backend/apiDocumentation/8.jpeg)
 
 ### 5.2.7. Team Collaboration Insights
 
+#### Fronted insights
+#### Municipality Admin Web Application
+![frontendMunicipalityAdmin.png](assets/5.product-implementation/insights/frontendMunicipalityAdmin.png)
+
+#### WasteTrack Citizen Mobile Application
+![wasteTrackCitizenMobileApp.png](assets/5.product-implementation/insights/wasteTrackCitizenMobileApp.png)
+
+#### Backend insights
+![backend.png](assets/5.product-implementation/insights/backend.png)
+
 ## 5.3. Video About-the-Product
+A continuación, la primera version del video About The Product
+
+![img.png](assets/5.product-implementation/aboutTheProduct/img.png)
+
+[Enlace video About the Product](https://upcedupe-my.sharepoint.com/personal/u20221c857_upc_edu_pe/_layouts/15/stream.aspx?id=%2Fpersonal%2Fu20221c857%5Fupc%5Fedu%5Fpe%2FDocuments%2FVideo%2DAbout%2DTheProduct%2DWasteTrack%2Emp4&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&ga=1&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview%2E614163d2%2D3f0f%2D42e6%2Da913%2Dfb143ec665dc)
 
 # Capítulo VI: Product Verification & Validation
 
