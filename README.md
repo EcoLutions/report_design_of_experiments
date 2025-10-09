@@ -200,6 +200,22 @@ Todos los miembros del equipo contribuyeron activamente al desarrollo del inform
     * [5.2.6. Restful API documentation](#526-restful-api-documentation)
     * [5.2.7. Team Collaboration Insights](#527-team-collaboration-insights)
   * [5.3. Video About-the-Product](#53-video-about-the-product)
+* [Capítulo VI: Product Verification & Validation](#capítulo-vi-testing-suites--validation)
+  * [6.1. Testing Suites & Validation](#61-testing-suites--validation)
+    * [6.1.1. Core Entities Unit Tests](#611-core-entities-unit-tests)
+    * [6.1.2. Core Integration Tests](#612-core-integration-tests)
+    * [6.1.3. Core Behavior-Driven Development](#613-core-behavior-driven-development)
+    * [6.1.4. Core System Tests](#614-core-system-tests)
+  * [Capítulo VII: DevOps Practices](#capítulo-vii-devops-practices)
+    * [7.1. Continuous Integration](#71-continuous-integration)
+      * [7.1.1. Tools and Practices](#711-tools-and-practices)
+      * [7.1.2. Build & Test Suite Pipeline Components](#712-build--test-suite-pipeline-components)
+    * [7.2. Continuous Delivery](#72-continuous-delivery)
+      * [7.2.1. Tools and Practices](#721-tools-and-practices)
+      * [7.2.2. Stages Deployment Pipeline Components](#722-stages-deployment-pipeline-components)
+    * [7.3. Continuous Deployment](#73-continuous-deployment)
+      * [7.3.1. Tools and Practices](#731-tools-and-practices)
+      * [7.3.2. Production Deployment Pipeline Components](#732-production-deployment-pipeline-components)
 * [Conclusiones](#conclusiones)
 * [Bibliografía](#bibliografía)
 * [Anexos](#anexos)
@@ -217,10 +233,10 @@ El curso contribuye al cumplimiento del Student Outcome ABET:
 
 En el siguiente cuadro se describe las acciones realizadas y enunciados de conclusiones por parte del grupo, que permiten sustentar el haber alcanzado el logro del ABET – EAC - Student Outcome 4.
 
-| **Criterio específico**                                                                                                                                           | **Acciones realizadas**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | **Conclusiones**                                                                                                                                                                                                                                                                                                                                                                                       |
-|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **4.c.1 Reconoce responsabilidad ética y profesional en situaciones de ingeniería de software.**                                                                  | - **Gutiérrez Soto, Jhosepmyr Orlando**: Supervisó el cumplimiento de convenciones éticas de desarrollo en el diseño del Domain-Driven Design y en la documentación técnica.<br>- **Hernández Tuiro, Eric Ernesto**: Veló por la protección de datos sensibles durante la transcripción y análisis de entrevistas.<br>- **Ramirez Mestanza, Salim Ignacio**: Promovió buenas prácticas en el versionamiento del código y la colaboración ética en Git.<br>- **Riva Rodríguez, Elmer Augusto**: Aseguró el uso de fuentes confiables para el análisis de impacto social y económico.<br>- **Sulca Gonzales, Paul Fernando**: Implementó lineamientos de diseño inclusivo y accesibilidad en las interfaces.                                                                                        | El equipo mostró un alto nivel de responsabilidad ética y profesional en todas las etapas del proyecto. Se mantuvo un compromiso con el uso responsable de la información, el cumplimiento de estándares técnicos y la transparencia en la colaboración. Cada integrante adoptó prácticas que fomentaron la integridad y el profesionalismo en la ingeniería de software.                              |
-| **4.c.2 Emite juicios informados considerando el impacto de las soluciones de ingeniería de software en contextos globales, económicos, ambientales y sociales.** | - **Gutiérrez Soto, Jhosepmyr Orlando**: Evaluó el impacto económico de la solución al justificar la reducción de costos operativos para municipios.<br>- **Hernández Tuiro, Eric Ernesto**: Incorporó las necesidades sociales de los ciudadanos en el diseño funcional del sistema a partir de entrevistas.<br>- **Ramirez Mestanza, Salim Ignacio**: Consideró el impacto ambiental al definir funcionalidades que promuevan la recolección oportuna de residuos.<br>- **Riva Rodríguez, Elmer Augusto**: Relacionó el alcance del producto con escenarios de implementación a nivel nacional y en otros contextos globales.<br>- **Sulca Gonzales, Paul Fernando**: Analizó la interoperabilidad de la solución en entornos con limitaciones tecnológicas y propuso alternativas sostenibles. | A lo largo del desarrollo, el equipo realizó juicios informados al considerar cómo su solución influye en el entorno. Se tomaron en cuenta factores económicos, ambientales y sociales para maximizar el valor público del sistema. Esta visión integral permitió que las decisiones de diseño y arquitectura respondieran a problemáticas reales de forma responsable y con proyección a largo plazo. |
+| **Criterio específico**                                                                                                                                           | **Acciones realizadas (TB1 y TB2)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | **Conclusiones (TB1 y TB2)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **4.c.1 Reconoce responsabilidad ética y profesional en situaciones de ingeniería de software.**                                                                  | **TB1:**<br> - *Gutiérrez Soto, Jhosepmyr Orlando:* Supervisó el cumplimiento de convenciones éticas de desarrollo en el diseño del Domain-Driven Design y en la documentación técnica.<br> - *Hernández Tuiro, Eric Ernesto:* Veló por la protección de datos sensibles durante la transcripción y análisis de entrevistas.<br> - *Ramirez Mestanza, Salim Ignacio:* Promovió buenas prácticas en el versionamiento del código y la colaboración ética en Git.<br> - *Riva Rodríguez, Elmer Augusto:* Aseguró el uso de fuentes confiables para el análisis de impacto social y económico.<br> - *Sulca Gonzales, Paul Fernando:* Implementó lineamientos de diseño inclusivo y accesibilidad en las interfaces.<br><br>**TB2:**<br> - *Gutiérrez Soto, Jhosepmyr Orlando:* Supervisó la correcta implementación del backend bajo principios de arquitectura limpia y aplicó prácticas de testing ético, garantizando la trazabilidad de los datos en los servicios REST.<br> - *Hernández Tuiro, Eric Ernesto:* Mantuvo la coherencia ética en la manipulación de información sensible y validación de tokens en la capa de seguridad durante las pruebas de integración.<br> - *Ramirez Mestanza, Salim Ignacio:* Aseguró el cumplimiento de las normas de codificación y control de versiones, además de documentar de forma transparente las pruebas unitarias e integradas.<br> - *Riva Rodríguez, Elmer Augusto:* Promovió la ética profesional al validar la consistencia de los controladores REST y la documentación API con principios de transparencia y mantenibilidad.<br> - *Sulca Gonzales, Paul Fernando:* Garantizó que el frontend cumpla criterios de accesibilidad y usabilidad ética, priorizando la experiencia del usuario final sin sesgos visuales ni técnicos. | **TB1:** El equipo mostró un alto nivel de responsabilidad ética y profesional en todas las etapas del proyecto. Se mantuvo un compromiso con el uso responsable de la información, el cumplimiento de estándares técnicos y la transparencia en la colaboración. Cada integrante adoptó prácticas que fomentaron la integridad y el profesionalismo en la ingeniería de software.<br><br>**TB2:** Durante esta segunda etapa, el equipo reafirmó su compromiso ético en la fase de desarrollo y pruebas. Se priorizó la calidad técnica, la seguridad de los datos y la accesibilidad del sistema en producción. Las decisiones de implementación, testing y documentación reflejaron responsabilidad profesional y respeto por los estándares éticos de la ingeniería de software.                                              |
+| **4.c.2 Emite juicios informados considerando el impacto de las soluciones de ingeniería de software en contextos globales, económicos, ambientales y sociales.** | **TB1:**<br> - *Gutiérrez Soto, Jhosepmyr Orlando:* Evaluó el impacto económico de la solución al justificar la reducción de costos operativos para municipios.<br> - *Hernández Tuiro, Eric Ernesto:* Incorporó las necesidades sociales de los ciudadanos en el diseño funcional del sistema a partir de entrevistas.<br> - *Ramirez Mestanza, Salim Ignacio:* Consideró el impacto ambiental al definir funcionalidades que promuevan la recolección oportuna de residuos.<br> - *Riva Rodríguez, Elmer Augusto:* Relacionó el alcance del producto con escenarios de implementación a nivel nacional y en otros contextos globales.<br> - *Sulca Gonzales, Paul Fernando:* Analizó la interoperabilidad de la solución en entornos con limitaciones tecnológicas y propuso alternativas sostenibles.<br><br>**TB2:**<br> - *Gutiérrez Soto, Jhosepmyr Orlando:* Evaluó el impacto social y económico de la implementación del backend en la eficiencia operativa de los servicios municipales.<br> - *Hernández Tuiro, Eric Ernesto:* Analizó la contribución del sistema al bienestar social mediante la digitalización de procesos de monitoreo y gestión urbana.<br> - *Ramirez Mestanza, Salim Ignacio:* Valoró el impacto ambiental de las pruebas BDD y la automatización de rutas en la reducción del consumo de recursos físicos.<br> - *Riva Rodríguez, Elmer Augusto:* Consideró la escalabilidad del sistema para su aplicación en otros contextos nacionales e internacionales, promoviendo interoperabilidad tecnológica.<br> - *Sulca Gonzales, Paul Fernando:* Reflexionó sobre el impacto social del frontend al mejorar la comunicación entre ciudadanos y entidades municipales, fomentando la transparencia en la gestión de residuos.                             | **TB1:** A lo largo del desarrollo, el equipo realizó juicios informados al considerar cómo su solución influye en el entorno. Se tomaron en cuenta factores económicos, ambientales y sociales para maximizar el valor público del sistema. Esta visión integral permitió que las decisiones de diseño y arquitectura respondieran a problemáticas reales de forma responsable y con proyección a largo plazo.<br><br>**TB2:** En la segunda etapa, los integrantes fortalecieron su capacidad de análisis sobre el impacto global y sostenible del sistema. Las decisiones técnicas se fundamentaron en su valor económico, social y ambiental, considerando la interoperabilidad, el mantenimiento a largo plazo y la accesibilidad tecnológica. Esto permitió consolidar una solución responsable y con proyección escalable. |
 
 <div style="page-break-before: always"></div>
 
@@ -257,8 +273,8 @@ Valores
 | ![erick.png](assets/1.introduction/1.1.startup-profile/1.1.2.team-member/erick.png)         | Eric Ernesto Hernández Tuiro     | 20221C857            | Ingeniería de Software | Especialista en desarrollo backend con Java/Spring Boot y diseño de arquitecturas de sistemas. Enfocado en tecnologías empresariales y soluciones eficientes. Será responsable de los servicios web, procesamiento de datos y desarrollo de APIs para la plataforma WasteTrack.                                                     |
 | ![elmer.png](assets/1.introduction/1.1.startup-profile/1.1.2.team-member/elmer.png)         | Elmer Augusto Riva Rodríguez     | 202220829            | Ingeniería de Software | Desarrollador con experiencia en Angular/Spring Boot y Vue.js/ASP.NET, enfocado en arquitecturas monolíticas y desarrollo de aplicaciones. Liderará el desarrollo de aplicaciones móviles para conductores y ciudadanos, garantizando interfaces intuitivas y funcionales.                                                          | 
 | ![jhosepmyr.png](assets/1.introduction/1.1.startup-profile/1.1.2.team-member/jhosepmyr.png) | Jhosepmyr Orlando Gutiérrez Soto | 202317638            | Ingeniería de Software | Especialista en desarrollo full-stack con Java/Spring Boot y frameworks frontend como Angular y Vue.js. Experiencia en microservicios y servicios cloud (AWS, Azure, GCP). Aporta habilidades de liderazgo técnico, toma de decisiones y coordinación de equipos de desarrollo para la arquitectura general del sistema WasteTrack. | 
-| ![paul.png](assets/1.introduction/1.1.startup-profile/1.1.2.team-member/paul.png)           | Paul Fernando Sulca Gonzales     | 20221C486  | Ingeniería de Software | Conocimiento en diseño de software orientado a objetos y modelado UML. Experiencia en implementación de interfaces web adaptativas. Amante de los desafíos de la vida universitaria.                                                                                                                                                |
-| ![salim.jpg](assets/1.introduction/1.1.startup-profile/1.1.2.team-member/salim.jpg)         | Salim Ignacio Ramirez Mestanza   | 20201E843  | Ingeniería de Software | Conocimiento en arquitectura de software y control de versiones con Git. Experiencia en documentación técnica y colaboración en equipos ágiles. Desarrollo backend con Java/Spring Boot y Domain-Driven Design.                                                                                                                     |
+| ![paul.png](assets/1.introduction/1.1.startup-profile/1.1.2.team-member/paul.png)           | Paul Fernando Sulca Gonzales     | 20221C486            | Ingeniería de Software | Conocimiento en diseño de software orientado a objetos y modelado UML. Experiencia en implementación de interfaces web adaptativas. Amante de los desafíos de la vida universitaria.                                                                                                                                                |
+| ![salim.jpg](assets/1.introduction/1.1.startup-profile/1.1.2.team-member/salim.jpg)         | Salim Ignacio Ramirez Mestanza   | 20201E843            | Ingeniería de Software | Conocimiento en arquitectura de software y control de versiones con Git. Experiencia en documentación técnica y colaboración en equipos ágiles. Desarrollo backend con Java/Spring Boot y Domain-Driven Design.                                                                                                                     |
 
 ## 1.2. Solution Profile
 
@@ -2585,6 +2601,11 @@ En esta sección se documenta el diseño orientado a objetos del software, propo
 
 Los diagramas de clases representan la estructura estática del sistema, mostrando las clases, sus atributos, métodos y las relaciones entre ellas. Estos diagramas ayudan a visualizar cómo se organiza el código y cómo interactúan los diferentes componentes del sistema.
 
+**Diagrama de clases del Shared Kernel**:
+Contiene las clases y estructuras compartidas entre los diferentes bounded contexts, como entidades comunes, objetos de valor, y servicios que son utilizados por múltiples contextos para asegurar la coherencia y reutilización de código.
+
+![Diagrama de Clases del Shared Kernel](assets/4.product-design/4.9.software-object-oriented-design/0.class-diagram-shared-kernel.png)
+
 **Diagrama de clases del Bounded Context Container Monitoring:**
 Encapsula toda la lógica de negocio relacionada con el monitoreo de contenedores de residuos mediante sensores IoT, la gestión de su estado operacional, y la generación de análisis predictivo para optimizar las operaciones de recolección municipal.
 
@@ -2629,6 +2650,209 @@ Encapsula toda la lógica de negocio relacionada con la gestión de identidades,
 
 En esta sección se presenta el diccionario de clases, que proporciona descripciones detalladas de cada clase, incluyendo sus atributos, métodos y responsabilidades. Este diccionario sirve como referencia para los desarrolladores y facilita la comprensión del diseño orientado a objetos del sistema.
 
+**Diccionario de Clases del Shared Kernel:**
+
+Se presenta un diccionario detallado de las clases que componen el Shared Kernel, incluyendo sus atributos, métodos y relaciones clave. Este diccionario sirve como referencia para los desarrolladores y facilita la comprensión del diseño orientado a objetos del sistema.
+
+**Value Objects**
+
+**1. `DistrictId` (Value Object)**
+
+Identificador único que representa un distrito dentro del sistema.
+
+**Atributos Principales:**
+
+| Atributo  | Tipo     | Visibilidad   | Descripción                        |
+|-----------|----------|---------------|------------------------------------|
+| `value`   | `String` | `private`     | Código único asignado al distrito. |
+
+---
+
+**2. `ContainerId` (Value Object)**
+
+Identificador único e inmutable asignado a cada contenedor de residuos.
+
+**Atributos Principales:**
+
+| Atributo  | Tipo     | Visibilidad  | Descripción                                |
+|-----------|----------|--------------|--------------------------------------------|
+| `value`   | `String` | `private`    | Código único que identifica un contenedor. |
+
+---
+
+**3. `VehicleId` (Value Object)**
+
+Identificador único asignado a un vehículo dentro del sistema de gestión de rutas o recolección.
+
+**Atributos Principales:**
+
+| Atributo  | Tipo     | Visibilidad  | Descripción                              |
+|-----------|----------|--------------|------------------------------------------|
+| `value`   | `String` | `private`    | Código único que representa al vehículo. |
+
+---
+
+**4. `DriverId` (Value Object)**
+
+Identificador único del conductor dentro del sistema.
+
+**Atributos Principales:**
+
+| Atributo  | Tipo     | Visibilidad  | Descripción                          |
+|-----------|----------|--------------|--------------------------------------|
+| `value`   | `String` | `private`    | Identificador asignado al conductor. |
+
+---
+
+**5. `UserId` (Value Object)**
+
+Identificador único que representa a un usuario dentro del dominio compartido.
+
+**Atributos Principales:**
+
+| Atributo  | Tipo     | Visibilidad  | Descripción               |
+|-----------|----------|--------------|---------------------------|
+| `value`   | `String` | `private`    | Código único del usuario. |
+
+---
+
+**6. `CitizenId` (Value Object)**
+
+Identificador único de un ciudadano en el sistema.
+
+**Atributos Principales:**
+
+| Atributo  | Tipo     | Visibilidad  | Descripción                           |
+|-----------|----------|--------------|---------------------------------------|
+| `value`   | `String` | `private`    | Código único asignado a un ciudadano. |
+
+---
+
+**7. `SubscriptionId` (Value Object)**
+
+Identificador único asociado a una suscripción o contrato dentro del sistema.
+
+**Atributos Principales:**
+
+| Atributo   | Tipo     | Visibilidad  | Descripción                     |
+|------------|----------|--------------|---------------------------------|
+| `value`    | `String` | `private`    | Código único de la suscripción. |
+
+---
+
+**8. `EmailAddress` (Value Object)**
+
+Representa la dirección de correo electrónico validada de un usuario o entidad.
+
+**Atributos Principales:**
+
+| Atributo  | Tipo     | Visibilidad  | Descripción                             |
+|-----------|----------|--------------|-----------------------------------------|
+| `value`   | `String` | `private`    | Dirección de correo electrónico válida. |
+
+---
+
+**9. `DocumentNumber` (Value Object)**
+
+Representa el número de documento de identidad o registro de una persona o entidad.
+
+**Atributos Principales:**
+
+| Atributo  | Tipo     | Visibilidad   | Descripción                                   |
+|-----------|----------|---------------|-----------------------------------------------|
+| `value`   | `String` | `private`     | Número de documento o identificación oficial. |
+
+---
+
+**10. `PhoneNumber` (Value Object)**
+
+Representa un número telefónico válido y registrado en el sistema.
+
+**Atributos Principales:**
+
+| Atributo  | Tipo     | Visibilidad   | Descripción                             |
+|-----------|----------|---------------|-----------------------------------------|
+| `value`   | `String` | `private`     | Número telefónico con formato estándar. |
+
+---
+
+**11. `NotificationRequestId` (Value Object)**
+
+Identificador único de una solicitud de notificación dentro del sistema.
+
+**Atributos Principales:**
+
+| Atributo  | Tipo     | Visibilidad  | Descripción                                          |
+|-----------|----------|--------------|------------------------------------------------------|
+| `value`   | `String` | `private`    | Código que identifica una solicitud de notificación. |
+
+---
+
+**12. `PaymentMethodId` (Value Object)**
+
+Identificador de un método de pago registrado por el usuario o entidad.
+
+**Atributos Principales:**
+
+| Atributo  | Tipo     | Visibilidad  | Descripción                             |
+|-----------|----------|--------------|-----------------------------------------|
+| `value`   | `String` | `private`    | Identificador único del método de pago. |
+
+---
+
+**13. `RoleId` (Value Object)**
+
+Identificador que representa el rol o perfil asignado a un usuario.
+
+**Atributos Principales:**
+
+| Atributo  | Tipo     | Visibilidad   | Descripción                      |
+|-----------|----------|---------------|----------------------------------|
+| `value`   | `String` | `private`     | Código único del rol de usuario. |
+
+---
+
+**14. `Location` (Value Object)**
+
+Representa una ubicación geográfica detallada, incluyendo coordenadas y dirección.
+
+**Atributos Principales:**
+
+| Atributo       | Tipo         | Visibilidad  | Descripción                                        |
+|----------------|--------------|--------------|----------------------------------------------------|
+| `latitude`     | `BigDecimal` | `private`    | Coordenada de latitud.                             |
+| `longitude`    | `BigDecimal` | `private`    | Coordenada de longitud.                            |
+| `address`      | `String`     | `private`    | Dirección textual asociada a la ubicación.         |
+| `districtCode` | `String`     | `private`    | Código del distrito al que pertenece la ubicación. |
+
+---
+
+**15. `FullName` (Value Object)**
+
+Representa el nombre completo de una persona, compuesto por nombres y apellidos.
+
+**Atributos Principales:**
+
+| Atributo    | Tipo     | Visibilidad  | Descripción             |
+|-------------|----------|--------------|-------------------------|
+| `firstName` | `String` | `private`    | Nombre de la persona.   |
+| `lastName`  | `String` | `private`    | Apellido de la persona. |
+
+---
+
+**16. `Money` (Value Object)**
+
+Representa una cantidad monetaria junto con su tipo de moneda.
+
+**Atributos Principales:**
+
+| Atributo   | Tipo         | Visibilidad  | Descripción                                       |
+|------------|--------------|--------------|---------------------------------------------------|
+| `amount`   | `BigDecimal` | `private`    | Monto monetario expresado en la moneda indicada.  |
+| `currency` | `String`     | `private`    | Código de la moneda (por ejemplo, PEN, USD, EUR). |
+
+---
+
 **Diccionario de Clases del Bounded Context Container Monitoring:**
 
 Se presenta un diccionario detallado de clases para el Bounded Context "Container Monitoring" en un sistema de gestión de residuos con contenedores inteligentes equipados con sensores IoT. Este diccionario incluye entidades, objetos de valor, servicios de dominio, servicios de aplicación, fábricas e interfaces de repositorio, proporcionando una visión completa de la estructura del dominio y sus interacciones.
@@ -2637,349 +2861,178 @@ Se presenta un diccionario detallado de clases para el Bounded Context "Containe
 
 **1. `Container` (Aggregate Root)**
 
-Representa un contenedor de residuos inteligente con capacidad de monitoreo en tiempo real, incluyendo sensores, ubicación, nivel de llenado y estado de recolección.
+Representa un contenedor inteligente con capacidad de monitoreo en tiempo real. Gestiona su ubicación, tipo, nivel de llenado, estado operativo y frecuencia de recolección, además de las lecturas de sensores asociadas.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del contenedor. |
-| `containerId` | `ContainerId` | `private` | Identificador de dominio del contenedor. |
-| `location` | `Location` | `private` | Ubicación geográfica del contenedor. |
-| `capacity` | `ContainerCapacity` | `private` | Capacidad máxima del contenedor. |
-| `currentFillLevel` | `FillLevel` | `private` | Nivel actual de llenado del contenedor. |
-| `status` | `ContainerStatus` | `private` | Estado operacional del contenedor. |
-| `type` | `ContainerType` | `private` | Tipo de residuos que acepta el contenedor. |
-| `lastCollectionDate` | `LocalDateTime` | `private` | Fecha y hora de la última recolección. |
-| `sensorReadings` | `List<SensorReading>` | `private` | Lista de lecturas de sensores asociadas. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
+| Atributo               | Tipo                  | Visibilidad   | Descripción                                              |
+|------------------------|-----------------------|---------------|----------------------------------------------------------|
+| `id`                   | `String`              | `private`     | Identificador único del contenedor.                      |
+| `location`             | `Location`            | `private`     | Ubicación geográfica del contenedor.                     |
+| `capacity`             | `ContainerCapacity`   | `private`     | Capacidad máxima en volumen y peso del contenedor.       |
+| `containerType`        | `ContainerType`       | `private`     | Tipo de residuos que acepta el contenedor.               |
+| `currentFillLevel`     | `FillLevel`           | `private`     | Nivel actual de llenado del contenedor.                  |
+| `status`               | `ContainerStatus`     | `private`     | Estado operacional del contenedor.                       |
+| `sensorId`             | `SensorId`            | `private`     | Identificador del sensor instalado.                      |
+| `lastReadingTimestamp` | `LocalDateTime`       | `private`     | Fecha y hora de la última lectura recibida.              |
+| `districtId`           | `DistrictId`          | `private`     | Identificador del distrito donde se ubica el contenedor. |
+| `lastCollectionDate`   | `LocalDateTime`       | `private`     | Fecha y hora de la última recolección realizada.         |
+| `collectionFrequency`  | `CollectionFrequency` | `private`     | Frecuencia programada de recolección.                    |
+| `createdAt`            | `LocalDateTime`       | `private`     | Fecha y hora de creación del registro.                   |
+| `updatedAt`            | `LocalDateTime`       | `private`     | Fecha y hora de la última actualización.                 |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `Container()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `Container(location, capacity, type)` | `Constructor` | `public` | Constructor que instancia un contenedor con ubicación, capacidad y tipo. |
-| `addSensorReading(reading)` | `void` | `public` | Agrega una nueva lectura de sensor al contenedor. |
-| `updateFillLevel(newLevel)` | `void` | `public` | Actualiza el nivel de llenado del contenedor. |
-| `markAsCollected()` | `void` | `public` | Marca el contenedor como recolectado y actualiza la fecha. |
-| `isOverflowing()` | `boolean` | `public` | Determina si el contenedor está desbordándose. |
-| `needsCollection()` | `boolean` | `public` | Determina si el contenedor necesita ser recolectado. |
-| `calculateFillRate()` | `double` | `public` | Calcula la tasa de llenado del contenedor. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
+| Método                                                           | Tipo de Retorno   | Visibilidad   | Descripción                                                      |
+|------------------------------------------------------------------|-------------------|---------------|------------------------------------------------------------------|
+| `updateFillLevel(newLevel: FillLevel, timestamp: LocalDateTime)` | `void`            | `public`      | Actualiza el nivel de llenado del contenedor y registra la hora. |
+| `markAsCollected(collectedAt: LocalDateTime)`                    | `void`            | `public`      | Marca el contenedor como recolectado en una fecha específica.    |
+| `requiresCollection()`                                           | `boolean`         | `public`      | Determina si el contenedor necesita ser vaciado.                 |
+| `isOverflowing()`                                                | `boolean`         | `public`      | Indica si el contenedor ha superado su capacidad máxima.         |
+| `assignSensor(sensorId: SensorId)`                               | `void`            | `public`      | Asocia un sensor físico al contenedor.                           |
+| `scheduleMaintenanceDueToSensorFailure()`                        | `void`            | `public`      | Programa mantenimiento por falla del sensor.                     |
 
 ---
 
-**Entities**
+**2. `SensorReading` (Aggregate Root)**
 
-**2. `SensorReading` (Entity)**
-
-Representa una lectura individual de un sensor instalado en un contenedor, incluyendo datos de nivel de llenado, temperatura y estado del sensor.
+Representa una lectura individual registrada por un sensor instalado en un contenedor, incluyendo nivel de llenado, temperatura, batería y validación de datos.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único de la lectura. |
-| `readingId` | `SensorReadingId` | `private` | Identificador de dominio de la lectura. |
-| `containerId` | `ContainerId` | `private` | Identificador del contenedor asociado. |
-| `sensorId` | `SensorId` | `private` | Identificador del sensor que tomó la lectura. |
-| `timestamp` | `LocalDateTime` | `private` | Marca de tiempo de la lectura. |
-| `fillLevel` | `FillLevel` | `private` | Nivel de llenado registrado. |
-| `temperature` | `Temperature` | `private` | Temperatura registrada por el sensor. |
-| `sensorHealth` | `SensorHealth` | `private` | Estado de salud del sensor. |
-| `isValidated` | `boolean` | `private` | Indica si la lectura ha sido validada. |
+| Atributo           | Tipo               | Visibilidad  | Descripción                                              |
+|--------------------|--------------------|--------------|----------------------------------------------------------|
+| `id`               | `String`           | `private`    | Identificador único de la lectura.                       |
+| `containerId`      | `ContainerId`      | `private`    | Identificador del contenedor asociado.                   |
+| `fillLevel`        | `FillLevel`        | `private`    | Nivel de llenado registrado por el sensor.               |
+| `temperature`      | `Temperature`      | `private`    | Temperatura medida en el momento de la lectura.          |
+| `batteryLevel`     | `BatteryLevel`     | `private`    | Nivel de batería del sensor al momento de la lectura.    |
+| `recordedAt`       | `LocalDateTime`    | `private`    | Fecha y hora en que se registró la lectura.              |
+| `isValidated`      | `boolean`          | `private`    | Indica si la lectura fue validada correctamente.         |
+| `validationStatus` | `ValidationStatus` | `private`    | Estado del proceso de validación de la lectura.          |
+| `receivedAt`       | `LocalDateTime`    | `private`    | Fecha y hora en que se recibió la lectura en el sistema. |
+| `createdAt`        | `LocalDateTime`    | `private`    | Fecha y hora de creación del registro.                   |
+| `updatedAt`        | `LocalDateTime`    | `private`    | Fecha y hora de la última modificación.                  |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `SensorReading()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `SensorReading(containerId, sensorId, fillLevel)` | `Constructor` | `public` | Constructor que instancia una lectura con datos básicos. |
-| `validate()` | `ValidationResult` | `public` | Valida la consistencia y precisión de la lectura. |
-| `isAnomalous()` | `boolean` | `public` | Determina si la lectura presenta anomalías. |
+| Método        | Tipo de Retorno    | Visibilidad  | Descripción                                                      |
+|---------------|--------------------|--------------|------------------------------------------------------------------|
+| `validate()`  | `ValidationResult` | `public`     | Valida los valores de la lectura según los umbrales del sistema. |
+| `isAnomaly()` | `boolean`          | `public`     | Determina si la lectura presenta una anomalía o error de sensor. |
 
 ---
 
 **Value Objects**
 
-**3. `ContainerId` (Value Object)**
+**3. `ContainerCapacity` (Value Object)**
 
-Identificador único inmutable para un contenedor en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `containerId` | `Long` | `private` | Valor numérico del identificador. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isValid()` | `boolean` | `public` | Valida que el identificador sea válido. |
-
-**4. `FillLevel` (Value Object)**
-
-Representa el nivel de llenado de un contenedor como porcentaje y timestamp.
+Define la capacidad física de un contenedor en términos de volumen y peso máximos.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `percentage` | `double` | `private` | Porcentaje de llenado (0-100). |
-| `lastUpdated` | `LocalDateTime` | `private` | Fecha y hora de la última actualización. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isCritical()` | `boolean` | `public` | Determina si el nivel es crítico (requiere recolección urgente). |
-| `isNearFull()` | `boolean` | `public` | Determina si el contenedor está cerca de llenarse. |
-
-**5. `ContainerCapacity` (Value Object)**
-
-Define la capacidad máxima de un contenedor en volumen y peso.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `volumeInLiters` | `double` | `private` | Capacidad en litros del contenedor. |
-| `maxWeight` | `double` | `private` | Peso máximo soportado en kilogramos. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `calculateUtilization(currentFill)` | `double` | `public` | Calcula el porcentaje de utilización actual. |
-
-**6. `ContainerStatus` (Value Object)**
-
-Estado operacional del contenedor con historial de cambios.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `status` | `String` | `private` | Estado actual del contenedor. |
-| `lastStatusChange` | `LocalDateTime` | `private` | Fecha del último cambio de estado. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isActive()` | `boolean` | `public` | Determina si el contenedor está activo. |
-| `canTransitionTo(newStatus)` | `boolean` | `public` | Valida si puede cambiar al nuevo estado. |
-
-**7. `SensorHealth` (Value Object)**
-
-Estado de salud y diagnóstico de un sensor IoT.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `healthStatus` | `String` | `private` | Estado de salud del sensor. |
-| `batteryLevel` | `double` | `private` | Nivel de batería del sensor (0-100). |
-| `signalStrength` | `double` | `private` | Intensidad de señal de comunicación. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isHealthy()` | `boolean` | `public` | Determina si el sensor está funcionando correctamente. |
-| `needsMaintenance()` | `boolean` | `public` | Determina si el sensor requiere mantenimiento. |
-
-**8. `Temperature` (Value Object)**
-
-Medición de temperatura con capacidades de conversión y validación.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `celsius` | `double` | `private` | Temperatura en grados Celsius. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `toFahrenheit()` | `double` | `public` | Convierte la temperatura a Fahrenheit. |
-| `isWithinNormalRange()` | `boolean` | `public` | Verifica si está dentro del rango normal. |
-
-**9. `SensorReadingId` (Value Object)**
-
-Identificador único inmutable para una lectura de sensor en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `readingId` | `Long` | `private` | Valor numérico del identificador de lectura. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isValid()` | `boolean` | `public` | Valida que el identificador sea válido. |
-
-**10. `SensorId` (Value Object)**
-
-Identificador único inmutable para un sensor IoT en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `sensorId` | `Long` | `private` | Valor numérico del identificador del sensor. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isValid()` | `boolean` | `public` | Valida que el identificador sea válido. |
+| Atributo       | Tipo      | Visibilidad  | Descripción                     |
+|----------------|-----------|--------------|---------------------------------|
+| `volumeLiters` | `Integer` | `private`    | Capacidad máxima en litros.     |
+| `maxWeightKg`  | `Integer` | `private`    | Capacidad máxima en kilogramos. |
 
 ---
 
-**Application Services**
+**4. `SensorId` (Value Object)**
 
-**11. `ContainerApplicationService` (Application Service)**
-
-Servicio de aplicación que coordina las operaciones de negocio relacionadas con contenedores.
+Identificador único que representa un sensor físico conectado al sistema.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `containerRepository` | `ContainerRepository` | `private` | Repositorio para persistencia de contenedores. |
-| `containerDomainService` | `ContainerDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `containerFactory` | `ContainerFactory` | `private` | Factory para creación de contenedores. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
+| Atributo  | Tipo     | Visibilidad  | Descripción                        |
+|-----------|----------|--------------|------------------------------------|
+| `value`   | `String` | `private`    | Código o identificador del sensor. |
 
-**Métodos principales:**
+---
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createContainer(location, capacity, type, municipalityId)` | `Container` | `public` | Crea un nuevo contenedor en el sistema. |
-| `updateFillLevel(containerId, fillLevel, sensorId)` | `void` | `public` | Actualiza el nivel de llenado de un contenedor. |
-| `markContainerAsCollected(containerId, driverId)` | `void` | `public` | Marca un contenedor como recolectado. |
-| `getContainerById(containerId)` | `Optional<Container>` | `public` | Obtiene un contenedor por su identificador. |
-| `getContainersByLocation(location, radiusKm)` | `List<Container>` | `public` | Obtiene contenedores en un radio específico. |
-| `getOverflowingContainers(municipalityId)` | `List<Container>` | `public` | Obtiene contenedores que están desbordándose. |
+**5. `CollectionFrequency` (Value Object)**
 
-**12. `SensorApplicationService` (Application Service)**
-
-Servicio de aplicación para procesamiento y validación de datos de sensores.
+Determina la frecuencia con la que debe realizarse la recolección de residuos en el contenedor.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `containerRepository` | `ContainerRepository` | `private` | Repositorio para acceso a contenedores. |
-| `sensorValidationService` | `SensorValidationService` | `private` | Servicio para validación de datos de sensores. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `processSensorReading(containerId, sensorId, fillLevel, temperature)` | `void` | `public` | Procesa una nueva lectura de sensor. |
-| `validateSensorReadings(containerId)` | `ValidationResult` | `public` | Valida las lecturas de sensores de un contenedor. |
-| `getSensorReadings(containerId, startDate, endDate)` | `List<SensorReading>` | `public` | Obtiene lecturas de sensores en un período. |
+| Atributo  | Tipo      | Visibilidad  | Descripción                                       |
+|-----------|-----------|--------------|---------------------------------------------------|
+| `days`    | `Integer` | `private`    | Número de días entre cada recolección programada. |
 
 ---
 
-**Domain Services**
+**6. `FillLevel` (Value Object)**
 
-**13. `ContainerDomainService` (Domain Service)**
-
-Servicio de dominio que implementa lógica de negocio compleja relacionada con contenedores.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `calculateOptimalCollectionRoute(containers)` | `CollectionRoute` | `public` | Calcula la ruta óptima de recolección. |
-| `determineMaintenancePriority(containers)` | `List<Container>` | `public` | Determina prioridad de mantenimiento de contenedores. |
-| `validateContainerPlacement(location, type)` | `ValidationResult` | `public` | Valida la ubicación propuesta para un contenedor. |
-
-**14. `SensorValidationService` (Domain Service)**
-
-Servicio especializado en validación y análisis de datos de sensores.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateReading(reading)` | `ValidationResult` | `public` | Valida una lectura individual de sensor. |
-| `detectAnomalies(readings)` | `List<Anomaly>` | `public` | Detecta anomalías en un conjunto de lecturas. |
-| `calibrateSensor(sensorId, referenceValue)` | `CalibrationResult` | `public` | Calibra un sensor con un valor de referencia. |
-
-**15. `ContainerAnalyticsService` (Domain Service)**
-
-Servicio para análisis predictivo y generación de reportes de contenedores.
+Representa el nivel actual de llenado de un contenedor en porcentaje.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `predictionStrategy` | `FillLevelPredictionStrategy` | `private` | Estrategia de predicción de niveles de llenado. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `calculateFillTrend(container)` | `FillTrend` | `public` | Calcula la tendencia de llenado de un contenedor. |
-| `generateUsageReport(containers, period)` | `UsageReport` | `public` | Genera reporte de uso de contenedores. |
-| `setPredictionStrategy(strategy)` | `void` | `public` | Establece la estrategia de predicción a usar. |
+| Atributo     | Tipo      | Visibilidad   | Descripción                                  |
+|--------------|-----------|---------------|----------------------------------------------|
+| `percentage` | `Integer` | `private`     | Porcentaje de llenado actual del contenedor. |
 
 ---
 
-**Factories**
+**7. `Temperature` (Value Object)**
 
-**16. `ContainerFactory` (Factory)**
+Representa la temperatura medida por un sensor en grados Celsius.
 
-Factory para la creación de instancias de Container con validaciones y configuraciones por defecto.
+**Atributos Principales:**
 
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createContainer(location, capacity, type, municipalityId)` | `Container` | `public` | Crea un contenedor con parámetros específicos. |
-| `createWithDefaults(location, type)` | `Container` | `public` | Crea un contenedor con valores por defecto. |
-
-**17. `SensorReadingFactory` (Factory)**
-
-Factory para la creación de lecturas de sensores desde diferentes fuentes de datos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createFromSensorData(containerId, sensorData)` | `SensorReading` | `public` | Crea lectura desde datos raw del sensor. |
-| `createFromIoTMessage(message)` | `SensorReading` | `public` | Crea lectura desde mensaje IoT estructurado. |
+| Atributo  | Tipo         | Visibilidad  | Descripción                               |
+|-----------|--------------|--------------|-------------------------------------------|
+| `celsius` | `BigDecimal` | `private`    | Temperatura registrada en grados Celsius. |
 
 ---
 
-**Repository Interfaces**
+**8. `BatteryLevel` (Value Object)**
 
-**18. `ContainerRepository` (Repository Interface)**
+Representa el nivel de batería restante del sensor.
 
-Interfaz de repositorio para la persistencia y consulta de contenedores.
+**Atributos Principales:**
 
-**Métodos principales:**
+| Atributo     | Tipo      | Visibilidad  | Descripción                               |
+|--------------|-----------|--------------|-------------------------------------------|
+| `percentage` | `Integer` | `private`    | Porcentaje actual de carga de la batería. |
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(containerId)` | `Optional<Container>` | `public` | Busca un contenedor por su identificador. |
-| `findByLocation(location, radiusKm)` | `List<Container>` | `public` | Busca contenedores en un área geográfica. |
-| `findByMunicipality(municipalityId)` | `List<Container>` | `public` | Busca contenedores de una municipalidad. |
-| `findOverflowing()` | `List<Container>` | `public` | Busca contenedores que están desbordándose. |
-| `findByStatus(status)` | `List<Container>` | `public` | Busca contenedores por estado. |
-| `save(container)` | `Container` | `public` | Persiste o actualiza un contenedor. |
-| `delete(containerId)` | `void` | `public` | Elimina un contenedor del sistema. |
-| `existsById(containerId)` | `boolean` | `public` | Verifica si existe un contenedor. |
+---
+
+**Enumerations**
+
+**9. `ContainerType` (Enumeration)**
+
+Clasifica los tipos de contenedores según el tipo de residuo que almacenan.
+
+| Valor        | Descripción                             |
+|--------------|-----------------------------------------|
+| `ORGANIC`    | Contenedor para residuos orgánicos.     |
+| `RECYCLABLE` | Contenedor para materiales reciclables. |
+| `GENERAL`    | Contenedor para desechos generales.     |
+
+---
+
+**10. `ContainerStatus` (Enumeration)**
+
+Indica el estado operativo de un contenedor dentro del sistema.
+
+| Valor            | Descripción                                                   |
+|------------------|---------------------------------------------------------------|
+| `ACTIVE`         | Contenedor operativo y disponible para uso.                   |
+| `MAINTENANCE`    | Contenedor temporalmente fuera de servicio por mantenimiento. |
+| `DECOMMISSIONED` | Contenedor retirado del servicio.                             |
+
+---
+
+**11. `ValidationStatus` (Enumeration)**
+
+Define el resultado de la validación de una lectura de sensor.
+
+| Valor          | Descripción                                    |
+|----------------|------------------------------------------------|
+| `VALID`        | Lectura válida sin errores detectados.         |
+| `ANOMALY`      | Lectura con valores atípicos o inconsistentes. |
+| `SENSOR_ERROR` | Error en el sensor durante la lectura.         |
 
 ---
 
@@ -2991,51 +3044,40 @@ Se presenta un diccionario detallado de las clases que componen el Bounded Conte
 
 **1. `Route` (Aggregate Root)**
 
-Representa una ruta de recolección de residuos que incluye secuencia de contenedores a visitar, conductor asignado, vehículo, y métricas de optimización.
+Representa una ruta de recolección planificada y ejecutada dentro de un distrito, asignada a un conductor y vehículo. Gestiona los puntos de parada (waypoints), el estado de la ejecución y las métricas de distancia y duración.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único de la ruta. |
-| `routeId` | `RouteId` | `private` | Identificador de dominio de la ruta. |
-| `name` | `String` | `private` | Nombre descriptivo de la ruta. |
-| `municipalityId` | `MunicipalityId` | `private` | Identificador de la municipalidad asociada. |
-| `driverId` | `DriverId` | `private` | Identificador del conductor asignado. |
-| `vehicleId` | `VehicleId` | `private` | Identificador del vehículo asignado. |
-| `routeType` | `RouteType` | `private` | Tipo de ruta (regular, emergencia, residuos especiales). |
-| `status` | `RouteStatus` | `private` | Estado actual de la ruta. |
-| `scheduledDate` | `LocalDateTime` | `private` | Fecha y hora programada para la ruta. |
-| `startTime` | `LocalDateTime` | `private` | Hora de inicio real de la ruta. |
-| `endTime` | `LocalDateTime` | `private` | Hora de finalización real de la ruta. |
-| `waypoints` | `List<Waypoint>` | `private` | Lista ordenada de puntos de parada. |
-| `estimatedDuration` | `Duration` | `private` | Duración estimada de la ruta. |
-| `actualDuration` | `Duration` | `private` | Duración real de la ruta. |
-| `totalDistance` | `Distance` | `private` | Distancia total de la ruta. |
-| `optimizationMetrics` | `OptimizationMetrics` | `private` | Métricas de optimización aplicadas. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
+| Atributo            | Tipo             | Visibilidad | Descripción                                          |
+|---------------------|------------------|-------------|------------------------------------------------------|
+| `id`                | `String`         | `private`   | Identificador único de la ruta.                      |
+| `districtId`        | `DistrictId`     | `private`   | Identificador del distrito donde se realiza la ruta. |
+| `vehicleId`         | `VehicleId`      | `private`   | Identificador del vehículo asignado.                 |
+| `driverId`          | `DriverId`       | `private`   | Identificador del conductor asignado.                |
+| `routeType`         | `RouteType`      | `private`   | Tipo de ruta (regular, de emergencia, optimizada).   |
+| `status`            | `RouteStatus`    | `private`   | Estado actual de la ruta.                            |
+| `scheduledDate`     | `LocalDate`      | `private`   | Fecha programada de ejecución.                       |
+| `startedAt`         | `LocalDateTime`  | `private`   | Fecha y hora de inicio de la ejecución.              |
+| `completedAt`       | `LocalDateTime`  | `private`   | Fecha y hora de finalización de la ruta.             |
+| `waypoints`         | `List<Waypoint>` | `private`   | Lista de puntos de parada que componen la ruta.      |
+| `totalDistance`     | `Distance`       | `private`   | Distancia total estimada de la ruta.                 |
+| `estimatedDuration` | `Duration`       | `private`   | Duración estimada del recorrido.                     |
+| `actualDuration`    | `Duration`       | `private`   | Duración real registrada al completar la ruta.       |
+| `createdAt`         | `LocalDateTime`  | `private`   | Fecha y hora de creación del registro.               |
+| `updatedAt`         | `LocalDateTime`  | `private`   | Fecha y hora de la última actualización.             |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `Route()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `Route(name, municipalityId, routeType)` | `Constructor` | `public` | Constructor que instancia una ruta con datos básicos. |
-| `addWaypoint(waypoint)` | `void` | `public` | Agrega un punto de parada a la ruta. |
-| `removeWaypoint(waypointId)` | `void` | `public` | Elimina un punto de parada de la ruta. |
-| `reorderWaypoints(newOrder)` | `void` | `public` | Reordena los puntos de parada según nueva secuencia. |
-| `startExecution()` | `void` | `public` | Inicia la ejecución de la ruta. |
-| `completeExecution()` | `void` | `public` | Finaliza la ejecución de la ruta. |
-| `updateProgress(currentLocation)` | `void` | `public` | Actualiza el progreso actual de la ruta. |
-| `optimizeWaypoints(strategy)` | `OptimizationResult` | `public` | Optimiza el orden de los puntos usando estrategia específica. |
-| `calculateEstimatedDuration()` | `Duration` | `public` | Calcula la duración estimada de la ruta. |
-| `isExecutable()` | `boolean` | `public` | Determina si la ruta puede ser ejecutada. |
-| `canBeModified()` | `boolean` | `public` | Determina si la ruta puede ser modificada. |
-| `canBeOptimized()` | `boolean` | `public` | Determina si la ruta puede ser optimizada. |
-| `canStartExecution()` | `boolean` | `public` | Determina si la ruta puede iniciar ejecución. |
-| `changeStatus(newStatus)` | `void` | `public` | Cambia el estado de la ruta. |
-| `getAvailableActions()` | `List<RouteAction>` | `public` | Obtiene las acciones disponibles según el estado actual. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
+| Método                                                                    | Tipo de Retorno | Visibilidad | Descripción                                                              |
+|---------------------------------------------------------------------------|-----------------|-------------|--------------------------------------------------------------------------|
+| `addWaypoint(containerId: ContainerId, priority: Priority)`               | `void`          | `public`    | Agrega un nuevo punto de parada a la ruta con prioridad asignada.        |
+| `removeWaypoint(waypointId: WaypointId)`                                  | `void`          | `public`    | Elimina un punto de parada de la ruta.                                   |
+| `assignToDriver(driverId: DriverId, vehicleId: VehicleId)`                | `void`          | `public`    | Asigna la ruta a un conductor y vehículo específicos.                    |
+| `startExecution()`                                                        | `void`          | `public`    | Inicia la ejecución de la ruta.                                          |
+| `completeExecution()`                                                     | `void`          | `public`    | Marca la ruta como completada.                                           |
+| `markWaypointAsVisited(waypointId: WaypointId, timestamp: LocalDateTime)` | `void`          | `public`    | Marca un punto de parada como visitado en una fecha y hora determinadas. |
+| `canBeModified()`                                                         | `boolean`       | `public`    | Verifica si la ruta puede ser modificada según su estado.                |
+| `isOverdue()`                                                             | `boolean`       | `public`    | Determina si la ruta ha superado su tiempo programado.                   |
 
 ---
 
@@ -3043,536 +3085,111 @@ Representa una ruta de recolección de residuos que incluye secuencia de contene
 
 **2. `Waypoint` (Entity)**
 
-Representa un punto de parada en una ruta, asociado a un contenedor específico con información de secuencia, tiempos y estado de visita.
+Representa un punto de parada dentro de una ruta de recolección. Cada waypoint corresponde a un contenedor o ubicación donde se debe realizar una acción (visita, omisión, etc.), e incluye información sobre tiempos y observaciones del conductor.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del punto de parada. |
-| `waypointId` | `WaypointId` | `private` | Identificador de dominio del punto de parada. |
-| `routeId` | `RouteId` | `private` | Identificador de la ruta asociada. |
-| `containerId` | `ContainerId` | `private` | Identificador del contenedor a visitar. |
-| `location` | `Location` | `private` | Ubicación geográfica del punto de parada. |
-| `priority` | `Priority` | `private` | Prioridad del punto de parada. |
-| `estimatedArrivalTime` | `LocalDateTime` | `private` | Hora estimada de llegada. |
-| `actualArrivalTime` | `LocalDateTime` | `private` | Hora real de llegada. |
-| `estimatedServiceTime` | `Duration` | `private` | Tiempo estimado de servicio. |
-| `actualServiceTime` | `Duration` | `private` | Tiempo real de servicio. |
-| `sequenceOrder` | `Integer` | `private` | Orden de secuencia en la ruta. |
-| `status` | `WaypointStatus` | `private` | Estado actual del punto de parada. |
-| `collectionInstructions` | `String` | `private` | Instrucciones especiales para la recolección. |
+| Atributo               | Tipo             | Visibilidad | Descripción                                                   |
+|------------------------|------------------|-------------|---------------------------------------------------------------|
+| `id`                   | `String`         | `private`   | Identificador único del waypoint.                             |
+| `containerId`          | `ContainerId`    | `private`   | Identificador del contenedor o punto de recolección asociado. |
+| `sequenceOrder`        | `Integer`        | `private`   | Orden secuencial del punto dentro de la ruta.                 |
+| `priority`             | `Priority`       | `private`   | Prioridad del punto según su urgencia o criticidad.           |
+| `status`               | `WaypointStatus` | `private`   | Estado actual del waypoint (pendiente, visitado, omitido).    |
+| `estimatedArrivalTime` | `LocalDateTime`  | `private`   | Hora estimada de llegada.                                     |
+| `actualArrivalTime`    | `LocalDateTime`  | `private`   | Hora real de llegada registrada.                              |
+| `serviceTime`          | `Duration`       | `private`   | Tiempo invertido en atender el punto.                         |
+| `driverNote`           | `String`         | `private`   | Nota o comentario del conductor sobre el punto.               |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `Waypoint()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `Waypoint(containerId, location, priority)` | `Constructor` | `public` | Constructor que instancia un punto de parada con datos básicos. |
-| `markAsVisited()` | `void` | `public` | Marca el punto de parada como visitado. |
-| `updateServiceTime(duration)` | `void` | `public` | Actualiza el tiempo de servicio real. |
-| `updateSequenceOrder(order)` | `void` | `public` | Actualiza el orden de secuencia. |
-| `canBeVisited()` | `boolean` | `public` | Determina si el punto puede ser visitado. |
-| `isCompleted()` | `boolean` | `public` | Determina si el punto ha sido completado. |
-| `validateInstructions()` | `ValidationResult` | `public` | Valida las instrucciones de recolección. |
-
-**3. `OptimizationResult` (Entity)**
-
-Representa el resultado de un proceso de optimización de ruta, incluyendo métricas de eficiencia y detalles del algoritmo utilizado.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del resultado. |
-| `resultId` | `OptimizationResultId` | `private` | Identificador de dominio del resultado. |
-| `routeId` | `RouteId` | `private` | Identificador de la ruta optimizada. |
-| `algorithmUsed` | `OptimizationAlgorithm` | `private` | Algoritmo utilizado para la optimización. |
-| `executionTime` | `Duration` | `private` | Tiempo de ejecución del algoritmo. |
-| `totalDistance` | `Distance` | `private` | Distancia total de la ruta optimizada. |
-| `estimatedFuelConsumption` | `Double` | `private` | Consumo estimado de combustible. |
-| `co2Emissions` | `Double` | `private` | Emisiones de CO2 estimadas. |
-| `costEstimate` | `MonetaryAmount` | `private` | Estimación de costo de la ruta. |
-| `optimizationScore` | `Double` | `private` | Puntuación de optimización obtenida. |
-| `timestamp` | `LocalDateTime` | `private` | Marca de tiempo del resultado. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `OptimizationResult(routeId, algorithm)` | `Constructor` | `public` | Constructor que instancia un resultado con ruta y algoritmo. |
-| `calculateScore()` | `Double` | `public` | Calcula la puntuación de optimización. |
-| `compareWith(other)` | `ComparisonResult` | `public` | Compara con otro resultado de optimización. |
-| `isValidResult()` | `boolean` | `public` | Determina si el resultado es válido. |
+| Método                                                              | Tipo de Retorno | Visibilidad | Descripción                                                                  |
+|---------------------------------------------------------------------|-----------------|-------------|------------------------------------------------------------------------------|
+| `markAsVisited(arrivalTime: LocalDateTime, serviceTime: Duration)`  | `void`          | `public`    | Marca el punto como visitado, registrando hora y duración del servicio.      |
+| `markAsSkipped(reason: String)`                                     | `void`          | `public`    | Marca el punto como omitido, indicando la razón.                             |
+| `isCompleted()`                                                     | `boolean`       | `public`    | Determina si el punto ha sido completado (visitado u omitido).               |
+| `canBeVisited()`                                                    | `boolean`       | `public`    | Indica si el punto está habilitado para ser visitado según su estado actual. |
 
 ---
 
 **Value Objects**
 
-**4. `RouteId` (Value Object)**
+**3. `Distance` (Value Object)**
 
-Identificador único inmutable para una ruta en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `routeId` | `Long` | `private` | Valor numérico del identificador de ruta. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isValid()` | `Boolean` | `public` | Valida que el identificador sea válido. |
-
-**5. `WaypointId` (Value Object)**
-
-Identificador único inmutable para un punto de parada en el sistema.
+Representa la distancia total o parcial medida en una ruta.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `waypointId` | `Long` | `private` | Valor numérico del identificador del punto de parada. |
-
-**6. `OptimizationResultId` (Value Object)**
-
-Identificador único inmutable para un resultado de optimización en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `resultId` | `Long` | `private` | Valor numérico del identificador del resultado. |
-
-**7. `Priority` (Value Object)**
-
-Representa el nivel de prioridad de un punto de parada o ruta.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `level` | `Integer` | `private` | Nivel numérico de prioridad. |
-| `description` | `String` | `private` | Descripción textual de la prioridad. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isHighPriority()` | `Boolean` | `public` | Determina si es de alta prioridad. |
-| `compareTo(other)` | `Integer` | `public` | Compara con otra prioridad. |
-
-**8. `Distance` (Value Object)**
-
-Representa una distancia con capacidades de conversión y operaciones aritméticas.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `kilometers` | `Double` | `private` | Distancia en kilómetros. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `toMeters()` | `Double` | `public` | Convierte la distancia a metros. |
-| `add(other)` | `Distance` | `public` | Suma otra distancia. |
-
-**9. `OptimizationMetrics` (Value Object)**
-
-Métricas consolidadas de optimización de una ruta.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `totalDistance` | `Distance` | `private` | Distancia total de la ruta. |
-| `estimatedFuelCost` | `MonetaryAmount` | `private` | Costo estimado de combustible. |
-| `co2Emissions` | `Double` | `private` | Emisiones de CO2 estimadas. |
-| `timeEfficiency` | `Double` | `private` | Eficiencia temporal de la ruta. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `calculateOverallScore()` | `Double` | `public` | Calcula la puntuación general de optimización. |
-
-**10. `OptimizationAlgorithm` (Value Object)**
-
-Representa un algoritmo de optimización con sus parámetros configurables.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `algorithmType` | `String` | `private` | Tipo de algoritmo de optimización. |
-| `parameters` | `Map<String, Object>` | `private` | Parámetros de configuración del algoritmo. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isTravelingSalesman()` | `boolean` | `public` | Determina si es algoritmo de vendedor viajero. |
-| `isGeneticAlgorithm()` | `boolean` | `public` | Determina si es algoritmo genético. |
-
-**11. `OptimizationConstraints` (Value Object)**
-
-Define las restricciones y limitaciones para el proceso de optimización de rutas.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `maxDuration` | `Duration` | `private` | Duración máxima permitida para la ruta. |
-| `maxDistance` | `Distance` | `private` | Distancia máxima permitida. |
-| `vehicleCapacity` | `Double` | `private` | Capacidad del vehículo asignado. |
-| `timeWindows` | `List<TimeWindow>` | `private` | Ventanas de tiempo para restricciones horarias. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isValid()` | `boolean` | `public` | Valida que las restricciones sean coherentes. |
+| Atributo     | Tipo         | Visibilidad  | Descripción                            |
+|--------------|--------------|--------------|----------------------------------------|
+| `kilometers` | `BigDecimal` | `private`    | Distancia medida en kilómetros.        |
+| `weight`     | `Integer`    | `private`    | Peso asociado al recorrido (opcional). |
 
 ---
 
-**Enums**
+**4. `Priority` (Value Object)**
 
-**12. `RouteStatus` (Enum)**
-
-Estados posibles de una ruta durante su ciclo de vida.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `DRAFT` | Ruta en estado de borrador. |
-| `OPTIMIZED` | Ruta optimizada lista para revisión. |
-| `READY_FOR_EXECUTION` | Ruta lista para ser ejecutada. |
-| `IN_PROGRESS` | Ruta en ejecución. |
-| `PAUSED` | Ruta pausada temporalmente. |
-| `COMPLETED` | Ruta completada exitosamente. |
-| `CANCELLED` | Ruta cancelada. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canTransitionTo(newStatus)` | `boolean` | `public` | Valida si puede transicionar al nuevo estado. |
-| `isExecutable()` | `boolean` | `public` | Determina si el estado permite ejecución. |
-| `allowsModification()` | `boolean` | `public` | Determina si permite modificaciones. |
-| `allowsOptimization()` | `boolean` | `public` | Determina si permite optimización. |
-| `requiresDriverAssignment()` | `boolean` | `public` | Determina si requiere asignación de conductor. |
-| `getAvailableTransitions()` | `List<RouteStatus>` | `public` | Obtiene las transiciones disponibles. |
-
-**13. `WaypointStatus` (Enum)**
-
-Estados posibles de un punto de parada durante la ejecución de una ruta.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `PENDING` | Punto de parada pendiente de visita. |
-| `IN_PROGRESS` | Punto de parada en proceso de servicio. |
-| `COMPLETED` | Punto de parada completado exitosamente. |
-| `SKIPPED` | Punto de parada omitido. |
-| `FAILED` | Punto de parada fallido. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canTransitionTo(newStatus)` | `boolean` | `public` | Valida si puede transicionar al nuevo estado. |
-| `isCompleted()` | `boolean` | `public` | Determina si está completado. |
-| `isPending()` | `boolean` | `public` | Determina si está pendiente. |
-| `requiresAction()` | `boolean` | `public` | Determina si requiere acción del conductor. |
-
-**14. `RouteAction` (Enum)**
-
-Acciones disponibles que se pueden realizar sobre una ruta según su estado actual.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `CREATE_WAYPOINT` | Crear nuevo punto de parada. |
-| `REMOVE_WAYPOINT` | Eliminar punto de parada existente. |
-| `REORDER_WAYPOINTS` | Reordenar secuencia de puntos. |
-| `OPTIMIZE_ROUTE` | Optimizar la ruta. |
-| `START_EXECUTION` | Iniciar ejecución de la ruta. |
-| `PAUSE_EXECUTION` | Pausar ejecución en curso. |
-| `RESUME_EXECUTION` | Reanudar ejecución pausada. |
-| `COMPLETE_ROUTE` | Completar la ruta. |
-| `CANCEL_ROUTE` | Cancelar la ruta. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAllowedForStatus(status)` | `boolean` | `public` | Determina si la acción está permitida para el estado. |
-| `getRequiredPermissions()` | `List<Permission>` | `public` | Obtiene los permisos requeridos para la acción. |
-
----
-
-**Application Services**
-
-**15. `RouteApplicationService` (Application Service)**
-
-Servicio de aplicación que coordina las operaciones de negocio relacionadas con rutas de recolección.
+Define la prioridad asignada a un punto de parada dentro de la ruta.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `routeRepository` | `RouteRepository` | `private` | Repositorio para persistencia de rutas. |
-| `routeDomainService` | `RouteDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `routeFactory` | `RouteFactory` | `private` | Factory para creación de rutas. |
-| `optimizationService` | `RouteOptimizationService` | `private` | Servicio de optimización de rutas. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createRoute(name, municipalityId, driverId, vehicleId, routeType, scheduledDate, containerIds)` | `Route` | `public` | Crea una nueva ruta en el sistema. |
-| `optimizeRoute(routeId, algorithm, constraints)` | `OptimizationResult` | `public` | Optimiza una ruta usando algoritmo específico. |
-| `startRouteExecution(routeId, driverId, startLocation)` | `void` | `public` | Inicia la ejecución de una ruta. |
-| `updateRouteProgress(routeId, currentLocation, completedWaypointId)` | `void` | `public` | Actualiza el progreso de una ruta en ejecución. |
-| `completeRoute(routeId, endLocation, totalCollectedVolume)` | `void` | `public` | Finaliza una ruta completada. |
-| `getRouteById(routeId)` | `Optional<Route>` | `public` | Obtiene una ruta por su identificador. |
-| `getRoutesByDriver(driverId, dateRange)` | `List<Route>` | `public` | Obtiene rutas asignadas a un conductor. |
-| `getActiveRoutes(municipalityId)` | `List<Route>` | `public` | Obtiene rutas activas de una municipalidad. |
-
-**16. `WaypointApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de puntos de parada en rutas.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `routeRepository` | `RouteRepository` | `private` | Repositorio para acceso a rutas. |
-| `waypointFactory` | `WaypointFactory` | `private` | Factory para creación de puntos de parada. |
-| `routeValidationService` | `RouteValidationService` | `private` | Servicio de validación de rutas. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `addWaypointToRoute(routeId, containerId, location, priority)` | `Waypoint` | `public` | Agrega un punto de parada a una ruta. |
-| `removeWaypointFromRoute(routeId, waypointId)` | `void` | `public` | Elimina un punto de parada de una ruta. |
-| `updateWaypointStatus(routeId, waypointId, status)` | `void` | `public` | Actualiza el estado de un punto de parada. |
-| `reorderWaypoints(routeId, newOrder)` | `void` | `public` | Reordena los puntos de parada de una ruta. |
-| `getWaypointsByRoute(routeId)` | `List<Waypoint>` | `public` | Obtiene todos los puntos de una ruta. |
+| Atributo  | Tipo            | Visibilidad  | Descripción                                       |
+|-----------|-----------------|--------------|---------------------------------------------------|
+| `level`   | `PriorityLevel` | `private`    | Nivel de prioridad (LOW, MEDIUM, HIGH, CRITICAL). |
 
 ---
 
-**Domain Services**
+**Enumerations**
 
-**17. `RouteDomainService` (Domain Service)**
+**5. `RouteType` (Enumeration)**
 
-Servicio de dominio que implementa lógica de negocio compleja relacionada con rutas.
+Define el tipo de planificación aplicada a la ruta según su propósito o urgencia.
 
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateRouteCreation(route)` | `ValidationResult` | `public` | Valida la creación de una nueva ruta. |
-| `calculateOptimalRouteSequence(waypoints)` | `List<Waypoint>` | `public` | Calcula la secuencia óptima de puntos. |
-| `determineRoutePriority(routes)` | `List<Route>` | `public` | Determina la prioridad entre múltiples rutas. |
-| `estimateRouteCompletion(route)` | `LocalDateTime` | `public` | Estima el tiempo de finalización de una ruta. |
-| `checkRouteConflicts(route, existingRoutes)` | `List<RouteConflict>` | `public` | Verifica conflictos con rutas existentes. |
-
-**18. `RouteOptimizationService` (Domain Service)**
-
-Servicio especializado en optimización de rutas usando diferentes estrategias.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `optimizationStrategy` | `OptimizationStrategy` | `private` | Estrategia de optimización actual. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `optimizeRoute(route, constraints)` | `OptimizationResult` | `public` | Optimiza una ruta con restricciones específicas. |
-| `compareOptimizations(results)` | `OptimizationComparison` | `public` | Compara múltiples resultados de optimización. |
-| `setOptimizationStrategy(strategy)` | `void` | `public` | Establece la estrategia de optimización a usar. |
-| `analyzeRouteEfficiency(route)` | `EfficiencyAnalysis` | `public` | Analiza la eficiencia de una ruta. |
-
-**19. `RouteValidationService` (Domain Service)**
-
-Servicio para validación de rutas y puntos de parada.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateRoute(route)` | `ValidationResult` | `public` | Valida una ruta completa. |
-| `validateWaypoint(waypoint)` | `ValidationResult` | `public` | Valida un punto de parada individual. |
-| `checkTimeConstraints(route)` | `List<TimeConstraintViolation>` | `public` | Verifica restricciones de tiempo. |
-| `checkVehicleCapacity(route, vehicle)` | `Boolean` | `public` | Verifica capacidad del vehículo. |
-| `validateWaypointSequence(waypoints)` | `ValidationResult` | `public` | Valida la secuencia de puntos de parada. |
-
-**20. `RouteAnalyticsService` (Domain Service)**
-
-Servicio para análisis y generación de reportes de rutas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `generateRouteReport(route)` | `RouteReport` | `public` | Genera reporte detallado de una ruta. |
-| `calculateRouteMetrics(route)` | `RouteMetrics` | `public` | Calcula métricas de rendimiento de una ruta. |
-| `analyzeRoutePerformance(routes, period)` | `PerformanceAnalysis` | `public` | Analiza rendimiento de rutas en un período. |
-| `predictRouteCompletion(route)` | `CompletionPrediction` | `public` | Predice el tiempo de finalización de una ruta. |
+| Valor       | Descripción                                        |
+|-------------|----------------------------------------------------|
+| `REGULAR`   | Ruta planificada con recorridos estándar.          |
+| `EMERGENCY` | Ruta creada para atender situaciones urgentes.     |
+| `OPTIMIZED` | Ruta ajustada mediante algoritmos de optimización. |
 
 ---
 
-**Strategies**
+**6. `RouteStatus` (Enumeration)**
 
-**21. `OptimizationStrategy` (Strategy Interface)**
+Representa el estado operativo de una ruta durante su ciclo de vida.
 
-Interfaz que define el contrato para diferentes algoritmos de optimización de rutas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `optimizeRoute(waypoints, constraints)` | `List<Waypoint>` | `public` | Optimiza el orden de los puntos de parada. |
-| `calculateScore(route)` | `Double` | `public` | Calcula la puntuación de una ruta. |
-
-**22. `TravelingSalesmanStrategy` (Strategy)**
-
-Implementación de estrategia basada en el algoritmo del vendedor viajero.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `optimizeRoute(waypoints, constraints)` | `List<Waypoint>` | `public` | Optimiza usando algoritmo del vendedor viajero. |
-| `calculateScore(route)` | `Double` | `public` | Calcula puntuación basada en distancia total. |
-
-**23. `NearestNeighborStrategy` (Strategy)**
-
-Implementación de estrategia basada en el algoritmo del vecino más cercano.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `optimizeRoute(waypoints, constraints)` | `List<Waypoint>` | `public` | Optimiza usando algoritmo del vecino más cercano. |
-| `calculateScore(route)` | `Double` | `public` | Calcula puntuación basada en proximidad. |
-
-**24. `GeneticAlgorithmStrategy` (Strategy)**
-
-Implementación de estrategia basada en algoritmos genéticos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `optimizeRoute(waypoints, constraints)` | `List<Waypoint>` | `public` | Optimiza usando algoritmo genético. |
-| `calculateScore(route)` | `Double` | `public` | Calcula puntuación basada en aptitud evolutiva. |
-
-**25. `HybridOptimizationStrategy` (Strategy)**
-
-Implementación de estrategia que combina múltiples algoritmos de optimización.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `strategies` | `List<OptimizationStrategy>` | `private` | Lista de estrategias a combinar. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `optimizeRoute(waypoints, constraints)` | `List<Waypoint>` | `public` | Optimiza combinando múltiples estrategias. |
-| `calculateScore(route)` | `Double` | `public` | Calcula puntuación promedio de todas las estrategias. |
+| Valor         | Descripción                                  |
+|---------------|----------------------------------------------|
+| `DRAFT`       | Ruta en borrador, pendiente de asignación.   |
+| `ASSIGNED`    | Ruta asignada a un conductor y vehículo.     |
+| `IN_PROGRESS` | Ruta en proceso de ejecución.                |
+| `COMPLETED`   | Ruta finalizada correctamente.               |
+| `CANCELLED`   | Ruta cancelada antes o durante su ejecución. |
 
 ---
 
-**Factories**
+**7. `WaypointStatus` (Enumeration)**
 
-**26. `RouteFactory` (Factory)**
+Indica el estado actual de un punto de parada dentro de la ruta.
 
-Factory para la creación de instancias de Route con validaciones y configuraciones por defecto.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createRoute(name, municipalityId, routeType)` | `Route` | `public` | Crea una ruta básica con parámetros mínimos. |
-| `createEmergencyRoute(containers, priority)` | `Route` | `public` | Crea una ruta de emergencia con alta prioridad. |
-| `createOptimizedRoute(containers, strategy)` | `Route` | `public` | Crea una ruta pre-optimizada usando estrategia específica. |
-
-**27. `WaypointFactory` (Factory)**
-
-Factory para la creación de puntos de parada desde diferentes fuentes de datos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createWaypoint(containerId, location, priority)` | `Waypoint` | `public` | Crea un punto de parada básico. |
-| `createWaypointsFromContainers(containers)` | `List<Waypoint>` | `public` | Crea múltiples puntos desde lista de contenedores. |
-| `createWithEstimatedTimes(containerId, location, estimatedArrival)` | `Waypoint` | `public` | Crea punto con tiempos estimados. |
-
-**28. `OptimizationResultFactory` (Factory)**
-
-Factory para la creación de resultados de optimización.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createResult(routeId, algorithm)` | `OptimizationResult` | `public` | Crea resultado básico de optimización. |
-| `createFromAnalysis(routeId, analysis)` | `OptimizationResult` | `public` | Crea resultado desde análisis completo. |
+| Valor     | Descripción                                 |
+|-----------|---------------------------------------------|
+| `PENDING` | Punto pendiente de visita.                  |
+| `VISITED` | Punto ya visitado durante la ruta.          |
+| `SKIPPED` | Punto omitido con justificación registrada. |
 
 ---
 
-**Repository Interfaces**
+**8. `PriorityLevel` (Enumeration)**
 
-**29. `RouteRepository` (Repository Interface)**
+Clasifica el nivel de prioridad asociado a un punto o tarea dentro de la ruta.
 
-Interfaz de repositorio para la persistencia y consulta de rutas.
+| Valor      | Descripción                                         |
+|------------|-----------------------------------------------------|
+| `LOW`      | Baja prioridad, puede ser atendido sin urgencia.    |
+| `MEDIUM`   | Prioridad intermedia, debe cumplirse en la jornada. |
+| `HIGH`     | Alta prioridad, requiere atención preferente.       |
+| `CRITICAL` | Prioridad máxima, atención inmediata obligatoria.   |
 
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(routeId)` | `Optional<Route>` | `public` | Busca una ruta por su identificador. |
-| `findByDriverId(driverId)` | `List<Route>` | `public` | Busca rutas asignadas a un conductor. |
-| `findByMunicipality(municipalityId)` | `List<Route>` | `public` | Busca rutas de una municipalidad. |
-| `findByStatus(status)` | `List<Route>` | `public` | Busca rutas por estado. |
-| `findByDateRange(startDate, endDate)` | `List<Route>` | `public` | Busca rutas en un rango de fechas. |
-| `findActiveRoutes(municipalityId)` | `List<Route>` | `public` | Busca rutas activas de una municipalidad. |
-| `save(route)` | `Route` | `public` | Persiste o actualiza una ruta. |
-| `delete(routeId)` | `void` | `public` | Elimina una ruta del sistema. |
-| `existsById(routeId)` | `boolean` | `public` | Verifica si existe una ruta. |
-| `findOptimizationHistory(routeId)` | `List<OptimizationResult>` | `public` | Obtiene historial de optimizaciones de una ruta. |
-
-**30. `OptimizationResultRepository` (Repository Interface)**
-
-Interfaz de repositorio para la persistencia de resultados de optimización.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findByRouteId(routeId)` | `List<OptimizationResult>` | `public` | Busca resultados por ruta. |
-| `findByAlgorithm(algorithm)` | `List<OptimizationResult>` | `public` | Busca resultados por algoritmo. |
-| `findBestResultForRoute(routeId)` | `Optional<OptimizationResult>` | `public` | Busca el mejor resultado para una ruta. |
-| `save(result)` | `OptimizationResult` | `public` | Persiste un resultado de optimización. |
-| `deleteOlderThan(date)` | `void` | `public` | Elimina resultados anteriores a una fecha. |
 
 ---
 
@@ -3584,849 +3201,240 @@ Se definen las clases principales que componen el Bounded Context "Municipal Ope
 
 **1. `District` (Aggregate Root)**
 
-Representa un distrito municipal con capacidad de gestión de recursos, presupuesto, límites geográficos y operaciones administrativas, incluyendo métricas de rendimiento y asignación de personal.
+Representa una jurisdicción municipal que administra vehículos, conductores y contenedores dentro de límites geográficos específicos. Controla la capacidad operativa y el estado de servicio del distrito.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del distrito. |
-| `districtId` | `DistrictId` | `private` | Identificador de dominio del distrito. |
-| `name` | `String` | `private` | Nombre descriptivo del distrito. |
-| `municipalityId` | `MunicipalityId` | `private` | Identificador de la municipalidad asociada. |
-| `administratorId` | `AdministratorId` | `private` | Identificador del administrador asignado. |
-| `boundaries` | `GeographicBoundary` | `private` | Límites geográficos del distrito. |
-| `population` | `Population` | `private` | Población del distrito. |
-| `budget` | `Budget` | `private` | Presupuesto asignado al distrito. |
-| `operationalStatus` | `OperationalStatus` | `private` | Estado operacional actual del distrito. |
-| `resources` | `List<Resource>` | `private` | Lista de recursos asignados al distrito. |
-| `performanceMetrics` | `PerformanceMetrics` | `private` | Métricas de rendimiento del distrito. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
+| Atributo            | Tipo                   | Visibilidad  | Descripción                                               |
+|---------------------|------------------------|--------------|-----------------------------------------------------------|
+| `id`                | `String`               | `private`    | Identificador único del distrito.                         |
+| `name`              | `String`               | `private`    | Nombre oficial del distrito.                              |
+| `code`              | `String`               | `private`    | Código único que representa al distrito.                  |
+| `boundaries`        | `GeographicBoundaries` | `private`    | Límites geográficos del distrito definidos por polígonos. |
+| `operationalStatus` | `OperationalStatus`    | `private`    | Estado operativo actual del distrito.                     |
+| `serviceStartDate`  | `LocalDate`            | `private`    | Fecha de inicio de los servicios municipales.             |
+| `subscriptionId`    | `SubscriptionId`       | `private`    | Identificador de la suscripción asociada al distrito.     |
+| `maxVehicles`       | `Integer`              | `private`    | Número máximo de vehículos permitidos.                    |
+| `maxDrivers`        | `Integer`              | `private`    | Número máximo de conductores permitidos.                  |
+| `maxContainers`     | `Integer`              | `private`    | Número máximo de contenedores asignables.                 |
+| `primaryAdminEmail` | `EmailAddress`         | `private`    | Correo electrónico del administrador principal.           |
+| `createdAt`         | `LocalDateTime`        | `private`    | Fecha y hora de creación del registro.                    |
+| `updatedAt`         | `LocalDateTime`        | `private`    | Fecha y hora de la última actualización.                  |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `District()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `District(name, municipalityId, boundaries)` | `Constructor` | `public` | Constructor que instancia un distrito con datos básicos. |
-| `allocateResource(resource)` | `void` | `public` | Asigna un recurso al distrito. |
-| `deallocateResource(resourceId)` | `void` | `public` | Desasigna un recurso del distrito. |
-| `updateBudget(newBudget)` | `void` | `public` | Actualiza el presupuesto del distrito. |
-| `assignAdministrator(administratorId)` | `void` | `public` | Asigna un administrador al distrito. |
-| `calculateOperationalCost()` | `MonetaryAmount` | `public` | Calcula el costo operacional del distrito. |
-| `isWithinBoundaries(location)` | `boolean` | `public` | Determina si una ubicación está dentro de los límites. |
-| `hasAvailableCapacity()` | `boolean` | `public` | Determina si el distrito tiene capacidad disponible. |
-| `getResourceUtilization()` | `ResourceUtilization` | `public` | Obtiene la utilización actual de recursos. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
-
-**2. `Vehicle` (Aggregate Root)**
-
-Representa un vehículo municipal para recolección de residuos con capacidad de seguimiento GPS, historial de mantenimiento y asignación de conductores.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del vehículo. |
-| `vehicleId` | `VehicleId` | `private` | Identificador de dominio del vehículo. |
-| `registrationNumber` | `String` | `private` | Número de registro del vehículo. |
-| `vehicleType` | `VehicleType` | `private` | Tipo de vehículo (camión recolector, mantenimiento, etc.). |
-| `capacity` | `VehicleCapacity` | `private` | Capacidad de carga del vehículo. |
-| `fuelType` | `FuelType` | `private` | Tipo de combustible que utiliza. |
-| `status` | `VehicleStatus` | `private` | Estado actual del vehículo. |
-| `districtId` | `DistrictId` | `private` | Identificador del distrito asignado. |
-| `currentDriverId` | `DriverId` | `private` | Identificador del conductor actual. |
-| `maintenanceHistory` | `List<MaintenanceRecord>` | `private` | Historial de mantenimientos realizados. |
-| `operationalMetrics` | `OperationalMetrics` | `private` | Métricas operacionales del vehículo. |
-| `gpsTracker` | `GPSTracker` | `private` | Dispositivo de seguimiento GPS. |
-| `lastInspectionDate` | `LocalDateTime` | `private` | Fecha de la última inspección. |
-| `nextMaintenanceDate` | `LocalDateTime` | `private` | Fecha programada para el próximo mantenimiento. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `Vehicle()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `Vehicle(registrationNumber, vehicleType, capacity)` | `Constructor` | `public` | Constructor que instancia un vehículo con datos básicos. |
-| `assignToDistrict(districtId)` | `void` | `public` | Asigna el vehículo a un distrito específico. |
-| `assignDriver(driverId)` | `void` | `public` | Asigna un conductor al vehículo. |
-| `scheduleMaintenance(maintenanceType, scheduledDate)` | `void` | `public` | Programa un mantenimiento para el vehículo. |
-| `recordMaintenance(record)` | `void` | `public` | Registra un mantenimiento realizado. |
-| `updateStatus(newStatus)` | `void` | `public` | Actualiza el estado del vehículo. |
-| `isAvailableForRoute()` | `boolean` | `public` | Determina si está disponible para asignar a una ruta. |
-| `requiresMaintenance()` | `boolean` | `public` | Determina si requiere mantenimiento. |
-| `calculateOperationalCost()` | `MonetaryAmount` | `public` | Calcula el costo operacional del vehículo. |
-| `updateLocation(location)` | `void` | `public` | Actualiza la ubicación actual del vehículo. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
-
-**3. `Driver` (Aggregate Root)**
-
-Representa un conductor municipal con información personal, licencias, horarios de trabajo, certificaciones y registro de rendimiento.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del conductor. |
-| `driverId` | `DriverId` | `private` | Identificador de dominio del conductor. |
-| `personalInfo` | `PersonalInfo` | `private` | Información personal del conductor. |
-| `licenseInfo` | `LicenseInfo` | `private` | Información de licencia de conducir. |
-| `employmentStatus` | `EmploymentStatus` | `private` | Estado laboral del conductor. |
-| `districtId` | `DistrictId` | `private` | Identificador del distrito asignado. |
-| `assignedVehicleId` | `VehicleId` | `private` | Identificador del vehículo asignado. |
-| `workSchedule` | `WorkSchedule` | `private` | Horario de trabajo del conductor. |
-| `performanceRecord` | `PerformanceRecord` | `private` | Registro de rendimiento del conductor. |
-| `certifications` | `List<Certification>` | `private` | Lista de certificaciones del conductor. |
-| `contactInfo` | `ContactInfo` | `private` | Información de contacto del conductor. |
-| `hireDate` | `LocalDateTime` | `private` | Fecha de contratación. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `Driver()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `Driver(personalInfo, licenseInfo)` | `Constructor` | `public` | Constructor que instancia un conductor con datos básicos. |
-| `assignToDistrict(districtId)` | `void` | `public` | Asigna el conductor a un distrito específico. |
-| `assignVehicle(vehicleId)` | `void` | `public` | Asigna un vehículo al conductor. |
-| `updateWorkSchedule(schedule)` | `void` | `public` | Actualiza el horario de trabajo del conductor. |
-| `recordPerformance(metrics)` | `void` | `public` | Registra métricas de rendimiento del conductor. |
-| `addCertification(certification)` | `void` | `public` | Agrega una nueva certificación al conductor. |
-| `isAvailableForAssignment()` | `boolean` | `public` | Determina si está disponible para asignación. |
-| `canOperateVehicle(vehicleType)` | `boolean` | `public` | Determina si puede operar un tipo específico de vehículo. |
-| `calculateWorkingHours(period)` | `Duration` | `public` | Calcula las horas trabajadas en un período. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
+| Método                                                       | Tipo de Retorno  | Visibilidad  | Descripción                                                                                     |
+|--------------------------------------------------------------|------------------|--------------|-------------------------------------------------------------------------------------------------|
+| `activate()`                                                 | `void`           | `public`     | Activa el distrito para operaciones regulares.                                                  |
+| `suspend(reason: String)`                                    | `void`           | `public`     | Suspende temporalmente las operaciones del distrito con una razón específica.                   |
+| `isWithinServiceLimits(vehicleCount: int, driverCount: int)` | `boolean`        | `public`     | Verifica si el número de vehículos y conductores se encuentra dentro de los límites permitidos. |
+| `canRegisterNewVehicle()`                                    | `boolean`        | `public`     | Determina si es posible registrar un nuevo vehículo.                                            |
+| `canRegisterNewDriver()`                                     | `boolean`        | `public`     | Determina si se puede registrar un nuevo conductor.                                             |
+| `isLocationWithinBoundaries(location: Location)`             | `boolean`        | `public`     | Verifica si una ubicación pertenece al distrito.                                                |
 
 ---
 
-**Entities**
+**2. `Vehicle` (Aggregate Root)**
 
-**4. `Resource` (Entity)**
-
-Representa un recurso municipal asignable a distritos, con capacidad de utilización, estado y costos asociados.
+Representa un vehículo municipal utilizado en las operaciones de recolección. Controla su tipo, capacidad, kilometraje, mantenimiento y estado de uso.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del recurso. |
-| `resourceId` | `ResourceId` | `private` | Identificador de dominio del recurso. |
-| `resourceType` | `ResourceType` | `private` | Tipo de recurso (financiero, humano, equipo). |
-| `name` | `String` | `private` | Nombre descriptivo del recurso. |
-| `description` | `String` | `private` | Descripción detallada del recurso. |
-| `capacity` | `ResourceCapacity` | `private` | Capacidad máxima del recurso. |
-| `currentUtilization` | `ResourceUtilization` | `private` | Utilización actual del recurso. |
-| `status` | `ResourceStatus` | `private` | Estado actual del recurso. |
-| `acquisitionCost` | `MonetaryAmount` | `private` | Costo de adquisición del recurso. |
-| `maintenanceCost` | `MonetaryAmount` | `private` | Costo de mantenimiento del recurso. |
-| `location` | `Location` | `private` | Ubicación física del recurso. |
+| Atributo              | Tipo             | Visibilidad  | Descripción                                              |
+|-----------------------|------------------|--------------|----------------------------------------------------------|
+| `id`                  | `String`         | `private`    | Identificador único del vehículo.                        |
+| `districtId`          | `DistrictId`     | `private`    | Identificador del distrito al que pertenece el vehículo. |
+| `licensePlate`        | `LicensePlate`   | `private`    | Placa única del vehículo.                                |
+| `vehicleType`         | `VehicleType`    | `private`    | Tipo de vehículo (Compacto, Camión, Mini-truck).         |
+| `capacityVolume`      | `VolumeCapacity` | `private`    | Capacidad volumétrica máxima.                            |
+| `capacityWeight`      | `WeightCapacity` | `private`    | Capacidad máxima en peso del vehículo.                   |
+| `status`              | `VehicleStatus`  | `private`    | Estado actual del vehículo.                              |
+| `currentMileage`      | `Mileage`        | `private`    | Kilometraje actual del vehículo.                         |
+| `lastMaintenanceDate` | `LocalDate`      | `private`    | Fecha del último mantenimiento realizado.                |
+| `nextMaintenanceDue`  | `LocalDate`      | `private`    | Fecha estimada para el próximo mantenimiento.            |
+| `createdAt`           | `LocalDateTime`  | `private`    | Fecha y hora de creación del registro.                   |
+| `updatedAt`           | `LocalDateTime`  | `private`    | Fecha y hora de la última actualización.                 |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `Resource(resourceType, name, capacity)` | `Constructor` | `public` | Constructor que instancia un recurso con datos básicos. |
-| `allocate(amount)` | `void` | `public` | Asigna una cantidad del recurso. |
-| `deallocate(amount)` | `void` | `public` | Libera una cantidad del recurso. |
-| `isAvailable()` | `boolean` | `public` | Determina si el recurso está disponible. |
-| `getUtilizationPercentage()` | `Double` | `public` | Obtiene el porcentaje de utilización actual. |
+| Método                                   | Tipo de Retorno  | Visibilidad   | Descripción                                          |
+|------------------------------------------|------------------|---------------|------------------------------------------------------|
+| `assignDriver(driverId: DriverId)`       | `void`           | `public`      | Asigna un conductor al vehículo.                     |
+| `unassignDriver()`                       | `void`           | `public`      | Retira el conductor asignado al vehículo.            |
+| `markAsInUse()`                          | `void`           | `public`      | Marca el vehículo como en uso activo.                |
+| `markAsAvailable()`                      | `void`           | `public`      | Marca el vehículo como disponible para asignación.   |
+| `scheduleMaintenanceAt(date: LocalDate)` | `void`           | `public`      | Programa una fecha de mantenimiento.                 |
+| `requiresMaintenance()`                  | `boolean`        | `public`      | Indica si el vehículo requiere mantenimiento.        |
+| `isAvailableForRoute()`                  | `boolean`        | `public`      | Determina si el vehículo puede asignarse a una ruta. |
+| `updateMileage(newMileage: Mileage)`     | `void`           | `public`      | Actualiza el kilometraje del vehículo.               |
 
-**5. `MaintenanceRecord` (Entity)**
+---
 
-Representa un registro de mantenimiento realizado en un vehículo, con información de programación, costos y estado de finalización.
+**3. `Driver` (Aggregate Root)**
+
+Representa un conductor municipal encargado de operar vehículos en rutas de recolección. Controla su licencia, estado laboral y estadísticas de trabajo.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del registro. |
-| `recordId` | `MaintenanceRecordId` | `private` | Identificador de dominio del registro. |
-| `vehicleId` | `VehicleId` | `private` | Identificador del vehículo mantenido. |
-| `maintenanceType` | `MaintenanceType` | `private` | Tipo de mantenimiento realizado. |
-| `scheduledDate` | `LocalDateTime` | `private` | Fecha programada para el mantenimiento. |
-| `completedDate` | `LocalDateTime` | `private` | Fecha de finalización del mantenimiento. |
-| `description` | `String` | `private` | Descripción del mantenimiento realizado. |
-| `cost` | `MonetaryAmount` | `private` | Costo total del mantenimiento. |
-| `technicianId` | `TechnicianId` | `private` | Identificador del técnico responsable. |
-| `status` | `MaintenanceStatus` | `private` | Estado del mantenimiento. |
-| `notes` | `String` | `private` | Notas adicionales del mantenimiento. |
+| Atributo               | Tipo             | Visibilidad  | Descripción                                      |
+|------------------------|------------------|--------------|--------------------------------------------------|
+| `id`                   | `String`         | `private`    | Identificador único del conductor.               |
+| `districtId`           | `DistrictId`     | `private`    | Distrito al que pertenece el conductor.          |
+| `fullName`             | `FullName`       | `private`    | Nombre completo del conductor.                   |
+| `documentNumber`       | `DocumentNumber` | `private`    | Documento de identidad del conductor.            |
+| `phoneNumber`          | `PhoneNumber`    | `private`    | Número telefónico de contacto.                   |
+| `userId`               | `UserId`         | `private`    | Identificador del usuario asociado al conductor. |
+| `driverLicense`        | `DriverLicense`  | `private`    | Número de licencia de conducir.                  |
+| `licenseExpiryDate`    | `LocalDate`      | `private`    | Fecha de expiración de la licencia.              |
+| `emailAddress`         | `EmailAddress`   | `private`    | Correo electrónico del conductor.                |
+| `totalHoursWorked`     | `Integer`        | `private`    | Total de horas trabajadas acumuladas.            |
+| `lastRouteCompletedAt` | `LocalDateTime`  | `private`    | Fecha y hora de la última ruta completada.       |
+| `status`               | `DriverStatus`   | `private`    | Estado actual del conductor.                     |
+| `assignedVehicleId`    | `VehicleId`      | `private`    | Identificador del vehículo asignado.             |
+| `createdAt`            | `LocalDateTime`  | `private`    | Fecha y hora de creación del registro.           |
+| `updatedAt`            | `LocalDateTime`  | `private`    | Fecha y hora de la última actualización.         |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `MaintenanceRecord(vehicleId, maintenanceType)` | `Constructor` | `public` | Constructor que instancia un registro con datos básicos. |
-| `complete(completedDate, cost)` | `void` | `public` | Marca el mantenimiento como completado. |
-| `addNotes(notes)` | `void` | `public` | Agrega notas al registro de mantenimiento. |
-| `isOverdue()` | `boolean` | `public` | Determina si el mantenimiento está atrasado. |
+| Método                                | Tipo de Retorno  | Visibilidad  | Descripción                                                     |
+|---------------------------------------|------------------|--------------|-----------------------------------------------------------------|
+| `startRoute()`                        | `void`           | `public`     | Inicia una nueva ruta asignada al conductor.                    |
+| `completeRoute(hoursWorked: int)`     | `void`           | `public`     | Marca la ruta como completada y actualiza las horas trabajadas. |
+| `goOffDuty()`                         | `void`           | `public`     | Cambia el estado del conductor a fuera de servicio.             |
+| `suspend(reason: String)`             | `void`           | `public`     | Suspende temporalmente al conductor con una razón específica.   |
+| `assignVehicle(vehicleId: VehicleId)` | `void`           | `public`     | Asigna un vehículo al conductor.                                |
+| `unassignVehicle()`                   | `void`           | `public`     | Desasigna el vehículo actual del conductor.                     |
+| `isAvailableForRoute()`               | `boolean`        | `public`     | Indica si el conductor está disponible para nuevas rutas.       |
+| `reactive()`                          | `void`           | `public`     | Reactiva al conductor si estaba suspendido.                     |
+| `isLicenseExpired()`                  | `boolean`        | `public`     | Determina si la licencia de conducir está vencida.              |
 
 ---
 
 **Value Objects**
 
-**6. `DistrictId` (Value Object)**
+**4. `GeographicBoundaries` (Value Object)**
 
-Identificador único inmutable para un distrito en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `districtId` | `Long` | `private` | Valor numérico del identificador del distrito. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isValid()` | `Boolean` | `public` | Valida que el identificador sea válido. |
-
-**7. `VehicleId` (Value Object)**
-
-Identificador único inmutable para un vehículo en el sistema.
+Define los límites geográficos de un distrito mediante un polígono o coordenadas.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `vehicleId` | `Long` | `private` | Valor numérico del identificador del vehículo. |
-
-**8. `DriverId` (Value Object)**
-
-Identificador único inmutable para un conductor en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `driverId` | `Long` | `private` | Valor numérico del identificador del conductor. |
-
-**9. `ResourceId` (Value Object)**
-
-Identificador único inmutable para un recurso en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `resourceId` | `Long` | `private` | Valor numérico del identificador del recurso. |
-
-**10. `MaintenanceRecordId` (Value Object)**
-
-Identificador único inmutable para un registro de mantenimiento en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `recordId` | `Long` | `private` | Valor numérico del identificador del registro. |
-
-**11. `GeographicBoundary` (Value Object)**
-
-Define los límites geográficos de un distrito con capacidades de cálculo de área y validación de ubicaciones.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `coordinates` | `List<Coordinate>` | `private` | Lista de coordenadas que definen el perímetro. |
-| `area` | `Double` | `private` | Área total del distrito en kilómetros cuadrados. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `contains(location)` | `Boolean` | `public` | Determina si una ubicación está dentro de los límites. |
-| `calculateArea()` | `Double` | `public` | Calcula el área del distrito. |
-| `getCenter()` | `Location` | `public` | Obtiene el centro geográfico del distrito. |
-
-**12. `VehicleCapacity` (Value Object)**
-
-Define la capacidad de carga de un vehículo en volumen y peso.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `volumeInCubicMeters` | `Double` | `private` | Capacidad de volumen en metros cúbicos. |
-| `weightInKilograms` | `Double` | `private` | Capacidad de peso en kilogramos. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canAccommodate(load)` | `Boolean` | `public` | Determina si puede acomodar una carga específica. |
-| `getRemainingCapacity(currentLoad)` | `VehicleCapacity` | `public` | Calcula la capacidad restante. |
-
-**13. `Budget` (Value Object)**
-
-Representa el presupuesto asignado a un distrito con categorías y controles fiscales.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `amount` | `MonetaryAmount` | `private` | Monto total del presupuesto. |
-| `fiscalYear` | `Year` | `private` | Año fiscal del presupuesto. |
-| `categories` | `Map<BudgetCategory, MonetaryAmount>` | `private` | Distribución por categorías presupuestarias. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `allocate(category, amount)` | `Budget` | `public` | Asigna fondos a una categoría específica. |
-| `hasAvailableFunds(amount)` | `Boolean` | `public` | Verifica si hay fondos disponibles. |
-
-**14. `PerformanceMetrics` (Value Object)**
-
-Métricas consolidadas de rendimiento para evaluación de desempeño.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `efficiency` | `Double` | `private` | Métrica de eficiencia (0-100). |
-| `costEffectiveness` | `Double` | `private` | Métrica de costo-efectividad. |
-| `customerSatisfaction` | `Double` | `private` | Métrica de satisfacción del cliente. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `calculateOverallScore()` | `Double` | `public` | Calcula la puntuación general de rendimiento. |
-| `compare(other)` | `ComparisonResult` | `public` | Compara con otras métricas de rendimiento. |
-
-**15. `WorkSchedule` (Value Object)**
-
-Define el horario de trabajo de un conductor con turnos y días laborables.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `shifts` | `List<WorkShift>` | `private` | Lista de turnos de trabajo. |
-| `workingDays` | `Set<DayOfWeek>` | `private` | Días de la semana laborables. |
-| `totalHoursPerWeek` | `Duration` | `private` | Total de horas por semana. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isWorkingDay(date)` | `Boolean` | `public` | Determina si es un día laboral. |
-| `getShiftForDate(date)` | `Optional<WorkShift>` | `public` | Obtiene el turno para una fecha específica. |
-
-**16. `PersonalInfo` (Value Object)**
-
-Información personal de un conductor con datos de identificación.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `firstName` | `String` | `private` | Nombre del conductor. |
-| `lastName` | `String` | `private` | Apellido del conductor. |
-| `dateOfBirth` | `LocalDate` | `private` | Fecha de nacimiento. |
-| `nationalId` | `String` | `private` | Número de identificación nacional. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getFullName()` | `String` | `public` | Obtiene el nombre completo. |
-| `getAge()` | `Integer` | `public` | Calcula la edad actual. |
-
-**17. `LicenseInfo` (Value Object)**
-
-Información de licencia de conducir con validaciones de vigencia.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `licenseNumber` | `String` | `private` | Número de licencia de conducir. |
-| `licenseType` | `LicenseType` | `private` | Tipo de licencia (categoría). |
-| `issueDate` | `LocalDate` | `private` | Fecha de emisión de la licencia. |
-| `expiryDate` | `LocalDate` | `private` | Fecha de vencimiento de la licencia. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isValid()` | `Boolean` | `public` | Determina si la licencia está vigente. |
-| `isExpired()` | `Boolean` | `public` | Determina si la licencia está vencida. |
-
-**18. `ResourceCapacity` (Value Object)**
-
-Define la capacidad máxima de un recurso con unidades de medida.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `maxCapacity` | `Double` | `private` | Capacidad máxima del recurso. |
-| `unit` | `String` | `private` | Unidad de medida de la capacidad. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canAccommodate(amount)` | `Boolean` | `public` | Determina si puede acomodar una cantidad. |
-
-**19. `ResourceUtilization` (Value Object)**
-
-Representa la utilización actual de un recurso con cálculos de porcentaje.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `currentUsage` | `Double` | `private` | Uso actual del recurso. |
-| `maxCapacity` | `Double` | `private` | Capacidad máxima del recurso. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getUtilizationPercentage()` | `Double` | `public` | Calcula el porcentaje de utilización. |
-| `hasCapacityFor(amount)` | `Boolean` | `public` | Determina si hay capacidad para una cantidad. |
+| Atributo          | Tipo     | Visibilidad   | Descripción                                                       |
+|-------------------|----------|---------------|-------------------------------------------------------------------|
+| `boundaryPolygon` | `String` | `private`     | Representación poligonal de los límites geográficos del distrito. |
 
 ---
 
-**Enums**
+**5. `LicensePlate` (Value Object)**
 
-**20. `OperationalStatus` (Enum)**
-
-Estados operacionales posibles de un distrito.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `ACTIVE` | Distrito operativo y funcional. |
-| `INACTIVE` | Distrito temporalmente inactivo. |
-| `MAINTENANCE` | Distrito en mantenimiento. |
-| `SUSPENDED` | Distrito suspendido por problemas. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canAcceptNewResources()` | `boolean` | `public` | Determina si puede aceptar nuevos recursos. |
-| `allowsOperations()` | `boolean` | `public` | Determina si permite operaciones. |
-
-**21. `VehicleStatus` (Enum)**
-
-Estados posibles de un vehículo durante su ciclo de vida.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `AVAILABLE` | Vehículo disponible para asignación. |
-| `IN_USE` | Vehículo en uso activo. |
-| `MAINTENANCE` | Vehículo en mantenimiento. |
-| `OUT_OF_SERVICE` | Vehículo fuera de servicio. |
-| `RETIRED` | Vehículo retirado del servicio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isOperational()` | `boolean` | `public` | Determina si está operativo. |
-| `canBeAssigned()` | `boolean` | `public` | Determina si puede ser asignado. |
-
-**22. `EmploymentStatus` (Enum)**
-
-Estados laborales posibles de un conductor.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `ACTIVE` | Conductor activo y disponible. |
-| `ON_LEAVE` | Conductor con licencia temporal. |
-| `SUSPENDED` | Conductor suspendido. |
-| `TERMINATED` | Conductor con contrato terminado. |
-| `RETIRED` | Conductor jubilado. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isActive()` | `boolean` | `public` | Determina si está activo. |
-| `canBeAssigned()` | `boolean` | `public` | Determina si puede ser asignado. |
-
-**23. `ResourceStatus` (Enum)**
-
-Estados posibles de un recurso municipal.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `AVAILABLE` | Recurso disponible para asignación. |
-| `ALLOCATED` | Recurso asignado a un distrito. |
-| `MAINTENANCE` | Recurso en mantenimiento. |
-| `DEPLETED` | Recurso agotado o sin disponibilidad. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAvailable()` | `boolean` | `public` | Determina si está disponible. |
-| `canBeAllocated()` | `boolean` | `public` | Determina si puede ser asignado. |
-
-**24. `MaintenanceStatus` (Enum)**
-
-Estados posibles de un registro de mantenimiento.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `SCHEDULED` | Mantenimiento programado. |
-| `IN_PROGRESS` | Mantenimiento en progreso. |
-| `COMPLETED` | Mantenimiento completado. |
-| `CANCELLED` | Mantenimiento cancelado. |
-| `OVERDUE` | Mantenimiento atrasado. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isCompleted()` | `boolean` | `public` | Determina si está completado. |
-| `isOverdue()` | `boolean` | `public` | Determina si está atrasado. |
-
----
-
-**Application Services**
-
-**25. `DistrictApplicationService` (Application Service)**
-
-Servicio de aplicación que coordina las operaciones de negocio relacionadas con distritos municipales.
+Representa la placa de registro única de un vehículo.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `districtRepository` | `DistrictRepository` | `private` | Repositorio para persistencia de distritos. |
-| `districtDomainService` | `DistrictDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `districtFactory` | `DistrictFactory` | `private` | Factory para creación de distritos. |
-| `resourceAllocationService` | `ResourceAllocationService` | `private` | Servicio de asignación de recursos. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
+| Atributo   | Tipo     | Visibilidad   | Descripción                                   |
+|------------|----------|---------------|-----------------------------------------------|
+| `value`    | `String` | `private`     | Código alfanumérico de la placa del vehículo. |
 
-**Métodos principales:**
+---
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createDistrict(name, municipalityId, boundaries, population, initialBudget, administratorId)` | `District` | `public` | Crea un nuevo distrito en el sistema. |
-| `updateDistrictBudget(districtId, newBudget)` | `void` | `public` | Actualiza el presupuesto de un distrito. |
-| `assignAdministrator(districtId, administratorId)` | `void` | `public` | Asigna un administrador a un distrito. |
-| `allocateResource(districtId, resourceType, amount, allocationPeriod)` | `void` | `public` | Asigna un recurso a un distrito. |
-| `deallocateResource(districtId, resourceId)` | `void` | `public` | Desasigna un recurso de un distrito. |
-| `getDistrictById(districtId)` | `Optional<District>` | `public` | Obtiene un distrito por su identificador. |
-| `getDistrictsByMunicipality(municipalityId)` | `List<District>` | `public` | Obtiene distritos de una municipalidad. |
-| `generatePerformanceReport(districtId, period)` | `PerformanceReport` | `public` | Genera reporte de rendimiento de un distrito. |
+**6. `DriverLicense` (Value Object)**
 
-**26. `VehicleApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de vehículos municipales y su mantenimiento.
+Contiene la información de la licencia de conducir asociada a un conductor.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `vehicleRepository` | `VehicleRepository` | `private` | Repositorio para persistencia de vehículos. |
-| `vehicleDomainService` | `VehicleDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `vehicleFactory` | `VehicleFactory` | `private` | Factory para creación de vehículos. |
-| `fleetManagementService` | `FleetManagementService` | `private` | Servicio de gestión de flota. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
+| Atributo   | Tipo     | Visibilidad   | Descripción                     |
+|------------|----------|---------------|---------------------------------|
+| `value`    | `String` | `private`     | Número de licencia de conducir. |
 
-**Métodos principales:**
+---
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `registerVehicle(registrationNumber, vehicleType, capacity, fuelType, districtId)` | `Vehicle` | `public` | Registra un nuevo vehículo en el sistema. |
-| `assignVehicleToDistrict(vehicleId, districtId)` | `void` | `public` | Asigna un vehículo a un distrito. |
-| `assignDriverToVehicle(vehicleId, driverId)` | `void` | `public` | Asigna un conductor a un vehículo. |
-| `scheduleMaintenance(vehicleId, maintenanceType, scheduledDate, priority)` | `void` | `public` | Programa mantenimiento para un vehículo. |
-| `updateVehicleStatus(vehicleId, newStatus)` | `void` | `public` | Actualiza el estado de un vehículo. |
-| `getVehicleById(vehicleId)` | `Optional<Vehicle>` | `public` | Obtiene un vehículo por su identificador. |
-| `getVehiclesByDistrict(districtId, status)` | `List<Vehicle>` | `public` | Obtiene vehículos de un distrito por estado. |
-| `getMaintenanceHistory(vehicleId)` | `List<MaintenanceRecord>` | `public` | Obtiene historial de mantenimiento de un vehículo. |
+**7. `VolumeCapacity` (Value Object)**
 
-**27. `DriverApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de conductores municipales y su rendimiento.
+Representa la capacidad volumétrica máxima de un vehículo.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `driverRepository` | `DriverRepository` | `private` | Repositorio para persistencia de conductores. |
-| `driverDomainService` | `DriverDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `driverFactory` | `DriverFactory` | `private` | Factory para creación de conductores. |
-| `performanceAnalysisService` | `PerformanceAnalysisService` | `private` | Servicio de análisis de rendimiento. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `registerDriver(personalInfo, licenseInfo, districtId, hireDate, initialCertifications)` | `Driver` | `public` | Registra un nuevo conductor en el sistema. |
-| `assignDriverToDistrict(driverId, districtId)` | `void` | `public` | Asigna un conductor a un distrito. |
-| `updateWorkSchedule(driverId, schedule)` | `void` | `public` | Actualiza el horario de trabajo de un conductor. |
-| `addCertification(driverId, certification)` | `void` | `public` | Agrega una certificación a un conductor. |
-| `updatePerformance(driverId, metrics)` | `void` | `public` | Actualiza métricas de rendimiento de un conductor. |
-| `getDriverById(driverId)` | `Optional<Driver>` | `public` | Obtiene un conductor por su identificador. |
-| `getAvailableDrivers(districtId, shiftDate)` | `List<Driver>` | `public` | Obtiene conductores disponibles para una fecha. |
-| `getDriverPerformance(driverId, period)` | `PerformanceRecord` | `public` | Obtiene registro de rendimiento de un conductor. |
+| Atributo      | Tipo         | Visibilidad  | Descripción                                              |
+|---------------|--------------|--------------|----------------------------------------------------------|
+| `cubicMeters` | `BigDecimal` | `private`    | Volumen máximo del vehículo expresado en metros cúbicos. |
 
 ---
 
-**Domain Services**
+**8. `WeightCapacity` (Value Object)**
 
-**28. `DistrictDomainService` (Domain Service)**
-
-Servicio de dominio que implementa lógica de negocio compleja relacionada con distritos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateDistrictCreation(district)` | `ValidationResult` | `public` | Valida la creación de un nuevo distrito. |
-| `calculateOptimalResourceDistribution(districts)` | `ResourceDistribution` | `public` | Calcula distribución óptima de recursos. |
-| `determineDistrictPriority(districts)` | `List<District>` | `public` | Determina prioridad entre distritos. |
-| `checkDistrictBoundaryConflicts(district, existingDistricts)` | `List<BoundaryConflict>` | `public` | Verifica conflictos de límites geográficos. |
-| `estimateOperationalCost(district)` | `MonetaryAmount` | `public` | Estima el costo operacional de un distrito. |
-
-**29. `VehicleDomainService` (Domain Service)**
-
-Servicio de dominio para lógica compleja relacionada con vehículos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateVehicleRegistration(vehicle)` | `ValidationResult` | `public` | Valida el registro de un nuevo vehículo. |
-| `calculateOptimalMaintenanceSchedule(vehicle)` | `MaintenanceSchedule` | `public` | Calcula programación óptima de mantenimiento. |
-| `determineVehicleAssignment(vehicle, availableRoutes)` | `AssignmentRecommendation` | `public` | Determina asignación óptima de vehículo. |
-| `checkVehicleCompatibility(vehicle, route)` | `CompatibilityResult` | `public` | Verifica compatibilidad vehículo-ruta. |
-| `estimateVehicleLifecycle(vehicle)` | `LifecycleEstimate` | `public` | Estima el ciclo de vida del vehículo. |
-
-**30. `DriverDomainService` (Domain Service)**
-
-Servicio de dominio para lógica compleja relacionada con conductores.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateDriverRegistration(driver)` | `ValidationResult` | `public` | Valida el registro de un nuevo conductor. |
-| `calculateOptimalWorkSchedule(driver, workload)` | `WorkSchedule` | `public` | Calcula horario óptimo de trabajo. |
-| `determineDriverAssignment(driver, availableVehicles)` | `AssignmentRecommendation` | `public` | Determina asignación óptima de conductor. |
-| `checkDriverQualifications(driver, vehicleType)` | `QualificationResult` | `public` | Verifica calificaciones del conductor. |
-| `estimateDriverPerformance(driver)` | `PerformanceProjection` | `public` | Estima el rendimiento futuro del conductor. |
-
-**31. `ResourceAllocationService` (Domain Service)**
-
-Servicio especializado en asignación y optimización de recursos municipales.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `allocateResources(district, requirements)` | `AllocationResult` | `public` | Asigna recursos según requerimientos. |
-| `optimizeResourceDistribution(districts)` | `OptimizationResult` | `public` | Optimiza distribución de recursos. |
-| `calculateResourceNeeds(district, projectedDemand)` | `ResourceRequirements` | `public` | Calcula necesidades de recursos. |
-| `balanceResourceUtilization(districts)` | `BalancingResult` | `public` | Balancea utilización de recursos. |
-
-**32. `FleetManagementService` (Domain Service)**
-
-Servicio para gestión integral de la flota de vehículos.
+Define la capacidad de carga en peso de un vehículo.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `maintenanceStrategy` | `MaintenanceStrategy` | `private` | Estrategia de mantenimiento actual. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `assignVehicleToRoute(vehicleId, routeId)` | `AssignmentResult` | `public` | Asigna vehículo a una ruta específica. |
-| `scheduleFleetMaintenance(vehicles)` | `MaintenanceSchedule` | `public` | Programa mantenimiento para la flota. |
-| `calculateFleetUtilization(district)` | `FleetUtilizationReport` | `public` | Calcula utilización de flota por distrito. |
-| `optimizeFleetDistribution(districts)` | `FleetOptimizationResult` | `public` | Optimiza distribución de vehículos. |
-| `setMaintenanceStrategy(strategy)` | `void` | `public` | Establece estrategia de mantenimiento. |
-
-**33. `PerformanceAnalysisService` (Domain Service)**
-
-Servicio para análisis de rendimiento y generación de reportes.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `analyzeDistrictPerformance(district, period)` | `PerformanceReport` | `public` | Analiza rendimiento de un distrito. |
-| `compareDistrictPerformance(districts)` | `ComparisonReport` | `public` | Compara rendimiento entre distritos. |
-| `calculateKPIs(district)` | `Map<KPI, Double>` | `public` | Calcula indicadores clave de rendimiento. |
-| `generateEfficiencyReport(entity, period)` | `EfficiencyReport` | `public` | Genera reporte de eficiencia. |
+| Atributo    | Tipo      | Visibilidad  | Descripción                     |
+|-------------|-----------|--------------|---------------------------------|
+| `kilograms` | `Integer` | `private`    | Capacidad máxima en kilogramos. |
 
 ---
 
-**Strategies**
+**9. `Mileage` (Value Object)**
 
-**34. `MaintenanceStrategy` (Strategy Interface)**
+Representa el kilometraje total recorrido por un vehículo.
 
-Interfaz que define el contrato para diferentes estrategias de mantenimiento de vehículos.
+**Atributos Principales:**
 
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `scheduleMaintenance(vehicle, currentDate)` | `MaintenanceSchedule` | `public` | Programa mantenimiento según la estrategia. |
-| `calculateMaintenanceCost(vehicle, maintenanceType)` | `MonetaryAmount` | `public` | Calcula costo de mantenimiento. |
-
-**35. `PreventiveMaintenanceStrategy` (Strategy)**
-
-Implementación de estrategia de mantenimiento preventivo.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `scheduleMaintenance(vehicle, currentDate)` | `MaintenanceSchedule` | `public` | Programa mantenimiento preventivo. |
-| `calculateMaintenanceCost(vehicle, maintenanceType)` | `MonetaryAmount` | `public` | Calcula costo de mantenimiento preventivo. |
-
-**36. `CorrectiveMaintenanceStrategy` (Strategy)**
-
-Implementación de estrategia de mantenimiento correctivo.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `scheduleMaintenance(vehicle, currentDate)` | `MaintenanceSchedule` | `public` | Programa mantenimiento correctivo. |
-| `calculateMaintenanceCost(vehicle, maintenanceType)` | `MonetaryAmount` | `public` | Calcula costo de mantenimiento correctivo. |
-
-**37. `PredictiveMaintenanceStrategy` (Strategy)**
-
-Implementación de estrategia de mantenimiento predictivo.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `scheduleMaintenance(vehicle, currentDate)` | `MaintenanceSchedule` | `public` | Programa mantenimiento predictivo. |
-| `calculateMaintenanceCost(vehicle, maintenanceType)` | `MonetaryAmount` | `public` | Calcula costo de mantenimiento predictivo. |
+| Atributo     | Tipo      | Visibilidad  | Descripción                              |
+|--------------|-----------|--------------|------------------------------------------|
+| `kilometers` | `Integer` | `private`    | Cantidad total de kilómetros recorridos. |
 
 ---
 
-**Factories**
+**Enumerations**
 
-**38. `DistrictFactory` (Factory)**
+**10. `OperationalStatus` (Enumeration)**
 
-Factory para la creación de instancias de District con validaciones y configuraciones por defecto.
+Define el estado operativo de un distrito.
 
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createDistrict(name, municipalityId, boundaries, population, initialBudget)` | `District` | `public` | Crea un distrito con parámetros completos. |
-| `createUrbanDistrict(name, population)` | `District` | `public` | Crea un distrito urbano con configuración predeterminada. |
-| `createRuralDistrict(name, area)` | `District` | `public` | Crea un distrito rural con configuración predeterminada. |
-
-**39. `VehicleFactory` (Factory)**
-
-Factory para la creación de vehículos según diferentes tipos y especificaciones.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createVehicle(registrationNumber, vehicleType, capacity, fuelType)` | `Vehicle` | `public` | Crea un vehículo con especificaciones completas. |
-| `createCollectionTruck(registrationNumber, capacity)` | `Vehicle` | `public` | Crea un camión recolector especializado. |
-| `createMaintenanceVehicle(registrationNumber)` | `Vehicle` | `public` | Crea un vehículo de mantenimiento. |
-
-**40. `DriverFactory` (Factory)**
-
-Factory para la creación de conductores con diferentes configuraciones iniciales.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createDriver(personalInfo, licenseInfo)` | `Driver` | `public` | Crea un conductor con información básica. |
-| `createDriverWithCertifications(personalInfo, licenseInfo, certifications)` | `Driver` | `public` | Crea un conductor con certificaciones iniciales. |
-
-**41. `ResourceFactory` (Factory)**
-
-Factory para la creación de recursos municipales de diferentes tipos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createResource(resourceType, name, capacity)` | `Resource` | `public` | Crea un recurso con especificaciones básicas. |
-| `createBudgetAllocation(district, budget)` | `Resource` | `public` | Crea una asignación presupuestaria como recurso. |
+| Valor       | Descripción                                      |
+|-------------|--------------------------------------------------|
+| `ACTIVE`    | Distrito operativo y en funcionamiento.          |
+| `SUSPENDED` | Distrito temporalmente inactivo.                 |
+| `TRIAL`     | Distrito en fase de prueba o activación inicial. |
 
 ---
 
-**Repository Interfaces**
+**11. `VehicleType` (Enumeration)**
 
-**42. `DistrictRepository` (Repository Interface)**
+Clasifica los tipos de vehículos disponibles para operaciones municipales.
 
-Interfaz de repositorio para la persistencia y consulta de distritos.
+| Valor        | Descripción                           |
+|--------------|---------------------------------------|
+| `COMPACTOR`  | Vehículo de compactación de residuos. |
+| `TRUCK`      | Camión de transporte de residuos.     |
+| `MINI_TRUCK` | Vehículo ligero de menor capacidad.   |
 
-**Métodos principales:**
+---
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(districtId)` | `Optional<District>` | `public` | Busca un distrito por su identificador. |
-| `findByMunicipality(municipalityId)` | `List<District>` | `public` | Busca distritos de una municipalidad. |
-| `findByAdministrator(administratorId)` | `List<District>` | `public` | Busca distritos de un administrador. |
-| `findByOperationalStatus(status)` | `List<District>` | `public` | Busca distritos por estado operacional. |
-| `findByLocation(location)` | `Optional<District>` | `public` | Busca distrito que contiene una ubicación. |
-| `save(district)` | `District` | `public` | Persiste o actualiza un distrito. |
-| `delete(districtId)` | `void` | `public` | Elimina un distrito del sistema. |
-| `existsById(districtId)` | `boolean` | `public` | Verifica si existe un distrito. |
+**12. `VehicleStatus` (Enumeration)**
 
-**43. `VehicleRepository` (Repository Interface)**
+Indica el estado operativo actual de un vehículo.
 
-Interfaz de repositorio para la persistencia y consulta de vehículos.
+| Valor            | Descripción                          |
+|------------------|--------------------------------------|
+| `AVAILABLE`      | Vehículo disponible para asignación. |
+| `IN_USE`         | Vehículo actualmente en operación.   |
+| `MAINTENANCE`    | Vehículo en mantenimiento.           |
+| `DECOMMISSIONED` | Vehículo dado de baja.               |
 
-**Métodos principales:**
+---
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(vehicleId)` | `Optional<Vehicle>` | `public` | Busca un vehículo por su identificador. |
-| `findByDistrict(districtId)` | `List<Vehicle>` | `public` | Busca vehículos de un distrito. |
-| `findByStatus(status)` | `List<Vehicle>` | `public` | Busca vehículos por estado. |
-| `findByVehicleType(vehicleType)` | `List<Vehicle>` | `public` | Busca vehículos por tipo. |
-| `findByDriver(driverId)` | `Optional<Vehicle>` | `public` | Busca vehículo asignado a un conductor. |
-| `findAvailableVehicles(districtId)` | `List<Vehicle>` | `public` | Busca vehículos disponibles en un distrito. |
-| `save(vehicle)` | `Vehicle` | `public` | Persiste o actualiza un vehículo. |
-| `delete(vehicleId)` | `void` | `public` | Elimina un vehículo del sistema. |
-| `existsById(vehicleId)` | `boolean` | `public` | Verifica si existe un vehículo. |
+**13. `DriverStatus` (Enumeration)**
 
-**44. `DriverRepository` (Repository Interface)**
+Define el estado actual del conductor dentro del sistema municipal.
 
-Interfaz de repositorio para la persistencia y consulta de conductores.
+| Valor       | Descripción                           |
+|-------------|---------------------------------------|
+| `AVAILABLE` | Conductor disponible para asignación. |
+| `ON_ROUTE`  | Conductor actualmente en ruta.        |
+| `OFF_DUTY`  | Conductor fuera de servicio.          |
+| `SUSPENDED` | Conductor suspendido temporalmente.   |
 
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(driverId)` | `Optional<Driver>` | `public` | Busca un conductor por su identificador. |
-| `findByDistrict(districtId)` | `List<Driver>` | `public` | Busca conductores de un distrito. |
-| `findByEmploymentStatus(status)` | `List<Driver>` | `public` | Busca conductores por estado laboral. |
-| `findByLicenseType(licenseType)` | `List<Driver>` | `public` | Busca conductores por tipo de licencia. |
-| `findAvailableDrivers(districtId, shiftDate)` | `List<Driver>` | `public` | Busca conductores disponibles para una fecha. |
-| `save(driver)` | `Driver` | `public` | Persiste o actualiza un conductor. |
-| `delete(driverId)` | `void` | `public` | Elimina un conductor del sistema. |
-| `existsById(driverId)` | `boolean` | `public` | Verifica si existe un conductor. |
+---
 
 **Diccionario de Clases del Bounded Context Community Relations:**
 
@@ -4436,872 +3444,169 @@ Se presenta un diccionario detallado de las clases principales que componen el B
 
 **1. `Citizen` (Aggregate Root)**
 
-Representa un ciudadano participante en el sistema de gestión comunitaria con capacidad de reportar incidencias, ganar recompensas, recibir notificaciones y mantener un perfil de participación activa.
+Representa a un ciudadano registrado en el sistema, capaz de reportar incidencias, acumular puntos por participación y pertenecer a distintos niveles de membresía dentro del programa comunitario.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del ciudadano. |
-| `citizenId` | `CitizenId` | `private` | Identificador de dominio del ciudadano. |
-| `personalInfo` | `PersonalInfo` | `private` | Información personal del ciudadano. |
-| `contactInfo` | `ContactInfo` | `private` | Información de contacto del ciudadano. |
-| `address` | `Address` | `private` | Dirección de residencia del ciudadano. |
-| `registrationDate` | `LocalDateTime` | `private` | Fecha y hora de registro en el sistema. |
-| `membershipStatus` | `MembershipStatus` | `private` | Estado de membresía del ciudadano. |
-| `engagementLevel` | `EngagementLevel` | `private` | Nivel de participación del ciudadano. |
-| `preferences` | `CitizenPreferences` | `private` | Preferencias del ciudadano. |
-| `rewardsAccount` | `RewardsAccount` | `private` | Cuenta de recompensas del ciudadano. |
-| `notifications` | `List<Notification>` | `private` | Lista de notificaciones del ciudadano. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
+| Atributo                | Tipo              | Visibilidad  | Descripción                                         |
+|-------------------------|-------------------|--------------|-----------------------------------------------------|
+| `id`                    | `String`          | `private`    | Identificador único del ciudadano.                  |
+| `userId`                | `UserId`          | `private`    | Identificador del usuario asociado.                 |
+| `districtId`            | `DistrictId`      | `private`    | Distrito al que pertenece el ciudadano.             |
+| `fullName`              | `FullName`        | `private`    | Nombre completo del ciudadano.                      |
+| `email`                 | `EmailAddress`    | `private`    | Dirección de correo electrónico del ciudadano.      |
+| `phoneNumber`           | `PhoneNumber`     | `private`    | Número de teléfono del ciudadano.                   |
+| `totalPoints`           | `RewardPoints`    | `private`    | Puntos acumulados por participación.                |
+| `membershipLevel`       | `MembershipLevel` | `private`    | Nivel de membresía actual del ciudadano.            |
+| `totalReportsSubmitted` | `Integer`         | `private`    | Número total de reportes enviados por el ciudadano. |
+| `lastActivityDate`      | `LocalDateTime`   | `private`    | Fecha de la última actividad registrada.            |
+| `createdAt`             | `LocalDateTime`   | `private`    | Fecha y hora de creación del registro.              |
+| `updatedAt`             | `LocalDateTime`   | `private`    | Fecha y hora de la última actualización.            |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `Citizen()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `Citizen(personalInfo, contactInfo, address)` | `Constructor` | `public` | Constructor que instancia un ciudadano con datos básicos. |
-| `updateProfile(personalInfo, contactInfo)` | `void` | `public` | Actualiza el perfil del ciudadano. |
-| `updatePreferences(preferences)` | `void` | `public` | Actualiza las preferencias del ciudadano. |
-| `addNotification(notification)` | `void` | `public` | Agrega una notificación al ciudadano. |
-| `earnRewardPoints(points, reason)` | `void` | `public` | Otorga puntos de recompensa al ciudadano. |
-| `redeemRewards(redemption)` | `void` | `public` | Redime recompensas del ciudadano. |
-| `updateEngagementLevel()` | `void` | `public` | Actualiza el nivel de participación. |
-| `canSubmitReport()` | `boolean` | `public` | Determina si puede enviar reportes. |
-| `calculateTotalRewardPoints()` | `RewardPoints` | `public` | Calcula el total de puntos de recompensa. |
-| `isActiveInDistrict(districtId)` | `boolean` | `public` | Determina si está activo en un distrito. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
+| Método                                        | Tipo de Retorno  | Visibilidad  | Descripción                                       |
+|-----------------------------------------------|------------------|--------------|---------------------------------------------------|
+| `earnPoints(points: Integer, reason: String)` | `void`           | `public`     | Añade puntos al ciudadano por una acción válida.  |
+| `redeemPoints(points: Integer)`               | `void`           | `public`     | Permite canjear puntos acumulados.                |
+| `submitReport()`                              | `void`           | `public`     | Registra el envío de un nuevo reporte.            |
+| `updateMembershipLevel()`                     | `void`           | `public`     | Actualiza el nivel de membresía según los puntos. |
+| `isActive()`                                  | `boolean`        | `public`     | Indica si el ciudadano está activo en el sistema. |
+
+---
 
 **2. `Report` (Aggregate Root)**
 
-Representa un reporte de incidencia enviado por un ciudadano con información detallada, imágenes, estado de resolución y asignación a contenedores específicos.
+Representa un reporte ciudadano sobre incidencias relacionadas con el servicio de recolección o estado de los contenedores. Incluye el tipo de reporte, estado, descripción, resolución y evidencias asociadas.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del reporte. |
-| `reportId` | `ReportId` | `private` | Identificador de dominio del reporte. |
-| `citizenId` | `CitizenId` | `private` | Identificador del ciudadano que envió el reporte. |
-| `reportType` | `ReportType` | `private` | Tipo de reporte enviado. |
-| `description` | `String` | `private` | Descripción detallada del reporte. |
-| `location` | `Location` | `private` | Ubicación geográfica del reporte. |
-| `priority` | `Priority` | `private` | Prioridad asignada al reporte. |
-| `status` | `ReportStatus` | `private` | Estado actual del reporte. |
-| `images` | `List<ReportImage>` | `private` | Lista de imágenes adjuntas al reporte. |
-| `assignedContainerId` | `ContainerId` | `private` | Identificador del contenedor asignado. |
-| `submissionDate` | `LocalDateTime` | `private` | Fecha y hora de envío del reporte. |
-| `resolutionDate` | `LocalDateTime` | `private` | Fecha y hora de resolución del reporte. |
-| `feedback` | `CitizenFeedback` | `private` | Retroalimentación del ciudadano. |
-| `administratorNotes` | `String` | `private` | Notas del administrador. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
+| Atributo         | Tipo                     | Visibilidad  | Descripción                                      |
+|------------------|--------------------------|--------------|--------------------------------------------------|
+| `id`             | `String`                 | `private`    | Identificador único del reporte.                 |
+| `citizenId`      | `CitizenId`              | `private`    | Identificador del ciudadano que creó el reporte. |
+| `location`       | `Location`               | `private`    | Ubicación donde ocurrió la incidencia.           |
+| `containerId`    | `ContainerId (opcional)` | `private`    | Contenedor afectado en el reporte, si aplica.    |
+| `reportType`     | `ReportType`             | `private`    | Tipo de incidente reportado.                     |
+| `description`    | `String`                 | `private`    | Descripción detallada de la incidencia.          |
+| `status`         | `ReportStatus`           | `private`    | Estado actual del reporte.                       |
+| `resolutionNote` | `String`                 | `private`    | Nota de resolución asociada.                     |
+| `resolvedAt`     | `LocalDateTime`          | `private`    | Fecha y hora en que se resolvió el reporte.      |
+| `resolvedBy`     | `UserId`                 | `private`    | Usuario que resolvió el reporte.                 |
+| `submittedAt`    | `LocalDateTime`          | `private`    | Fecha de creación del reporte.                   |
+| `acknowledgedAt` | `LocalDateTime`          | `private`    | Fecha en que se reconoció el reporte.            |
+| `createdAt`      | `LocalDateTime`          | `private`    | Fecha y hora de registro.                        |
+| `updatedAt`      | `LocalDateTime`          | `private`    | Fecha y hora de la última actualización.         |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `Report()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `Report(citizenId, reportType, description, location)` | `Constructor` | `public` | Constructor que instancia un reporte con datos básicos. |
-| `addImage(image)` | `void` | `public` | Agrega una imagen al reporte. |
-| `assignToContainer(containerId)` | `void` | `public` | Asigna el reporte a un contenedor específico. |
-| `updateStatus(newStatus, notes)` | `void` | `public` | Actualiza el estado del reporte. |
-| `provideResolution(resolution, resolvedBy)` | `void` | `public` | Proporciona resolución al reporte. |
-| `submitFeedback(feedback)` | `void` | `public` | Envía retroalimentación sobre el reporte. |
-| `calculateResolutionTime()` | `Duration` | `public` | Calcula el tiempo de resolución del reporte. |
-| `isOverdue()` | `boolean` | `public` | Determina si el reporte está atrasado. |
-| `canBeUpdated()` | `boolean` | `public` | Determina si el reporte puede ser actualizado. |
-| `canAddComments()` | `boolean` | `public` | Determina si se pueden agregar comentarios. |
-| `canProvideResolution()` | `boolean` | `public` | Determina si se puede proporcionar resolución. |
-| `getAvailableActions()` | `List<ReportAction>` | `public` | Obtiene las acciones disponibles según el estado. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
-
-**3. `RewardsProgram` (Aggregate Root)**
-
-Representa un programa de recompensas con reglas específicas, opciones de redención y gestión de participantes para incentivar la participación ciudadana.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del programa. |
-| `programId` | `RewardsProgramId` | `private` | Identificador de dominio del programa. |
-| `name` | `String` | `private` | Nombre del programa de recompensas. |
-| `description` | `String` | `private` | Descripción detallada del programa. |
-| `isActive` | `Boolean` | `private` | Indica si el programa está activo. |
-| `startDate` | `LocalDateTime` | `private` | Fecha de inicio del programa. |
-| `endDate` | `LocalDateTime` | `private` | Fecha de finalización del programa. |
-| `rules` | `List<RewardRule>` | `private` | Lista de reglas del programa. |
-| `redemptionOptions` | `List<RedemptionOption>` | `private` | Opciones de redención disponibles. |
-| `participants` | `List<CitizenId>` | `private` | Lista de participantes del programa. |
-| `totalPointsAwarded` | `RewardPoints` | `private` | Total de puntos otorgados. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `RewardsProgram()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `RewardsProgram(name, description, rules)` | `Constructor` | `public` | Constructor que instancia un programa con datos básicos. |
-| `addRule(rule)` | `void` | `public` | Agrega una regla al programa. |
-| `addRedemptionOption(option)` | `void` | `public` | Agrega una opción de redención. |
-| `calculatePoints(action)` | `RewardPoints` | `public` | Calcula puntos según una acción ciudadana. |
-| `enrollCitizen(citizenId)` | `void` | `public` | Inscribe un ciudadano al programa. |
-| `isEligibleForRedemption(citizenId, option)` | `boolean` | `public` | Determina elegibilidad para redención. |
-| `deactivateProgram()` | `void` | `public` | Desactiva el programa. |
-| `isActive()` | `boolean` | `public` | Determina si el programa está activo. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
+| Método                                       | Tipo de Retorno   | Visibilidad  | Descripción                                                |
+|----------------------------------------------|-------------------|--------------|------------------------------------------------------------|
+| `acknowledge()`                              | `void`            | `public`     | Marca el reporte como reconocido por el sistema.           |
+| `startProcessing()`                          | `void`            | `public`     | Inicia el procesamiento del reporte.                       |
+| `resolve(note: String, resolvedBy: UserId)`  | `void`            | `public`     | Resuelve el reporte con nota y usuario responsable.        |
+| `reject(reason: String, rejectedBy: UserId)` | `void`            | `public`     | Rechaza el reporte con justificación.                      |
+| `calculateResolutionTime()`                  | `Duration`        | `public`     | Calcula la duración entre la creación y la resolución.     |
+| `isOverdue()`                                | `boolean`         | `public`     | Indica si el reporte excedió el tiempo máximo de atención. |
 
 ---
 
 **Entities**
 
-**4. `ReportImage` (Entity)**
+**3. `Evidence` (Entity)**
 
-Representa una imagen adjunta a un reporte con metadatos de archivo, validaciones de formato y capacidades de gestión de contenido multimedia.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único de la imagen. |
-| `imageId` | `ReportImageId` | `private` | Identificador de dominio de la imagen. |
-| `reportId` | `ReportId` | `private` | Identificador del reporte asociado. |
-| `fileName` | `String` | `private` | Nombre del archivo de imagen. |
-| `filePath` | `String` | `private` | Ruta del archivo en el sistema. |
-| `fileSize` | `Long` | `private` | Tamaño del archivo en bytes. |
-| `mimeType` | `String` | `private` | Tipo MIME del archivo. |
-| `uploadedDate` | `LocalDateTime` | `private` | Fecha de subida de la imagen. |
-| `description` | `String` | `private` | Descripción de la imagen. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `ReportImage(reportId, fileName, filePath)` | `Constructor` | `public` | Constructor que instancia una imagen con datos básicos. |
-| `getFileUrl()` | `String` | `public` | Obtiene la URL del archivo. |
-| `isValidImageType()` | `Boolean` | `public` | Valida si es un tipo de imagen válido. |
-
-**5. `Notification` (Entity)**
-
-Representa una notificación enviada a un ciudadano con información sobre reportes, recompensas y actualizaciones del sistema.
+Representa una evidencia asociada a un reporte ciudadano, como una foto, video o documento que respalda la información enviada.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único de la notificación. |
-| `notificationId` | `NotificationId` | `private` | Identificador de dominio de la notificación. |
-| `citizenId` | `CitizenId` | `private` | Identificador del ciudadano destinatario. |
-| `type` | `NotificationType` | `private` | Tipo de notificación. |
-| `title` | `String` | `private` | Título de la notificación. |
-| `message` | `String` | `private` | Mensaje de la notificación. |
-| `priority` | `NotificationPriority` | `private` | Prioridad de la notificación. |
-| `channel` | `NotificationChannel` | `private` | Canal de envío de la notificación. |
-| `status` | `NotificationStatus` | `private` | Estado de la notificación. |
-| `scheduledDate` | `LocalDateTime` | `private` | Fecha programada de envío. |
-| `sentDate` | `LocalDateTime` | `private` | Fecha de envío real. |
-| `readDate` | `LocalDateTime` | `private` | Fecha de lectura por el ciudadano. |
+| Atributo       | Tipo           | Visibilidad  | Descripción                                  |
+|----------------|----------------|--------------|----------------------------------------------|
+| `id`           | `String`       | `private`    | Identificador único de la evidencia.         |
+| `type`         | `EvidenceType` | `private`    | Tipo de evidencia (foto, video o documento). |
+| `filePath`     | `String`       | `private`    | Ruta del archivo almacenado.                 |
+| `originalName` | `String`       | `private`    | Nombre original del archivo cargado.         |
+| `description`  | `String`       | `private`    | Descripción opcional de la evidencia.        |
+| `fileSize`     | `Long`         | `private`    | Tamaño del archivo en bytes.                 |
+| `mimeType`     | `String`       | `private`    | Tipo MIME del archivo.                       |
+| `thumbnailUrl` | `String`       | `private`    | URL del thumbnail generado (si aplica).      |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `Notification(citizenId, type, message)` | `Constructor` | `public` | Constructor que instancia una notificación con datos básicos. |
-| `markAsRead()` | `void` | `public` | Marca la notificación como leída. |
-| `markAsSent()` | `void` | `public` | Marca la notificación como enviada. |
-| `isExpired()` | `Boolean` | `public` | Determina si la notificación ha expirado. |
-| `canBeRead()` | `Boolean` | `public` | Determina si la notificación puede ser leída. |
+| Método                                    | Tipo de Retorno  | Visibilidad   | Descripción                                        |
+|-------------------------------------------|------------------|---------------|----------------------------------------------------|
+| `isImage()`                               | `boolean`        | `public`      | Determina si la evidencia es una imagen.           |
+| `isVideo()`                               | `boolean`        | `public`      | Determina si la evidencia es un video.             |
+| `isLargeFile()`                           | `boolean`        | `public`      | Indica si el archivo excede un tamaño determinado. |
+| `updateDescription(description: String)`  | `void`           | `public`      | Actualiza la descripción del archivo.              |
+| `generateThumbnail(thumbnailUrl: String)` | `void`           | `public`      | Genera una miniatura asociada al archivo.          |
 
 ---
 
 **Value Objects**
 
-**6. `CitizenId` (Value Object)**
+**4. `RewardPoints` (Value Object)**
 
-Identificador único inmutable para un ciudadano en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `citizenId` | `Long` | `private` | Valor numérico del identificador del ciudadano. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isValid()` | `Boolean` | `public` | Valida que el identificador sea válido. |
-
-**7. `ReportId` (Value Object)**
-
-Identificador único inmutable para un reporte en el sistema.
+Representa la cantidad de puntos obtenidos o canjeados por un ciudadano según sus interacciones en el sistema.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `reportId` | `Long` | `private` | Valor numérico del identificador del reporte. |
-
-**8. `RewardsProgramId` (Value Object)**
-
-Identificador único inmutable para un programa de recompensas en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `programId` | `Long` | `private` | Valor numérico del identificador del programa. |
-
-**9. `NotificationId` (Value Object)**
-
-Identificador único inmutable para una notificación en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `notificationId` | `Long` | `private` | Valor numérico del identificador de la notificación. |
-
-**10. `ReportImageId` (Value Object)**
-
-Identificador único inmutable para una imagen de reporte en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `imageId` | `Long` | `private` | Valor numérico del identificador de la imagen. |
-
-**11. `PersonalInfo` (Value Object)**
-
-Información personal de un ciudadano con datos de identificación y validaciones correspondientes.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `firstName` | `String` | `private` | Nombre del ciudadano. |
-| `lastName` | `String` | `private` | Apellido del ciudadano. |
-| `documentType` | `DocumentType` | `private` | Tipo de documento de identidad. |
-| `documentNumber` | `String` | `private` | Número de documento de identidad. |
-| `birthDate` | `LocalDate` | `private` | Fecha de nacimiento. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getFullName()` | `String` | `public` | Obtiene el nombre completo. |
-| `getAge()` | `Integer` | `public` | Calcula la edad actual. |
-
-**12. `ContactInfo` (Value Object)**
-
-Información de contacto de un ciudadano con validaciones de formato para email y teléfono.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `email` | `EmailAddress` | `private` | Dirección de correo electrónico. |
-| `phoneNumber` | `PhoneNumber` | `private` | Número de teléfono principal. |
-| `alternativePhone` | `PhoneNumber` | `private` | Número de teléfono alternativo. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isValidEmail()` | `Boolean` | `public` | Valida el formato del email. |
-| `isValidPhone()` | `Boolean` | `public` | Valida el formato del teléfono. |
-
-**13. `EngagementLevel` (Value Object)**
-
-Nivel de participación de un ciudadano con cálculos de actividad y métricas de compromiso.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `level` | `String` | `private` | Nivel de participación del ciudadano. |
-| `score` | `Double` | `private` | Puntuación de participación. |
-| `lastCalculation` | `LocalDateTime` | `private` | Fecha del último cálculo. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isHighEngagement()` | `Boolean` | `public` | Determina si tiene alta participación. |
-| `calculateNewLevel(recentActivity)` | `EngagementLevel` | `public` | Calcula nuevo nivel basado en actividad. |
-
-**14. `RewardPoints` (Value Object)**
-
-Puntos de recompensa otorgados a ciudadanos con capacidades de cálculo y gestión de expiración.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `points` | `Integer` | `private` | Cantidad de puntos de recompensa. |
-| `earnedDate` | `LocalDateTime` | `private` | Fecha de obtención de los puntos. |
-| `expiryDate` | `LocalDateTime` | `private` | Fecha de expiración de los puntos. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isExpired()` | `Boolean` | `public` | Determina si los puntos han expirado. |
-| `add(other)` | `RewardPoints` | `public` | Suma otros puntos de recompensa. |
-| `subtract(other)` | `RewardPoints` | `public` | Resta otros puntos de recompensa. |
-
-**15. `CitizenPreferences` (Value Object)**
-
-Preferencias configurables de un ciudadano para notificaciones, idioma y temas de interés.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `language` | `Language` | `private` | Idioma preferido del ciudadano. |
-| `notificationChannels` | `Set<NotificationChannel>` | `private` | Canales de notificación preferidos. |
-| `topicInterests` | `Set<TopicInterest>` | `private` | Temas de interés del ciudadano. |
-| `privacySettings` | `PrivacySettings` | `private` | Configuraciones de privacidad. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `allowsNotificationType(type)` | `Boolean` | `public` | Determina si permite un tipo de notificación. |
-
-**16. `RewardsAccount` (Value Object)**
-
-Cuenta de recompensas de un ciudadano con gestión de puntos disponibles y histórico de actividad.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `totalPoints` | `RewardPoints` | `private` | Total de puntos acumulados. |
-| `availablePoints` | `RewardPoints` | `private` | Puntos disponibles para redención. |
-| `lifetimeEarned` | `RewardPoints` | `private` | Total de puntos ganados históricos. |
-| `lastActivity` | `LocalDateTime` | `private` | Fecha de última actividad. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canRedeem(amount)` | `Boolean` | `public` | Determina si puede redimir una cantidad. |
-| `addPoints(points)` | `RewardsAccount` | `public` | Agrega puntos a la cuenta. |
-| `redeemPoints(amount)` | `RewardsAccount` | `public` | Redime puntos de la cuenta. |
-
-**17. `CitizenFeedback` (Value Object)**
-
-Retroalimentación proporcionada por un ciudadano sobre un reporte con calificación y comentarios.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `rating` | `Integer` | `private` | Calificación numérica del ciudadano. |
-| `comments` | `String` | `private` | Comentarios del ciudadano. |
-| `submissionDate` | `LocalDateTime` | `private` | Fecha de envío de la retroalimentación. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isPositive()` | `Boolean` | `public` | Determina si la retroalimentación es positiva. |
-| `isValid()` | `Boolean` | `public` | Valida la retroalimentación. |
-
-**18. `ReportType` (Value Object)**
-
-Tipo de reporte con categorización, requerimientos especiales y configuraciones específicas.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `type` | `String` | `private` | Tipo específico del reporte. |
-| `category` | `String` | `private` | Categoría del reporte. |
-| `requiresImages` | `Boolean` | `private` | Indica si requiere imágenes. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isEmergency()` | `Boolean` | `public` | Determina si es un reporte de emergencia. |
-| `isContainerRelated()` | `Boolean` | `public` | Determina si está relacionado con contenedores. |
+| Atributo  | Tipo     | Visibilidad  | Descripción                                               |
+|-----------|----------|--------------|-----------------------------------------------------------|
+| `value`   | `String` | `private`    | Valor numérico o representación de los puntos acumulados. |
 
 ---
 
-**Enums**
+**Enumerations**
 
-**19. `ReportStatus` (Enum)**
+**5. `MembershipLevel` (Enumeration)**
 
-Estados posibles de un reporte durante su ciclo de vida y procesamiento.
+Clasifica el nivel de membresía del ciudadano de acuerdo con su nivel de participación o puntos acumulados.
 
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `SUBMITTED` | Reporte enviado por el ciudadano. |
-| `IN_REVIEW` | Reporte en proceso de revisión. |
-| `IN_PROGRESS` | Reporte en proceso de resolución. |
-| `RESOLVED` | Reporte resuelto exitosamente. |
-| `CLOSED` | Reporte cerrado. |
-| `REJECTED` | Reporte rechazado. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canTransitionTo(newStatus)` | `boolean` | `public` | Valida si puede transicionar al nuevo estado. |
-| `isResolved()` | `boolean` | `public` | Determina si está resuelto. |
-| `allowsUpdates()` | `boolean` | `public` | Determina si permite actualizaciones. |
-| `allowsComments()` | `boolean` | `public` | Determina si permite comentarios. |
-| `requiresResolution()` | `boolean` | `public` | Determina si requiere resolución. |
-| `getAvailableTransitions()` | `List<ReportStatus>` | `public` | Obtiene las transiciones disponibles. |
-
-**20. `MembershipStatus` (Enum)**
-
-Estados de membresía de un ciudadano en el sistema comunitario.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `GUEST` | Ciudadano invitado sin membresía. |
-| `BASIC` | Membresía básica estándar. |
-| `PREMIUM` | Membresía premium con beneficios. |
-| `VIP` | Membresía VIP con máximos beneficios. |
-| `SUSPENDED` | Membresía suspendida temporalmente. |
-| `INACTIVE` | Membresía inactiva. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isActive()` | `boolean` | `public` | Determina si está activo. |
-| `canUpgrade()` | `boolean` | `public` | Determina si puede mejorar membresía. |
-| `canSubmitReports()` | `boolean` | `public` | Determina si puede enviar reportes. |
-| `getMaxReportsPerDay()` | `Integer` | `public` | Obtiene el máximo de reportes por día. |
-
-**21. `NotificationStatus` (Enum)**
-
-Estados posibles de una notificación durante su ciclo de vida.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `SCHEDULED` | Notificación programada para envío. |
-| `SENT` | Notificación enviada al destinatario. |
-| `DELIVERED` | Notificación entregada exitosamente. |
-| `READ` | Notificación leída por el destinatario. |
-| `FAILED` | Notificación falló en el envío. |
-| `EXPIRED` | Notificación expirada. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isDelivered()` | `boolean` | `public` | Determina si fue entregada. |
-| `canBeRead()` | `boolean` | `public` | Determina si puede ser leída. |
-| `hasExpired()` | `boolean` | `public` | Determina si ha expirado. |
-
-**22. `ReportAction` (Enum)**
-
-Acciones disponibles que se pueden realizar sobre un reporte según su estado.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `UPDATE_STATUS` | Actualizar estado del reporte. |
-| `ADD_COMMENT` | Agregar comentarios al reporte. |
-| `ADD_IMAGE` | Agregar imágenes al reporte. |
-| `ASSIGN_TO_CONTAINER` | Asignar reporte a contenedor. |
-| `PROVIDE_RESOLUTION` | Proporcionar resolución. |
-| `SUBMIT_FEEDBACK` | Enviar retroalimentación. |
-| `CLOSE_REPORT` | Cerrar el reporte. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAllowedForStatus(status)` | `boolean` | `public` | Determina si la acción está permitida para el estado. |
-| `requiresAdminPrivileges()` | `boolean` | `public` | Determina si requiere privilegios de administrador. |
+| Valor    | Descripción                             |
+|----------|-----------------------------------------|
+| `BRONZE` | Nivel inicial de membresía.             |
+| `SILVER` | Nivel intermedio de membresía.          |
+| `GOLD`   | Nivel avanzado o de alta participación. |
 
 ---
 
-**Application Services**
+**6. `ReportType` (Enumeration)**
 
-**23. `CitizenApplicationService` (Application Service)**
+Define el tipo de reporte ciudadano según el tipo de incidencia registrada.
 
-Servicio de aplicación que coordina las operaciones de negocio relacionadas con ciudadanos y su participación comunitaria.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `citizenRepository` | `CitizenRepository` | `private` | Repositorio para persistencia de ciudadanos. |
-| `citizenDomainService` | `CitizenDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `citizenFactory` | `CitizenFactory` | `private` | Factory para creación de ciudadanos. |
-| `rewardsManagementService` | `RewardsManagementService` | `private` | Servicio de gestión de recompensas. |
-| `engagementAnalysisService` | `EngagementAnalysisService` | `private` | Servicio de análisis de participación. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `registerCitizen(personalInfo, contactInfo, address, preferences)` | `Citizen` | `public` | Registra un nuevo ciudadano en el sistema. |
-| `updateProfile(citizenId, personalInfo, contactInfo)` | `void` | `public` | Actualiza el perfil de un ciudadano. |
-| `updatePreferences(citizenId, preferences)` | `void` | `public` | Actualiza las preferencias de un ciudadano. |
-| `earnRewardPoints(citizenId, points, reason)` | `void` | `public` | Otorga puntos de recompensa a un ciudadano. |
-| `redeemRewards(citizenId, redemption)` | `void` | `public` | Procesa redención de recompensas. |
-| `getCitizenById(citizenId)` | `Optional<Citizen>` | `public` | Obtiene un ciudadano por su identificador. |
-| `getCitizensByDistrict(districtId, status)` | `List<Citizen>` | `public` | Obtiene ciudadanos de un distrito por estado. |
-| `updateEngagementLevel(citizenId)` | `void` | `public` | Actualiza el nivel de participación. |
-
-**24. `ReportApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de reportes ciudadanos y su procesamiento.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `reportRepository` | `ReportRepository` | `private` | Repositorio para persistencia de reportes. |
-| `reportDomainService` | `ReportDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `reportFactory` | `ReportFactory` | `private` | Factory para creación de reportes. |
-| `reportRoutingService` | `ReportRoutingService` | `private` | Servicio de enrutamiento de reportes. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `submitReport(citizenId, reportType, description, location, priority, images)` | `Report` | `public` | Envía un nuevo reporte al sistema. |
-| `updateReportStatus(reportId, newStatus, adminNotes)` | `void` | `public` | Actualiza el estado de un reporte. |
-| `addReportImage(reportId, image)` | `void` | `public` | Agrega una imagen a un reporte. |
-| `provideResolution(reportId, resolution, resolvedBy)` | `void` | `public` | Proporciona resolución a un reporte. |
-| `submitFeedback(reportId, feedback)` | `void` | `public` | Envía retroalimentación sobre un reporte. |
-| `getReportById(reportId)` | `Optional<Report>` | `public` | Obtiene un reporte por su identificador. |
-| `getCitizenReports(citizenId, status, dateRange)` | `List<Report>` | `public` | Obtiene reportes de un ciudadano. |
-| `getReportsByLocation(location, radius, reportType)` | `List<Report>` | `public` | Obtiene reportes por ubicación geográfica. |
-| `getActiveReports(priority, districtId)` | `List<Report>` | `public` | Obtiene reportes activos por prioridad y distrito. |
-
-**25. `RewardsProgramApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de programas de recompensas y participación ciudadana.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `rewardsProgramRepository` | `RewardsProgramRepository` | `private` | Repositorio para persistencia de programas. |
-| `rewardsProgramDomainService` | `RewardsProgramDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `rewardsProgramFactory` | `RewardsProgramFactory` | `private` | Factory para creación de programas. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createProgram(name, description, rules, redemptionOptions)` | `RewardsProgram` | `public` | Crea un nuevo programa de recompensas. |
-| `addRewardRule(programId, rule)` | `void` | `public` | Agrega una regla a un programa. |
-| `addRedemptionOption(programId, option)` | `void` | `public` | Agrega una opción de redención. |
-| `enrollCitizen(programId, citizenId)` | `void` | `public` | Inscribe un ciudadano al programa. |
-| `deactivateProgram(programId)` | `void` | `public` | Desactiva un programa de recompensas. |
-| `getProgramById(programId)` | `Optional<RewardsProgram>` | `public` | Obtiene un programa por su identificador. |
-| `getActivePrograms()` | `List<RewardsProgram>` | `public` | Obtiene programas activos. |
-| `calculatePoints(programId, action)` | `RewardPoints` | `public` | Calcula puntos según acción ciudadana. |
-
-**26. `NotificationApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de notificaciones ciudadanas y comunicación del sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `citizenRepository` | `CitizenRepository` | `private` | Repositorio para acceso a ciudadanos. |
-| `notificationFactory` | `NotificationFactory` | `private` | Factory para creación de notificaciones. |
-| `notificationDomainService` | `NotificationDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `sendNotification(citizenId, type, title, message, channel, priority)` | `void` | `public` | Envía una notificación a un ciudadano. |
-| `markNotificationAsRead(citizenId, notificationId)` | `void` | `public` | Marca una notificación como leída. |
-| `getCitizenNotifications(citizenId, status)` | `List<Notification>` | `public` | Obtiene notificaciones de un ciudadano. |
-| `createWelcomeNotification(citizenId)` | `void` | `public` | Crea notificación de bienvenida. |
-| `createReportStatusNotification(reportId, newStatus)` | `void` | `public` | Crea notificación de cambio de estado. |
-| `createRewardsNotification(citizenId, points)` | `void` | `public` | Crea notificación de recompensas. |
+| Valor               | Descripción                             |
+|---------------------|-----------------------------------------|
+| `CONTAINER_FULL`    | Reporte de contenedor lleno.            |
+| `CONTAINER_DAMAGED` | Reporte de contenedor dañado.           |
+| `GARBAGE_OUTSIDE`   | Reporte de basura fuera del contenedor. |
+| `MISSED_COLLECTION` | Reporte de recolección no realizada.    |
+| `OTHER`             | Reporte de tipo misceláneo.             |
 
 ---
 
-**Domain Services**
+**7. `ReportStatus` (Enumeration)**
 
-**27. `CitizenDomainService` (Domain Service)**
+Indica el estado del ciclo de vida de un reporte.
 
-Servicio de dominio que implementa lógica de negocio compleja relacionada con ciudadanos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateCitizenRegistration(citizen)` | `ValidationResult` | `public` | Valida el registro de un nuevo ciudadano. |
-| `calculateEngagementLevel(citizen, activities)` | `EngagementLevel` | `public` | Calcula el nivel de participación. |
-| `determineEligibilityForUpgrade(citizen)` | `MembershipUpgradeResult` | `public` | Determina elegibilidad para mejora de membresía. |
-| `validateRewardRedemption(citizen, redemption)` | `ValidationResult` | `public` | Valida redención de recompensas. |
-| `checkDuplicateRegistration(personalInfo)` | `ValidationResult` | `public` | Verifica registros duplicados. |
-
-**28. `ReportDomainService` (Domain Service)**
-
-Servicio de dominio para lógica compleja relacionada con reportes ciudadanos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateReportSubmission(report)` | `ValidationResult` | `public` | Valida el envío de un reporte. |
-| `calculatePriority(report, systemLoad)` | `Priority` | `public` | Calcula la prioridad del reporte. |
-| `estimateResolutionTime(report, workload)` | `Duration` | `public` | Estima tiempo de resolución. |
-| `checkDuplicateReports(report, existingReports)` | `ValidationResult` | `public` | Verifica reportes duplicados. |
-| `assignToNearestContainer(report, containers)` | `Optional<ContainerId>` | `public` | Asigna al contenedor más cercano. |
-
-**29. `RewardsProgramDomainService` (Domain Service)**
-
-Servicio de dominio para lógica compleja relacionada con programas de recompensas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateProgramCreation(program)` | `ValidationResult` | `public` | Valida la creación de un programa. |
-| `calculateProgramEffectiveness(program)` | `EffectivenessReport` | `public` | Calcula efectividad del programa. |
-| `optimizeRewardRules(program, usage)` | `List<RewardRule>` | `public` | Optimiza reglas de recompensas. |
-| `checkProgramEligibility(citizen, program)` | `EligibilityResult` | `public` | Verifica elegibilidad para el programa. |
-
-**30. `EngagementAnalysisService` (Domain Service)**
-
-Servicio especializado en análisis de participación y comportamiento ciudadano.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `calculateEngagementLevel(citizen)` | `EngagementLevel` | `public` | Calcula nivel de participación. |
-| `analyzeReportingPatterns(citizen)` | `ReportingPatterns` | `public` | Analiza patrones de reportes. |
-| `identifyInfluentialCitizens(district)` | `List<Citizen>` | `public` | Identifica ciudadanos influyentes. |
-| `generateEngagementReport(period)` | `EngagementReport` | `public` | Genera reporte de participación. |
-| `predictCitizenBehavior(citizen)` | `BehaviorPrediction` | `public` | Predice comportamiento ciudadano. |
-
-**31. `RewardsManagementService` (Domain Service)**
-
-Servicio para gestión integral de recompensas y estrategias de cálculo.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `rewardStrategy` | `RewardCalculationStrategy` | `private` | Estrategia de cálculo de recompensas actual. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `calculateRewards(citizen, action)` | `RewardPoints` | `public` | Calcula recompensas por acción ciudadana. |
-| `processRedemption(citizen, redemption)` | `RedemptionResult` | `public` | Procesa redención de recompensas. |
-| `expirePoints(citizen)` | `List<ExpiredPoints>` | `public` | Expira puntos vencidos. |
-| `setRewardStrategy(strategy)` | `void` | `public` | Establece estrategia de cálculo. |
-| `analyzeRewardUsage(program)` | `UsageAnalysis` | `public` | Analiza uso de recompensas. |
-
-**32. `ReportRoutingService` (Domain Service)**
-
-Servicio especializado en enrutamiento y asignación de reportes.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `routeReport(report)` | `RoutingResult` | `public` | Enruta reporte al departamento apropiado. |
-| `assignPriority(report)` | `Priority` | `public` | Asigna prioridad al reporte. |
-| `findNearestContainer(location)` | `Optional<ContainerId>` | `public` | Encuentra contenedor más cercano. |
-| `estimateResolutionTime(report)` | `Duration` | `public` | Estima tiempo de resolución. |
-| `distributeWorkload(reports, districts)` | `WorkloadDistribution` | `public` | Distribuye carga de trabajo. |
-
-**33. `NotificationDomainService` (Domain Service)**
-
-Servicio de dominio para lógica compleja relacionada con notificaciones.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateNotification(notification)` | `ValidationResult` | `public` | Valida una notificación. |
-| `determineOptimalChannel(citizen, notificationType)` | `NotificationChannel` | `public` | Determina canal óptimo de notificación. |
-| `scheduleNotification(notification, preferences)` | `ScheduleResult` | `public` | Programa envío de notificación. |
-| `prioritizeNotifications(notifications)` | `List<Notification>` | `public` | Prioriza lista de notificaciones. |
+| Valor          | Descripción                           |
+|----------------|---------------------------------------|
+| `SUBMITTED`    | Reporte enviado por el ciudadano.     |
+| `ACKNOWLEDGED` | Reporte reconocido por el sistema.    |
+| `IN_PROGRESS`  | Reporte actualmente en procesamiento. |
+| `RESOLVED`     | Reporte resuelto y cerrado.           |
+| `REJECTED`     | Reporte rechazado con justificación.  |
 
 ---
 
-**Strategies**
+**8. `EvidenceType` (Enumeration)**
 
-**34. `RewardCalculationStrategy` (Strategy Interface)**
+Clasifica los tipos de evidencia que puede adjuntar un ciudadano a un reporte.
 
-Interfaz que define el contrato para diferentes algoritmos de cálculo de recompensas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `calculatePoints(action, citizen)` | `RewardPoints` | `public` | Calcula puntos según acción y ciudadano. |
-| `getMultiplier(citizen)` | `Double` | `public` | Obtiene multiplicador según ciudadano. |
-
-**35. `BasicRewardStrategy` (Strategy)**
-
-Implementación de estrategia básica de cálculo de recompensas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `calculatePoints(action, citizen)` | `RewardPoints` | `public` | Calcula puntos usando estrategia básica. |
-| `getMultiplier(citizen)` | `Double` | `public` | Obtiene multiplicador básico. |
-
-**36. `TieredRewardStrategy` (Strategy)**
-
-Implementación de estrategia escalonada de recompensas según nivel de membresía.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `calculatePoints(action, citizen)` | `RewardPoints` | `public` | Calcula puntos usando estrategia escalonada. |
-| `getMultiplier(citizen)` | `Double` | `public` | Obtiene multiplicador según nivel. |
-
-**37. `SeasonalRewardStrategy` (Strategy)**
-
-Implementación de estrategia estacional con bonificaciones temporales.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `calculatePoints(action, citizen)` | `RewardPoints` | `public` | Calcula puntos usando estrategia estacional. |
-| `getMultiplier(citizen)` | `Double` | `public` | Obtiene multiplicador estacional. |
-
----
-
-**Factories**
-
-**38. `CitizenFactory` (Factory)**
-
-Factory para la creación de instancias de Citizen con diferentes configuraciones iniciales.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createCitizen(personalInfo, contactInfo, address, preferences)` | `Citizen` | `public` | Crea un ciudadano con configuración completa. |
-| `createCitizenWithDefaults(basicInfo, contact)` | `Citizen` | `public` | Crea ciudadano con configuración por defecto. |
-| `createGuestCitizen(tempId)` | `Citizen` | `public` | Crea ciudadano invitado temporal. |
-
-**39. `ReportFactory` (Factory)**
-
-Factory para la creación de reportes de diferentes tipos y configuraciones.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createReport(citizenId, reportType, description, location, priority)` | `Report` | `public` | Crea un reporte con parámetros específicos. |
-| `createEmergencyReport(citizenId, location, description)` | `Report` | `public` | Crea reporte de emergencia. |
-| `createContainerReport(citizenId, containerId, issue)` | `Report` | `public` | Crea reporte relacionado con contenedor. |
-
-**40. `RewardsProgramFactory` (Factory)**
-
-Factory para la creación de programas de recompensas con diferentes configuraciones.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createProgram(name, description, rules)` | `RewardsProgram` | `public` | Crea programa con reglas específicas. |
-| `createBasicProgram(name)` | `RewardsProgram` | `public` | Crea programa básico con reglas estándar. |
-| `createSeasonalProgram(name, season)` | `RewardsProgram` | `public` | Crea programa estacional. |
-
-**41. `NotificationFactory` (Factory)**
-
-Factory para la creación de notificaciones de diferentes tipos y propósitos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createWelcomeNotification(citizenId)` | `Notification` | `public` | Crea notificación de bienvenida. |
-| `createReportStatusNotification(reportId, newStatus)` | `Notification` | `public` | Crea notificación de cambio de estado. |
-| `createRewardsNotification(citizenId, points)` | `Notification` | `public` | Crea notificación de recompensas. |
-| `createSystemNotification(citizenId, message)` | `Notification` | `public` | Crea notificación del sistema. |
-
----
-
-**Repository Interfaces**
-
-**42. `CitizenRepository` (Repository Interface)**
-
-Interfaz de repositorio para la persistencia y consulta de ciudadanos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(citizenId)` | `Optional<Citizen>` | `public` | Busca un ciudadano por su identificador. |
-| `findByDocumentNumber(documentNumber)` | `Optional<Citizen>` | `public` | Busca ciudadano por número de documento. |
-| `findByEmail(email)` | `Optional<Citizen>` | `public` | Busca ciudadano por email. |
-| `findByDistrict(districtId)` | `List<Citizen>` | `public` | Busca ciudadanos de un distrito. |
-| `findByMembershipStatus(status)` | `List<Citizen>` | `public` | Busca ciudadanos por estado de membresía. |
-| `findByEngagementLevel(minLevel)` | `List<Citizen>` | `public` | Busca ciudadanos por nivel de participación. |
-| `save(citizen)` | `Citizen` | `public` | Persiste o actualiza un ciudadano. |
-| `delete(citizenId)` | `void` | `public` | Elimina un ciudadano del sistema. |
-| `existsById(citizenId)` | `boolean` | `public` | Verifica si existe un ciudadano. |
-
-**43. `ReportRepository` (Repository Interface)**
-
-Interfaz de repositorio para la persistencia y consulta de reportes ciudadanos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(reportId)` | `Optional<Report>` | `public` | Busca un reporte por su identificador. |
-| `findByCitizenId(citizenId)` | `List<Report>` | `public` | Busca reportes de un ciudadano. |
-| `findByStatus(status)` | `List<Report>` | `public` | Busca reportes por estado. |
-| `findByLocation(location, radius)` | `List<Report>` | `public` | Busca reportes por ubicación geográfica. |
-| `findByDateRange(startDate, endDate)` | `List<Report>` | `public` | Busca reportes en un rango de fechas. |
-| `findByPriority(priority)` | `List<Report>` | `public` | Busca reportes por prioridad. |
-| `findOverdueReports()` | `List<Report>` | `public` | Busca reportes atrasados. |
-| `save(report)` | `Report` | `public` | Persiste o actualiza un reporte. |
-| `delete(reportId)` | `void` | `public` | Elimina un reporte del sistema. |
-| `existsById(reportId)` | `boolean` | `public` | Verifica si existe un reporte. |
-
-**44. `RewardsProgramRepository` (Repository Interface)**
-
-Interfaz de repositorio para la persistencia y consulta de programas de recompensas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(programId)` | `Optional<RewardsProgram>` | `public` | Busca un programa por su identificador. |
-| `findActivePrograms()` | `List<RewardsProgram>` | `public` | Busca programas activos. |
-| `findByParticipant(citizenId)` | `List<RewardsProgram>` | `public` | Busca programas de un participante. |
-| `findByDateRange(startDate, endDate)` | `List<RewardsProgram>` | `public` | Busca programas en un rango de fechas. |
-| `save(program)` | `RewardsProgram` | `public` | Persiste o actualiza un programa. |
-| `delete(programId)` | `void` | `public` | Elimina un programa del sistema. |
-| `existsById(programId)` | `boolean` | `public` | Verifica si existe un programa. |
+| Valor      | Descripción                      |
+|------------|----------------------------------|
+| `PHOTO`    | Imagen o fotografía adjunta.     |
+| `VIDEO`    | Archivo de video como evidencia. |
+| `DOCUMENT` | Documento adjunto como respaldo. |
 
 ---
 
@@ -5313,923 +3618,248 @@ Se presenta un diccionario detallado de clases para el Bounded Context de "Payme
 
 **1. `Subscription` (Aggregate Root)**
 
-Representa una suscripción municipal al sistema de gestión inteligente de residuos con capacidad de facturación automática, gestión de planes, métodos de pago y renovación automática.
+Representa la suscripción activa de un distrito a un plan del sistema. Controla los períodos de facturación, estado del servicio, método de pago predeterminado y ciclos de renovación o suspensión.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único de la suscripción. |
-| `subscriptionId` | `SubscriptionId` | `private` | Identificador de dominio de la suscripción. |
-| `municipalityId` | `MunicipalityId` | `private` | Identificador de la municipalidad asociada. |
-| `planId` | `PlanId` | `private` | Identificador del plan de suscripción. |
-| `status` | `SubscriptionStatus` | `private` | Estado actual de la suscripción. |
-| `startDate` | `LocalDateTime` | `private` | Fecha de inicio de la suscripción. |
-| `endDate` | `LocalDateTime` | `private` | Fecha de finalización de la suscripción. |
-| `nextBillingDate` | `LocalDateTime` | `private` | Fecha de la próxima facturación. |
-| `paymentMethodId` | `PaymentMethodId` | `private` | Identificador del método de pago asignado. |
-| `billingAddress` | `BillingAddress` | `private` | Dirección de facturación. |
-| `billingCycle` | `BillingCycle` | `private` | Ciclo de facturación de la suscripción. |
-| `trialEndDate` | `LocalDateTime` | `private` | Fecha de finalización del período de prueba. |
-| `autoRenewal` | `Boolean` | `private` | Indica si la renovación automática está habilitada. |
-| `gracePeriodEndDate` | `LocalDateTime` | `private` | Fecha de finalización del período de gracia. |
-| `createdAt` | `LocalDateTime` | `private` | Fecha de creación de la suscripción. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
+| Atributo                 | Tipo                 | Visibilidad  | Descripción                                        |
+|--------------------------|----------------------|--------------|----------------------------------------------------|
+| `id`                     | `String`             | `private`    | Identificador único de la suscripción.             |
+| `districtId`             | `DistrictId`         | `private`    | Distrito asociado a la suscripción.                |
+| `planId`                 | `PlanId`             | `private`    | Identificador del plan contratado.                 |
+| `planName`               | `String`             | `private`    | Nombre del plan actual.                            |
+| `monthlyPrice`           | `Money`              | `private`    | Costo mensual del plan.                            |
+| `status`                 | `SubscriptionStatus` | `private`    | Estado actual de la suscripción.                   |
+| `startDate`              | `LocalDate`          | `private`    | Fecha de inicio de la suscripción.                 |
+| `trialEndDate`           | `LocalDate`          | `private`    | Fecha de finalización del período de prueba.       |
+| `currentPeriodStart`     | `LocalDate`          | `private`    | Fecha de inicio del período de facturación actual. |
+| `currentPeriodEnd`       | `LocalDate`          | `private`    | Fecha de fin del período de facturación actual.    |
+| `nextBillingDate`        | `LocalDate`          | `private`    | Fecha del próximo ciclo de facturación.            |
+| `gracePeriodEndDate`     | `LocalDate`          | `private`    | Fecha límite del período de gracia.                |
+| `cancelledAt`            | `LocalDate`          | `private`    | Fecha de cancelación de la suscripción.            |
+| `defaultPaymentMethodId` | `PaymentMethodId`    | `private`    | Método de pago predeterminado.                     |
+| `createdAt`              | `LocalDateTime`      | `private`    | Fecha y hora de creación del registro.             |
+| `updatedAt`              | `LocalDateTime`      | `private`    | Fecha y hora de la última actualización.           |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `Subscription()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `Subscription(municipalityId, planId, billingCycle)` | `Constructor` | `public` | Constructor que instancia una suscripción con datos básicos. |
-| `activate()` | `void` | `public` | Activa la suscripción. |
-| `suspend(reason)` | `void` | `public` | Suspende la suscripción por una razón específica. |
-| `cancel(reason)` | `void` | `public` | Cancela la suscripción por una razón específica. |
-| `updatePlan(newPlanId)` | `void` | `public` | Actualiza el plan de la suscripción. |
-| `updatePaymentMethod(paymentMethodId)` | `void` | `public` | Actualiza el método de pago de la suscripción. |
-| `processPayment(amount)` | `PaymentResult` | `public` | Procesa un pago para la suscripción. |
-| `isActive()` | `boolean` | `public` | Determina si la suscripción está activa. |
-| `isInGracePeriod()` | `boolean` | `public` | Determina si está en período de gracia. |
-| `canBeUpgraded()` | `boolean` | `public` | Determina si puede ser actualizada a un plan superior. |
-| `canBeDowngraded()` | `boolean` | `public` | Determina si puede ser degradada a un plan inferior. |
-| `canBeCancelled()` | `boolean` | `public` | Determina si puede ser cancelada. |
-| `canBeActivated()` | `boolean` | `public` | Determina si puede ser activada. |
-| `calculateNextBilling()` | `LocalDateTime` | `public` | Calcula la fecha de la próxima facturación. |
-| `getAvailableActions()` | `List<SubscriptionAction>` | `public` | Obtiene las acciones disponibles según el estado. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
+| Método                       | Tipo de Retorno  | Visibilidad  | Descripción                                                     |
+|------------------------------|------------------|--------------|-----------------------------------------------------------------|
+| `activate()`                 | `void`           | `public`     | Activa la suscripción y comienza el ciclo de facturación.       |
+| `suspend(reason: String)`    | `void`           | `public`     | Suspende temporalmente la suscripción por una razón específica. |
+| `enterGracePeriod()`         | `void`           | `public`     | Coloca la suscripción en período de gracia.                     |
+| `cancel(reason: String)`     | `void`           | `public`     | Cancela la suscripción definitivamente.                         |
+| `renew()`                    | `void`           | `public`     | Renueva la suscripción al finalizar el ciclo actual.            |
+| `isInGracePeriod()`          | `boolean`        | `public`     | Verifica si la suscripción se encuentra en período de gracia.   |
+| `shouldBeBilledToday()`      | `boolean`        | `public`     | Determina si corresponde facturar hoy.                          |
+| `calculateNextBillingDate()` | `LocalDate`      | `public`     | Calcula la próxima fecha de facturación.                        |
+
+---
 
 **2. `Payment` (Aggregate Root)**
 
-Representa un pago realizado o programado para una suscripción con capacidad de reintentos, seguimiento de transacciones y gestión de fallos.
+Representa un intento de pago asociado a una suscripción. Gestiona el estado de la transacción, número de intentos, errores y validaciones con el gateway de pago.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del pago. |
-| `paymentId` | `PaymentId` | `private` | Identificador de dominio del pago. |
-| `subscriptionId` | `SubscriptionId` | `private` | Identificador de la suscripción asociada. |
-| `amount` | `MonetaryAmount` | `private` | Monto del pago. |
-| `currency` | `Currency` | `private` | Moneda del pago. |
-| `paymentMethod` | `PaymentMethodType` | `private` | Tipo de método de pago utilizado. |
-| `status` | `PaymentStatus` | `private` | Estado actual del pago. |
-| `transactionId` | `TransactionId` | `private` | Identificador de la transacción en el gateway. |
-| `gatewayResponse` | `GatewayResponse` | `private` | Respuesta del gateway de pagos. |
-| `attemptNumber` | `Integer` | `private` | Número de intento de pago. |
-| `scheduledDate` | `LocalDateTime` | `private` | Fecha programada del pago. |
-| `processedDate` | `LocalDateTime` | `private` | Fecha de procesamiento del pago. |
-| `failureReason` | `FailureReason` | `private` | Razón del fallo si aplica. |
-| `attempts` | `List<PaymentAttempt>` | `private` | Lista de intentos de pago realizados. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
+| Atributo               | Tipo              | Visibilidad   | Descripción                                    |
+|------------------------|-------------------|---------------|------------------------------------------------|
+| `id`                   | `String`          | `private`     | Identificador único del pago.                  |
+| `subscriptionId`       | `SubscriptionId`  | `private`     | Suscripción asociada al pago.                  |
+| `amount`               | `Money`           | `private`     | Monto total del pago.                          |
+| `paymentMethodId`      | `PaymentMethodId` | `private`     | Método de pago utilizado.                      |
+| `status`               | `PaymentStatus`   | `private`     | Estado actual del pago.                        |
+| `gatewayTransactionId` | `String`          | `private`     | Identificador de la transacción en el gateway. |
+| `gatewayResponse`      | `String`          | `private`     | Respuesta del gateway de pago.                 |
+| `scheduledAt`          | `LocalDateTime`   | `private`     | Fecha programada para el intento de pago.      |
+| `processedAt`          | `LocalDateTime`   | `private`     | Fecha de procesamiento del pago.               |
+| `succeededAt`          | `LocalDateTime`   | `private`     | Fecha de confirmación de éxito.                |
+| `attemptNumber`        | `Integer`         | `private`     | Número de intentos realizados.                 |
+| `failureReason`        | `String`          | `private`     | Motivo del fallo, si aplica.                   |
+| `canRetry`             | `Boolean`         | `private`     | Indica si el pago puede volver a intentarse.   |
+| `createdAt`            | `LocalDateTime`   | `private`     | Fecha y hora de creación del registro.         |
+| `updatedAt`            | `LocalDateTime`   | `private`     | Fecha y hora de la última actualización.       |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `Payment()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `Payment(subscriptionId, amount, paymentMethod)` | `Constructor` | `public` | Constructor que instancia un pago con datos básicos. |
-| `process()` | `PaymentResult` | `public` | Procesa el pago. |
-| `retry()` | `PaymentResult` | `public` | Reintenta el pago. |
-| `markAsSuccessful(transactionId)` | `void` | `public` | Marca el pago como exitoso. |
-| `markAsFailed(reason)` | `void` | `public` | Marca el pago como fallido. |
-| `canBeRetried()` | `boolean` | `public` | Determina si el pago puede ser reintentado. |
-| `isSuccessful()` | `boolean` | `public` | Determina si el pago fue exitoso. |
-| `canBeProcessed()` | `boolean` | `public` | Determina si el pago puede ser procesado. |
-| `canBeCancelled()` | `boolean` | `public` | Determina si el pago puede ser cancelado. |
-| `getAvailableActions()` | `List<PaymentAction>` | `public` | Obtiene las acciones disponibles según el estado. |
-| `getAttemptHistory()` | `List<PaymentAttempt>` | `public` | Obtiene el historial de intentos de pago. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
+| Método                                             | Tipo de Retorno  | Visibilidad   | Descripción                                                        |
+|----------------------------------------------------|------------------|---------------|--------------------------------------------------------------------|
+| `markAsProcessing()`                               | `void`           | `public`      | Marca el pago como en proceso.                                     |
+| `markAsSucceeded(transactionId: String)`           | `void`           | `public`      | Marca el pago como exitoso e incluye el identificador del gateway. |
+| `markAsFailed(reason: String, retryable: boolean)` | `void`           | `public`      | Marca el pago como fallido e indica si puede reintentarse.         |
+| `canBeRetried()`                                   | `boolean`        | `public`      | Verifica si el pago puede volver a intentarse.                     |
+| `shouldRetryAt()`                                  | `LocalDateTime`  | `public`      | Calcula la próxima fecha de reintento.                             |
+
+---
 
 **3. `Invoice` (Aggregate Root)**
 
-Representa una factura generada para una suscripción con líneas de detalle, cálculos de impuestos y seguimiento de pagos.
+Representa una factura generada automáticamente o manualmente para una suscripción. Incluye montos, fechas de emisión, vencimiento, impuestos y estado de pago.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único de la factura. |
-| `invoiceId` | `InvoiceId` | `private` | Identificador de dominio de la factura. |
-| `subscriptionId` | `SubscriptionId` | `private` | Identificador de la suscripción asociada. |
-| `invoiceNumber` | `InvoiceNumber` | `private` | Número de factura único. |
-| `billingPeriod` | `BillingPeriod` | `private` | Período de facturación. |
-| `issueDate` | `LocalDateTime` | `private` | Fecha de emisión de la factura. |
-| `dueDate` | `LocalDateTime` | `private` | Fecha de vencimiento de la factura. |
-| `subtotal` | `MonetaryAmount` | `private` | Subtotal antes de impuestos. |
-| `taxAmount` | `MonetaryAmount` | `private` | Monto de impuestos. |
-| `totalAmount` | `MonetaryAmount` | `private` | Monto total de la factura. |
-| `status` | `InvoiceStatus` | `private` | Estado actual de la factura. |
-| `paymentId` | `PaymentId` | `private` | Identificador del pago asociado. |
-| `lineItems` | `List<InvoiceLineItem>` | `private` | Lista de líneas de detalle de la factura. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
+| Atributo             | Tipo             | Visibilidad  | Descripción                                 |
+|----------------------|------------------|--------------|---------------------------------------------|
+| `id`                 | `String`         | `private`    | Identificador único de la factura.          |
+| `subscriptionId`     | `SubscriptionId` | `private`    | Identificador de la suscripción asociada.   |
+| `districtId`         | `DistrictId`     | `private`    | Distrito facturado.                         |
+| `invoiceNumber`      | `InvoiceNumber`  | `private`    | Número único de factura.                    |
+| `billingPeriodStart` | `LocalDate`      | `private`    | Fecha de inicio del período facturado.      |
+| `billingPeriodEnd`   | `LocalDate`      | `private`    | Fecha de fin del período facturado.         |
+| `subtotal`           | `Money`          | `private`    | Subtotal sin impuestos.                     |
+| `taxAmount`          | `Money`          | `private`    | Monto correspondiente al impuesto aplicado. |
+| `totalAmount`        | `Money`          | `private`    | Total final de la factura.                  |
+| `status`             | `InvoiceStatus`  | `private`    | Estado actual de la factura.                |
+| `issuedAt`           | `LocalDate`      | `private`    | Fecha de emisión de la factura.             |
+| `dueDate`            | `LocalDate`      | `private`    | Fecha límite de pago.                       |
+| `paidAt`             | `LocalDate`      | `private`    | Fecha de pago de la factura.                |
+| `paymentId`          | `PaymentId`      | `private`    | Identificador del pago asociado.            |
+| `createdAt`          | `LocalDateTime`  | `private`    | Fecha y hora de creación del registro.      |
+| `updatedAt`          | `LocalDateTime`  | `private`    | Fecha y hora de la última actualización.    |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `Invoice()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `Invoice(subscriptionId, billingPeriod)` | `Constructor` | `public` | Constructor que instancia una factura con datos básicos. |
-| `addLineItem(item)` | `void` | `public` | Agrega una línea de detalle a la factura. |
-| `calculateTotals()` | `void` | `public` | Calcula los totales de la factura. |
-| `markAsPaid(paymentId)` | `void` | `public` | Marca la factura como pagada. |
-| `markAsOverdue()` | `void` | `public` | Marca la factura como vencida. |
-| `isPaid()` | `boolean` | `public` | Determina si la factura está pagada. |
-| `isOverdue()` | `boolean` | `public` | Determina si la factura está vencida. |
-| `canBePaid()` | `boolean` | `public` | Determina si la factura puede ser pagada. |
-| `canBeVoided()` | `boolean` | `public` | Determina si la factura puede ser anulada. |
-| `getDaysOverdue()` | `Integer` | `public` | Obtiene los días de vencimiento. |
-| `getAvailableActions()` | `List<InvoiceAction>` | `public` | Obtiene las acciones disponibles según el estado. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
+| Método                             | Tipo de Retorno  | Visibilidad   | Descripción                            |
+|------------------------------------|------------------|---------------|----------------------------------------|
+| `issue()`                          | `void`           | `public`      | Emite formalmente la factura.          |
+| `markAsPaid(paymentId: PaymentId)` | `void`           | `public`      | Marca la factura como pagada.          |
+| `markAsOverdue()`                  | `void`           | `public`      | Marca la factura como vencida.         |
+| `void_invoice()`                   | `void`           | `public`      | Anula o invalida la factura.           |
+| `isOverdue()`                      | `boolean`        | `public`      | Determina si la factura está vencida.  |
+| `getDaysOverdue()`                 | `Integer`        | `public`      | Devuelve el número de días de retraso. |
+
+---
+
+**4. `PaymentMethod` (Aggregate Root)**
+
+Representa un método de pago registrado en el sistema, asociado a un distrito, que puede ser utilizado para procesar facturas o suscripciones.
+
+**Atributos Principales:**
+
+| Atributo         | Tipo                | Visibilidad  | Descripción                                   |
+|------------------|---------------------|--------------|-----------------------------------------------|
+| `id`             | `String`            | `private`    | Identificador único del método de pago.       |
+| `districtId`     | `DistrictId`        | `private`    | Distrito propietario del método de pago.      |
+| `type`           | `PaymentMethodType` | `private`    | Tipo de método de pago.                       |
+| `culqiTokenId`   | `String`            | `private`    | Token del gateway de pago (Culqi).            |
+| `cardBrand`      | `String`            | `private`    | Marca de la tarjeta (Visa, Mastercard, etc.). |
+| `lastFourDigits` | `String`            | `private`    | Últimos cuatro dígitos de la tarjeta.         |
+| `expiryMonth`    | `Integer`           | `private`    | Mes de expiración de la tarjeta.              |
+| `expiryYear`     | `Integer`           | `private`    | Año de expiración de la tarjeta.              |
+| `isDefault`      | `Boolean`           | `private`    | Indica si es el método predeterminado.        |
+| `isValid`        | `Boolean`           | `private`    | Indica si el método es válido para uso.       |
+| `registeredAt`   | `LocalDateTime`     | `private`    | Fecha de registro en el sistema.              |
+| `lastUsedAt`     | `LocalDateTime`     | `private`    | Fecha del último uso registrado.              |
+
+**Métodos Principales:**
+
+| Método           | Tipo de Retorno  | Visibilidad   | Descripción                                |
+|------------------|------------------|---------------|--------------------------------------------|
+| `isExpired()`    | `boolean`        | `public`      | Indica si la tarjeta ha expirado.          |
+| `markAsUsed()`   | `void`           | `public`      | Actualiza la fecha del último uso.         |
+| `setAsDefault()` | `void`           | `public`      | Establece este método como predeterminado. |
 
 ---
 
 **Entities**
 
-**4. `PaymentMethod` (Entity)**
+**5. `PlanCatalog` (Entity)**
 
-Representa un método de pago configurado para una municipalidad con información de tarjetas de crédito, cuentas bancarias y validaciones.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del método de pago. |
-| `paymentMethodId` | `PaymentMethodId` | `private` | Identificador de dominio del método de pago. |
-| `municipalityId` | `MunicipalityId` | `private` | Identificador de la municipalidad asociada. |
-| `type` | `PaymentMethodType` | `private` | Tipo de método de pago. |
-| `cardDetails` | `CardDetails` | `private` | Detalles de tarjeta de crédito. |
-| `bankAccountDetails` | `BankAccountDetails` | `private` | Detalles de cuenta bancaria. |
-| `isDefault` | `Boolean` | `private` | Indica si es el método de pago por defecto. |
-| `isActive` | `Boolean` | `private` | Indica si el método está activo. |
-| `expiryDate` | `LocalDateTime` | `private` | Fecha de expiración. |
-| `lastUsedDate` | `LocalDateTime` | `private` | Fecha de último uso. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `PaymentMethod(municipalityId, type)` | `Constructor` | `public` | Constructor que instancia un método de pago con datos básicos. |
-| `validate()` | `ValidationResult` | `public` | Valida el método de pago. |
-| `isExpired()` | `boolean` | `public` | Determina si el método de pago está vencido. |
-| `canProcess(amount)` | `boolean` | `public` | Determina si puede procesar un monto específico. |
-| `updateDetails(cardDetails, bankDetails)` | `void` | `public` | Actualiza los detalles del método de pago. |
-
-**5. `InvoiceLineItem` (Entity)**
-
-Representa una línea de detalle en una factura con información de producto, cantidad, precio e impuestos.
+Representa un plan de suscripción disponible en el catálogo, con su precio y límites de recursos asociados.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único de la línea. |
-| `lineItemId` | `LineItemId` | `private` | Identificador de dominio de la línea. |
-| `description` | `String` | `private` | Descripción del servicio o producto. |
-| `quantity` | `Integer` | `private` | Cantidad del servicio o producto. |
-| `unitPrice` | `MonetaryAmount` | `private` | Precio unitario. |
-| `totalPrice` | `MonetaryAmount` | `private` | Precio total de la línea. |
-| `taxRate` | `TaxRate` | `private` | Tasa de impuesto aplicada. |
-| `taxAmount` | `MonetaryAmount` | `private` | Monto de impuesto. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `InvoiceLineItem(description, quantity, unitPrice)` | `Constructor` | `public` | Constructor que instancia una línea con datos básicos. |
-| `calculateTotal()` | `MonetaryAmount` | `public` | Calcula el total de la línea. |
-| `applyTax(rate)` | `void` | `public` | Aplica una tasa de impuesto a la línea. |
-
-**6. `PaymentAttempt` (Entity)**
-
-Representa un intento de procesamiento de pago con información de respuesta del gateway y manejo de errores.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del intento. |
-| `attemptId` | `AttemptId` | `private` | Identificador de dominio del intento. |
-| `paymentId` | `PaymentId` | `private` | Identificador del pago asociado. |
-| `attemptNumber` | `Integer` | `private` | Número de intento. |
-| `attemptDate` | `LocalDateTime` | `private` | Fecha del intento. |
-| `status` | `AttemptStatus` | `private` | Estado del intento. |
-| `gatewayResponse` | `GatewayResponse` | `private` | Respuesta del gateway de pagos. |
-| `errorCode` | `String` | `private` | Código de error si aplica. |
-| `errorMessage` | `String` | `private` | Mensaje de error si aplica. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `PaymentAttempt(paymentId, attemptNumber)` | `Constructor` | `public` | Constructor que instancia un intento con datos básicos. |
-| `isSuccessful()` | `boolean` | `public` | Determina si el intento fue exitoso. |
-| `getResponseTime()` | `Duration` | `public` | Obtiene el tiempo de respuesta del intento. |
+| Atributo        | Tipo      | Visibilidad  | Descripción                       |
+|-----------------|-----------|--------------|-----------------------------------|
+| `id`            | `String`  | `private`    | Identificador único del plan.     |
+| `name`          | `String`  | `private`    | Nombre del plan ofrecido.         |
+| `monthlyPrice`  | `Money`   | `private`    | Costo mensual del plan.           |
+| `maxVehicles`   | `Integer` | `private`    | Límite de vehículos incluidos.    |
+| `maxDrivers`    | `Integer` | `private`    | Límite de conductores incluidos.  |
+| `maxContainers` | `Integer` | `private`    | Límite de contenedores incluidos. |
 
 ---
 
 **Value Objects**
 
-**7. `SubscriptionId` (Value Object)**
+**6. `InvoiceNumber` (Value Object)**
 
-Identificador único inmutable para una suscripción en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `subscriptionId` | `String` | `private` | Valor alfanumérico del identificador de suscripción. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isValid()` | `Boolean` | `public` | Valida que el identificador sea válido. |
-
-**8. `PaymentId` (Value Object)**
-
-Identificador único inmutable para un pago en el sistema.
+Define el número único y secuencial de una factura emitida.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `paymentId` | `String` | `private` | Valor alfanumérico del identificador de pago. |
-
-**9. `InvoiceId` (Value Object)**
-
-Identificador único inmutable para una factura en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `invoiceId` | `String` | `private` | Valor alfanumérico del identificador de factura. |
-
-**10. `PaymentMethodId` (Value Object)**
-
-Identificador único inmutable para un método de pago en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `paymentMethodId` | `String` | `private` | Valor alfanumérico del identificador del método de pago. |
-
-**11. `MonetaryAmount` (Value Object)**
-
-Representa un monto monetario con operaciones aritméticas y validaciones de moneda.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `amount` | `BigDecimal` | `private` | Valor numérico del monto. |
-| `currency` | `Currency` | `private` | Moneda del monto. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `add(other)` | `MonetaryAmount` | `public` | Suma otro monto monetario. |
-| `subtract(other)` | `MonetaryAmount` | `public` | Resta otro monto monetario. |
-| `multiply(factor)` | `MonetaryAmount` | `public` | Multiplica por un factor. |
-| `isZero()` | `boolean` | `public` | Determina si el monto es cero. |
-| `isPositive()` | `boolean` | `public` | Determina si el monto es positivo. |
-
-**12. `BillingAddress` (Value Object)**
-
-Dirección de facturación con validaciones de formato y completitud.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `street` | `String` | `private` | Calle de la dirección. |
-| `city` | `String` | `private` | Ciudad de la dirección. |
-| `state` | `String` | `private` | Estado o provincia. |
-| `postalCode` | `String` | `private` | Código postal. |
-| `country` | `String` | `private` | País de la dirección. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getFullAddress()` | `String` | `public` | Obtiene la dirección completa formateada. |
-
-**13. `BillingCycle` (Value Object)**
-
-Define el ciclo de facturación con tipo y frecuencia de facturación.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `type` | `BillingCycleType` | `private` | Tipo de ciclo de facturación. |
-| `intervalMonths` | `Integer` | `private` | Intervalo en meses entre facturaciones. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `calculateNextBilling(startDate)` | `LocalDateTime` | `public` | Calcula la fecha de la próxima facturación. |
-
-**14. `PaymentMethodType` (Value Object)**
-
-Tipo de método de pago con capacidades de validación y categorización.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `type` | `String` | `private` | Tipo específico del método de pago. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isCreditCard()` | `boolean` | `public` | Determina si es tarjeta de crédito. |
-| `isBankTransfer()` | `boolean` | `public` | Determina si es transferencia bancaria. |
-| `isDigitalWallet()` | `boolean` | `public` | Determina si es billetera digital. |
-
-**15. `CardDetails` (Value Object)**
-
-Detalles de tarjeta de crédito con validaciones de formato y expiración.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `cardNumber` | `String` | `private` | Número de tarjeta (enmascarado). |
-| `expiryDate` | `LocalDate` | `private` | Fecha de expiración. |
-| `cardHolderName` | `String` | `private` | Nombre del titular. |
-| `cvv` | `String` | `private` | Código de seguridad. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isExpired()` | `boolean` | `public` | Determina si la tarjeta está vencida. |
-| `isValid()` | `boolean` | `public` | Valida el formato de la tarjeta. |
-
-**16. `BankAccountDetails` (Value Object)**
-
-Detalles de cuenta bancaria con validaciones de formato y verificación.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `accountNumber` | `String` | `private` | Número de cuenta bancaria. |
-| `routingNumber` | `String` | `private` | Número de ruta bancaria. |
-| `accountHolderName` | `String` | `private` | Nombre del titular de la cuenta. |
-| `bankName` | `String` | `private` | Nombre del banco. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isValid()` | `boolean` | `public` | Valida el formato de la cuenta bancaria. |
-
-**17. `GatewayResponse` (Value Object)**
-
-Respuesta del gateway de pagos con código de respuesta y detalles de transacción.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `responseCode` | `String` | `private` | Código de respuesta del gateway. |
-| `responseMessage` | `String` | `private` | Mensaje de respuesta. |
-| `transactionId` | `String` | `private` | Identificador de transacción. |
-| `timestamp` | `LocalDateTime` | `private` | Marca de tiempo de la respuesta. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isSuccessful()` | `boolean` | `public` | Determina si la respuesta indica éxito. |
-
-**18. `BillingPeriod` (Value Object)**
-
-Período de facturación con fechas de inicio y fin para cálculos de prorateo.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `startDate` | `LocalDate` | `private` | Fecha de inicio del período. |
-| `endDate` | `LocalDate` | `private` | Fecha de fin del período. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getDurationInDays()` | `Integer` | `public` | Obtiene la duración en días del período. |
-| `contains(date)` | `boolean` | `public` | Determina si una fecha está dentro del período. |
-
-**19. `InvoiceNumber` (Value Object)**
-
-Número de factura único con formato y secuencia automática.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `number` | `String` | `private` | Número completo de la factura. |
-| `prefix` | `String` | `private` | Prefijo del número de factura. |
-| `sequence` | `Integer` | `private` | Secuencia numérica. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getFormattedNumber()` | `String` | `public` | Obtiene el número formateado completo. |
+| Atributo     | Tipo      | Visibilidad   | Descripción                           |
+|--------------|-----------|---------------|---------------------------------------|
+| `series`     | `String`  | `private`     | Serie de numeración de la factura.    |
+| `sequential` | `Integer` | `private`     | Número secuencial dentro de la serie. |
 
 ---
 
-**Enums**
+**7. `PlanId` (Value Object)**
 
-**20. `SubscriptionStatus` (Enum)**
-
-Estados posibles de una suscripción durante su ciclo de vida.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `TRIAL` | Suscripción en período de prueba. |
-| `ACTIVE` | Suscripción activa y funcional. |
-| `SUSPENDED` | Suscripción suspendida temporalmente. |
-| `CANCELLED` | Suscripción cancelada. |
-| `EXPIRED` | Suscripción vencida. |
-| `PENDING_ACTIVATION` | Suscripción pendiente de activación. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canTransitionTo(newStatus)` | `boolean` | `public` | Valida si puede transicionar al nuevo estado. |
-| `isActive()` | `boolean` | `public` | Determina si está activo. |
-| `isSuspended()` | `boolean` | `public` | Determina si está suspendido. |
-| `isCancelled()` | `boolean` | `public` | Determina si está cancelado. |
-| `canBeActivated()` | `boolean` | `public` | Determina si puede ser activado. |
-| `canBeUpgraded()` | `boolean` | `public` | Determina si puede ser actualizado. |
-| `getAvailableTransitions()` | `List<SubscriptionStatus>` | `public` | Obtiene las transiciones disponibles. |
-
-**21. `PaymentStatus` (Enum)**
-
-Estados posibles de un pago durante su procesamiento.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `PENDING` | Pago pendiente de procesamiento. |
-| `PROCESSING` | Pago en proceso. |
-| `SUCCESSFUL` | Pago procesado exitosamente. |
-| `FAILED` | Pago fallido. |
-| `CANCELLED` | Pago cancelado. |
-| `REFUNDED` | Pago reembolsado. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canTransitionTo(newStatus)` | `boolean` | `public` | Valida si puede transicionar al nuevo estado. |
-| `isPending()` | `boolean` | `public` | Determina si está pendiente. |
-| `isSuccessful()` | `boolean` | `public` | Determina si fue exitoso. |
-| `isFailed()` | `boolean` | `public` | Determina si falló. |
-| `canBeRetried()` | `boolean` | `public` | Determina si puede ser reintentado. |
-| `canBeCancelled()` | `boolean` | `public` | Determina si puede ser cancelado. |
-| `getAvailableTransitions()` | `List<PaymentStatus>` | `public` | Obtiene las transiciones disponibles. |
-
-**22. `InvoiceStatus` (Enum)**
-
-Estados posibles de una factura durante su ciclo de vida.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `DRAFT` | Factura en borrador. |
-| `ISSUED` | Factura emitida. |
-| `PAID` | Factura pagada. |
-| `OVERDUE` | Factura vencida. |
-| `CANCELLED` | Factura cancelada. |
-| `VOIDED` | Factura anulada. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canTransitionTo(newStatus)` | `boolean` | `public` | Valida si puede transicionar al nuevo estado. |
-| `isPaid()` | `boolean` | `public` | Determina si está pagada. |
-| `isOverdue()` | `boolean` | `public` | Determina si está vencida. |
-| `canBePaid()` | `boolean` | `public` | Determina si puede ser pagada. |
-| `canBeVoided()` | `boolean` | `public` | Determina si puede ser anulada. |
-| `getAvailableTransitions()` | `List<InvoiceStatus>` | `public` | Obtiene las transiciones disponibles. |
-
-**23. `SubscriptionAction` (Enum)**
-
-Acciones disponibles que se pueden realizar sobre una suscripción.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `ACTIVATE` | Activar la suscripción. |
-| `SUSPEND` | Suspender la suscripción. |
-| `CANCEL` | Cancelar la suscripción. |
-| `UPGRADE_PLAN` | Actualizar a un plan superior. |
-| `DOWNGRADE_PLAN` | Degradar a un plan inferior. |
-| `UPDATE_PAYMENT_METHOD` | Actualizar método de pago. |
-| `RENEW` | Renovar la suscripción. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAllowedForStatus(status)` | `boolean` | `public` | Determina si la acción está permitida para el estado. |
-| `requiresPaymentMethod()` | `boolean` | `public` | Determina si requiere método de pago. |
-
-**24. `PaymentAction` (Enum)**
-
-Acciones disponibles que se pueden realizar sobre un pago.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `PROCESS` | Procesar el pago. |
-| `RETRY` | Reintentar el pago. |
-| `CANCEL` | Cancelar el pago. |
-| `REFUND` | Reembolsar el pago. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAllowedForStatus(status)` | `boolean` | `public` | Determina si la acción está permitida para el estado. |
-| `requiresGatewayInteraction()` | `boolean` | `public` | Determina si requiere interacción con gateway. |
-
-**25. `InvoiceAction` (Enum)**
-
-Acciones disponibles que se pueden realizar sobre una factura.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `PAY` | Pagar la factura. |
-| `VOID` | Anular la factura. |
-| `SEND_REMINDER` | Enviar recordatorio de pago. |
-| `APPLY_DISCOUNT` | Aplicar descuento. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAllowedForStatus(status)` | `boolean` | `public` | Determina si la acción está permitida para el estado. |
-| `requiresPayment()` | `boolean` | `public` | Determina si requiere procesamiento de pago. |
-
----
-
-**Application Services**
-
-**26. `SubscriptionApplicationService` (Application Service)**
-
-Servicio de aplicación que coordina las operaciones de negocio relacionadas con suscripciones municipales.
+Identificador único que representa un plan dentro del catálogo de suscripciones.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `subscriptionRepository` | `SubscriptionRepository` | `private` | Repositorio para persistencia de suscripciones. |
-| `subscriptionDomainService` | `SubscriptionDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `subscriptionFactory` | `SubscriptionFactory` | `private` | Factory para creación de suscripciones. |
-| `billingService` | `BillingService` | `private` | Servicio de gestión de facturación. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createSubscription(municipalityId, planId, billingCycle, paymentMethodId, billingAddress, autoRenewal)` | `Subscription` | `public` | Crea una nueva suscripción en el sistema. |
-| `updateSubscription(subscriptionId, newPlanId, effectiveDate, prorationPolicy)` | `void` | `public` | Actualiza el plan de una suscripción. |
-| `activateSubscription(subscriptionId)` | `void` | `public` | Activa una suscripción. |
-| `suspendSubscription(subscriptionId, reason)` | `void` | `public` | Suspende una suscripción. |
-| `cancelSubscription(subscriptionId, reason)` | `void` | `public` | Cancela una suscripción. |
-| `updatePaymentMethod(subscriptionId, paymentMethodId)` | `void` | `public` | Actualiza el método de pago. |
-| `getSubscriptionById(subscriptionId)` | `Optional<Subscription>` | `public` | Obtiene una suscripción por su identificador. |
-| `getSubscriptionsByMunicipality(municipalityId, status)` | `List<Subscription>` | `public` | Obtiene suscripciones de una municipalidad. |
-
-**27. `PaymentApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de pagos y métodos de pago.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `paymentRepository` | `PaymentRepository` | `private` | Repositorio para persistencia de pagos. |
-| `paymentDomainService` | `PaymentDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `paymentFactory` | `PaymentFactory` | `private` | Factory para creación de pagos. |
-| `paymentProcessingService` | `PaymentProcessingService` | `private` | Servicio de procesamiento de pagos. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `processPayment(subscriptionId, amount, paymentMethodId, scheduledDate)` | `Payment` | `public` | Procesa un pago para una suscripción. |
-| `retryPayment(paymentId)` | `PaymentResult` | `public` | Reintenta un pago fallido. |
-| `addPaymentMethod(municipalityId, type, cardDetails, bankAccountDetails, isDefault)` | `PaymentMethod` | `public` | Agrega un método de pago. |
-| `updatePaymentMethod(paymentMethodId, cardDetails, bankAccountDetails)` | `void` | `public` | Actualiza un método de pago. |
-| `getPaymentById(paymentId)` | `Optional<Payment>` | `public` | Obtiene un pago por su identificador. |
-| `getPaymentHistory(subscriptionId, startDate, endDate)` | `List<Payment>` | `public` | Obtiene historial de pagos. |
-| `getPaymentMethods(municipalityId)` | `List<PaymentMethod>` | `public` | Obtiene métodos de pago de una municipalidad. |
-
-**28. `InvoiceApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de facturas y reportes financieros.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `invoiceRepository` | `InvoiceRepository` | `private` | Repositorio para persistencia de facturas. |
-| `invoiceDomainService` | `InvoiceDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `invoiceFactory` | `InvoiceFactory` | `private` | Factory para creación de facturas. |
-| `financialReportingService` | `FinancialReportingService` | `private` | Servicio de reportes financieros. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `generateInvoice(subscriptionId, billingPeriod, includeUsageCharges)` | `Invoice` | `public` | Genera una factura para una suscripción. |
-| `markInvoiceAsPaid(invoiceId, paymentId)` | `void` | `public` | Marca una factura como pagada. |
-| `markInvoiceAsOverdue(invoiceId)` | `void` | `public` | Marca una factura como vencida. |
-| `getInvoiceById(invoiceId)` | `Optional<Invoice>` | `public` | Obtiene una factura por su identificador. |
-| `getInvoicesBySubscription(subscriptionId)` | `List<Invoice>` | `public` | Obtiene facturas de una suscripción. |
-| `getOutstandingInvoices(municipalityId, overdueOnly)` | `List<Invoice>` | `public` | Obtiene facturas pendientes. |
-| `generateFinancialReport(municipalityId, period)` | `FinancialReport` | `public` | Genera reporte financiero. |
+| Atributo  | Tipo     | Visibilidad   | Descripción                        |
+|-----------|----------|---------------|------------------------------------|
+| `value`   | `String` | `private`     | Identificador del plan registrado. |
 
 ---
 
-**Domain Services**
+**Enumerations**
 
-**29. `SubscriptionDomainService` (Domain Service)**
+**8. `SubscriptionStatus` (Enumeration)**
 
-Servicio de dominio que implementa lógica de negocio compleja relacionada con suscripciones.
+Define el estado actual de una suscripción en su ciclo de vida.
 
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateSubscriptionCreation(subscription)` | `ValidationResult` | `public` | Valida la creación de una nueva suscripción. |
-| `calculateProrationAmount(subscription, change)` | `MonetaryAmount` | `public` | Calcula el monto de prorateo por cambios. |
-| `determineBillingDate(subscription, planChange)` | `LocalDateTime` | `public` | Determina la fecha de facturación. |
-| `checkMunicipalityEligibility(municipalityId, planId)` | `EligibilityResult` | `public` | Verifica elegibilidad de municipalidad. |
-| `calculateUpgradeDowngradeFee(currentPlan, newPlan)` | `MonetaryAmount` | `public` | Calcula tarifa de cambio de plan. |
-
-**30. `PaymentDomainService` (Domain Service)**
-
-Servicio de dominio para lógica compleja relacionada con pagos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validatePayment(payment, paymentMethod)` | `ValidationResult` | `public` | Valida un pago antes de procesarlo. |
-| `calculateRetrySchedule(payment)` | `List<LocalDateTime>` | `public` | Calcula horarios de reintentos. |
-| `determineFailureReason(gatewayResponse)` | `FailureReason` | `public` | Determina la razón de fallo. |
-| `checkFraudRisk(payment, paymentMethod)` | `FraudRiskResult` | `public` | Verifica riesgo de fraude. |
-| `calculateProcessingFee(amount, paymentMethod)` | `MonetaryAmount` | `public` | Calcula tarifa de procesamiento. |
-
-**31. `InvoiceDomainService` (Domain Service)**
-
-Servicio de dominio para lógica compleja relacionada con facturas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateInvoiceGeneration(subscription, period)` | `ValidationResult` | `public` | Valida la generación de una factura. |
-| `calculateInvoiceLineItems(subscription, period)` | `List<InvoiceLineItem>` | `public` | Calcula líneas de la factura. |
-| `applyDiscounts(invoice, discounts)` | `MonetaryAmount` | `public` | Aplica descuentos a una factura. |
-| `calculateTaxes(invoice, taxRules)` | `MonetaryAmount` | `public` | Calcula impuestos de una factura. |
-| `generateInvoiceNumber(subscription)` | `InvoiceNumber` | `public` | Genera número único de factura. |
-
-**32. `BillingService` (Domain Service)**
-
-Servicio especializado en gestión de facturación y ciclos de cobro.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `calculateNextBillingDate(subscription)` | `LocalDateTime` | `public` | Calcula próxima fecha de facturación. |
-| `generateBillingCycle(subscription)` | `BillingCycle` | `public` | Genera ciclo de facturación. |
-| `processScheduledBilling(subscriptions)` | `List<Invoice>` | `public` | Procesa facturación programada. |
-| `handlePaymentFailure(payment, subscription)` | `BillingAction` | `public` | Maneja fallos de pago. |
-| `calculateGracePeriod(subscription)` | `LocalDateTime` | `public` | Calcula período de gracia. |
-
-**33. `PaymentProcessingService` (Domain Service)**
-
-Servicio para procesamiento de pagos usando diferentes estrategias.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `processingStrategy` | `PaymentProcessingStrategy` | `private` | Estrategia de procesamiento actual. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `processPayment(payment, paymentMethod)` | `PaymentResult` | `public` | Procesa un pago usando la estrategia. |
-| `retryPayment(payment)` | `PaymentResult` | `public` | Reintenta un pago fallido. |
-| `refundPayment(payment, amount)` | `RefundResult` | `public` | Procesa un reembolso. |
-| `setProcessingStrategy(strategy)` | `void` | `public` | Establece la estrategia de procesamiento. |
-| `validatePaymentMethod(paymentMethod)` | `ValidationResult` | `public` | Valida un método de pago. |
-
-**34. `FinancialReportingService` (Domain Service)**
-
-Servicio para generación de reportes financieros y análisis.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `generateRevenueReport(municipalityId, period)` | `RevenueReport` | `public` | Genera reporte de ingresos. |
-| `calculateOutstandingBalance(municipalityId)` | `MonetaryAmount` | `public` | Calcula saldo pendiente. |
-| `generatePaymentAnalytics(subscriptions)` | `PaymentAnalytics` | `public` | Genera analíticas de pagos. |
-| `calculateChurnRate(municipalityId, period)` | `Double` | `public` | Calcula tasa de cancelación. |
-| `generateFinancialSummary(period)` | `FinancialSummary` | `public` | Genera resumen financiero. |
+| Valor       | Descripción                            |
+|-------------|----------------------------------------|
+| `TRIAL`     | En período de prueba gratuito.         |
+| `ACTIVE`    | Suscripción activa y en uso.           |
+| `SUSPENDED` | Suscripción suspendida temporalmente.  |
+| `CANCELLED` | Suscripción cancelada permanentemente. |
 
 ---
 
-**Strategies**
+**9. `PaymentStatus` (Enumeration)**
 
-**35. `PaymentProcessingStrategy` (Strategy Interface)**
+Representa los diferentes estados por los que puede pasar un pago.
 
-Interfaz que define el contrato para diferentes estrategias de procesamiento de pagos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `processPayment(payment, paymentMethod)` | `PaymentResult` | `public` | Procesa un pago según la estrategia. |
-| `validatePayment(payment)` | `ValidationResult` | `public` | Valida un pago antes de procesarlo. |
-| `canProcess(paymentMethod)` | `boolean` | `public` | Determina si puede procesar el tipo de método. |
-
-**36. `CreditCardStrategy` (Strategy)**
-
-Implementación de estrategia para procesamiento de pagos con tarjeta de crédito.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `processPayment(payment, paymentMethod)` | `PaymentResult` | `public` | Procesa pago con tarjeta de crédito. |
-| `validatePayment(payment)` | `ValidationResult` | `public` | Valida pago con tarjeta. |
-| `canProcess(paymentMethod)` | `boolean` | `public` | Verifica si es tarjeta de crédito. |
-
-**37. `BankTransferStrategy` (Strategy)**
-
-Implementación de estrategia para procesamiento de transferencias bancarias.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `processPayment(payment, paymentMethod)` | `PaymentResult` | `public` | Procesa transferencia bancaria. |
-| `validatePayment(payment)` | `ValidationResult` | `public` | Valida transferencia bancaria. |
-| `canProcess(paymentMethod)` | `boolean` | `public` | Verifica si es transferencia bancaria. |
-
-**38. `DigitalWalletStrategy` (Strategy)**
-
-Implementación de estrategia para procesamiento de pagos con billetera digital.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `processPayment(payment, paymentMethod)` | `PaymentResult` | `public` | Procesa pago con billetera digital. |
-| `validatePayment(payment)` | `ValidationResult` | `public` | Valida pago con billetera digital. |
-| `canProcess(paymentMethod)` | `boolean` | `public` | Verifica si es billetera digital. |
+| Valor        | Descripción                  |
+|--------------|------------------------------|
+| `PENDING`    | Pago pendiente de ejecución. |
+| `PROCESSING` | Pago en proceso.             |
+| `SUCCEEDED`  | Pago realizado exitosamente. |
+| `FAILED`     | Pago fallido.                |
+| `REFUNDED`   | Pago reembolsado.            |
 
 ---
 
-**Factories**
+**10. `InvoiceStatus` (Enumeration)**
 
-**39. `SubscriptionFactory` (Factory)**
+Indica el estado actual de una factura.
 
-Factory para la creación de diferentes tipos de suscripciones con configuraciones específicas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createTrialSubscription(municipalityId, planId)` | `Subscription` | `public` | Crea suscripción de prueba. |
-| `createPaidSubscription(municipalityId, planId, paymentMethod)` | `Subscription` | `public` | Crea suscripción pagada. |
-| `createSubscription(municipalityId, planId, billingCycle, paymentMethodId)` | `Subscription` | `public` | Crea suscripción con configuración específica. |
-
-**40. `PaymentFactory` (Factory)**
-
-Factory para la creación de pagos según diferentes escenarios.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createScheduledPayment(subscription, amount)` | `Payment` | `public` | Crea pago programado. |
-| `createRetryPayment(originalPayment)` | `Payment` | `public` | Crea pago de reintento. |
-| `createPayment(subscriptionId, amount, paymentMethod)` | `Payment` | `public` | Crea pago con parámetros específicos. |
-
-**41. `InvoiceFactory` (Factory)**
-
-Factory para la creación de facturas según diferentes tipos de facturación.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createMonthlyInvoice(subscription, period)` | `Invoice` | `public` | Crea factura mensual. |
-| `createProrationInvoice(subscription, adjustment)` | `Invoice` | `public` | Crea factura de prorateo. |
-| `createInvoice(subscriptionId, billingPeriod)` | `Invoice` | `public` | Crea factura con período específico. |
-
-**42. `PaymentMethodFactory` (Factory)**
-
-Factory para la creación de métodos de pago según diferentes tipos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createCreditCard(municipalityId, cardDetails)` | `PaymentMethod` | `public` | Crea método de tarjeta de crédito. |
-| `createBankAccount(municipalityId, bankDetails)` | `PaymentMethod` | `public` | Crea método de cuenta bancaria. |
-| `createDigitalWallet(municipalityId, walletDetails)` | `PaymentMethod` | `public` | Crea método de billetera digital. |
+| Valor     | Descripción                   |
+|-----------|-------------------------------|
+| `DRAFT`   | Factura en borrador.          |
+| `ISSUED`  | Factura emitida oficialmente. |
+| `PAID`    | Factura pagada.               |
+| `OVERDUE` | Factura vencida sin pago.     |
+| `VOID`    | Factura anulada.              |
 
 ---
 
-**Repository Interfaces**
+**11. `PaymentMethodType` (Enumeration)**
 
-**43. `SubscriptionRepository` (Repository Interface)**
+Clasifica los tipos de métodos de pago disponibles.
 
-Interfaz de repositorio para la persistencia y consulta de suscripciones.
+| Valor           | Descripción                                |
+|-----------------|--------------------------------------------|
+| `CREDIT_CARD`   | Pago mediante tarjeta de crédito o débito. |
+| `BANK_TRANSFER` | Pago mediante transferencia bancaria.      |
 
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(subscriptionId)` | `Optional<Subscription>` | `public` | Busca una suscripción por su identificador. |
-| `findByMunicipality(municipalityId)` | `List<Subscription>` | `public` | Busca suscripciones de una municipalidad. |
-| `findByStatus(status)` | `List<Subscription>` | `public` | Busca suscripciones por estado. |
-| `findByPlan(planId)` | `List<Subscription>` | `public` | Busca suscripciones por plan. |
-| `findActiveSubscriptions()` | `List<Subscription>` | `public` | Busca suscripciones activas. |
-| `findExpiringSubscriptions(withinDays)` | `List<Subscription>` | `public` | Busca suscripciones próximas a vencer. |
-| `save(subscription)` | `Subscription` | `public` | Persiste o actualiza una suscripción. |
-| `delete(subscriptionId)` | `void` | `public` | Elimina una suscripción del sistema. |
-| `existsById(subscriptionId)` | `boolean` | `public` | Verifica si existe una suscripción. |
-
-**44. `PaymentRepository` (Repository Interface)**
-
-Interfaz de repositorio para la persistencia y consulta de pagos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(paymentId)` | `Optional<Payment>` | `public` | Busca un pago por su identificador. |
-| `findBySubscription(subscriptionId)` | `List<Payment>` | `public` | Busca pagos de una suscripción. |
-| `findByStatus(status)` | `List<Payment>` | `public` | Busca pagos por estado. |
-| `findByDateRange(startDate, endDate)` | `List<Payment>` | `public` | Busca pagos en un rango de fechas. |
-| `findFailedPayments()` | `List<Payment>` | `public` | Busca pagos fallidos. |
-| `findPaymentsForRetry()` | `List<Payment>` | `public` | Busca pagos pendientes de reintento. |
-| `save(payment)` | `Payment` | `public` | Persiste o actualiza un pago. |
-| `delete(paymentId)` | `void` | `public` | Elimina un pago del sistema. |
-| `existsById(paymentId)` | `boolean` | `public` | Verifica si existe un pago. |
-
-**45. `InvoiceRepository` (Repository Interface)**
-
-Interfaz de repositorio para la persistencia y consulta de facturas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(invoiceId)` | `Optional<Invoice>` | `public` | Busca una factura por su identificador. |
-| `findBySubscription(subscriptionId)` | `List<Invoice>` | `public` | Busca facturas de una suscripción. |
-| `findByStatus(status)` | `List<Invoice>` | `public` | Busca facturas por estado. |
-| `findByMunicipality(municipalityId)` | `List<Invoice>` | `public` | Busca facturas de una municipalidad. |
-| `findOverdueInvoices()` | `List<Invoice>` | `public` | Busca facturas vencidas. |
-| `findByDateRange(startDate, endDate)` | `List<Invoice>` | `public` | Busca facturas en un rango de fechas. |
-| `save(invoice)` | `Invoice` | `public` | Persiste o actualiza una factura. |
-| `delete(invoiceId)` | `void` | `public` | Elimina una factura del sistema. |
-| `existsById(invoiceId)` | `boolean` | `public` | Verifica si existe una factura. |
+---
 
 **Diccionario de Clases del Bounded Context Communication Hub:**
 
@@ -6239,897 +3869,249 @@ Se presenta un diccionario detallado de clases para el Bounded Context Communica
 
 **1. `NotificationRequest` (Aggregate Root)**
 
-Representa una solicitud de notificación con capacidad de programación, entrega multi-canal, seguimiento de intentos y gestión de estados del ciclo de vida de notificaciones.
+Representa una solicitud de notificación generada por otro módulo del sistema. Define el destinatario, canal, prioridad y plantilla a utilizar para enviar mensajes por correo, SMS o notificaciones push.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único de la solicitud. |
-| `requestId` | `NotificationRequestId` | `private` | Identificador de dominio de la solicitud. |
-| `sourceContext` | `SourceContext` | `private` | Contexto de origen de la notificación. |
-| `recipientId` | `RecipientId` | `private` | Identificador del destinatario. |
-| `recipientType` | `RecipientType` | `private` | Tipo de destinatario de la notificación. |
-| `messageType` | `MessageType` | `private` | Tipo de mensaje de la notificación. |
-| `priority` | `Priority` | `private` | Prioridad de la notificación. |
-| `channels` | `List<DeliveryChannel>` | `private` | Lista de canales de entrega. |
-| `templateId` | `TemplateId` | `private` | Identificador de la plantilla asociada. |
-| `templateData` | `TemplateData` | `private` | Datos para renderizar la plantilla. |
-| `scheduledDate` | `LocalDateTime` | `private` | Fecha programada de entrega. |
-| `expiryDate` | `LocalDateTime` | `private` | Fecha de expiración de la notificación. |
-| `status` | `RequestStatus` | `private` | Estado actual de la solicitud. |
-| `deliveryAttempts` | `List<DeliveryAttempt>` | `private` | Lista de intentos de entrega. |
-| `createdAt` | `LocalDateTime` | `private` | Fecha de creación de la solicitud. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
+| Atributo         | Tipo                        | Visibilidad  | Descripción                                                      |
+|------------------|-----------------------------|--------------|------------------------------------------------------------------|
+| `id`             | `String`                    | `private`    | Identificador único de la solicitud de notificación.             |
+| `sourceContext`  | `SourceContext`             | `private`    | Contexto o módulo del sistema que generó la solicitud.           |
+| `recipientId`    | `RecipientId`               | `private`    | Identificador del destinatario de la notificación.               |
+| `recipientType`  | `RecipientType`             | `private`    | Tipo de destinatario (ciudadano, conductor o administrador).     |
+| `recipientEmail` | `EmailAddress`              | `private`    | Correo electrónico del destinatario.                             |
+| `recipientPhone` | `PhoneNumber`               | `private`    | Número telefónico del destinatario.                              |
+| `messageType`    | `MessageType`               | `private`    | Tipo de mensaje según su propósito (alerta, recordatorio, etc.). |
+| `templateId`     | `TemplateId`                | `private`    | Identificador de la plantilla de mensaje asociada.               |
+| `templateData`   | `Map<String, String>`       | `private`    | Datos dinámicos utilizados para personalizar el mensaje.         |
+| `channels`       | `List<NotificationChannel>` | `private`    | Canales de comunicación seleccionados para el envío.             |
+| `priority`       | `NotificationPriority`      | `private`    | Nivel de prioridad de la notificación.                           |
+| `scheduledFor`   | `LocalDateTime`             | `private`    | Fecha y hora programada para el envío.                           |
+| `expiresAt`      | `LocalDateTime`             | `private`    | Fecha de expiración del mensaje.                                 |
+| `status`         | `RequestStatus`             | `private`    | Estado actual de la solicitud.                                   |
+| `sentAt`         | `LocalDateTime`             | `private`    | Fecha y hora en que fue enviada la notificación.                 |
+| `createdAt`      | `LocalDateTime`             | `private`    | Fecha y hora de creación del registro.                           |
+| `failureReason`  | `String`                    | `private`    | Motivo del fallo si la notificación no fue enviada.              |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `NotificationRequest()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `NotificationRequest(sourceContext, recipientId, messageType)` | `Constructor` | `public` | Constructor que instancia una solicitud con datos básicos. |
-| `addDeliveryChannel(channel)` | `void` | `public` | Agrega un canal de entrega a la solicitud. |
-| `scheduleDelivery(scheduledDate)` | `void` | `public` | Programa la entrega para una fecha específica. |
-| `processDelivery()` | `DeliveryResult` | `public` | Procesa la entrega de la notificación. |
-| `markAsDelivered(channel, deliveryId)` | `void` | `public` | Marca la notificación como entregada. |
-| `markAsFailed(channel, reason)` | `void` | `public` | Marca la notificación como fallida. |
-| `canBeRetried()` | `boolean` | `public` | Determina si la notificación puede ser reintentada. |
-| `isExpired()` | `boolean` | `public` | Determina si la notificación ha expirado. |
-| `isScheduled()` | `boolean` | `public` | Determina si la notificación está programada. |
-| `canBeProcessed()` | `boolean` | `public` | Determina si la notificación puede ser procesada. |
-| `canBeCancelled()` | `boolean` | `public` | Determina si la notificación puede ser cancelada. |
-| `getPreferredChannel()` | `DeliveryChannel` | `public` | Obtiene el canal preferido de entrega. |
-| `requiresImmediateDelivery()` | `boolean` | `public` | Determina si requiere entrega inmediata. |
-| `getAvailableActions()` | `List<NotificationAction>` | `public` | Obtiene las acciones disponibles según el estado. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
-
-**2. `MessageTemplate` (Aggregate Root)**
-
-Representa una plantilla de mensaje reutilizable con soporte multi-idioma, variables dinámicas, validaciones y gestión de versiones para diferentes canales de comunicación.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único de la plantilla. |
-| `templateId` | `TemplateId` | `private` | Identificador de dominio de la plantilla. |
-| `name` | `String` | `private` | Nombre descriptivo de la plantilla. |
-| `category` | `TemplateCategory` | `private` | Categoría de la plantilla. |
-| `messageType` | `MessageType` | `private` | Tipo de mensaje de la plantilla. |
-| `channels` | `List<DeliveryChannel>` | `private` | Lista de canales compatibles. |
-| `subject` | `String` | `private` | Asunto de la plantilla. |
-| `bodyTemplate` | `String` | `private` | Cuerpo de la plantilla con variables. |
-| `variables` | `List<TemplateVariable>` | `private` | Lista de variables de la plantilla. |
-| `localization` | `Map<Language, LocalizedContent>` | `private` | Contenido localizado por idioma. |
-| `version` | `TemplateVersion` | `private` | Versión de la plantilla. |
-| `status` | `TemplateStatus` | `private` | Estado actual de la plantilla. |
-| `metadata` | `TemplateMetadata` | `private` | Metadatos de la plantilla. |
-| `createdAt` | `LocalDateTime` | `private` | Fecha de creación de la plantilla. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `MessageTemplate()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `MessageTemplate(name, category, messageType)` | `Constructor` | `public` | Constructor que instancia una plantilla con datos básicos. |
-| `updateContent(subject, body)` | `void` | `public` | Actualiza el contenido de la plantilla. |
-| `addLocalization(language, content)` | `void` | `public` | Agrega localización en un idioma específico. |
-| `addVariable(variable)` | `void` | `public` | Agrega una variable a la plantilla. |
-| `renderMessage(data, language)` | `RenderedMessage` | `public` | Renderiza el mensaje con datos específicos. |
-| `isCompatibleWith(channel)` | `boolean` | `public` | Determina si es compatible con un canal. |
-| `validateTemplate()` | `ValidationResult` | `public` | Valida la consistencia de la plantilla. |
-| `activate()` | `void` | `public` | Activa la plantilla para uso. |
-| `deactivate()` | `void` | `public` | Desactiva la plantilla. |
-| `canBeModified()` | `boolean` | `public` | Determina si la plantilla puede ser modificada. |
-| `canBeActivated()` | `boolean` | `public` | Determina si la plantilla puede ser activada. |
-| `canBeDeactivated()` | `boolean` | `public` | Determina si la plantilla puede ser desactivada. |
-| `getAvailableActions()` | `List<TemplateAction>` | `public` | Obtiene las acciones disponibles según el estado. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
-
-**3. `DeliveryRecord` (Aggregate Root)**
-
-Representa un registro de entrega de notificación con seguimiento de estado, costos, metadatos de proveedor y capacidades de confirmación y reintento.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del registro. |
-| `recordId` | `DeliveryRecordId` | `private` | Identificador de dominio del registro. |
-| `requestId` | `NotificationRequestId` | `private` | Identificador de la solicitud asociada. |
-| `recipientId` | `RecipientId` | `private` | Identificador del destinatario. |
-| `channel` | `DeliveryChannel` | `private` | Canal de entrega utilizado. |
-| `providerTransactionId` | `String` | `private` | Identificador de transacción del proveedor. |
-| `status` | `DeliveryStatus` | `private` | Estado actual de la entrega. |
-| `attemptNumber` | `Integer` | `private` | Número de intento de entrega. |
-| `deliveryDate` | `LocalDateTime` | `private` | Fecha de entrega. |
-| `confirmationDate` | `LocalDateTime` | `private` | Fecha de confirmación de entrega. |
-| `failureReason` | `FailureReason` | `private` | Razón del fallo si aplica. |
-| `cost` | `MonetaryAmount` | `private` | Costo de la entrega. |
-| `metadata` | `DeliveryMetadata` | `private` | Metadatos adicionales de la entrega. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `DeliveryRecord()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `DeliveryRecord(requestId, channel)` | `Constructor` | `public` | Constructor que instancia un registro con datos básicos. |
-| `markAsDelivered(providerTransactionId)` | `void` | `public` | Marca la entrega como exitosa. |
-| `markAsFailed(reason)` | `void` | `public` | Marca la entrega como fallida. |
-| `markAsConfirmed()` | `void` | `public` | Marca la entrega como confirmada. |
-| `calculateDeliveryTime()` | `Duration` | `public` | Calcula el tiempo de entrega. |
-| `isSuccessful()` | `boolean` | `public` | Determina si la entrega fue exitosa. |
-| `canBeRetried()` | `boolean` | `public` | Determina si la entrega puede ser reintentada. |
-| `canBeUpdated()` | `boolean` | `public` | Determina si el registro puede ser actualizado. |
-| `getAvailableActions()` | `List<DeliveryAction>` | `public` | Obtiene las acciones disponibles según el estado. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
+| Método                 | Tipo de Retorno  | Visibilidad  | Descripción                                                      |
+|------------------------|------------------|--------------|------------------------------------------------------------------|
+| `send()`               | `void`           | `public`     | Envía la notificación por los canales definidos.                 |
+| `fail(reason: String)` | `void`           | `public`     | Marca la solicitud como fallida con una razón específica.        |
+| `expire()`             | `void`           | `public`     | Expira la solicitud si supera su tiempo límite.                  |
+| `isExpired()`          | `boolean`        | `public`     | Indica si la solicitud ha expirado.                              |
+| `shouldSendNow()`      | `boolean`        | `public`     | Determina si la notificación debe enviarse en el momento actual. |
+| `isPending()`          | `boolean`        | `public`     | Verifica si la solicitud aún está pendiente de envío.            |
 
 ---
 
-**Entities**
+**2. `DeliveryAttempt` (Aggregate Root)**
 
-**4. `DeliveryAttempt` (Entity)**
-
-Representa un intento individual de entrega de notificación con información de canal, estado, respuesta del proveedor y programación de reintentos.
+Registra cada intento de entrega asociado a una solicitud de notificación. Controla el canal, proveedor, costo y resultado del intento.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del intento. |
-| `attemptId` | `AttemptId` | `private` | Identificador de dominio del intento. |
-| `requestId` | `NotificationRequestId` | `private` | Identificador de la solicitud asociada. |
-| `channel` | `DeliveryChannel` | `private` | Canal de entrega utilizado. |
-| `attemptNumber` | `Integer` | `private` | Número de intento. |
-| `attemptDate` | `LocalDateTime` | `private` | Fecha del intento. |
-| `status` | `AttemptStatus` | `private` | Estado del intento. |
-| `providerResponse` | `ProviderResponse` | `private` | Respuesta del proveedor de entrega. |
-| `errorCode` | `String` | `private` | Código de error si aplica. |
-| `errorMessage` | `String` | `private` | Mensaje de error si aplica. |
-| `retryDate` | `LocalDateTime` | `private` | Fecha programada para reintento. |
+| Atributo            | Tipo                    | Visibilidad   | Descripción                                                    |
+|---------------------|-------------------------|---------------|----------------------------------------------------------------|
+| `id`                | `String`                | `private`     | Identificador único del intento de entrega.                    |
+| `requestId`         | `NotificationRequestId` | `private`     | Identificador de la solicitud de notificación asociada.        |
+| `channel`           | `NotificationChannel`   | `private`     | Canal utilizado para el intento de entrega (Email, SMS, Push). |
+| `provider`          | `ProviderType`          | `private`     | Proveedor de envío empleado (SendGrid, Twilio, Firebase).      |
+| `providerMessageId` | `String`                | `private`     | Identificador del mensaje en el sistema del proveedor.         |
+| `status`            | `AttemptStatus`         | `private`     | Estado actual del intento.                                     |
+| `attemptNumber`     | `Integer`               | `private`     | Número de intento realizado.                                   |
+| `canRetry`          | `Boolean`               | `private`     | Indica si el intento puede reintentarse.                       |
+| `sentAt`            | `LocalDateTime`         | `private`     | Fecha y hora de envío.                                         |
+| `deliveredAt`       | `LocalDateTime`         | `private`     | Fecha y hora de entrega exitosa.                               |
+| `errorCode`         | `String`                | `private`     | Código de error retornado por el proveedor.                    |
+| `errorMessage`      | `String`                | `private`     | Mensaje descriptivo del error.                                 |
+| `cost`              | `Money`                 | `private`     | Costo asociado al intento de envío.                            |
+| `createdAt`         | `LocalDateTime`         | `private`     | Fecha y hora de creación del registro.                         |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `DeliveryAttempt(requestId, channel)` | `Constructor` | `public` | Constructor que instancia un intento con datos básicos. |
-| `isSuccessful()` | `boolean` | `public` | Determina si el intento fue exitoso. |
-| `canRetry()` | `boolean` | `public` | Determina si el intento puede ser reintentado. |
-| `getNextRetryDate()` | `LocalDateTime` | `public` | Obtiene la fecha del próximo reintento. |
+| Método                                                | Tipo de Retorno  | Visibilidad   | Descripción                                                   |
+|-------------------------------------------------------|------------------|---------------|---------------------------------------------------------------|
+| `markAsDelivered(providerMessageId: String)`          | `void`           | `public`      | Marca el intento como exitosamente entregado.                 |
+| `markAsFailed(errorCode: String, retryable: boolean)` | `void`           | `public`      | Marca el intento como fallido e indica si puede reintentarse. |
+| `canBeRetried()`                                      | `boolean`        | `public`      | Indica si el intento puede ser reintentado.                   |
+| `calculateDeliveryTime()`                             | `Duration`       | `public`      | Calcula la duración entre el envío y la entrega.              |
 
-**5. `RecipientPreference` (Entity)**
+---
 
-Representa las preferencias de notificación de un destinatario con configuración de canales, horarios de silencio, idioma y frecuencia de notificaciones.
+**3. `MessageTemplate` (Aggregate Root)**
 
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único de la preferencia. |
-| `preferenceId` | `PreferenceId` | `private` | Identificador de dominio de la preferencia. |
-| `recipientId` | `RecipientId` | `private` | Identificador del destinatario. |
-| `recipientType` | `RecipientType` | `private` | Tipo de destinatario. |
-| `preferredChannels` | `List<DeliveryChannel>` | `private` | Lista de canales preferidos. |
-| `blockedChannels` | `List<DeliveryChannel>` | `private` | Lista de canales bloqueados. |
-| `quietHours` | `QuietHours` | `private` | Horarios de silencio configurados. |
-| `language` | `Language` | `private` | Idioma preferido del destinatario. |
-| `timezone` | `Timezone` | `private` | Zona horaria del destinatario. |
-| `frequency` | `NotificationFrequency` | `private` | Frecuencia de notificaciones. |
-| `isActive` | `boolean` | `private` | Indica si las preferencias están activas. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `RecipientPreference(recipientId, recipientType)` | `Constructor` | `public` | Constructor que instancia preferencias con datos básicos. |
-| `getPreferredChannel(messageType)` | `DeliveryChannel` | `public` | Obtiene el canal preferido para un tipo de mensaje. |
-| `isChannelAllowed(channel)` | `boolean` | `public` | Determina si un canal está permitido. |
-| `isInQuietHours(timestamp)` | `boolean` | `public` | Determina si está en horario de silencio. |
-| `shouldReceiveNotification(messageType)` | `boolean` | `public` | Determina si debe recibir un tipo de notificación. |
-
-**6. `TemplateVariable` (Entity)**
-
-Representa una variable de plantilla con tipo de datos, validaciones, valor por defecto y reglas de formateo.
+Define las plantillas de mensaje preconfiguradas utilizadas por el sistema para enviar notificaciones personalizadas por diferentes canales (correo, SMS o push).
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único de la variable. |
-| `variableId` | `VariableId` | `private` | Identificador de dominio de la variable. |
-| `name` | `String` | `private` | Nombre de la variable. |
-| `dataType` | `VariableDataType` | `private` | Tipo de datos de la variable. |
-| `isRequired` | `boolean` | `private` | Indica si la variable es requerida. |
-| `defaultValue` | `String` | `private` | Valor por defecto de la variable. |
-| `validation` | `ValidationRule` | `private` | Regla de validación de la variable. |
-| `description` | `String` | `private` | Descripción de la variable. |
+| Atributo            | Tipo                        | Visibilidad   | Descripción                                         |
+|---------------------|-----------------------------|---------------|-----------------------------------------------------|
+| `id`                | `String`                    | `private`     | Identificador único de la plantilla.                |
+| `name`              | `String`                    | `private`     | Nombre descriptivo de la plantilla.                 |
+| `category`          | `TemplateCategory`          | `private`     | Categoría funcional de la plantilla.                |
+| `supportedChannels` | `List<NotificationChannel>` | `private`     | Canales en los que puede utilizarse esta plantilla. |
+| `emailSubject`      | `String`                    | `private`     | Asunto del correo electrónico.                      |
+| `emailBody`         | `String`                    | `private`     | Cuerpo del mensaje de correo.                       |
+| `smsBody`           | `String`                    | `private`     | Contenido del mensaje SMS.                          |
+| `pushTitle`         | `String`                    | `private`     | Título de la notificación push.                     |
+| `pushBody`          | `String`                    | `private`     | Cuerpo de la notificación push.                     |
+| `variables`         | `List<String>`              | `private`     | Variables dinámicas utilizadas en la plantilla.     |
+| `isActive`          | `Boolean`                   | `private`     | Indica si la plantilla está activa.                 |
+| `createdAt`         | `LocalDateTime`             | `private`     | Fecha y hora de creación del registro.              |
+| `updatedAt`         | `LocalDateTime`             | `private`     | Fecha y hora de la última actualización.            |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `TemplateVariable(name, dataType)` | `Constructor` | `public` | Constructor que instancia una variable con datos básicos. |
-| `validate(value)` | `ValidationResult` | `public` | Valida un valor contra las reglas. |
-| `getFormattedValue(value, format)` | `String` | `public` | Obtiene el valor formateado según especificación. |
+| Método                                                                      | Tipo de Retorno  | Visibilidad  | Descripción                                                   |
+|-----------------------------------------------------------------------------|------------------|--------------|---------------------------------------------------------------|
+| `renderForChannel(channel: NotificationChannel, data: Map<String, String>)` | `String`         | `public`     | Genera el mensaje final sustituyendo las variables dinámicas. |
+| `supportsChannel(channel: NotificationChannel)`                             | `boolean`        | `public`     | Verifica si la plantilla admite un canal específico.          |
+| `activate()`                                                                | `void`           | `public`     | Activa la plantilla para su uso.                              |
+| `deactivate()`                                                              | `void`           | `public`     | Desactiva la plantilla temporalmente.                         |
 
 ---
 
 **Value Objects**
 
-**7. `NotificationRequestId` (Value Object)**
+**4. `RecipientId` (Value Object)**
 
-Identificador único inmutable para una solicitud de notificación en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `requestId` | `String` | `private` | Valor alfanumérico del identificador de solicitud. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isValid()` | `Boolean` | `public` | Valida que el identificador sea válido. |
-
-**8. `TemplateId` (Value Object)**
-
-Identificador único inmutable para una plantilla de mensaje en el sistema.
+Identificador único que representa al destinatario de una notificación.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `templateId` | `String` | `private` | Valor alfanumérico del identificador de plantilla. |
-
-**9. `DeliveryRecordId` (Value Object)**
-
-Identificador único inmutable para un registro de entrega en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `recordId` | `String` | `private` | Valor alfanumérico del identificador de registro. |
-
-**10. `DeliveryChannel` (Value Object)**
-
-Canal de entrega de notificaciones con capacidades de identificación y categorización.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `channel` | `String` | `private` | Nombre del canal de entrega. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isEmail()` | `boolean` | `public` | Determina si es canal de email. |
-| `isSMS()` | `boolean` | `public` | Determina si es canal de SMS. |
-| `isPush()` | `boolean` | `public` | Determina si es canal de push notification. |
-| `isInApp()` | `boolean` | `public` | Determina si es canal in-app. |
-| `getChannelName()` | `String` | `public` | Obtiene el nombre del canal. |
-
-**11. `Priority` (Value Object)**
-
-Prioridad de notificación con nivel numérico y capacidades de comparación.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `level` | `Integer` | `private` | Nivel numérico de prioridad. |
-| `description` | `String` | `private` | Descripción textual de la prioridad. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isHighPriority()` | `boolean` | `public` | Determina si es de alta prioridad. |
-| `isCritical()` | `boolean` | `public` | Determina si es crítica. |
-| `compareTo(other)` | `int` | `public` | Compara con otra prioridad. |
-
-**12. `TemplateData` (Value Object)**
-
-Datos utilizados para renderizar plantillas con variables dinámicas.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `data` | `Map<String, Object>` | `private` | Mapa de datos clave-valor. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getValue(key)` | `Object` | `public` | Obtiene el valor de una clave. |
-| `containsKey(key)` | `boolean` | `public` | Determina si contiene una clave. |
-| `merge(other)` | `TemplateData` | `public` | Combina con otros datos de plantilla. |
-
-**13. `RenderedMessage` (Value Object)**
-
-Mensaje renderizado listo para entrega con contenido formateado y metadatos.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `subject` | `String` | `private` | Asunto del mensaje renderizado. |
-| `body` | `String` | `private` | Cuerpo del mensaje renderizado. |
-| `channel` | `DeliveryChannel` | `private` | Canal de entrega del mensaje. |
-| `metadata` | `MessageMetadata` | `private` | Metadatos adicionales del mensaje. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getSubject()` | `String` | `public` | Obtiene el asunto del mensaje. |
-| `getBody()` | `String` | `public` | Obtiene el cuerpo del mensaje. |
-| `getMetadata()` | `MessageMetadata` | `public` | Obtiene los metadatos del mensaje. |
-
-**14. `MessageType` (Value Object)**
-
-Tipo de mensaje con categorización y capacidades de clasificación.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `type` | `String` | `private` | Tipo específico del mensaje. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAlert()` | `boolean` | `public` | Determina si es un mensaje de alerta. |
-| `isNotification()` | `boolean` | `public` | Determina si es una notificación. |
-| `isMarketing()` | `boolean` | `public` | Determina si es un mensaje de marketing. |
-| `isTransactional()` | `boolean` | `public` | Determina si es un mensaje transaccional. |
-
-**15. `QuietHours` (Value Object)**
-
-Horarios de silencio configurados para un destinatario con zona horaria.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `startTime` | `LocalTime` | `private` | Hora de inicio del período de silencio. |
-| `endTime` | `LocalTime` | `private` | Hora de fin del período de silencio. |
-| `timezone` | `Timezone` | `private` | Zona horaria del período. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isInQuietPeriod(timestamp)` | `boolean` | `public` | Determina si una marca de tiempo está en período silencioso. |
-| `getDuration()` | `Duration` | `public` | Obtiene la duración del período de silencio. |
-
-**16. `SourceContext` (Value Object)**
-
-Contexto de origen de una notificación con identificación y metadatos.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `contextName` | `String` | `private` | Nombre del contexto de origen. |
-| `contextId` | `String` | `private` | Identificador del contexto. |
-| `metadata` | `Map<String, String>` | `private` | Metadatos adicionales del contexto. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getFullContext()` | `String` | `public` | Obtiene el contexto completo formateado. |
+| Atributo  | Tipo     | Visibilidad  | Descripción                           |
+|-----------|----------|--------------|---------------------------------------|
+| `value`   | `String` | `private`    | Identificador único del destinatario. |
 
 ---
 
-**Enums**
+**5. `TemplateId` (Value Object)**
 
-**17. `RequestStatus` (Enum)**
-
-Estados posibles de una solicitud de notificación durante su ciclo de vida.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `DRAFT` | Solicitud en estado de borrador. |
-| `SCHEDULED` | Solicitud programada para entrega. |
-| `PROCESSING` | Solicitud en proceso de entrega. |
-| `DELIVERED` | Solicitud entregada exitosamente. |
-| `FAILED` | Solicitud fallida en la entrega. |
-| `CANCELLED` | Solicitud cancelada. |
-| `EXPIRED` | Solicitud expirada. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canTransitionTo(newStatus)` | `boolean` | `public` | Valida si puede transicionar al nuevo estado. |
-| `isDelivered()` | `boolean` | `public` | Determina si está entregado. |
-| `isFailed()` | `boolean` | `public` | Determina si falló. |
-| `canBeRetried()` | `boolean` | `public` | Determina si puede ser reintentado. |
-| `canBeCancelled()` | `boolean` | `public` | Determina si puede ser cancelado. |
-| `getAvailableTransitions()` | `List<RequestStatus>` | `public` | Obtiene las transiciones disponibles. |
-
-**18. `TemplateStatus` (Enum)**
-
-Estados posibles de una plantilla de mensaje durante su ciclo de vida.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `DRAFT` | Plantilla en estado de borrador. |
-| `ACTIVE` | Plantilla activa y disponible. |
-| `INACTIVE` | Plantilla inactiva temporalmente. |
-| `DEPRECATED` | Plantilla obsoleta. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canTransitionTo(newStatus)` | `boolean` | `public` | Valida si puede transicionar al nuevo estado. |
-| `isActive()` | `boolean` | `public` | Determina si está activa. |
-| `canBeModified()` | `boolean` | `public` | Determina si puede ser modificada. |
-| `canBeActivated()` | `boolean` | `public` | Determina si puede ser activada. |
-| `getAvailableTransitions()` | `List<TemplateStatus>` | `public` | Obtiene las transiciones disponibles. |
-
-**19. `DeliveryStatus` (Enum)**
-
-Estados posibles de un registro de entrega durante su procesamiento.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `PENDING` | Entrega pendiente de procesamiento. |
-| `IN_PROGRESS` | Entrega en progreso. |
-| `DELIVERED` | Entrega completada exitosamente. |
-| `FAILED` | Entrega fallida. |
-| `CONFIRMED` | Entrega confirmada por el destinatario. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canTransitionTo(newStatus)` | `boolean` | `public` | Valida si puede transicionar al nuevo estado. |
-| `isDelivered()` | `boolean` | `public` | Determina si está entregado. |
-| `isFailed()` | `boolean` | `public` | Determina si falló. |
-| `canBeUpdated()` | `boolean` | `public` | Determina si puede ser actualizado. |
-| `getAvailableTransitions()` | `List<DeliveryStatus>` | `public` | Obtiene las transiciones disponibles. |
-
-**20. `NotificationAction` (Enum)**
-
-Acciones disponibles que se pueden realizar sobre una solicitud de notificación.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `SCHEDULE` | Programar la notificación. |
-| `SEND` | Enviar la notificación. |
-| `RETRY` | Reintentar la notificación. |
-| `CANCEL` | Cancelar la notificación. |
-| `UPDATE_PRIORITY` | Actualizar la prioridad. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAllowedForStatus(status)` | `boolean` | `public` | Determina si la acción está permitida para el estado. |
-| `requiresChannel()` | `boolean` | `public` | Determina si requiere especificación de canal. |
-
-**21. `TemplateAction` (Enum)**
-
-Acciones disponibles que se pueden realizar sobre una plantilla de mensaje.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `ACTIVATE` | Activar la plantilla. |
-| `DEACTIVATE` | Desactivar la plantilla. |
-| `UPDATE_CONTENT` | Actualizar el contenido. |
-| `ADD_LOCALIZATION` | Agregar localización. |
-| `DEPRECATE` | Marcar como obsoleta. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAllowedForStatus(status)` | `boolean` | `public` | Determina si la acción está permitida para el estado. |
-| `requiresValidation()` | `boolean` | `public` | Determina si requiere validación. |
-
-**22. `DeliveryAction` (Enum)**
-
-Acciones disponibles que se pueden realizar sobre un registro de entrega.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `RETRY` | Reintentar la entrega. |
-| `CONFIRM` | Confirmar la entrega. |
-| `UPDATE_STATUS` | Actualizar el estado. |
-| `CANCEL` | Cancelar la entrega. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAllowedForStatus(status)` | `boolean` | `public` | Determina si la acción está permitida para el estado. |
-| `requiresProvider()` | `boolean` | `public` | Determina si requiere interacción con proveedor. |
-
----
-
-**Application Services**
-
-**23. `NotificationApplicationService` (Application Service)**
-
-Servicio de aplicación que coordina las operaciones de negocio relacionadas con solicitudes de notificación y su procesamiento.
+Identificador único de una plantilla de mensaje registrada en el sistema.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `notificationRepository` | `NotificationRepository` | `private` | Repositorio para persistencia de notificaciones. |
-| `notificationDomainService` | `NotificationDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `notificationFactory` | `NotificationFactory` | `private` | Factory para creación de notificaciones. |
-| `deliveryOrchestrationService` | `DeliveryOrchestrationService` | `private` | Servicio de orquestación de entregas. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createNotification(sourceContext, recipientId, recipientType, messageType, templateId, templateData, priority)` | `NotificationRequest` | `public` | Crea una nueva solicitud de notificación. |
-| `scheduleNotification(requestId, scheduledDate)` | `void` | `public` | Programa una notificación para entrega futura. |
-| `sendNotification(requestId, forceDelivery, overrideChannels)` | `DeliveryResult` | `public` | Envía una notificación inmediatamente. |
-| `retryNotification(requestId, channel)` | `DeliveryResult` | `public` | Reintenta una notificación fallida. |
-| `cancelNotification(requestId)` | `void` | `public` | Cancela una notificación pendiente. |
-| `getNotificationById(requestId)` | `Optional<NotificationRequest>` | `public` | Obtiene una notificación por su identificador. |
-| `getNotificationsByRecipient(recipientId, status, dateRange)` | `List<NotificationRequest>` | `public` | Obtiene notificaciones de un destinatario. |
-
-**24. `TemplateApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de plantillas de mensaje y renderizado de contenido.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `templateRepository` | `TemplateRepository` | `private` | Repositorio para persistencia de plantillas. |
-| `templateDomainService` | `TemplateDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `templateFactory` | `TemplateFactory` | `private` | Factory para creación de plantillas. |
-| `messageRenderingService` | `MessageRenderingService` | `private` | Servicio de renderizado de mensajes. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createTemplate(name, category, messageType, channels, subject, bodyTemplate, variables)` | `MessageTemplate` | `public` | Crea una nueva plantilla de mensaje. |
-| `updateTemplate(templateId, subject, bodyTemplate, variables)` | `void` | `public` | Actualiza el contenido de una plantilla. |
-| `activateTemplate(templateId)` | `void` | `public` | Activa una plantilla para uso. |
-| `deactivateTemplate(templateId)` | `void` | `public` | Desactiva una plantilla. |
-| `addLocalization(templateId, language, content)` | `void` | `public` | Agrega localización a una plantilla. |
-| `getTemplateById(templateId)` | `Optional<MessageTemplate>` | `public` | Obtiene una plantilla por su identificador. |
-| `getTemplatesByType(messageType, channel, activeOnly)` | `List<MessageTemplate>` | `public` | Obtiene plantillas por tipo y canal. |
-| `renderPreview(templateId, data, language)` | `RenderedMessage` | `public` | Genera vista previa de una plantilla. |
-
-**25. `DeliveryApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de registros de entrega y análisis de rendimiento.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `deliveryRepository` | `DeliveryRepository` | `private` | Repositorio para persistencia de entregas. |
-| `deliveryDomainService` | `DeliveryDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `deliveryRecordFactory` | `DeliveryRecordFactory` | `private` | Factory para creación de registros. |
-| `deliveryAnalyticsService` | `DeliveryAnalyticsService` | `private` | Servicio de análisis de entregas. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `recordDeliveryAttempt(requestId, channel, attemptNumber)` | `DeliveryRecord` | `public` | Registra un intento de entrega. |
-| `markDeliveryAsSuccessful(recordId, providerTransactionId)` | `void` | `public` | Marca una entrega como exitosa. |
-| `markDeliveryAsFailed(recordId, reason)` | `void` | `public` | Marca una entrega como fallida. |
-| `getDeliveryRecord(recordId)` | `Optional<DeliveryRecord>` | `public` | Obtiene un registro de entrega. |
-| `getDeliveryHistory(requestId)` | `List<DeliveryRecord>` | `public` | Obtiene historial de entregas de una solicitud. |
-| `getDeliveryAnalytics(startDate, endDate, channel)` | `DeliveryAnalytics` | `public` | Obtiene análisis de entregas. |
-| `getChannelPerformance(channel, period)` | `ChannelPerformance` | `public` | Obtiene rendimiento de un canal. |
-
-**26. `PreferenceApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de preferencias de destinatarios y verificación de elegibilidad.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `notificationRepository` | `NotificationRepository` | `private` | Repositorio para acceso a notificaciones. |
-| `preferenceDomainService` | `PreferenceDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getRecipientPreferences(recipientId)` | `Optional<RecipientPreference>` | `public` | Obtiene preferencias de un destinatario. |
-| `updatePreferences(recipientId, preferredChannels, blockedChannels, language, timezone, frequency)` | `void` | `public` | Actualiza preferencias de un destinatario. |
-| `setQuietHours(recipientId, quietHours)` | `void` | `public` | Configura horarios de silencio. |
-| `checkNotificationEligibility(recipientId, messageType, timestamp)` | `Boolean` | `public` | Verifica elegibilidad para recibir notificación. |
+| Atributo  | Tipo     | Visibilidad  | Descripción                          |
+|-----------|----------|--------------|--------------------------------------|
+| `value`   | `String` | `private`    | Identificador único de la plantilla. |
 
 ---
 
-**Domain Services**
+**Enumerations**
 
-**27. `NotificationDomainService` (Domain Service)**
+**6. `SourceContext` (Enumeration)**
 
-Servicio de dominio que implementa lógica de negocio compleja relacionada con notificaciones.
+Identifica el módulo del sistema que originó la solicitud de notificación.
 
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateNotificationCreation(request)` | `ValidationResult` | `public` | Valida la creación de una nueva notificación. |
-| `determineOptimalDeliveryChannels(request, preferences)` | `List<DeliveryChannel>` | `public` | Determina los canales óptimos de entrega. |
-| `calculateDeliverySchedule(request, preferences)` | `LocalDateTime` | `public` | Calcula la programación de entrega. |
-| `checkRecipientEligibility(recipientId, messageType)` | `Boolean` | `public` | Verifica elegibilidad del destinatario. |
-| `estimateDeliveryCost(request, channels)` | `MonetaryAmount` | `public` | Estima el costo de entrega. |
-
-**28. `TemplateDomainService` (Domain Service)**
-
-Servicio de dominio para lógica compleja relacionada con plantillas de mensaje.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateTemplateCreation(template)` | `ValidationResult` | `public` | Valida la creación de una nueva plantilla. |
-| `validateTemplateVariables(variables)` | `ValidationResult` | `public` | Valida las variables de una plantilla. |
-| `optimizeTemplateContent(template, channel)` | `String` | `public` | Optimiza el contenido para un canal específico. |
-| `checkTemplateDuplication(template, existingTemplates)` | `ValidationResult` | `public` | Verifica duplicación de plantillas. |
-| `generateTemplateMetrics(template, usage)` | `TemplateMetrics` | `public` | Genera métricas de uso de plantilla. |
-
-**29. `DeliveryDomainService` (Domain Service)**
-
-Servicio de dominio para lógica compleja relacionada con entregas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateDeliveryAttempt(record)` | `ValidationResult` | `public` | Valida un intento de entrega. |
-| `calculateRetrySchedule(record, attempt)` | `LocalDateTime` | `public` | Calcula programación de reintentos. |
-| `estimateDeliveryTime(channel, messageType)` | `Duration` | `public` | Estima tiempo de entrega. |
-| `checkProviderCapacity(channel, timestamp)` | `Boolean` | `public` | Verifica capacidad del proveedor. |
-| `calculateDeliveryCost(channel, messageType)` | `MonetaryAmount` | `public` | Calcula costo de entrega. |
-
-**30. `DeliveryOrchestrationService` (Domain Service)**
-
-Servicio de orquestación para gestión integral de entregas usando estrategias configurables.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `channelStrategy` | `ChannelSelectionStrategy` | `private` | Estrategia de selección de canales actual. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `orchestrateDelivery(request, preferences)` | `DeliveryResult` | `public` | Orquesta la entrega de una notificación. |
-| `handleDeliveryFailure(record, request)` | `RetryStrategy` | `public` | Maneja fallos de entrega. |
-| `optimizeDeliverySequence(requests)` | `List<DeliveryPlan>` | `public` | Optimiza secuencia de entregas. |
-| `setChannelStrategy(strategy)` | `void` | `public` | Establece la estrategia de selección de canales. |
-| `monitorDeliveryProgress(requests)` | `DeliveryProgress` | `public` | Monitorea el progreso de entregas. |
-
-**31. `MessageRenderingService` (Domain Service)**
-
-Servicio especializado en renderizado y procesamiento de plantillas de mensaje.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `renderMessage(template, data, channel)` | `RenderedMessage` | `public` | Renderiza un mensaje desde plantilla. |
-| `validateTemplateData(template, data)` | `ValidationResult` | `public` | Valida datos contra plantilla. |
-| `processTemplateVariables(template, data)` | `String` | `public` | Procesa variables en plantilla. |
-| `optimizeMessageForChannel(message, channel)` | `RenderedMessage` | `public` | Optimiza mensaje para canal específico. |
-| `generatePreview(template, data)` | `RenderedMessage` | `public` | Genera vista previa de mensaje. |
-
-**32. `DeliveryAnalyticsService` (Domain Service)**
-
-Servicio para análisis y generación de reportes de entregas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `generateDeliveryReport(startDate, endDate)` | `DeliveryReport` | `public` | Genera reporte de entregas. |
-| `calculateChannelPerformance(channel, period)` | `ChannelPerformance` | `public` | Calcula rendimiento de canal. |
-| `analyzeDeliveryTrends(records)` | `DeliveryTrends` | `public` | Analiza tendencias de entregas. |
-| `calculateSuccessRates(channel, messageType)` | `Double` | `public` | Calcula tasas de éxito. |
-| `generateCostAnalysis(period)` | `CostAnalysis` | `public` | Genera análisis de costos. |
-
-**33. `PreferenceDomainService` (Domain Service)**
-
-Servicio de dominio para lógica compleja relacionada con preferencias de destinatarios.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validatePreferences(preferences)` | `ValidationResult` | `public` | Valida configuración de preferencias. |
-| `mergePreferences(existing, updates)` | `RecipientPreference` | `public` | Combina preferencias existentes con actualizaciones. |
-| `determineDefaultPreferences(recipientType)` | `RecipientPreference` | `public` | Determina preferencias por defecto. |
-| `checkConsentCompliance(preferences, messageType)` | `Boolean` | `public` | Verifica cumplimiento de consentimiento. |
-| `optimizePreferences(preferences, usage)` | `RecipientPreference` | `public` | Optimiza preferencias basado en uso. |
+| Valor                  | Descripción                                             |
+|------------------------|---------------------------------------------------------|
+| `CONTAINER_MONITORING` | Solicitudes generadas por el monitoreo de contenedores. |
+| `ROUTE_PLANNING`       | Solicitudes generadas por planificación de rutas.       |
+| `COMMUNITY_RELATIONS`  | Solicitudes de comunicación comunitaria.                |
+| `PAYMENT`              | Solicitudes relacionadas con pagos y facturas.          |
+| `MUNICIPAL_OPS`        | Notificaciones generadas por operaciones municipales.   |
 
 ---
 
-**Strategies**
+**7. `NotificationChannel` (Enumeration)**
 
-**34. `ChannelSelectionStrategy` (Strategy Interface)**
+Define los canales disponibles para enviar notificaciones al usuario.
 
-Interfaz que define el contrato para diferentes estrategias de selección de canales de entrega.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `selectOptimalChannel(request, preferences)` | `DeliveryChannel` | `public` | Selecciona el canal óptimo para entrega. |
-| `getFallbackChannels(primaryChannel)` | `List<DeliveryChannel>` | `public` | Obtiene canales de respaldo. |
-| `isChannelAvailable(channel, timestamp)` | `boolean` | `public` | Verifica disponibilidad de canal. |
-
-**35. `PriorityBasedStrategy` (Strategy)**
-
-Implementación de estrategia basada en prioridad de notificación.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `selectOptimalChannel(request, preferences)` | `DeliveryChannel` | `public` | Selecciona canal basado en prioridad. |
-| `getFallbackChannels(primaryChannel)` | `List<DeliveryChannel>` | `public` | Obtiene canales de respaldo por prioridad. |
-| `isChannelAvailable(channel, timestamp)` | `boolean` | `public` | Verifica disponibilidad considerando prioridad. |
-
-**36. `CostOptimizedStrategy` (Strategy)**
-
-Implementación de estrategia optimizada por costo de entrega.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `selectOptimalChannel(request, preferences)` | `DeliveryChannel` | `public` | Selecciona canal más económico. |
-| `getFallbackChannels(primaryChannel)` | `List<DeliveryChannel>` | `public` | Obtiene canales de respaldo por costo. |
-| `isChannelAvailable(channel, timestamp)` | `boolean` | `public` | Verifica disponibilidad considerando costo. |
-
-**37. `ReliabilityBasedStrategy` (Strategy)**
-
-Implementación de estrategia basada en confiabilidad de canales.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `selectOptimalChannel(request, preferences)` | `DeliveryChannel` | `public` | Selecciona canal más confiable. |
-| `getFallbackChannels(primaryChannel)` | `List<DeliveryChannel>` | `public` | Obtiene canales de respaldo por confiabilidad. |
-| `isChannelAvailable(channel, timestamp)` | `boolean` | `public` | Verifica disponibilidad considerando confiabilidad. |
+| Valor   | Descripción                                          |
+|---------|------------------------------------------------------|
+| `EMAIL` | Envío por correo electrónico.                        |
+| `SMS`   | Envío mediante mensaje de texto.                     |
+| `PUSH`  | Envío como notificación push a dispositivos móviles. |
 
 ---
 
-**Factories**
+**8. `RequestStatus` (Enumeration)**
 
-**38. `NotificationFactory` (Factory)**
+Indica el estado actual de la solicitud de notificación.
 
-Factory para la creación de diferentes tipos de solicitudes de notificación.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createUrgentNotification(recipientId, messageType, data)` | `NotificationRequest` | `public` | Crea notificación urgente. |
-| `createScheduledNotification(recipientId, messageType, scheduledDate)` | `NotificationRequest` | `public` | Crea notificación programada. |
-| `createBulkNotification(recipients, messageType)` | `List<NotificationRequest>` | `public` | Crea notificaciones en lote. |
-| `createNotification(sourceContext, recipientId, messageType)` | `NotificationRequest` | `public` | Crea notificación con contexto específico. |
-
-**39. `TemplateFactory` (Factory)**
-
-Factory para la creación de plantillas según diferentes tipos de canal.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createEmailTemplate(name, subject, body)` | `MessageTemplate` | `public` | Crea plantilla para email. |
-| `createSMSTemplate(name, body)` | `MessageTemplate` | `public` | Crea plantilla para SMS. |
-| `createPushTemplate(name, title, body)` | `MessageTemplate` | `public` | Crea plantilla para push notification. |
-| `createTemplate(name, category, messageType)` | `MessageTemplate` | `public` | Crea plantilla con configuración específica. |
-
-**40. `DeliveryRecordFactory` (Factory)**
-
-Factory para la creación de registros de entrega según diferentes escenarios.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createDeliveryRecord(request, channel)` | `DeliveryRecord` | `public` | Crea registro para una entrega. |
-| `createRetryRecord(originalRecord)` | `DeliveryRecord` | `public` | Crea registro de reintento. |
-| `createBulkRecords(requests)` | `List<DeliveryRecord>` | `public` | Crea registros en lote. |
+| Valor     | Descripción                            |
+|-----------|----------------------------------------|
+| `PENDING` | Solicitud creada y pendiente de envío. |
+| `SENT`    | Notificación enviada correctamente.    |
+| `FAILED`  | Envío fallido.                         |
+| `EXPIRED` | Solicitud expirada por tiempo límite.  |
 
 ---
 
-**Repository Interfaces**
+**9. `NotificationPriority` (Enumeration)**
 
-**41. `NotificationRepository` (Repository Interface)**
+Define la urgencia o prioridad de la notificación.
 
-Interfaz de repositorio para la persistencia y consulta de solicitudes de notificación.
+| Valor    | Descripción                    |
+|----------|--------------------------------|
+| `LOW`    | Prioridad baja.                |
+| `NORMAL` | Prioridad normal.              |
+| `HIGH`   | Alta prioridad.                |
+| `URGENT` | Prioridad crítica o inmediata. |
 
-**Métodos principales:**
+---
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(requestId)` | `Optional<NotificationRequest>` | `public` | Busca una solicitud por su identificador. |
-| `findByRecipient(recipientId)` | `List<NotificationRequest>` | `public` | Busca solicitudes de un destinatario. |
-| `findByStatus(status)` | `List<NotificationRequest>` | `public` | Busca solicitudes por estado. |
-| `findByDateRange(startDate, endDate)` | `List<NotificationRequest>` | `public` | Busca solicitudes en un rango de fechas. |
-| `findScheduledNotifications(beforeDate)` | `List<NotificationRequest>` | `public` | Busca notificaciones programadas. |
-| `findExpiredNotifications()` | `List<NotificationRequest>` | `public` | Busca notificaciones expiradas. |
-| `save(request)` | `NotificationRequest` | `public` | Persiste o actualiza una solicitud. |
-| `delete(requestId)` | `void` | `public` | Elimina una solicitud del sistema. |
-| `existsById(requestId)` | `boolean` | `public` | Verifica si existe una solicitud. |
+**10. `RecipientType` (Enumeration)**
 
-**42. `TemplateRepository` (Repository Interface)**
+Especifica el tipo de destinatario de la notificación.
 
-Interfaz de repositorio para la persistencia y consulta de plantillas de mensaje.
+| Valor           | Descripción                          |
+|-----------------|--------------------------------------|
+| `CITIZEN`       | Ciudadano o usuario final.           |
+| `DRIVER`        | Conductor o personal de operaciones. |
+| `ADMINISTRATOR` | Administrador o autoridad municipal. |
 
-**Métodos principales:**
+---
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(templateId)` | `Optional<MessageTemplate>` | `public` | Busca una plantilla por su identificador. |
-| `findByMessageType(messageType)` | `List<MessageTemplate>` | `public` | Busca plantillas por tipo de mensaje. |
-| `findByChannel(channel)` | `List<MessageTemplate>` | `public` | Busca plantillas por canal. |
-| `findActiveTemplates()` | `List<MessageTemplate>` | `public` | Busca plantillas activas. |
-| `findByCategory(category)` | `List<MessageTemplate>` | `public` | Busca plantillas por categoría. |
-| `save(template)` | `MessageTemplate` | `public` | Persiste o actualiza una plantilla. |
-| `delete(templateId)` | `void` | `public` | Elimina una plantilla del sistema. |
-| `existsById(templateId)` | `boolean` | `public` | Verifica si existe una plantilla. |
+**11. `MessageType` (Enumeration)**
 
-**43. `DeliveryRepository` (Repository Interface)**
+Clasifica el tipo de mensaje según su propósito o contexto.
 
-Interfaz de repositorio para la persistencia y consulta de registros de entrega.
+| Valor       | Descripción                                |
+|-------------|--------------------------------------------|
+| `ALERT`     | Mensaje de alerta o emergencia.            |
+| `INFO`      | Notificación informativa.                  |
+| `REMINDER`  | Recordatorio programado.                   |
+| `MARKETING` | Mensaje de tipo promocional o de difusión. |
 
-**Métodos principales:**
+---
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(recordId)` | `Optional<DeliveryRecord>` | `public` | Busca un registro por su identificador. |
-| `findByRequestId(requestId)` | `List<DeliveryRecord>` | `public` | Busca registros de una solicitud. |
-| `findByChannel(channel)` | `List<DeliveryRecord>` | `public` | Busca registros por canal. |
-| `findByStatus(status)` | `List<DeliveryRecord>` | `public` | Busca registros por estado. |
-| `findByDateRange(startDate, endDate)` | `List<DeliveryRecord>` | `public` | Busca registros en un rango de fechas. |
-| `findFailedDeliveries()` | `List<DeliveryRecord>` | `public` | Busca entregas fallidas. |
-| `save(record)` | `DeliveryRecord` | `public` | Persiste o actualiza un registro. |
-| `delete(recordId)` | `void` | `public` | Elimina un registro del sistema. |
-| `existsById(recordId)` | `boolean` | `public` | Verifica si existe un registro. |
+**12. `ProviderType` (Enumeration)**
+
+Identifica el proveedor externo responsable del envío de la notificación.
+
+| Valor      | Descripción                       |
+|------------|-----------------------------------|
+| `SENDGRID` | Proveedor de correo electrónico.  |
+| `TWILIO`   | Proveedor de mensajería SMS.      |
+| `FIREBASE` | Proveedor de notificaciones push. |
+
+---
+
+**13. `AttemptStatus` (Enumeration)**
+
+Define el estado actual del intento de entrega.
+
+| Valor       | Descripción                                        |
+|-------------|----------------------------------------------------|
+| `PENDING`   | Intento pendiente de ejecución.                    |
+| `DELIVERED` | Intento exitosamente entregado.                    |
+| `FAILED`    | Intento fallido.                                   |
+| `BOUNCED`   | Intento rechazado o no entregado por el proveedor. |
+
+---
+
+**14. `TemplateCategory` (Enumeration)**
+
+Clasifica las plantillas de mensajes según su función dentro del sistema.
+
+| Valor            | Descripción                                     |
+|------------------|-------------------------------------------------|
+| `OPERATIONAL`    | Plantillas para notificaciones operativas.      |
+| `ADMINISTRATIVE` | Plantillas para comunicaciones administrativas. |
+| `MARKETING`      | Plantillas destinadas a campañas o difusión.    |
 
 ---
 
@@ -7141,800 +4123,67 @@ Se presenta un diccionario detallado de clases para el Bounded Context Profile, 
 
 **1. `UserProfile` (Aggregate Root)**
 
-Representa el perfil de usuario en el sistema con información personal, contacto, dirección, configuraciones de privacidad y completitud del perfil con capacidades de validación y gestión de elegibilidad de servicios.
+Representa el perfil del usuario dentro del sistema, incluyendo su información personal, configuración de notificaciones, preferencias de idioma y dispositivos asociados. Centraliza la gestión de contacto y accesibilidad del usuario.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del perfil. |
-| `profileId` | `ProfileId` | `private` | Identificador de dominio del perfil. |
-| `userId` | `UserId` | `private` | Identificador del usuario asociado. |
-| `userType` | `UserType` | `private` | Tipo de usuario del perfil. |
-| `personalInfo` | `PersonalInfo` | `private` | Información personal del usuario. |
-| `contactInfo` | `ContactInfo` | `private` | Información de contacto del usuario. |
-| `addressInfo` | `AddressInfo` | `private` | Información de dirección del usuario. |
-| `serviceArea` | `ServiceArea` | `private` | Área de servicio del usuario. |
-| `status` | `ProfileStatus` | `private` | Estado actual del perfil. |
-| `privacySettings` | `PrivacySettings` | `private` | Configuraciones de privacidad. |
-| `accountSettings` | `AccountSettings` | `private` | Configuraciones de cuenta. |
-| `profileCompleteness` | `ProfileCompleteness` | `private` | Nivel de completitud del perfil. |
-| `lastLoginDate` | `LocalDateTime` | `private` | Fecha del último inicio de sesión. |
-| `createdAt` | `LocalDateTime` | `private` | Fecha de creación del perfil. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
+| Atributo                    | Tipo            | Visibilidad  | Descripción                                                                     |
+|-----------------------------|-----------------|--------------|---------------------------------------------------------------------------------|
+| `id`                        | `String`        | `private`    | Identificador único del perfil del usuario.                                     |
+| `userId`                    | `UserId`        | `private`    | Identificador del usuario asociado.                                             |
+| `pictureUrl`                | `String`        | `private`    | URL de la imagen de perfil.                                                     |
+| `userType`                  | `UserType`      | `private`    | Tipo de usuario dentro del sistema (ciudadano, conductor, administrador, etc.). |
+| `districtId`                | `DistrictId`    | `private`    | Distrito al que pertenece el usuario.                                           |
+| `email`                     | `EmailAddress`  | `private`    | Dirección de correo electrónico del usuario.                                    |
+| `photo`                     | `Photo`         | `private`    | Objeto que representa la foto de perfil.                                        |
+| `phoneNumber`               | `PhoneNumber`   | `private`    | Número de teléfono asociado al usuario.                                         |
+| `emailNotificationsEnabled` | `Boolean`       | `private`    | Indica si las notificaciones por correo están habilitadas.                      |
+| `smsNotificationsEnabled`   | `Boolean`       | `private`    | Indica si las notificaciones por SMS están habilitadas.                         |
+| `pushNotificationsEnabled`  | `Boolean`       | `private`    | Indica si las notificaciones push están habilitadas.                            |
+| `deviceTokens`              | `List<String>`  | `private`    | Lista de tokens de dispositivos móviles registrados.                            |
+| `language`                  | `Language`      | `private`    | Idioma preferido del usuario.                                                   |
+| `timezone`                  | `String`        | `private`    | Zona horaria configurada por el usuario.                                        |
+| `isActive`                  | `Boolean`       | `private`    | Indica si el perfil está activo.                                                |
+| `createdAt`                 | `LocalDateTime` | `private`    | Fecha y hora de creación del perfil.                                            |
+| `updatedAt`                 | `LocalDateTime` | `private`    | Fecha y hora de la última actualización.                                        |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `UserProfile()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `UserProfile(userId, userType, personalInfo)` | `Constructor` | `public` | Constructor que instancia un perfil con datos básicos. |
-| `updatePersonalInfo(personalInfo)` | `void` | `public` | Actualiza la información personal del usuario. |
-| `updateContactInfo(contactInfo)` | `void` | `public` | Actualiza la información de contacto del usuario. |
-| `updateAddress(addressInfo)` | `void` | `public` | Actualiza la información de dirección del usuario. |
-| `validateServiceAreaEligibility(location)` | `EligibilityResult` | `public` | Valida la elegibilidad del área de servicio. |
-| `updatePrivacySettings(settings)` | `void` | `public` | Actualiza las configuraciones de privacidad. |
-| `deactivate(reason)` | `void` | `public` | Desactiva el perfil por una razón específica. |
-| `isComplete()` | `boolean` | `public` | Determina si el perfil está completo. |
-| `canAccessService(serviceType)` | `boolean` | `public` | Determina si puede acceder a un tipo de servicio. |
-| `calculateProfileScore()` | `ProfileScore` | `public` | Calcula la puntuación del perfil. |
-| `recordLogin()` | `void` | `public` | Registra un inicio de sesión. |
-| `isActive()` | `boolean` | `public` | Determina si el perfil está activo. |
-| `canBeModified()` | `boolean` | `public` | Determina si el perfil puede ser modificado. |
-| `canBeDeactivated()` | `boolean` | `public` | Determina si el perfil puede ser desactivado. |
-| `getAvailableActions()` | `List<ProfileAction>` | `public` | Obtiene las acciones disponibles según el estado. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
-
-**2. `UserPreferences` (Aggregate Root)**
-
-Representa las preferencias del usuario para notificaciones, comunicación, idioma, zona horaria, tema, accesibilidad y consentimientos de marketing con capacidades de gestión y validación.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único de las preferencias. |
-| `preferencesId` | `PreferencesId` | `private` | Identificador de dominio de las preferencias. |
-| `profileId` | `ProfileId` | `private` | Identificador del perfil asociado. |
-| `notificationSettings` | `NotificationSettings` | `private` | Configuraciones de notificaciones. |
-| `communicationChannels` | `List<CommunicationChannel>` | `private` | Lista de canales de comunicación. |
-| `languagePreference` | `Language` | `private` | Idioma preferido del usuario. |
-| `timezonePreference` | `Timezone` | `private` | Zona horaria preferida del usuario. |
-| `themePreference` | `ThemePreference` | `private` | Tema preferido de la interfaz. |
-| `accessibilitySettings` | `AccessibilitySettings` | `private` | Configuraciones de accesibilidad. |
-| `dataRetentionSettings` | `DataRetentionSettings` | `private` | Configuraciones de retención de datos. |
-| `marketingConsent` | `MarketingConsent` | `private` | Consentimiento para comunicaciones de marketing. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `UserPreferences()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `UserPreferences(profileId, defaultSettings)` | `Constructor` | `public` | Constructor que instancia preferencias con configuraciones por defecto. |
-| `updateNotificationSettings(settings)` | `void` | `public` | Actualiza las configuraciones de notificaciones. |
-| `addCommunicationChannel(channel)` | `void` | `public` | Agrega un canal de comunicación. |
-| `removeCommunicationChannel(channel)` | `void` | `public` | Elimina un canal de comunicación. |
-| `updateLanguage(language)` | `void` | `public` | Actualiza el idioma preferido. |
-| `updateTheme(theme)` | `void` | `public` | Actualiza el tema preferido. |
-| `updateAccessibilitySettings(settings)` | `void` | `public` | Actualiza las configuraciones de accesibilidad. |
-| `grantMarketingConsent()` | `void` | `public` | Otorga consentimiento para marketing. |
-| `revokeMarketingConsent()` | `void` | `public` | Revoca consentimiento para marketing. |
-| `isChannelEnabled(channel)` | `boolean` | `public` | Determina si un canal está habilitado. |
-| `getEffectiveTimezone()` | `Timezone` | `public` | Obtiene la zona horaria efectiva. |
-| `canBeModified()` | `boolean` | `public` | Determina si las preferencias pueden ser modificadas. |
-| `getAvailableActions()` | `List<PreferencesAction>` | `public` | Obtiene las acciones disponibles según el estado. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
-
-**3. `PersonalizationSettings` (Aggregate Root)**
-
-Representa la configuración de personalización del usuario incluyendo diseño de dashboard, widgets, atajos, campos personalizados y preferencias de vista con capacidades de exportación y restablecimiento.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único de la configuración. |
-| `settingsId` | `PersonalizationSettingsId` | `private` | Identificador de dominio de la configuración. |
-| `profileId` | `ProfileId` | `private` | Identificador del perfil asociado. |
-| `dashboardLayout` | `DashboardLayout` | `private` | Diseño del dashboard del usuario. |
-| `widgetConfigurations` | `List<WidgetConfiguration>` | `private` | Lista de configuraciones de widgets. |
-| `shortcuts` | `List<Shortcut>` | `private` | Lista de atajos personalizados. |
-| `customFields` | `List<CustomField>` | `private` | Lista de campos personalizados. |
-| `viewPreferences` | `ViewPreferences` | `private` | Preferencias de vista del usuario. |
-| `reportingPreferences` | `ReportingPreferences` | `private` | Preferencias de reportes del usuario. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `PersonalizationSettings()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `PersonalizationSettings(profileId, userType)` | `Constructor` | `public` | Constructor que instancia configuración con tipo de usuario. |
-| `updateDashboardLayout(layout)` | `void` | `public` | Actualiza el diseño del dashboard. |
-| `addWidget(widget)` | `void` | `public` | Agrega un widget a la configuración. |
-| `removeWidget(widgetId)` | `void` | `public` | Elimina un widget de la configuración. |
-| `createShortcut(shortcut)` | `void` | `public` | Crea un atajo personalizado. |
-| `addCustomField(field)` | `void` | `public` | Agrega un campo personalizado. |
-| `updateViewPreferences(preferences)` | `void` | `public` | Actualiza las preferencias de vista. |
-| `resetToDefaults(userType)` | `void` | `public` | Restablece a configuraciones por defecto. |
-| `exportConfiguration()` | `PersonalizationExport` | `public` | Exporta la configuración de personalización. |
-| `canBeModified()` | `boolean` | `public` | Determina si la configuración puede ser modificada. |
-| `canBeReset()` | `boolean` | `public` | Determina si la configuración puede ser restablecida. |
-| `getAvailableActions()` | `List<PersonalizationAction>` | `public` | Obtiene las acciones disponibles según el estado. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
+| Método                                  | Tipo de Retorno  | Visibilidad  | Descripción                                                      |
+|-----------------------------------------|------------------|--------------|------------------------------------------------------------------|
+| `updateEmail(email: EmailAddress)`      | `void`           | `public`     | Actualiza la dirección de correo electrónico del usuario.        |
+| `updatePhoneNumber(phone: PhoneNumber)` | `void`           | `public`     | Actualiza el número telefónico del usuario.                      |
+| `enableNotificationChannel()`           | `void`           | `public`     | Habilita un canal de notificación (correo, SMS o push).          |
+| `disableNotificationChannel()`          | `void`           | `public`     | Desactiva un canal de notificación.                              |
+| `addDeviceToken(token: String)`         | `void`           | `public`     | Registra un nuevo dispositivo para notificaciones push.          |
+| `removeDeviceToken(token: String)`      | `void`           | `public`     | Elimina un token de dispositivo registrado.                      |
+| `isNotificationEnabledFor()`            | `boolean`        | `public`     | Verifica si un canal de notificación específico está habilitado. |
+| `deactivate()`                          | `void`           | `public`     | Desactiva el perfil del usuario en el sistema.                   |
 
 ---
 
-**Entities**
+**Enumerations**
 
-**4. `ContactMethod` (Entity)**
+**2. `UserType` (Enumeration)**
 
-Representa un método de contacto del usuario con información de tipo, valor, verificación y uso con capacidades de validación y seguimiento de actividad.
+Define los diferentes roles o tipos de usuario disponibles dentro del sistema.
 
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del método de contacto. |
-| `methodId` | `ContactMethodId` | `private` | Identificador de dominio del método. |
-| `type` | `ContactMethodType` | `private` | Tipo del método de contacto. |
-| `value` | `String` | `private` | Valor del método de contacto. |
-| `isPrimary` | `boolean` | `private` | Indica si es el método primario. |
-| `isVerified` | `boolean` | `private` | Indica si está verificado. |
-| `verificationDate` | `LocalDateTime` | `private` | Fecha de verificación. |
-| `lastUsedDate` | `LocalDateTime` | `private` | Fecha del último uso. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `ContactMethod(type, value)` | `Constructor` | `public` | Constructor que instancia un método con tipo y valor. |
-| `verify(verificationCode)` | `VerificationResult` | `public` | Verifica el método con un código. |
-| `markAsUsed()` | `void` | `public` | Marca el método como utilizado. |
-| `isActive()` | `boolean` | `public` | Determina si el método está activo. |
-| `canBeVerified()` | `boolean` | `public` | Determina si puede ser verificado. |
-
-**5. `AddressHistory` (Entity)**
-
-Representa el historial de direcciones de un usuario con información de período de validez y razón de cambio para seguimiento de ubicaciones históricas.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del historial. |
-| `historyId` | `AddressHistoryId` | `private` | Identificador de dominio del historial. |
-| `profileId` | `ProfileId` | `private` | Identificador del perfil asociado. |
-| `address` | `AddressInfo` | `private` | Información de la dirección histórica. |
-| `validFrom` | `LocalDateTime` | `private` | Fecha de inicio de validez. |
-| `validTo` | `LocalDateTime` | `private` | Fecha de fin de validez. |
-| `changeReason` | `AddressChangeReason` | `private` | Razón del cambio de dirección. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `AddressHistory(profileId, address)` | `Constructor` | `public` | Constructor que instancia historial con perfil y dirección. |
-| `isCurrentAddress()` | `boolean` | `public` | Determina si es la dirección actual. |
-| `overlaps(other)` | `boolean` | `public` | Determina si se superpone con otro historial. |
-| `endPeriod()` | `void` | `public` | Finaliza el período de validez. |
-
-**6. `WidgetConfiguration` (Entity)**
-
-Representa la configuración de un widget en el dashboard del usuario con información de posición, tamaño, configuración y visibilidad con capacidades de personalización.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del widget. |
-| `widgetId` | `WidgetId` | `private` | Identificador de dominio del widget. |
-| `widgetType` | `WidgetType` | `private` | Tipo del widget. |
-| `position` | `WidgetPosition` | `private` | Posición del widget en el dashboard. |
-| `size` | `WidgetSize` | `private` | Tamaño del widget. |
-| `configuration` | `WidgetConfig` | `private` | Configuración específica del widget. |
-| `isVisible` | `boolean` | `private` | Indica si el widget está visible. |
-| `refreshInterval` | `Duration` | `private` | Intervalo de actualización del widget. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `WidgetConfiguration(widgetType, position)` | `Constructor` | `public` | Constructor que instancia widget con tipo y posición. |
-| `updatePosition(position)` | `void` | `public` | Actualiza la posición del widget. |
-| `resize(size)` | `void` | `public` | Cambia el tamaño del widget. |
-| `hide()` | `void` | `public` | Oculta el widget. |
-| `show()` | `void` | `public` | Muestra el widget. |
-| `updateConfiguration(config)` | `void` | `public` | Actualiza la configuración del widget. |
+| Valor                 | Descripción                                                    |
+|-----------------------|----------------------------------------------------------------|
+| `CITIZEN`             | Usuario ciudadano común, participante en la comunidad.         |
+| `ADMINISTRATOR`       | Administrador del sistema o del distrito.                      |
+| `DRIVER`              | Conductor o personal operativo encargado de rutas o vehículos. |
+| `SUPER_ADMINISTRATOR` | Administrador global con permisos sobre todo el sistema.       |
 
 ---
 
-**Value Objects**
+**3. `Language` (Enumeration)**
 
-**7. `ProfileId` (Value Object)**
+Especifica el idioma preferido del usuario para la interfaz y las notificaciones.
 
-Identificador único inmutable para un perfil de usuario en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `profileId` | `String` | `private` | Valor alfanumérico del identificador del perfil. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getValue()` | `String` | `public` | Obtiene el valor del identificador. |
-| `isValid()` | `boolean` | `public` | Valida que el identificador sea válido. |
-
-**8. `PreferencesId` (Value Object)**
-
-Identificador único inmutable para las preferencias de usuario en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `preferencesId` | `String` | `private` | Valor alfanumérico del identificador de preferencias. |
-
-**9. `PersonalizationSettingsId` (Value Object)**
-
-Identificador único inmutable para las configuraciones de personalización en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `settingsId` | `String` | `private` | Valor alfanumérico del identificador de configuración. |
-
-**10. `ContactMethodId` (Value Object)**
-
-Identificador único inmutable para un método de contacto en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `methodId` | `String` | `private` | Valor alfanumérico del identificador del método. |
-
-**11. `WidgetId` (Value Object)**
-
-Identificador único inmutable para un widget en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `widgetId` | `String` | `private` | Valor alfanumérico del identificador del widget. |
-
-**12. `PersonalInfo` (Value Object)**
-
-Información personal del usuario con datos de identificación, validaciones y capacidades de cálculo de edad.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `firstName` | `String` | `private` | Nombre del usuario. |
-| `lastName` | `String` | `private` | Apellido del usuario. |
-| `documentType` | `DocumentType` | `private` | Tipo de documento de identidad. |
-| `documentNumber` | `String` | `private` | Número de documento de identidad. |
-| `dateOfBirth` | `LocalDate` | `private` | Fecha de nacimiento del usuario. |
-| `gender` | `Gender` | `private` | Género del usuario. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getFullName()` | `String` | `public` | Obtiene el nombre completo del usuario. |
-| `getAge()` | `Integer` | `public` | Calcula la edad actual del usuario. |
-| `isMinor()` | `boolean` | `public` | Determina si el usuario es menor de edad. |
-| `isValidDocumentNumber()` | `boolean` | `public` | Valida el número de documento. |
-
-**13. `ContactInfo` (Value Object)**
-
-Información de contacto del usuario con emails, teléfonos y contacto de emergencia con validaciones y preferencias.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `primaryEmail` | `EmailAddress` | `private` | Email principal del usuario. |
-| `secondaryEmail` | `EmailAddress` | `private` | Email secundario del usuario. |
-| `primaryPhone` | `PhoneNumber` | `private` | Teléfono principal del usuario. |
-| `secondaryPhone` | `PhoneNumber` | `private` | Teléfono secundario del usuario. |
-| `emergencyContact` | `EmergencyContact` | `private` | Contacto de emergencia del usuario. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `hasSecondaryContacts()` | `boolean` | `public` | Determina si tiene contactos secundarios. |
-| `getPreferredContactMethod()` | `ContactMethodType` | `public` | Obtiene el método de contacto preferido. |
-| `isValidContactInfo()` | `boolean` | `public` | Valida la información de contacto. |
-
-**14. `AddressInfo` (Value Object)**
-
-Información de dirección del usuario con datos completos de ubicación, coordenadas y validaciones de área de servicio.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `street` | `String` | `private` | Calle de la dirección. |
-| `number` | `String` | `private` | Número de la dirección. |
-| `district` | `String` | `private` | Distrito de la dirección. |
-| `city` | `String` | `private` | Ciudad de la dirección. |
-| `region` | `String` | `private` | Región de la dirección. |
-| `postalCode` | `String` | `private` | Código postal de la dirección. |
-| `coordinates` | `GeoCoordinates` | `private` | Coordenadas geográficas de la dirección. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getFullAddress()` | `String` | `public` | Obtiene la dirección completa formateada. |
-| `isInServiceArea(serviceArea)` | `boolean` | `public` | Determina si está en el área de servicio. |
-| `isValidAddress()` | `boolean` | `public` | Valida la dirección. |
-
-**15. `NotificationSettings` (Value Object)**
-
-Configuraciones de notificaciones del usuario con canales habilitados, horarios silenciosos y frecuencia de notificaciones.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `emailEnabled` | `boolean` | `private` | Indica si las notificaciones por email están habilitadas. |
-| `smsEnabled` | `boolean` | `private` | Indica si las notificaciones por SMS están habilitadas. |
-| `pushEnabled` | `boolean` | `private` | Indica si las notificaciones push están habilitadas. |
-| `inAppEnabled` | `boolean` | `private` | Indica si las notificaciones in-app están habilitadas. |
-| `quietHours` | `QuietHours` | `private` | Horarios de silencio para notificaciones. |
-| `frequency` | `NotificationFrequency` | `private` | Frecuencia de las notificaciones. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isChannelEnabled(channel)` | `boolean` | `public` | Determina si un canal está habilitado. |
-| `isInQuietHours(timestamp)` | `boolean` | `public` | Determina si está en horario silencioso. |
-| `merge(other)` | `NotificationSettings` | `public` | Combina con otras configuraciones. |
-
-**16. `PrivacySettings` (Value Object)**
-
-Configuraciones de privacidad del usuario con visibilidad de perfil, compartición de datos y seguimiento analítico.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `profileVisibility` | `ProfileVisibility` | `private` | Visibilidad del perfil del usuario. |
-| `dataSharing` | `DataSharingLevel` | `private` | Nivel de compartición de datos. |
-| `analyticsTracking` | `boolean` | `private` | Indica si permite seguimiento analítico. |
-| `marketingCommunications` | `boolean` | `private` | Indica si permite comunicaciones de marketing. |
-| `thirdPartySharing` | `boolean` | `private` | Indica si permite compartir con terceros. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `allowsDataSharing()` | `boolean` | `public` | Determina si permite compartir datos. |
-| `allowsAnalytics()` | `boolean` | `public` | Determina si permite análisis. |
-| `isCompliantWithRegulations()` | `boolean` | `public` | Verifica cumplimiento de regulaciones. |
-
-**17. `ProfileCompleteness` (Value Object)**
-
-Nivel de completitud del perfil del usuario con porcentaje, campos faltantes y puntuación calculada.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `completionPercentage` | `Double` | `private` | Porcentaje de completitud del perfil. |
-| `missingFields` | `List<String>` | `private` | Lista de campos faltantes. |
-| `lastCalculated` | `LocalDateTime` | `private` | Fecha del último cálculo. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isComplete()` | `boolean` | `public` | Determina si el perfil está completo. |
-| `getNextRequiredField()` | `String` | `public` | Obtiene el siguiente campo requerido. |
-| `calculateScore()` | `Double` | `public` | Calcula la puntuación de completitud. |
-
----
-
-**Enums**
-
-**18. `ProfileStatus` (Enum)**
-
-Estados posibles de un perfil de usuario durante su ciclo de vida.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `ACTIVE` | Perfil activo y funcional. |
-| `INACTIVE` | Perfil inactivo temporalmente. |
-| `SUSPENDED` | Perfil suspendido por infracciones. |
-| `DEACTIVATED` | Perfil desactivado por el usuario. |
-| `PENDING_VERIFICATION` | Perfil pendiente de verificación. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canTransitionTo(newStatus)` | `boolean` | `public` | Valida si puede transicionar al nuevo estado. |
-| `isActive()` | `boolean` | `public` | Determina si está activo. |
-| `canBeModified()` | `boolean` | `public` | Determina si puede ser modificado. |
-| `canBeDeactivated()` | `boolean` | `public` | Determina si puede ser desactivado. |
-| `getAvailableTransitions()` | `List<ProfileStatus>` | `public` | Obtiene las transiciones disponibles. |
-
-**19. `ProfileAction` (Enum)**
-
-Acciones disponibles que se pueden realizar sobre un perfil de usuario.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `UPDATE_PERSONAL_INFO` | Actualizar información personal. |
-| `UPDATE_CONTACT_INFO` | Actualizar información de contacto. |
-| `UPDATE_ADDRESS` | Actualizar dirección. |
-| `DEACTIVATE` | Desactivar el perfil. |
-| `VERIFY_CONTACT` | Verificar método de contacto. |
-| `UPDATE_PRIVACY` | Actualizar configuraciones de privacidad. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAllowedForStatus(status)` | `boolean` | `public` | Determina si la acción está permitida para el estado. |
-| `requiresVerification()` | `boolean` | `public` | Determina si requiere verificación. |
-
-**20. `PreferencesAction` (Enum)**
-
-Acciones disponibles que se pueden realizar sobre las preferencias de usuario.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `UPDATE_NOTIFICATIONS` | Actualizar configuraciones de notificaciones. |
-| `ADD_CHANNEL` | Agregar canal de comunicación. |
-| `REMOVE_CHANNEL` | Eliminar canal de comunicación. |
-| `UPDATE_LANGUAGE` | Actualizar idioma preferido. |
-| `UPDATE_TIMEZONE` | Actualizar zona horaria. |
-| `UPDATE_CONSENT` | Actualizar consentimientos. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAllowedForProfile(profile)` | `boolean` | `public` | Determina si está permitida para el perfil. |
-| `requiresConfirmation()` | `boolean` | `public` | Determina si requiere confirmación. |
-
-**21. `PersonalizationAction` (Enum)**
-
-Acciones disponibles que se pueden realizar sobre la configuración de personalización.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `UPDATE_LAYOUT` | Actualizar diseño del dashboard. |
-| `ADD_WIDGET` | Agregar widget al dashboard. |
-| `REMOVE_WIDGET` | Eliminar widget del dashboard. |
-| `CREATE_SHORTCUT` | Crear atajo personalizado. |
-| `RESET_TO_DEFAULTS` | Restablecer a configuraciones por defecto. |
-| `EXPORT_CONFIG` | Exportar configuración. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAllowedForUserType(userType)` | `boolean` | `public` | Determina si está permitida para el tipo de usuario. |
-| `requiresPermission()` | `boolean` | `public` | Determina si requiere permisos especiales. |
-
----
-
-**Application Services**
-
-**22. `ProfileApplicationService` (Application Service)**
-
-Servicio de aplicación que coordina las operaciones de negocio relacionadas con perfiles de usuario y su gestión.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `profileRepository` | `ProfileRepository` | `private` | Repositorio para persistencia de perfiles. |
-| `profileDomainService` | `ProfileDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `profileFactory` | `ProfileFactory` | `private` | Factory para creación de perfiles. |
-| `eligibilityService` | `ProfileEligibilityService` | `private` | Servicio de elegibilidad de perfiles. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createProfile(userId, userType, personalInfo, contactInfo, addressInfo)` | `UserProfile` | `public` | Crea un nuevo perfil de usuario. |
-| `updateProfile(profileId, personalInfo, contactInfo, addressInfo)` | `void` | `public` | Actualiza información del perfil. |
-| `updateContactInfo(profileId, contactInfo)` | `void` | `public` | Actualiza información de contacto. |
-| `updateAddress(profileId, addressInfo)` | `void` | `public` | Actualiza dirección del perfil. |
-| `deactivateProfile(profileId, reason)` | `void` | `public` | Desactiva un perfil de usuario. |
-| `verifyContactMethod(profileId, methodId, verificationCode)` | `VerificationResult` | `public` | Verifica un método de contacto. |
-| `getProfileById(profileId)` | `Optional<UserProfile>` | `public` | Obtiene un perfil por su identificador. |
-| `getProfileByUserId(userId)` | `Optional<UserProfile>` | `public` | Obtiene un perfil por ID de usuario. |
-| `getProfilesByUserType(userType, municipalityId)` | `List<UserProfile>` | `public` | Obtiene perfiles por tipo de usuario. |
-
-**23. `PreferencesApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de preferencias de usuario y configuraciones personalizadas.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `preferencesRepository` | `PreferencesRepository` | `private` | Repositorio para persistencia de preferencias. |
-| `preferencesDomainService` | `PreferencesDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `preferencesFactory` | `PreferencesFactory` | `private` | Factory para creación de preferencias. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createPreferences(profileId, defaultSettings)` | `UserPreferences` | `public` | Crea preferencias para un perfil. |
-| `updatePreferences(preferencesId, notificationSettings, communicationChannels, language, timezone)` | `void` | `public` | Actualiza preferencias del usuario. |
-| `updateNotificationSettings(preferencesId, settings)` | `void` | `public` | Actualiza configuraciones de notificaciones. |
-| `addCommunicationChannel(preferencesId, channel)` | `void` | `public` | Agrega canal de comunicación. |
-| `removeCommunicationChannel(preferencesId, channel)` | `void` | `public` | Elimina canal de comunicación. |
-| `updateLanguage(preferencesId, language)` | `void` | `public` | Actualiza idioma preferido. |
-| `updateMarketingConsent(preferencesId, consent)` | `void` | `public` | Actualiza consentimiento de marketing. |
-| `getPreferencesByProfile(profileId)` | `Optional<UserPreferences>` | `public` | Obtiene preferencias por perfil. |
-
-**24. `PersonalizationApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de configuraciones de personalización y diseño de dashboard.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `personalizationRepository` | `PersonalizationRepository` | `private` | Repositorio para persistencia de personalizaciones. |
-| `personalizationDomainService` | `PersonalizationDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `personalizationFactory` | `PersonalizationFactory` | `private` | Factory para creación de personalizaciones. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createPersonalization(profileId, userType)` | `PersonalizationSettings` | `public` | Crea configuración de personalización. |
-| `updateDashboardLayout(settingsId, layout)` | `void` | `public` | Actualiza diseño del dashboard. |
-| `addWidget(settingsId, widget)` | `void` | `public` | Agrega widget al dashboard. |
-| `removeWidget(settingsId, widgetId)` | `void` | `public` | Elimina widget del dashboard. |
-| `updateWidget(settingsId, widgetId, configuration)` | `void` | `public` | Actualiza configuración de widget. |
-| `createShortcut(settingsId, shortcut)` | `void` | `public` | Crea atajo personalizado. |
-| `resetToDefaults(settingsId, userType)` | `void` | `public` | Restablece a configuraciones por defecto. |
-| `getPersonalizationByProfile(profileId)` | `Optional<PersonalizationSettings>` | `public` | Obtiene personalización por perfil. |
-| `exportConfiguration(settingsId)` | `PersonalizationExport` | `public` | Exporta configuración de personalización. |
-
----
-
-**Domain Services**
-
-**25. `ProfileDomainService` (Domain Service)**
-
-Servicio de dominio que implementa lógica de negocio compleja relacionada con perfiles de usuario.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `validationStrategy` | `ProfileValidationStrategy` | `private` | Estrategia de validación de perfiles actual. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateProfileCreation(profile)` | `ValidationResult` | `public` | Valida la creación de un nuevo perfil. |
-| `validateProfileUpdate(profile, changes)` | `ValidationResult` | `public` | Valida actualizaciones del perfil. |
-| `calculateProfileCompleteness(profile)` | `ProfileCompleteness` | `public` | Calcula la completitud del perfil. |
-| `checkDuplicateProfile(personalInfo, documentNumber)` | `ValidationResult` | `public` | Verifica duplicación de perfiles. |
-| `setValidationStrategy(strategy)` | `void` | `public` | Establece la estrategia de validación. |
-
-**26. `PreferencesDomainService` (Domain Service)**
-
-Servicio de dominio para lógica compleja relacionada con preferencias de usuario.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validatePreferencesSettings(preferences)` | `ValidationResult` | `public` | Valida configuraciones de preferencias. |
-| `mergePreferencesSettings(existing, updates)` | `UserPreferences` | `public` | Combina preferencias existentes con actualizaciones. |
-| `determineDefaultPreferences(userType)` | `DefaultPreferences` | `public` | Determina preferencias por defecto. |
-| `checkConsentCompliance(preferences)` | `ComplianceResult` | `public` | Verifica cumplimiento de consentimientos. |
-| `optimizeNotificationSettings(preferences, usage)` | `NotificationSettings` | `public` | Optimiza configuraciones de notificaciones. |
-
-**27. `PersonalizationDomainService` (Domain Service)**
-
-Servicio de dominio para lógica compleja relacionada con personalización de dashboard.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validatePersonalizationSettings(settings)` | `ValidationResult` | `public` | Valida configuraciones de personalización. |
-| `generateDefaultLayout(userType)` | `DashboardLayout` | `public` | Genera diseño por defecto según tipo de usuario. |
-| `optimizeWidgetConfiguration(widgets, usage)` | `List<WidgetConfiguration>` | `public` | Optimiza configuración de widgets. |
-| `validateWidgetCompatibility(widget, userType)` | `ValidationResult` | `public` | Valida compatibilidad de widget. |
-| `exportPersonalizationData(settings)` | `PersonalizationExport` | `public` | Exporta datos de personalización. |
-
-**28. `ProfileEligibilityService` (Domain Service)**
-
-Servicio especializado en validación de elegibilidad y acceso a servicios.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateServiceAreaEligibility(profile, serviceArea)` | `EligibilityResult` | `public` | Valida elegibilidad de área de servicio. |
-| `checkAccessPermissions(profile, serviceType)` | `AccessResult` | `public` | Verifica permisos de acceso. |
-| `calculateEligibilityScore(profile)` | `EligibilityScore` | `public` | Calcula puntuación de elegibilidad. |
-| `determineServiceRestrictions(profile)` | `List<ServiceRestriction>` | `public` | Determina restricciones de servicios. |
-| `validateUserTypeRequirements(userType, profile)` | `ValidationResult` | `public` | Valida requerimientos por tipo de usuario. |
-
----
-
-**Strategies**
-
-**29. `ProfileValidationStrategy` (Strategy Interface)**
-
-Interfaz que define el contrato para diferentes estrategias de validación de perfiles.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateProfile(profile)` | `ValidationResult` | `public` | Valida un perfil según la estrategia. |
-| `validatePersonalInfo(personalInfo)` | `ValidationResult` | `public` | Valida información personal. |
-| `validateServiceAreaEligibility(address, userType)` | `EligibilityResult` | `public` | Valida elegibilidad de área de servicio. |
-
-**30. `CitizenValidationStrategy` (Strategy)**
-
-Implementación de estrategia de validación específica para ciudadanos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateProfile(profile)` | `ValidationResult` | `public` | Valida perfil usando reglas de ciudadano. |
-| `validatePersonalInfo(personalInfo)` | `ValidationResult` | `public` | Valida información personal de ciudadano. |
-| `validateServiceAreaEligibility(address, userType)` | `EligibilityResult` | `public` | Valida elegibilidad de ciudadano. |
-
-**31. `AdministratorValidationStrategy` (Strategy)**
-
-Implementación de estrategia de validación específica para administradores.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateProfile(profile)` | `ValidationResult` | `public` | Valida perfil usando reglas de administrador. |
-| `validatePersonalInfo(personalInfo)` | `ValidationResult` | `public` | Valida información personal de administrador. |
-| `validateServiceAreaEligibility(address, userType)` | `EligibilityResult` | `public` | Valida elegibilidad de administrador. |
-
-**32. `DriverValidationStrategy` (Strategy)**
-
-Implementación de estrategia de validación específica para conductores.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateProfile(profile)` | `ValidationResult` | `public` | Valida perfil usando reglas de conductor. |
-| `validatePersonalInfo(personalInfo)` | `ValidationResult` | `public` | Valida información personal de conductor. |
-| `validateServiceAreaEligibility(address, userType)` | `EligibilityResult` | `public` | Valida elegibilidad de conductor. |
-
----
-
-**Factories**
-
-**33. `ProfileFactory` (Factory)**
-
-Factory para la creación de diferentes tipos de perfiles de usuario con configuraciones específicas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createCitizenProfile(userId, personalInfo, contactInfo)` | `UserProfile` | `public` | Crea perfil de ciudadano. |
-| `createAdministratorProfile(userId, personalInfo, municipality)` | `UserProfile` | `public` | Crea perfil de administrador. |
-| `createDriverProfile(userId, personalInfo, licenseInfo)` | `UserProfile` | `public` | Crea perfil de conductor. |
-| `createProfile(userId, userType, personalInfo, contactInfo)` | `UserProfile` | `public` | Crea perfil con tipo específico. |
-
-**34. `PreferencesFactory` (Factory)**
-
-Factory para la creación de preferencias según diferentes configuraciones iniciales.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createDefaultPreferences(profileId, userType)` | `UserPreferences` | `public` | Crea preferencias por defecto. |
-| `createCustomPreferences(profileId, settings)` | `UserPreferences` | `public` | Crea preferencias personalizadas. |
-| `createPreferences(profileId, defaultSettings)` | `UserPreferences` | `public` | Crea preferencias con configuración específica. |
-
-**35. `PersonalizationFactory` (Factory)**
-
-Factory para la creación de configuraciones de personalización según tipo de usuario.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createDefaultPersonalization(profileId, userType)` | `PersonalizationSettings` | `public` | Crea personalización por defecto. |
-| `createCustomPersonalization(profileId, layout)` | `PersonalizationSettings` | `public` | Crea personalización personalizada. |
-| `createPersonalization(profileId, userType)` | `PersonalizationSettings` | `public` | Crea personalización con tipo específico. |
-
----
-
-**Repository Interfaces**
-
-**36. `ProfileRepository` (Repository Interface)**
-
-Interfaz de repositorio para la persistencia y consulta de perfiles de usuario.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(profileId)` | `Optional<UserProfile>` | `public` | Busca un perfil por su identificador. |
-| `findByUserId(userId)` | `Optional<UserProfile>` | `public` | Busca perfil por ID de usuario. |
-| `findByUserType(userType)` | `List<UserProfile>` | `public` | Busca perfiles por tipo de usuario. |
-| `findByServiceArea(serviceArea)` | `List<UserProfile>` | `public` | Busca perfiles por área de servicio. |
-| `findByStatus(status)` | `List<UserProfile>` | `public` | Busca perfiles por estado. |
-| `findByDocumentNumber(documentNumber)` | `Optional<UserProfile>` | `public` | Busca perfil por número de documento. |
-| `save(profile)` | `UserProfile` | `public` | Persiste o actualiza un perfil. |
-| `delete(profileId)` | `void` | `public` | Elimina un perfil del sistema. |
-| `existsById(profileId)` | `boolean` | `public` | Verifica si existe un perfil. |
-
-**37. `PreferencesRepository` (Repository Interface)**
-
-Interfaz de repositorio para la persistencia y consulta de preferencias de usuario.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(preferencesId)` | `Optional<UserPreferences>` | `public` | Busca preferencias por su identificador. |
-| `findByProfileId(profileId)` | `Optional<UserPreferences>` | `public` | Busca preferencias por perfil. |
-| `findByLanguage(language)` | `List<UserPreferences>` | `public` | Busca preferencias por idioma. |
-| `findByTimezone(timezone)` | `List<UserPreferences>` | `public` | Busca preferencias por zona horaria. |
-| `findWithMarketingConsent(consent)` | `List<UserPreferences>` | `public` | Busca preferencias con consentimiento. |
-| `save(preferences)` | `UserPreferences` | `public` | Persiste o actualiza preferencias. |
-| `delete(preferencesId)` | `void` | `public` | Elimina preferencias del sistema. |
-| `existsById(preferencesId)` | `boolean` | `public` | Verifica si existen las preferencias. |
-
-**38. `PersonalizationRepository` (Repository Interface)**
-
-Interfaz de repositorio para la persistencia y consulta de configuraciones de personalización.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(settingsId)` | `Optional<PersonalizationSettings>` | `public` | Busca configuración por su identificador. |
-| `findByProfileId(profileId)` | `Optional<PersonalizationSettings>` | `public` | Busca configuración por perfil. |
-| `findByUserType(userType)` | `List<PersonalizationSettings>` | `public` | Busca configuraciones por tipo de usuario. |
-| `save(settings)` | `PersonalizationSettings` | `public` | Persiste o actualiza configuración. |
-| `delete(settingsId)` | `void` | `public` | Elimina configuración del sistema. |
-| `existsById(settingsId)` | `boolean` | `public` | Verifica si existe la configuración. |
+| Valor  | Descripción                                  |
+|--------|----------------------------------------------|
+| `ES`   | Español (idioma predeterminado del sistema). |
 
 ---
 
@@ -7946,702 +4195,143 @@ Se presenta un diccionario detallado de clases para el Bounded Context de Gesti�
 
 **1. `User` (Aggregate Root)**
 
-Representa un usuario del sistema con capacidad de autenticación, gestión de roles, información personal, configuraciones de seguridad y seguimiento de intentos de inicio de sesión.
+Representa a un usuario autenticable dentro del sistema. Gestiona sus credenciales, roles, estado de cuenta, y operaciones relacionadas con autenticación, recuperación y bloqueo de acceso.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del usuario. |
-| `userId` | `UserId` | `private` | Identificador de dominio del usuario. |
-| `username` | `Username` | `private` | Nombre de usuario único en el sistema. |
-| `email` | `EmailAddress` | `private` | Dirección de correo electrónico del usuario. |
-| `hashedPassword` | `HashedPassword` | `private` | Contraseña hasheada del usuario. |
-| `status` | `UserStatus` | `private` | Estado actual del usuario. |
-| `personalInfo` | `PersonalInfo` | `private` | Información personal del usuario. |
-| `securityInfo` | `SecurityInfo` | `private` | Información de seguridad del usuario. |
-| `roles` | `Set<Role>` | `private` | Conjunto de roles asignados al usuario. |
-| `createdAt` | `LocalDateTime` | `private` | Fecha de creación del usuario. |
-| `lastLoginAt` | `LocalDateTime` | `private` | Fecha del último inicio de sesión. |
-| `failedLoginAttempts` | `Integer` | `private` | Número de intentos fallidos de inicio de sesión. |
-| `lockoutTime` | `LocalDateTime` | `private` | Fecha de bloqueo de la cuenta. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
+| Atributo                   | Tipo             | Visibilidad  | Descripción                                          |
+|----------------------------|------------------|--------------|------------------------------------------------------|
+| `id`                       | `String`         | `private`    | Identificador único del usuario.                     |
+| `username`                 | `Username`       | `private`    | Nombre de usuario utilizado para autenticación.      |
+| `email`                    | `EmailAddress`   | `private`    | Correo electrónico asociado al usuario.              |
+| `hashedPassword`           | `HashedPassword` | `private`    | Contraseña almacenada de forma segura mediante hash. |
+| `accountStatus`            | `AccountStatus`  | `private`    | Estado actual de la cuenta.                          |
+| `roles`                    | `Set<RoleId>`    | `private`    | Conjunto de roles asignados al usuario.              |
+| `failedLoginAttempts`      | `Integer`        | `private`    | Número de intentos fallidos de inicio de sesión.     |
+| `lastLoginAt`              | `LocalDateTime`  | `private`    | Fecha y hora del último inicio de sesión exitoso.    |
+| `passwordChangedAt`        | `LocalDateTime`  | `private`    | Fecha y hora del último cambio de contraseña.        |
+| `activationToken`          | `String`         | `private`    | Token de activación de cuenta.                       |
+| `activationTokenExpiresAt` | `LocalDateTime`  | `private`    | Fecha y hora de expiración del token de activación.  |
+| `createdAt`                | `LocalDateTime`  | `private`    | Fecha y hora de creación del registro.               |
+| `updatedAt`                | `LocalDateTime`  | `private`    | Fecha y hora de la última actualización.             |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `User()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `User(username, email, hashedPassword, userType)` | `Constructor` | `public` | Constructor que instancia un usuario con datos básicos. |
-| `authenticate(password)` | `AuthenticationResult` | `public` | Autentica al usuario con contraseña proporcionada. |
-| `changePassword(oldPassword, newPassword, policy)` | `void` | `public` | Cambia la contraseña del usuario. |
-| `assignRole(role)` | `void` | `public` | Asigna un rol al usuario. |
-| `removeRole(role)` | `void` | `public` | Elimina un rol del usuario. |
-| `activate()` | `void` | `public` | Activa el usuario. |
-| `deactivate(reason)` | `void` | `public` | Desactiva el usuario por una razón específica. |
-| `suspend()` | `void` | `public` | Suspende temporalmente el usuario. |
-| `updatePersonalInfo(personalInfo)` | `void` | `public` | Actualiza la información personal del usuario. |
-| `recordLogin()` | `void` | `public` | Registra un inicio de sesión exitoso. |
-| `recordFailedLogin()` | `void` | `public` | Registra un intento fallido de inicio de sesión. |
-| `isLocked()` | `boolean` | `public` | Determina si la cuenta está bloqueada. |
-| `unlock()` | `void` | `public` | Desbloquea la cuenta del usuario. |
-| `hasRole(roleName)` | `boolean` | `public` | Determina si el usuario tiene un rol específico. |
-| `hasPermission(permissionName)` | `boolean` | `public` | Determina si el usuario tiene un permiso específico. |
-| `canPerformAction(action)` | `boolean` | `public` | Determina si el usuario puede realizar una acción. |
-| `isActive()` | `boolean` | `public` | Determina si el usuario está activo. |
-| `canBeModified()` | `boolean` | `public` | Determina si el usuario puede ser modificado. |
-| `canBeDeactivated()` | `boolean` | `public` | Determina si el usuario puede ser desactivado. |
-| `getAvailableActions()` | `List<UserAction>` | `public` | Obtiene las acciones disponibles según el estado. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
-
-**2. `Role` (Aggregate Root)**
-
-Representa un rol del sistema con permisos asociados, capacidades de gestión jerárquica y validaciones de dependencias para control de acceso basado en roles.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del rol. |
-| `roleId` | `RoleId` | `private` | Identificador de dominio del rol. |
-| `name` | `String` | `private` | Nombre único del rol. |
-| `description` | `String` | `private` | Descripción del rol. |
-| `permissions` | `Set<Permission>` | `private` | Conjunto de permisos del rol. |
-| `isDefault` | `boolean` | `private` | Indica si es un rol por defecto. |
-| `isSystemRole` | `boolean` | `private` | Indica si es un rol del sistema. |
-| `createdAt` | `LocalDateTime` | `private` | Fecha de creación del rol. |
-| `version` | `Long` | `private` | Versión para control de concurrencia optimista. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `Role()` | `Constructor` | `protected` | Constructor protegido para uso exclusivo del repositorio. |
-| `Role(name, description)` | `Constructor` | `public` | Constructor que instancia un rol con datos básicos. |
-| `addPermission(permission)` | `void` | `public` | Agrega un permiso al rol. |
-| `removePermission(permission)` | `void` | `public` | Elimina un permiso del rol. |
-| `updateDescription(description)` | `void` | `public` | Actualiza la descripción del rol. |
-| `hasPermission(permissionName)` | `boolean` | `public` | Determina si el rol tiene un permiso específico. |
-| `canBeDeleted()` | `boolean` | `public` | Determina si el rol puede ser eliminado. |
-| `canBeModified()` | `boolean` | `public` | Determina si el rol puede ser modificado. |
-| `getAvailableActions()` | `List<RoleAction>` | `public` | Obtiene las acciones disponibles según el estado. |
-| `publishDomainEvents()` | `List<DomainEvent>` | `public` | Publica eventos de dominio relacionados con cambios de estado. |
+| Método                                                     | Tipo de Retorno        | Visibilidad  | Descripción                                                           |
+|------------------------------------------------------------|------------------------|--------------|-----------------------------------------------------------------------|
+| `authenticate(rawPassword: String)`                        | `AuthenticationResult` | `public`     | Verifica las credenciales ingresadas contra la contraseña almacenada. |
+| `changePassword(oldPassword: String, newPassword: String)` | `void`                 | `public`     | Permite al usuario cambiar su contraseña.                             |
+| `resetPassword(newPassword: String)`                       | `void`                 | `public`     | Restablece la contraseña sin requerir la anterior.                    |
+| `assignRole(roleId: RoleId)`                               | `void`                 | `public`     | Asigna un nuevo rol al usuario.                                       |
+| `removeRole(roleId: RoleId)`                               | `void`                 | `public`     | Elimina un rol previamente asignado.                                  |
+| `hasPermission(permission: Permission)`                    | `boolean`              | `public`     | Verifica si el usuario posee un permiso específico.                   |
+| `lockAccount()`                                            | `void`                 | `public`     | Bloquea la cuenta del usuario.                                        |
+| `unlockAccount()`                                          | `void`                 | `public`     | Desbloquea la cuenta del usuario.                                     |
+| `recordSuccessfulLogin()`                                  | `void`                 | `public`     | Registra un inicio de sesión exitoso.                                 |
+| `recordFailedLogin()`                                      | `void`                 | `public`     | Incrementa el conteo de intentos fallidos.                            |
+| `generateActivationToken()`                                | `String`               | `public`     | Genera un token único de activación.                                  |
+| `activateAccount(token: String)`                           | `void`                 | `public`     | Activa la cuenta mediante el token de activación.                     |
+| `isAccountLocked()`                                        | `boolean`              | `public`     | Indica si la cuenta está bloqueada.                                   |
+| `requiresPasswordChange()`                                 | `boolean`              | `public`     | Determina si el usuario debe cambiar su contraseña.                   |
 
 ---
 
-**Entities**
+**2. `Role` (Aggregate Root)**
 
-**3. `Permission` (Entity)**
-
-Representa un permiso del sistema con información de recurso, acción, alcance y validaciones para control granular de acceso.
+Representa un rol del sistema con un conjunto de permisos asociados. Puede ser un rol del sistema o un rol personalizado, y controla los privilegios de acceso de los usuarios.
 
 **Atributos Principales:**
 
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del permiso. |
-| `permissionId` | `PermissionId` | `private` | Identificador de dominio del permiso. |
-| `name` | `String` | `private` | Nombre único del permiso. |
-| `description` | `String` | `private` | Descripción del permiso. |
-| `resource` | `String` | `private` | Recurso sobre el cual aplica el permiso. |
-| `action` | `String` | `private` | Acción que permite el permiso. |
-| `scope` | `PermissionScope` | `private` | Alcance del permiso. |
+| Atributo      | Tipo              | Visibilidad   | Descripción                                      |
+|---------------|-------------------|---------------|--------------------------------------------------|
+| `id`          | `String`          | `private`     | Identificador único del rol.                     |
+| `name`        | `RoleName`        | `private`     | Nombre del rol.                                  |
+| `description` | `String`          | `private`     | Descripción del propósito o alcance del rol.     |
+| `permissions` | `Set<Permission>` | `private`     | Conjunto de permisos asociados al rol.           |
+| `roleType`    | `RoleType`        | `private`     | Indica si el rol es del sistema o personalizado. |
+| `isActive`    | `Boolean`         | `private`     | Indica si el rol está activo.                    |
+| `createdAt`   | `LocalDateTime`   | `private`     | Fecha y hora de creación.                        |
+| `updatedAt`   | `LocalDateTime`   | `private`     | Fecha y hora de la última actualización.         |
 
-**Métodos principales:**
+**Métodos Principales:**
 
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `Permission(name, description, resource, action)` | `Constructor` | `public` | Constructor que instancia un permiso con datos básicos. |
-| `getPermissionKey()` | `String` | `public` | Obtiene la clave única del permiso. |
-| `isSystemPermission()` | `boolean` | `public` | Determina si es un permiso del sistema. |
-| `canBeDeleted()` | `boolean` | `public` | Determina si el permiso puede ser eliminado. |
-
-**4. `AuthToken` (Entity)**
-
-Representa un token de autenticación con información de tipo, expiración, revocación y validación para gestión de sesiones y seguridad.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `id` | `Long` | `private` | Identificador único del token. |
-| `tokenId` | `TokenId` | `private` | Identificador de dominio del token. |
-| `userId` | `UserId` | `private` | Identificador del usuario asociado. |
-| `tokenValue` | `String` | `private` | Valor del token de autenticación. |
-| `tokenType` | `TokenType` | `private` | Tipo de token. |
-| `expiryDate` | `LocalDateTime` | `private` | Fecha de expiración del token. |
-| `isRevoked` | `boolean` | `private` | Indica si el token ha sido revocado. |
-| `createdAt` | `LocalDateTime` | `private` | Fecha de creación del token. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `AuthToken(userId, tokenType, expiryDate)` | `Constructor` | `public` | Constructor que instancia un token con datos básicos. |
-| `isExpired()` | `boolean` | `public` | Determina si el token ha expirado. |
-| `revoke()` | `void` | `public` | Revoca el token. |
-| `isValid()` | `boolean` | `public` | Determina si el token es válido. |
-| `getRemainingTime()` | `Duration` | `public` | Obtiene el tiempo restante de validez. |
+| Método                                     | Tipo de Retorno  | Visibilidad  | Descripción                                     |
+|--------------------------------------------|------------------|--------------|-------------------------------------------------|
+| `addPermission(permission: Permission)`    | `void`           | `public`     | Agrega un permiso al rol.                       |
+| `removePermission(permission: Permission)` | `void`           | `public`     | Elimina un permiso existente.                   |
+| `hasPermission(permission: Permission)`    | `boolean`        | `public`     | Verifica si el rol posee un permiso específico. |
+| `canBeModified()`                          | `boolean`        | `public`     | Indica si el rol puede ser modificado.          |
+| `activate()`                               | `void`           | `public`     | Activa el rol para su uso.                      |
+| `deactivate()`                             | `void`           | `public`     | Desactiva temporalmente el rol.                 |
 
 ---
 
 **Value Objects**
 
-**5. `UserId` (Value Object)**
+**3. `Username` (Value Object)**
 
-Identificador único inmutable para un usuario en el sistema.
+Define el nombre de usuario único utilizado para la autenticación.
 
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `userId` | `String` | `private` | Valor alfanumérico del identificador del usuario. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getValue()` | `String` | `public` | Obtiene el valor del identificador. |
-| `isValid()` | `boolean` | `public` | Valida que el identificador sea válido. |
-
-**6. `RoleId` (Value Object)**
-
-Identificador único inmutable para un rol en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `roleId` | `String` | `private` | Valor alfanumérico del identificador del rol. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getValue()` | `String` | `public` | Obtiene el valor del identificador. |
-
-**7. `PermissionId` (Value Object)**
-
-Identificador único inmutable para un permiso en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `permissionId` | `String` | `private` | Valor alfanumérico del identificador del permiso. |
-
-**8. `TokenId` (Value Object)**
-
-Identificador único inmutable para un token en el sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `tokenId` | `String` | `private` | Valor alfanumérico del identificador del token. |
-
-**9. `Username` (Value Object)**
-
-Nombre de usuario único con validaciones de formato y disponibilidad.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `username` | `String` | `private` | Valor del nombre de usuario. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getValue()` | `String` | `public` | Obtiene el valor del nombre de usuario. |
-| `isValid()` | `boolean` | `public` | Valida el formato del nombre de usuario. |
-| `meetsRequirements()` | `boolean` | `public` | Verifica que cumple los requerimientos. |
-
-**10. `HashedPassword` (Value Object)**
-
-Contraseña hasheada con información de algoritmo, sal y capacidades de verificación y rehashing.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `hash` | `String` | `private` | Hash de la contraseña. |
-| `salt` | `String` | `private` | Sal utilizada en el hash. |
-| `algorithm` | `String` | `private` | Algoritmo de hash utilizado. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `matches(password)` | `boolean` | `public` | Verifica si una contraseña coincide con el hash. |
-| `needsRehashing()` | `boolean` | `public` | Determina si necesita ser rehasheada. |
-
-**11. `PersonalInfo` (Value Object)**
-
-Información personal del usuario con datos de identificación, nombre completo y avatar.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `firstName` | `String` | `private` | Nombre del usuario. |
-| `lastName` | `String` | `private` | Apellido del usuario. |
-| `displayName` | `String` | `private` | Nombre para mostrar del usuario. |
-| `avatarUrl` | `String` | `private` | URL del avatar del usuario. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getFullName()` | `String` | `public` | Obtiene el nombre completo del usuario. |
-| `hasAvatar()` | `boolean` | `public` | Determina si el usuario tiene avatar. |
-
-**12. `SecurityInfo` (Value Object)**
-
-Información de seguridad del usuario con configuraciones de autenticación de dos factores, historial de contraseñas y preguntas de seguridad.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `twoFactorEnabled` | `boolean` | `private` | Indica si la autenticación de dos factores está habilitada. |
-| `lastPasswordChange` | `LocalDateTime` | `private` | Fecha del último cambio de contraseña. |
-| `passwordHistory` | `List<String>` | `private` | Historial de contraseñas utilizadas. |
-| `securityQuestions` | `List<SecurityQuestion>` | `private` | Lista de preguntas de seguridad. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `needsPasswordChange()` | `boolean` | `public` | Determina si necesita cambio de contraseña. |
-| `hasUsedPassword(password)` | `boolean` | `public` | Determina si ha usado una contraseña anteriormente. |
-
-**13. `AuthenticationResult` (Value Object)**
-
-Resultado de un proceso de autenticación con información de éxito, razón de fallo y requerimientos adicionales.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `isSuccessful` | `boolean` | `private` | Indica si la autenticación fue exitosa. |
-| `failureReason` | `AuthFailureReason` | `private` | Razón del fallo si aplica. |
-| `user` | `User` | `private` | Usuario autenticado si es exitoso. |
-| `requiresTwoFactor` | `boolean` | `private` | Indica si requiere autenticación de dos factores. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isSuccessful()` | `boolean` | `public` | Determina si la autenticación fue exitosa. |
-| `getFailureReason()` | `AuthFailureReason` | `public` | Obtiene la razón del fallo. |
+| Atributo  | Tipo     | Visibilidad  | Descripción                  |
+|-----------|----------|--------------|------------------------------|
+| `value`   | `String` | `private`    | Valor del nombre de usuario. |
 
 ---
 
-**Enums**
+**4. `HashedPassword` (Value Object)**
 
-**14. `UserStatus` (Enum)**
+Contiene la contraseña del usuario en formato encriptado para garantizar seguridad.
 
-Estados posibles de un usuario durante su ciclo de vida en el sistema.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `PENDING_VERIFICATION` | Usuario pendiente de verificación. |
-| `ACTIVE` | Usuario activo y funcional. |
-| `SUSPENDED` | Usuario suspendido temporalmente. |
-| `LOCKED` | Usuario bloqueado por intentos fallidos. |
-| `DEACTIVATED` | Usuario desactivado. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `canTransitionTo(newStatus)` | `boolean` | `public` | Valida si puede transicionar al nuevo estado. |
-| `isActive()` | `boolean` | `public` | Determina si está activo. |
-| `canLogin()` | `boolean` | `public` | Determina si puede iniciar sesión. |
-| `canBeModified()` | `boolean` | `public` | Determina si puede ser modificado. |
-| `getAvailableTransitions()` | `List<UserStatus>` | `public` | Obtiene las transiciones disponibles. |
-
-**15. `UserAction` (Enum)**
-
-Acciones disponibles que se pueden realizar sobre un usuario según su estado.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `ACTIVATE` | Activar el usuario. |
-| `DEACTIVATE` | Desactivar el usuario. |
-| `SUSPEND` | Suspender el usuario. |
-| `UNLOCK` | Desbloquear el usuario. |
-| `CHANGE_PASSWORD` | Cambiar contraseña del usuario. |
-| `ASSIGN_ROLE` | Asignar rol al usuario. |
-| `REMOVE_ROLE` | Eliminar rol del usuario. |
-| `UPDATE_INFO` | Actualizar información del usuario. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAllowedForStatus(status)` | `boolean` | `public` | Determina si la acción está permitida para el estado. |
-| `requiresSpecialPermission()` | `boolean` | `public` | Determina si requiere permisos especiales. |
-
-**16. `RoleAction` (Enum)**
-
-Acciones disponibles que se pueden realizar sobre un rol.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `ADD_PERMISSION` | Agregar permiso al rol. |
-| `REMOVE_PERMISSION` | Eliminar permiso del rol. |
-| `UPDATE_DESCRIPTION` | Actualizar descripción del rol. |
-| `DELETE_ROLE` | Eliminar el rol. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `isAllowedForRole(role)` | `boolean` | `public` | Determina si está permitida para el rol. |
-| `requiresAdminPermission()` | `boolean` | `public` | Determina si requiere permisos de administrador. |
-
-**17. `TokenType` (Enum)**
-
-Tipos de tokens disponibles en el sistema con diferentes propósitos y configuraciones.
-
-**Valores:**
-
-| Valor | Descripción |
-| ----- | ----------- |
-| `ACCESS_TOKEN` | Token de acceso para autenticación. |
-| `REFRESH_TOKEN` | Token para renovar sesión. |
-| `RESET_TOKEN` | Token para reseteo de contraseña. |
-| `VERIFICATION_TOKEN` | Token para verificación de cuenta. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `getExpiryDuration()` | `Duration` | `public` | Obtiene la duración de expiración. |
-| `canBeRefreshed()` | `boolean` | `public` | Determina si puede ser renovado. |
+| Atributo  | Tipo     | Visibilidad   | Descripción                      |
+|-----------|----------|---------------|----------------------------------|
+| `value`   | `String` | `private`     | Valor de la contraseña hasheada. |
 
 ---
 
-**Application Services**
+**5. `RoleName` (Value Object)**
 
-**18. `UserApplicationService` (Application Service)**
+Representa el nombre único de un rol dentro del sistema.
 
-Servicio de aplicación que coordina las operaciones de negocio relacionadas con usuarios, autenticación y gestión de roles.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `userRepository` | `UserRepository` | `private` | Repositorio para persistencia de usuarios. |
-| `userDomainService` | `UserDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `userFactory` | `UserFactory` | `private` | Factory para creación de usuarios. |
-| `passwordPolicyService` | `PasswordPolicyService` | `private` | Servicio de políticas de contraseña. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `registerUser(username, email, password, userType)` | `User` | `public` | Registra un nuevo usuario en el sistema. |
-| `authenticateUser(email, password)` | `AuthenticationResult` | `public` | Autentica un usuario con email y contraseña. |
-| `updateUser(userId, personalInfo)` | `void` | `public` | Actualiza información de un usuario. |
-| `activateUser(userId)` | `void` | `public` | Activa un usuario. |
-| `deactivateUser(userId, reason)` | `void` | `public` | Desactiva un usuario. |
-| `changePassword(userId, oldPassword, newPassword)` | `void` | `public` | Cambia la contraseña de un usuario. |
-| `assignRole(userId, roleId)` | `void` | `public` | Asigna un rol a un usuario. |
-| `removeRole(userId, roleId)` | `void` | `public` | Elimina un rol de un usuario. |
-| `getUserById(userId)` | `Optional<User>` | `public` | Obtiene un usuario por su identificador. |
-| `getUserByEmail(email)` | `Optional<User>` | `public` | Obtiene un usuario por su email. |
-| `getUsersByRole(roleId)` | `List<User>` | `public` | Obtiene usuarios con un rol específico. |
-
-**19. `RoleApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de roles y permisos del sistema.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `roleRepository` | `RoleRepository` | `private` | Repositorio para persistencia de roles. |
-| `roleDomainService` | `RoleDomainService` | `private` | Servicio de dominio para lógica compleja. |
-| `roleFactory` | `RoleFactory` | `private` | Factory para creación de roles. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createRole(name, description, permissions)` | `Role` | `public` | Crea un nuevo rol en el sistema. |
-| `updateRole(roleId, description)` | `void` | `public` | Actualiza la descripción de un rol. |
-| `addPermission(roleId, permissionId)` | `void` | `public` | Agrega un permiso a un rol. |
-| `removePermission(roleId, permissionId)` | `void` | `public` | Elimina un permiso de un rol. |
-| `getRoleById(roleId)` | `Optional<Role>` | `public` | Obtiene un rol por su identificador. |
-| `getRoleByName(name)` | `Optional<Role>` | `public` | Obtiene un rol por su nombre. |
-| `getAllRoles()` | `List<Role>` | `public` | Obtiene todos los roles del sistema. |
-| `deleteRole(roleId)` | `void` | `public` | Elimina un rol del sistema. |
-
-**20. `AuthApplicationService` (Application Service)**
-
-Servicio de aplicación para gestión de autenticación, tokens y seguridad de sesiones.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `userRepository` | `UserRepository` | `private` | Repositorio para acceso a usuarios. |
-| `tokenService` | `TokenDomainService` | `private` | Servicio de dominio para tokens. |
-| `authenticationService` | `AuthenticationDomainService` | `private` | Servicio de dominio para autenticación. |
-| `eventPublisher` | `DomainEventPublisher` | `private` | Publicador de eventos de dominio. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `login(email, password)` | `AuthToken` | `public` | Inicia sesión de usuario. |
-| `logout(token)` | `void` | `public` | Cierra sesión de usuario. |
-| `refreshToken(refreshToken)` | `AuthToken` | `public` | Renueva un token de acceso. |
-| `verifyToken(token)` | `TokenValidationResult` | `public` | Verifica la validez de un token. |
-| `requestPasswordReset(email)` | `void` | `public` | Solicita reseteo de contraseña. |
-| `resetPassword(resetToken, newPassword)` | `void` | `public` | Resetea la contraseña con token. |
+| Atributo   | Tipo     | Visibilidad  | Descripción           |
+|------------|----------|--------------|-----------------------|
+| `value`    | `String` | `private`    | Nombre único del rol. |
 
 ---
 
-**Domain Services**
+**6. `Permission` (Value Object)**
 
-**21. `UserDomainService` (Domain Service)**
+Define un permiso individual compuesto por una acción y un recurso.
 
-Servicio de dominio que implementa lógica de negocio compleja relacionada con usuarios.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateUserRegistration(user)` | `ValidationResult` | `public` | Valida el registro de un nuevo usuario. |
-| `checkUsernameAvailability(username)` | `boolean` | `public` | Verifica disponibilidad de nombre de usuario. |
-| `checkEmailAvailability(email)` | `boolean` | `public` | Verifica disponibilidad de email. |
-| `calculateUserPermissions(user)` | `Set<Permission>` | `public` | Calcula permisos efectivos del usuario. |
-| `determineDefaultRoles(userType)` | `Set<Role>` | `public` | Determina roles por defecto según tipo de usuario. |
-| `validateRoleAssignment(user, role)` | `ValidationResult` | `public` | Valida asignación de rol a usuario. |
-
-**22. `RoleDomainService` (Domain Service)**
-
-Servicio de dominio para lógica compleja relacionada con roles y permisos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validateRoleCreation(role)` | `ValidationResult` | `public` | Valida la creación de un nuevo rol. |
-| `checkRoleNameAvailability(name)` | `boolean` | `public` | Verifica disponibilidad de nombre de rol. |
-| `validatePermissionAssignment(role, permission)` | `ValidationResult` | `public` | Valida asignación de permiso a rol. |
-| `calculateRoleHierarchy(role)` | `RoleHierarchy` | `public` | Calcula la jerarquía del rol. |
-| `checkRoleDependencies(role)` | `List<RoleDependency>` | `public` | Verifica dependencias del rol. |
-
-**23. `AuthenticationDomainService` (Domain Service)**
-
-Servicio de dominio especializado en autenticación y seguridad de acceso.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `authenticateUser(email, password, users)` | `AuthenticationResult` | `public` | Autentica usuario con credenciales. |
-| `validateLoginAttempt(user)` | `ValidationResult` | `public` | Valida intento de inicio de sesión. |
-| `handleFailedLogin(user)` | `void` | `public` | Maneja intento fallido de inicio de sesión. |
-| `checkAccountLockout(user)` | `boolean` | `public` | Verifica si la cuenta está bloqueada. |
-| `validateTwoFactorAuthentication(user, code)` | `boolean` | `public` | Valida autenticación de dos factores. |
-
-**24. `TokenDomainService` (Domain Service)**
-
-Servicio de dominio para gestión de tokens de autenticación.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `generateToken(userId, tokenType)` | `AuthToken` | `public` | Genera un token para un usuario. |
-| `validateToken(token)` | `TokenValidationResult` | `public` | Valida un token de autenticación. |
-| `revokeToken(token)` | `void` | `public` | Revoca un token. |
-| `refreshToken(refreshToken)` | `AuthToken` | `public` | Renueva un token de acceso. |
-| `cleanupExpiredTokens()` | `void` | `public` | Limpia tokens expirados. |
-
-**25. `PasswordPolicyService` (Domain Service)**
-
-Servicio de dominio para gestión de políticas de contraseña usando estrategias configurables.
-
-**Atributos Principales:**
-
-| Atributo | Tipo | Visibilidad | Descripción |
-| -------- | ---- | ----------- | ----------- |
-| `passwordStrategy` | `PasswordPolicyStrategy` | `private` | Estrategia de política de contraseña actual. |
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validatePassword(password)` | `ValidationResult` | `public` | Valida una contraseña según la política. |
-| `generatePassword()` | `String` | `public` | Genera una contraseña segura. |
-| `checkPasswordHistory(user, password)` | `boolean` | `public` | Verifica historial de contraseñas. |
-| `setPasswordStrategy(strategy)` | `void` | `public` | Establece la estrategia de política. |
-| `calculatePasswordStrength(password)` | `PasswordStrength` | `public` | Calcula la fortaleza de una contraseña. |
-
-**26. `PermissionManagementService` (Domain Service)**
-
-Servicio de dominio para gestión de permisos y control de acceso.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validatePermission(permission)` | `ValidationResult` | `public` | Valida un permiso. |
-| `checkPermissionConflicts(permissions)` | `List<PermissionConflict>` | `public` | Verifica conflictos entre permisos. |
-| `calculateEffectivePermissions(user)` | `Set<Permission>` | `public` | Calcula permisos efectivos de un usuario. |
-| `checkResourceAccess(user, resource, action)` | `boolean` | `public` | Verifica acceso a recurso. |
-| `groupPermissionsByResource(permissions)` | `Map<String, List<Permission>>` | `public` | Agrupa permisos por recurso. |
+| Atributo   | Tipo     | Visibilidad   | Descripción                                   |
+|------------|----------|---------------|-----------------------------------------------|
+| `resource` | `String` | `private`     | Recurso del sistema al que aplica el permiso. |
+| `action`   | `String` | `private`     | Acción permitida sobre el recurso.            |
 
 ---
 
-**Strategies**
+**Enumerations**
 
-**27. `PasswordPolicyStrategy` (Strategy Interface)**
+**7. `AccountStatus` (Enumeration)**
 
-Interfaz que define el contrato para diferentes estrategias de política de contraseñas.
+Indica el estado de la cuenta de un usuario.
 
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validate(password)` | `ValidationResult` | `public` | Valida una contraseña según la estrategia. |
-| `generateStrengthScore(password)` | `PasswordStrength` | `public` | Genera puntuación de fortaleza. |
-| `suggestImprovements(password)` | `List<String>` | `public` | Sugiere mejoras para la contraseña. |
-
-**28. `BasicPasswordStrategy` (Strategy)**
-
-Implementación de estrategia básica de política de contraseñas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validate(password)` | `ValidationResult` | `public` | Valida contraseña con reglas básicas. |
-| `generateStrengthScore(password)` | `PasswordStrength` | `public` | Genera puntuación básica de fortaleza. |
-| `suggestImprovements(password)` | `List<String>` | `public` | Sugiere mejoras básicas. |
-
-**29. `EnhancedPasswordStrategy` (Strategy)**
-
-Implementación de estrategia mejorada de política de contraseñas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validate(password)` | `ValidationResult` | `public` | Valida contraseña con reglas mejoradas. |
-| `generateStrengthScore(password)` | `PasswordStrength` | `public` | Genera puntuación mejorada de fortaleza. |
-| `suggestImprovements(password)` | `List<String>` | `public` | Sugiere mejoras avanzadas. |
-
-**30. `EnterprisePasswordStrategy` (Strategy)**
-
-Implementación de estrategia empresarial de política de contraseñas con máxima seguridad.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `validate(password)` | `ValidationResult` | `public` | Valida contraseña con reglas empresariales. |
-| `generateStrengthScore(password)` | `PasswordStrength` | `public` | Genera puntuación empresarial de fortaleza. |
-| `suggestImprovements(password)` | `List<String>` | `public` | Sugiere mejoras de nivel empresarial. |
+| Valor                | Descripción                                           |
+|----------------------|-------------------------------------------------------|
+| `ACTIVE`             | Cuenta activa y operativa.                            |
+| `LOCKED`             | Cuenta bloqueada temporalmente por intentos fallidos. |
+| `PENDING_ACTIVATION` | Cuenta pendiente de activación.                       |
+| `DISABLED`           | Cuenta deshabilitada permanentemente.                 |
 
 ---
 
-**Factories**
+**8. `RoleType` (Enumeration)**
 
-**31. `UserFactory` (Factory)**
+Define el origen o tipo del rol.
 
-Factory para la creación de diferentes tipos de usuarios con configuraciones específicas.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createUser(username, email, password, userType)` | `User` | `public` | Crea usuario con tipo específico. |
-| `createAdminUser(username, email, password)` | `User` | `public` | Crea usuario administrador. |
-| `createSystemUser(username, email)` | `User` | `public` | Crea usuario del sistema. |
-
-**32. `RoleFactory` (Factory)**
-
-Factory para la creación de roles con diferentes configuraciones y permisos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createRole(name, description, permissions)` | `Role` | `public` | Crea rol con permisos específicos. |
-| `createDefaultRole(userType)` | `Role` | `public` | Crea rol por defecto según tipo de usuario. |
-| `createSystemRole(name, permissions)` | `Role` | `public` | Crea rol del sistema. |
-
-**33. `TokenFactory` (Factory)**
-
-Factory para la creación de tokens de diferentes tipos y propósitos.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `createAccessToken(userId)` | `AuthToken` | `public` | Crea token de acceso. |
-| `createRefreshToken(userId)` | `AuthToken` | `public` | Crea token de renovación. |
-| `createResetToken(userId)` | `AuthToken` | `public` | Crea token de reseteo. |
-| `createVerificationToken(userId)` | `AuthToken` | `public` | Crea token de verificación. |
-
----
-
-**Repository Interfaces**
-
-**34. `UserRepository` (Repository Interface)**
-
-Interfaz de repositorio para la persistencia y consulta de usuarios.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(userId)` | `Optional<User>` | `public` | Busca un usuario por su identificador. |
-| `findByUsername(username)` | `Optional<User>` | `public` | Busca usuario por nombre de usuario. |
-| `findByEmail(email)` | `Optional<User>` | `public` | Busca usuario por email. |
-| `findByStatus(status)` | `List<User>` | `public` | Busca usuarios por estado. |
-| `findByRole(roleId)` | `List<User>` | `public` | Busca usuarios por rol. |
-| `findActiveUsers()` | `List<User>` | `public` | Busca usuarios activos. |
-| `save(user)` | `User` | `public` | Persiste o actualiza un usuario. |
-| `delete(userId)` | `void` | `public` | Elimina un usuario del sistema. |
-| `existsById(userId)` | `boolean` | `public` | Verifica si existe un usuario. |
-| `existsByUsername(username)` | `boolean` | `public` | Verifica si existe un nombre de usuario. |
-| `existsByEmail(email)` | `boolean` | `public` | Verifica si existe un email. |
-
-**35. `RoleRepository` (Repository Interface)**
-
-Interfaz de repositorio para la persistencia y consulta de roles.
-
-**Métodos principales:**
-
-| Método | Tipo de Retorno | Visibilidad | Descripción |
-|--------|-----------------|-------------|-------------|
-| `findById(roleId)` | `Optional<Role>` | `public` | Busca un rol por su identificador. |
-| `findByName(name)` | `Optional<Role>` | `public` | Busca rol por nombre. |
-| `findDefaultRoles()` | `List<Role>` | `public` | Busca roles por defecto. |
-| `findSystemRoles()` | `List<Role>` | `public` | Busca roles del sistema. |
-| `findAll()` | `List<Role>` | `public` | Busca todos los roles. |
-| `save(role)` | `Role` | `public` | Persiste o actualiza un rol. |
-| `delete(roleId)` | `void` | `public` | Elimina un rol del sistema. |
-| `existsById(roleId)` | `boolean` | `public` | Verifica si existe un rol. |
-| `existsByName(name)` | `boolean` | `public` | Verifica si existe un nombre de rol. |
+| Valor    | Descripción                                        |
+|----------|----------------------------------------------------|
+| `SYSTEM` | Rol interno del sistema, no editable por usuarios. |
+| `CUSTOM` | Rol personalizado creado por un administrador.     |
 
 ---
 
@@ -8819,6 +4509,58 @@ El despliegue de WasteTrack se ejecuta de forma automatizada en entornos en la n
 | US35          | Sección específica para ciudadanos      | T4      | Sección Ciudadanos       | Crear sección que muestre opciones de participación ciudadana.           | 4                  | Hernández Tuiro, Eric Ernesto     | Done   |
 | US36          | Casos de éxito y testimonios            | T5      | Casos de Éxito           | Diseñar e implementar sección con testimonios e indicadores de impacto.  | 4                  | Gutiérrez Soto, Jhosepmyr Orlando | Done   |
 
+
+**Sprint Backlog – Sprint 2**
+
+<table border="1" cellspacing="0" cellpadding="6" style="border-collapse:collapse; width:100%; font-family:Arial, sans-serif; font-size:13px;">
+  <thead style=" font-weight:bold; text-align:center;">
+    <tr>
+      <th>User Story ID</th>
+      <th>User Story Title</th>
+      <th>Task ID</th>
+      <th>Task Title</th>
+      <th>Description</th>
+      <th>Estimation (Hours)</th>
+      <th>Assigned To</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>US07</td><td>Visualización de contenedores en mapa</td><td>T07</td><td>Implementar vista y servicio de contenedores</td><td>Desarrollo del endpoint y vista de mapa interactivo que muestra la ubicación y estado actual de cada contenedor.</td><td>8</td><td>Riva Rodríguez, Elmer Augusto</td><td>Done</td></tr>
+    <tr><td>US08</td><td>Alertas de contenedores críticos</td><td>T08</td><td>Configurar alertas automáticas</td><td>Implementación del servicio backend que genera alertas según umbrales de llenado y muestra notificaciones en el panel admin.</td><td>6</td><td>Hernández Tuiro, Eric Ernesto</td><td>Done</td></tr>
+    <tr><td>US09</td><td>Historial de llenado de contenedores</td><td>T09</td><td>CRUD de historial de llenado</td><td>Creación del servicio para almacenar, consultar y visualizar el historial de llenado con filtros de fecha y ubicación.</td><td>5</td><td>Sulca Gonzales, Paul Fernando</td><td>Done</td></tr>
+    <tr><td>US10</td><td>Estado de contenedores para ciudadanos</td><td>T10</td><td>MVP de vista ciudadana</td><td>Desarrollo del módulo ciudadano que consulta el contenedor más cercano y muestra su estado de llenado.</td><td>5</td><td>Ramirez Mestanza, Salim Ignacio</td><td>Done</td></tr>
+    <tr><td>US11</td><td>Configuración de parámetros de contenedores</td><td>T11</td><td>CRUD de parámetros configurables</td><td>Implementación del backend para modificar umbrales y parámetros específicos de contenedores desde el panel admin.</td><td>6</td><td>Gutiérrez Soto, Jhosepmyr Orlando</td><td>Done</td></tr>
+    <tr><td>US12</td><td>Generación automática de rutas optimizadas</td><td>T12</td><td>Servicio de cálculo de rutas</td><td>Creación del endpoint de optimización que usa datos de contenedores y genera rutas de recolección dinámicas.</td><td>8</td><td>Riva Rodríguez, Elmer Augusto</td><td>Done</td></tr>
+    <tr><td>US13</td><td>Visualización de rutas en conductor móvil</td><td>T13</td><td>MVP de vista conductor</td><td>Implementar vista móvil básica para que los conductores visualicen la ruta asignada paso a paso.</td><td>5</td><td>Hernández Tuiro, Eric Ernesto</td><td>Done</td></tr>
+    <tr><td>US14</td><td>Modificación dinámica de rutas</td><td>T14</td><td>Endpoint de actualización de rutas</td><td>Desarrollar servicio para reconfigurar rutas activas en tiempo real ante alertas de contenedores críticos.</td><td>7</td><td>Sulca Gonzales, Paul Fernando</td><td>Done</td></tr>
+    <tr><td>US15</td><td>Reporte de eficiencia de rutas</td><td>T15</td><td>Módulo de analítica de rutas</td><td>Implementar servicio que calcule métricas de eficiencia por ruta (tiempo, distancia, llenado promedio).</td><td>6</td><td>Ramirez Mestanza, Salim Ignacio</td><td>Done</td></tr>
+    <tr><td>US16</td><td>Confirmación de recolección por conductor</td><td>T16</td><td>Servicio de confirmación de recolección</td><td>Endpoint que permite al conductor marcar contenedores como recolectados, actualizando el estado del sistema.</td><td>4</td><td>Gutiérrez Soto, Jhosepmyr Orlando</td><td>Done</td></tr>
+    <tr><td>US17</td><td>Reporte de problemas por ciudadanos</td><td>T17</td><td>MVP de reportes ciudadanos</td><td>Implementación básica del formulario de reporte con persistencia y estado inicial en el backend.</td><td>5</td><td>Hernández Tuiro, Eric Ernesto</td><td>Done</td></tr>
+    <tr><td>US18</td><td>Seguimiento de reportes ciudadanos</td><td>T18</td><td>Módulo de seguimiento de reportes</td><td>Endpoint que permite consultar el estado de reportes ciudadanos (pendiente, en revisión, resuelto).</td><td>5</td><td>Sulca Gonzales, Paul Fernando</td><td>Done</td></tr>
+    <tr><td>US19</td><td>Notificaciones de recolección programada</td><td>T19</td><td>Servicio de notificaciones</td><td>Implementación del servicio que envía notificaciones push sobre horarios de recolección.</td><td>6</td><td>Ramirez Mestanza, Salim Ignacio</td><td>Done</td></tr>
+    <tr><td>US20</td><td>Información educativa sobre reciclaje</td><td>T20</td><td>MVP informativo</td><td>MVP con contenido estático y editable desde el backend para mostrar consejos y prácticas de reciclaje.</td><td>4</td><td>Gutiérrez Soto, Jhosepmyr Orlando</td><td>Done</td></tr>
+    <tr><td>US21</td><td>Sistema de puntos por buen comportamiento</td><td>T21</td><td>Backend de gamificación</td><td>Servicio que registra acciones del ciudadano y asigna puntos por participación y reportes útiles.</td><td>6</td><td>Riva Rodríguez, Elmer Augusto</td><td>Done</td></tr>
+    <tr><td>US22</td><td>Monitoreo de flota de vehículos</td><td>T22</td><td>Servicio de tracking vehicular</td><td>Desarrollo del servicio que recibe posiciones GPS de vehículos y las muestra en panel de monitoreo.</td><td>7</td><td>Hernández Tuiro, Eric Ernesto</td><td>Done</td></tr>
+    <tr><td>US23</td><td>Programación de mantenimiento preventivo</td><td>T23</td><td>CRUD de mantenimiento preventivo</td><td>Implementar backend para registrar mantenimientos por kilometraje o fecha y alertar próximos eventos.</td><td>5</td><td>Sulca Gonzales, Paul Fernando</td><td>Done</td></tr>
+    <tr><td>US24</td><td>Control de combustible y gastos operativos</td><td>T24</td><td>Servicio de registro de gastos</td><td>Implementar módulo backend que almacene y calcule consumo y costos operativos por vehículo.</td><td>5</td><td>Ramirez Mestanza, Salim Ignacio</td><td>Done</td></tr>
+    <tr><td>US25</td><td>Asignación automática de vehículos</td><td>T25</td><td>Algoritmo de asignación por capacidad</td><td>Implementación del servicio que asigna vehículos automáticamente según capacidad y disponibilidad.</td><td>7</td><td>Gutiérrez Soto, Jhosepmyr Orlando</td><td>Done</td></tr>
+    <tr><td>US26</td><td>Generación automática de reportes MINAM</td><td>T26</td><td>Servicio de reportes normativos</td><td>Backend que genera reportes automáticos requeridos por el MINAM a partir de los datos operativos.</td><td>6</td><td>Riva Rodríguez, Elmer Augusto</td><td>Done</td></tr>
+    <tr><td>US27</td><td>Dashboard de cumplimiento regulatorio</td><td>T27</td><td>MVP de dashboard regulatorio</td><td>Implementación inicial de visualización con KPIs de cumplimiento ambiental.</td><td>6</td><td>Hernández Tuiro, Eric Ernesto</td><td>Done</td></tr>
+    <tr><td>US28</td><td>Trazabilidad de residuos peligrosos</td><td>T28</td><td>Servicio de trazabilidad</td><td>Desarrollo de módulo backend que registra y rastrea residuos hospitalarios y peligrosos.</td><td>7</td><td>Sulca Gonzales, Paul Fernando</td><td>Done</td></tr>
+    <tr><td>US29</td><td>Predicción de llenado de contenedores</td><td>T29</td><td>Servicio de predicción IoT</td><td>Implementación del servicio que usa datos históricos para predecir llenado futuro de contenedores.</td><td>8</td><td>Ramirez Mestanza, Salim Ignacio</td><td>Done</td></tr>
+    <tr><td>US30</td><td>Análisis de patrones de generación</td><td>T30</td><td>Módulo analítico de generación</td><td>Implementación del backend que calcula patrones de generación de residuos por zona y tiempo.</td><td>6</td><td>Gutiérrez Soto, Jhosepmyr Orlando</td><td>Done</td></tr>
+    <tr><td>US31</td><td>Dashboard ejecutivo con KPIs</td><td>T31</td><td>MVP de dashboard ejecutivo</td><td>Crear vista ejecutiva con indicadores globales del sistema (rutas, contenedores, alertas).</td><td>6</td><td>Riva Rodríguez, Elmer Augusto</td><td>Done</td></tr>
+    <tr><td>TS01</td><td>API de autenticación y autorización</td><td>T32</td><td>Implementar Auth API</td><td>Desarrollo del endpoint seguro de login, registro y autorización JWT.</td><td>7</td><td>Hernández Tuiro, Eric Ernesto</td><td>Done</td></tr>
+    <tr><td>TS02</td><td>API de gestión de contenedores</td><td>T33</td><td>Implementar Contenedor CRUD</td><td>Crear endpoints CRUD para entidades de contenedores, con filtros por distrito y estado.</td><td>6</td><td>Sulca Gonzales, Paul Fernando</td><td>Done</td></tr>
+    <tr><td>TS03</td><td>API de optimización de rutas</td><td>T34</td><td>Implementar Route Optimization API</td><td>Implementación del servicio de optimización que provee rutas eficientes al sistema.</td><td>8</td><td>Ramirez Mestanza, Salim Ignacio</td><td>Done</td></tr>
+    <tr><td>TS04</td><td>API de datos de sensores IoT</td><td>T35</td><td>Implementar IoT Data API</td><td>Endpoint que recibe y procesa datos en tiempo real de sensores.</td><td>7</td><td>Gutiérrez Soto, Jhosepmyr Orlando</td><td>Done</td></tr>
+    <tr><td>TS05</td><td>API de reportes y analytics</td><td>T36</td><td>Implementar Reports API</td><td>Endpoint de generación de reportes estadísticos del sistema.</td><td>6</td><td>Riva Rodríguez, Elmer Augusto</td><td>Done</td></tr>
+    <tr><td>TS08</td><td>Edge API para procesamiento local</td><td>T37</td><td>Implementar Edge Processing API</td><td>Servicio que procesa localmente datos críticos de sensores para operaciones offline.</td><td>8</td><td>Hernández Tuiro, Eric Ernesto</td><td>Done</td></tr>
+    <tr><td>TS09</td><td>Sincronización Edge-Cloud</td><td>T38</td><td>Implementar Edge-Cloud Sync Service</td><td>Mecanismo de sincronización bidireccional entre Edge API y nube para coherencia de datos.</td><td>7</td><td>Sulca Gonzales, Paul Fernando</td><td>Done</td></tr>
+  </tbody>
+</table>
+
 ### 5.2.2. Implemented Landing Page Evidence
 
 **Enlace de la landing page:** [https://wastetracklanding.vercel.app/](https://wastetracklanding.vercel.app/)
@@ -8838,15 +4580,474 @@ Pasos para desplegar un landing page en Vercel
 
 ### 5.2.3. Implemented Frontend-Web Application Evidence
 
+#### Pasos de despliegue en Netlify
+
+Elegir a GitHub como Git provider
+
+![connectToGit.png](assets/5.product-implementation/web-application/deploy/connectToGit.png)
+
+Conectar con la organización EcoLutions de GitHub
+
+![selectRepo.png](assets/5.product-implementation/web-application/deploy/selectRepo.png)
+
+Configurar proyecto y deploy command
+
+![lastStep.png](assets/5.product-implementation/web-application/deploy/lastStep.png)
+![lastStep2.png](assets/5.product-implementation/web-application/deploy/lastStep2.png)
+
+Vista final con deploy logs en estado completado
+
+![deployLogs.png](assets/5.product-implementation/web-application/deploy/deployLogs.png)
+
+**Enlace de la aplicacion web de administrador municipal** [https://waste-track-admin-app.netlify.app/dashboard](https://waste-track-admin-app.netlify.app/dashboard)
+
+#### Imagenes de la aplicación web para administrador municipal
+
+![dashboard.png](assets/5.product-implementation/web-application/dashboard.png)
+
+![collaborator_list.png](assets/5.product-implementation/web-application/collaborator_list.png)
+
+![add_collaborator.png](assets/5.product-implementation/web-application/add_collaborator.png)
+
+![edit_collaborator.png](assets/5.product-implementation/web-application/edit_collaborator.png)
+
+![deactivate_collaborator.png](assets/5.product-implementation/web-application/deactivate_collaborator.png)
+
+![no_registered_vehicles.png](assets/5.product-implementation/web-application/no_registered_vehicles.png)
+
+![fleet_list.png](assets/5.product-implementation/web-application/fleet_list.png)
+
+![add_vehicle.png](assets/5.product-implementation/web-application/add_vehicle.png)
+
+![edit_vehicle.png](assets/5.product-implementation/web-application/edit_vehicle.png)
+
+![deleteVehicle.png](assets/5.product-implementation/web-application/deleteVehicle.png)
+
+![no_iot_device.png](assets/5.product-implementation/web-application/no_iot_device.png)
+
+![iot_list.png](assets/5.product-implementation/web-application/iot_list.png)
+
+![add_iot_device.png](assets/5.product-implementation/web-application/add_iot_device.png)
+
+![configure_iot_device.png](assets/5.product-implementation/web-application/configure_iot_device.png)
+
+![deleteIotDevice.png](assets/5.product-implementation/web-application/deleteIotDevice.png)
+
 ### 5.2.4. Implemented Native-Mobile Application Evidence
+
+#### Generar apk
+Para la compilación de la aplicación y la generación del archivo de instalación de Android (.apk), se siguieron los siguientes pasos utilizando el entorno de desarrollo Android Studio.
+
+**Apertura del Terminal**
+Dentro del proyecto de Flutter, se abrió el terminal integrado en Android Studio para tener acceso a la línea de comandos.
+
+**Ejecución del Comando de Compilación**
+Se procedió a ejecutar el comando para construir la versión de lanzamiento de la aplicación. Se utilizó el flag --release para asegurar que el APK generado estuviera optimizado para producción, ofuscado y sin información de depuración.
+
+flutter build apk --release
+
+**Ubicación del Archivo Generado**
+Una vez finalizado el proceso de compilación, el archivo app-release.apk fue localizado en el directorio de salida correspondiente dentro de la estructura del proyecto:
+
+build/app/outputs/flutter-apk/app-release.apk
+
+Este archivo es la versión final que fue utilizada para las pruebas de despliegue y la distribución.
+
+#### WasteTrack Citizen mobile app
+
+![splashImage.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/splashImage.png)
+
+![welcomeView.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/welcomeView.png)
+
+![selectMunicipality1.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/selectMunicipality1.png)
+
+![selectMunicipality2.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/selectMunicipality2.png)
+
+![home_view.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/home_view.png)
+
+![changeMunicipality.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/changeMunicipality.png)
+
+![notifications.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/notifications.png)
+
+![report.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/report.png)
 
 ### 5.2.5. Implemented Restful API and/or Serverless Backend Evidence
 
+#### Evidencia de Implementación de Backend y API RESTful
+Para el proyecto WasteTrack, se ha implementado una infraestructura de backend robusta y escalable en la nube, utilizando servicios de Microsoft Azure. El proceso abarcó desde el aprovisionamiento de un servidor virtual hasta su configuración para el despliegue automatizado de la API RESTful mediante contenedores.
+
+A continuación, se detalla el proceso realizado, respaldado por la evidencia visual adjunta.
+
+1. Aprovisionamiento de la Infraestructura en la Nube
+
+El primer paso fue crear los recursos necesarios en Microsoft Azure. Se configuró una máquina virtual (VM) con las siguientes especificaciones para alojar el backend:
+
+Nombre del Recurso: waste-track-platform
+
+Sistema Operativo: Linux (Ubuntu 22.04 LTS)
+
+Capacidad: 4 vCPUs y 16 GB de RAM
+
+Región: Sur de Brasil (South America)
+
+IP Pública Asignada: 20.206.240.65
+
+Este proceso, visible en las capturas del portal de Azure, estableció la base del servidor donde se ejecutará nuestra aplicación.
+
+![1.jpeg](assets/5.product-implementation/backend/implementation/1.jpeg)
+
+![4.jpeg](assets/5.product-implementation/backend/implementation/4.jpeg)
+
+2. Configuración y Acceso Seguro al Servidor
+
+Una vez creada la VM, se estableció una conexión segura desde un equipo local utilizando el protocolo SSH (Secure Shell). Para ello, se gestionó una clave privada (.pem) con los permisos adecuados (chmod 400) para garantizar un acceso restringido y seguro al servidor.
+
+Inmediatamente después de la conexión, se actualizaron todos los paquetes del sistema operativo con sudo apt update && sudo apt upgrade para asegurar que el entorno base estuviera actualizado y protegido.
+
+![3.jpeg](assets/5.product-implementation/backend/implementation/3.jpeg)
+
+![6.jpeg](assets/5.product-implementation/backend/implementation/6.jpeg)
+
+3. Implementación del Entorno de Contenedores con Docker
+
+Para asegurar un despliegue consistente, aislado y escalable de la API, se instaló y configuró un entorno de containerización.
+
+Se instaló Docker y Docker Compose en el servidor Ubuntu.
+
+Se habilitó el servicio de Docker para que se inicie automáticamente con el sistema (systemctl enable docker).
+
+Se configuraron los permisos de usuario para gestionar Docker sin necesidad de privilegios de superusuario en cada comando.
+
+Este entorno permite empaquetar la API RESTful y todas sus dependencias en contenedores, facilitando su despliegue y gestión.
+
+![7.jpeg](assets/5.product-implementation/backend/implementation/7.jpeg)
+
+![9.jpeg](assets/5.product-implementation/backend/implementation/9.jpeg)
+
+4. Preparación para el Despliegue Automatizado (CI/CD)
+
+Finalmente, se preparó el terreno para la Integración y Despliegue Continuo (CI/CD) utilizando GitHub Actions. Se configuraron los "Secrets" en el repositorio del proyecto en GitHub, que incluyen:
+
+Credenciales del servidor (PROD_HOST, PROD_USER, PROD_SSH_KEY): Para que GitHub Actions pueda conectarse al servidor de Azure y desplegar nuevas versiones.
+
+Variables de entorno de la aplicación (PROD_DATABASE_*, JWT_SECRET): Para configurar la aplicación en el entorno de producción de forma segura sin exponer datos sensibles en el código.
+
+Esta configuración es la pieza clave que permite automatizar el despliegue de la API RESTful, haciendo que cualquier cambio en la rama principal del repositorio se refleje automáticamente en el servidor de producción.
+
+![8.jpeg](assets/5.product-implementation/backend/implementation/8.jpeg)
+
 ### 5.2.6. Restful API documentation
+
+#### Documentación de la API RESTful
+Para garantizar la correcta integración, escalabilidad y mantenimiento de los servicios del backend, se ha documentado exhaustivamente la API RESTful del proyecto Waste Track Platform. Se utilizó el estándar OpenAPI 3.0 y la herramienta Swagger UI para generar una documentación interactiva que no solo describe los endpoints, sino que también permite probarlos directamente desde el navegador.
+
+Esta documentación sirve como un contrato claro entre el backend y cualquier cliente que consuma la API (como la aplicación móvil o futuras integraciones).
+
+![1.jpeg](assets/5.product-implementation/backend/apiDocumentation/1.jpeg)
+
+Estructura y Endpoints Disponibles
+La API está organizada en controladores que agrupan funcionalidades relacionadas con los recursos principales del sistema. Cada recurso cuenta con un conjunto completo de operaciones CRUD (Crear, Leer, Actualizar, Eliminar), siguiendo las convenciones estándar de los métodos HTTP (POST, GET, PUT, DELETE).
+
+A continuación, se presenta una visión general de los endpoints documentados:
+
+1. Gestión de Autenticación y Usuarios (/authentication, /users, /roles)
+
+Endpoints cruciales para la seguridad y la gestión de acceso. Permiten el registro (sign-up), inicio de sesión (sign-in) y la obtención de información sobre usuarios y sus roles.
+
+![2.jpeg](assets/5.product-implementation/backend/apiDocumentation/2.jpeg)
+
+2. Gestión de Entidades Centrales (/containers, /vehicles, /routes)
+
+Manejan la lógica de negocio principal, incluyendo la administración de contenedores de residuos, vehículos de recolección y las rutas que estos siguen.
+
+![3.jpeg](assets/5.product-implementation/backend/apiDocumentation/3.jpeg)
+
+![4.jpeg](assets/5.product-implementation/backend/apiDocumentation/4.jpeg)
+
+3. Gestión de Datos Geográficos y Operativos (/districts, /waypoints, /sensor-readings)
+
+Endpoints dedicados a la gestión de distritos, puntos de referencia en las rutas (waypoints) y la recolección de datos de sensores.
+
+![5.jpeg](assets/5.product-implementation/backend/apiDocumentation/5.jpeg)
+
+![6.jpeg](assets/5.product-implementation/backend/apiDocumentation/6.jpeg)
+
+4. Gestión de Perfiles y Actores (/citizens, /drivers, /user-profiles)
+
+Permiten administrar la información de los diferentes tipos de usuarios que interactúan con la plataforma, como ciudadanos, conductores y sus perfiles detallados.
+
+![7.jpeg](assets/5.product-implementation/backend/apiDocumentation/7.jpeg)
+
+![8.jpeg](assets/5.product-implementation/backend/apiDocumentation/8.jpeg)
 
 ### 5.2.7. Team Collaboration Insights
 
+#### Fronted insights
+#### Municipality Admin Web Application
+![frontendMunicipalityAdmin.png](assets/5.product-implementation/insights/frontendMunicipalityAdmin.png)
+
+#### WasteTrack Citizen Mobile Application
+![wasteTrackCitizenMobileApp.png](assets/5.product-implementation/insights/wasteTrackCitizenMobileApp.png)
+
+#### Backend insights
+![backend.png](assets/5.product-implementation/insights/backend.png)
+
 ## 5.3. Video About-the-Product
+A continuación, la primera version del video About The Product
+
+![img.png](assets/5.product-implementation/aboutTheProduct/img.png)
+
+[Enlace video About the Product](https://upcedupe-my.sharepoint.com/personal/u20221c857_upc_edu_pe/_layouts/15/stream.aspx?id=%2Fpersonal%2Fu20221c857%5Fupc%5Fedu%5Fpe%2FDocuments%2FVideo%2DAbout%2DTheProduct%2DWasteTrack%2Emp4&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&ga=1&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview%2E614163d2%2D3f0f%2D42e6%2Da913%2Dfb143ec665dc)
+
+# Capítulo VI: Product Verification & Validation
+
+## 6.1. Testing Suites & Validation
+
+### 6.1.1. Core Entities Unit Tests
+**Municipal Operations**
+
+Se validó el aggregate **Driver**, asegurando su correcto comportamiento en operaciones clave de gestión de conductores. Las pruebas siguieron el patrón **Arrange–Act–Assert (AAA)** y fueron ejecutadas con **JUnit 5**, confirmando la estabilidad del modelo de dominio.
+
+**User Story relacionada:**
+*US04 – Gestión de conductores por administrador*
+*Como administrador municipal, quiero crear y gestionar cuentas de conductores de mi distrito para que puedan acceder a la aplicación móvil de rutas.*
+
+**Resumen de pruebas:**
+
+* **Inicio de ruta:** cambia el estado del conductor a **ON_ROUTE**.
+* **Finalización de ruta:** retorna a **AVAILABLE**, suma horas y registra la fecha.
+* **Suspensión:** valida cambio de estado con motivo válido.
+* **Asignación/desasignación de vehículo:** mantiene integridad entre conductor y vehículo.
+
+**Evidencia de ejecución:**
+![DriverTest-Execution](assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.1.core-entities-unit-tests/driver-test-unit.png)
+
+Se validó el aggregate **Vehicle**, encargado de representar las propiedades y comportamientos de los vehículos de recolección dentro del sistema. Las pruebas unitarias siguieron el patrón **Arrange–Act–Assert (AAA)** y fueron ejecutadas con **JUnit 5**, confirmando la consistencia del dominio en la gestión de la flota.
+
+**User Stories relacionadas:**
+*US22 – Monitoreo de flota de vehículos*
+*US23 – Programación de mantenimiento preventivo*
+*US25 – Asignación automática de vehículos*
+
+**Resumen de pruebas:**
+
+* **Creación de placa válida:** valida el formato correcto de placas vehiculares.
+* **Formato inválido:** lanza excepción cuando el formato de placa no cumple el patrón establecido.
+* **Mantenimiento preventivo:** marca el vehículo como necesitado de mantenimiento al superar los **10 000 km**.
+* **Capacidad inválida:** arroja excepción si el volumen o peso son nulos o negativos.
+
+**Conclusión:**
+Las pruebas confirman que el agregado **Vehicle** cumple las reglas de negocio vinculadas al control y mantenimiento de la flota municipal, soportando la trazabilidad y confiabilidad requeridas por las *User Stories US22, US23 y US25.*
+
+**Evidencia de ejecución:**
+![VehicleTest-Execution](assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.1.core-entities-unit-tests/vehicle-test-unit.png)
+
+
+**Container Monitoring**
+
+Se validó el aggregate **Container**, encargado de gestionar la configuración y el estado operativo de los contenedores inteligentes dentro del sistema. Las pruebas siguieron el patrón **Arrange–Act–Assert (AAA)** y fueron ejecutadas con **JUnit 5**, garantizando el correcto funcionamiento de los parámetros de capacidad, ubicación y frecuencia de recolección.
+
+**User Story relacionada:**
+*US11 – Configuración de parámetros de contenedores*
+*Como administrador municipal, quiero configurar parámetros específicos de cada contenedor para personalizar alertas según su ubicación y tipo.*
+
+**Resumen de pruebas:**
+
+* **Creación de contenedor:** inicializa con estado **ACTIVE**, tipo de residuo y nivel vacío.
+* **Actualización de nivel:** actualiza porcentaje y fecha de lectura correctamente.
+* **Reinicio tras recolección:** restablece el nivel a **0%** y guarda la fecha de recolección.
+* **Requerimiento de recolección:** se activa por nivel alto o frecuencia excedida.
+* **Detección de desborde:** identifica cuando el contenedor supera su capacidad.
+* **Cambio de estado:** permite alternar entre **MAINTENANCE**, **ACTIVE** y **DECOMMISSIONED**.
+* **Asignación de sensor:** actualiza el identificador del sensor asociado al contenedor.
+
+**Evidencia de ejecución:**
+![ContainerTest-Execution](assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.1.core-entities-unit-tests/container-test-unit.png)
+
+
+Se validó el aggregate **SensorReading**, responsable de procesar y validar las lecturas de sensores IoT vinculadas a los contenedores. Las pruebas siguieron el patrón **Arrange–Act–Assert (AAA)** y fueron ejecutadas con **JUnit 5**, confirmando la integridad de los datos y la correcta detección de anomalías.
+
+**User Story relacionada:**
+*TS04 – API de datos de sensores IoT*
+*Como developer, quiero implementar endpoints para recibir y procesar datos de sensores IoT para mantener información actualizada de contenedores.*
+
+**Resumen de pruebas:**
+
+* **Creación de lectura:** genera registros válidos con fechas automáticas y estado **VALID**.
+* **Validación exitosa:** marca como válida una lectura dentro de los rangos permitidos.
+* **Batería baja:** identifica la lectura como **ANOMALY** y requiere mantenimiento.
+* **Valor fuera de rango:** lanza excepción al recibir un nivel de llenado inválido.
+
+**Conclusión:**
+Las pruebas confirman que el agregado **SensorReading** cumple con las reglas de validación de datos IoT, asegurando la precisión, consistencia y detección temprana de fallos en la red de monitoreo de contenedores.
+
+**Evidencia de ejecución:**
+![SensorReadingTest-Execution](assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.1.core-entities-unit-tests/sensor-reading-test-unit.png)
+
+### 6.1.2. Core Integration Tests
+
+**Route Planning Execution**
+
+Se validaron los controladores del bounded context core Route Planning and Execution, asegurando la correcta integración entre los servicios RESTful y el dominio. Las pruebas siguieron el patrón **Arrange–Act–Assert (AAA)** y fueron ejecutadas con **Spring Boot Test** y **Mockito**, confirmando la funcionalidad de los endpoints clave.
+
+**Resumen de pruebas:**
+
+**Route Controller**
+
+Las pruebas tienen como objetivo verificar que el controlador REST de rutas funcione correctamente dentro del contexto real de la aplicación, usando TestRestTemplate para ejecutar peticiones HTTP reales y validar las respuestas del sistema.
+
+* La prueba POST comprueba que se pueda crear una nueva ruta correctamente, devolviendo código 201 Created y los datos esperados.
+
+* La prueba GET (todas las rutas) valida que el sistema liste las rutas existentes con respuesta 200 OK.
+
+* La prueba PUT verifica que una ruta pueda actualizarse exitosamente y que los cambios se reflejen con código 200 OK.
+
+* La prueba GET por ID asegura que una ruta específica pueda consultarse y se devuelva con los datos correctos.
+
+* La prueba DELETE confirma que una ruta pueda eliminarse y que el sistema responda con 204 No Content
+
+En conjunto, estas pruebas comprueban que los endpoints del controlador de rutas funcionan de extremo a extremo, manejan correctamente las operaciones CRUD, responden con los códigos de estado adecuados y se integran de forma coherente dentro del flujo de la aplicación.
+
+**Evidencia de ejecución:**
+![RouteControllerTest](assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.2.core-integration-tests/route-integration-test.png)
+
+
+**Waypoint Controller**
+Las pruebas de integración del WayPointControllerIntegrationTest verifican el correcto funcionamiento del controlador REST de puntos de ruta, asegurando que sus endpoints procesen correctamente las operaciones CRUD y devuelvan las respuestas esperadas dentro del contexto real de la aplicación.
+
+* La prueba de creación valida que el endpoint permita registrar un nuevo WayPoint con los datos enviados y que la respuesta sea 201 Created, confirmando una creación exitosa.
+
+* La prueba de obtención por ID comprueba que el sistema pueda recuperar un WayPoint específico y devuelva la información con código 200 OK.
+
+* La prueba de listado general verifica que el endpoint retorne correctamente todos los WayPoints almacenados y responda con 200 OK.
+
+* La prueba de actualización evalúa que un WayPoint existente pueda modificarse y que el controlador invoque correctamente al servicio correspondiente, reflejando los cambios esperados.
+
+* La prueba de eliminación garantiza que un WayPoint pueda eliminarse correctamente y que el controlador llame al servicio encargado, confirmando el flujo exitoso de eliminación
+
+En conjunto, estas pruebas aseguran que el WayPointControllerImpl maneje correctamente las solicitudes HTTP, integre de forma adecuada con la capa de servicios y mantenga la coherencia en las respuestas del API.
+
+![WaypointControllerTest](assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.2.core-integration-tests/waypoint-integration-test.png)
+
+### 6.1.3. Core Behavior-Driven Development
+
+**Driver**
+
+Las pruebas a continuacion centran en el comportamiento del aggregate Driver dentro del bounded context de Municipal Operations.
+
+**User Story relacionada:**
+*TS04 – API de datos de sensores IoT*
+*Como developer, quiero implementar endpoints para recibir y procesar datos de sensores IoT para mantener información actualizada de contenedores.*
+
+**Resumen de scenarios**
+
+* **Creación de cuenta de conductor** Simula la creación de un nuevo conductor a partir de datos de registro. Verifica que se generen credenciales y que el estado inicial sea AVAILABLE.
+
+* **Inicio de ruta**  Verifica que un conductor con estado AVAILABLE cambie a ON_ROUTE al iniciar una ruta.
+
+* **Finalización de ruta** Simula un conductor con una ruta activa y horas acumuladas. Al completar la ruta, el estado vuelve a AVAILABLE y se suma la duración al total de horas trabajadas.
+
+* **Suspensión de conductor** Permite suspender un conductor con un motivo. Verifica que su estado pase a SUSPENDED.
+
+* **Asignación y desasignación de vehículo** Comprueba que un vehículo puede ser asignado al conductor (guardando su VehicleId) y luego retirado, dejando el campo vacío (null).
+
+**Evidencia de ejecucion**
+
+![DriverBDDTest](assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.3.core-behavior-driven-development/driver-bdd-test.png)
+
+
+**Sensor Reading**
+
+Las pruebas a continuacion centran en el comportamiento del aggregate SensorReading dentro del bounded context de Container Monitoring.
+
+**User Story relacionada:**
+*US04 – Gestión de conductores por administrador*
+*Como administrador municipal, quiero crear y gestionar cuentas de conductores de mi distrito para que puedan acceder a la aplicación móvil de rutas.*
+
+**Resumen de scenarios**
+
+* **Recepción y almacenamiento exitoso de lectura**  Simula el envío de una lectura IoT válida con encabezados correctos. Verifica que el sistema responda con código 201, marque la lectura como VALID, actualice el nivel del contenedor y publique un evento en tiempo real.
+
+* **Validación exitosa cuando los valores están en rango**  Comprueba que una lectura con valores normales (nivel, temperatura, batería) sea marcada como VALID sin anomalías ni errores de sensor.
+
+* **Anomalía por batería baja** Envía una lectura con batería menor al 10%. El sistema debe responder 201, marcar la lectura como ANOMALY, requerir mantenimiento y generar una alerta de mantenimiento.
+
+* **Error por nivel de llenado inválido**  Envía una lectura con fillLevel fuera del rango permitido (mayor a 100). Se espera una respuesta 400 con el mensaje de error "Percentage must be between 0 and 100".
+
+* **Autenticación requerida**  Verifica que el endpoint rechace solicitudes con autenticación inválida o ausente. Ambos casos deben responder con código 401 (Unauthorized).
+
+* **Actualización del estado del contenedor en tiempo real**  Simula el procesamiento de una lectura válida con nivel alto. El contenedor debe reflejar el nuevo nivel y estado, y confirmarse que se publicó un evento en tiempo real.
+
+**Evidencia de ejecucion**
+![SensorReadingBDDTest](assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.3.core-behavior-driven-development/sensor-reading-bdd-test.png)
+
+
+### 6.1.4. Core System Tests
+
+Aquí se muestran algunos ejemplos de pruebas del sistema central que se pueden realizar para garantizar su correcto funcionamiento:
+
+1. **Registro de usuarios**: Verificar que los usuarios puedan registrarse correctamente en el sistema, incluyendo la validación de datos y la creación de perfiles.
+
+![Registro de usuarios](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/sign-up.png)
+
+2. **Inicio de sesión**: Asegurarse de que los usuarios puedan iniciar sesión con credenciales válidas y que se manejen correctamente los intentos fallidos.
+
+![Inicio de sesión](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/sign-in.png)
+
+3. **Creación de un distrito**: Probar la funcionalidad de creación de distritos, asegurándose de que los datos se guarden correctamente y que se puedan visualizar en la interfaz.
+
+![Creación de un distrito](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/districts-post.png)
+
+4. **Visualización de distritos**: Verificar que los usuarios puedan ver la lista de distritos creados y que la información mostrada sea precisa.
+
+![Visualización de distritos](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/districts-get.png)
+
+5. **Creación de un contenedor**: Asegurarse de que los usuarios puedan crear contenedores dentro de un distrito y que los datos se guarden correctamente.
+
+![Creación de un contenedor](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/containers-post.png)
+
+6. **Creación de un ciudadano**: Probar la funcionalidad de creación de ciudadanos, asegurándose de que los datos se guarden correctamente y que se puedan visualizar en la interfaz.
+
+![Creación de un ciudadano](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/citizens-post.png)
+
+![Visualización de ciudadanos](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/citizens-post-2.png)
+
+7. **Visualización de ciudadanos**: Verificar que los usuarios puedan ver la lista de ciudadanos creados y que la información mostrada sea precisa.
+
+![Visualización de ciudadanos](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/citizens-get.png)
+
+8. **Creación de un vehículo**: Asegurarse de que los usuarios puedan crear vehículos y que los datos se guarden correctamente.
+
+![Creación de un vehículo](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/vehicles-post.png)
+
+9. **Creación de una ruta**: Probar la funcionalidad de creación de rutas, asegurándose de que los datos se guarden correctamente y que se puedan visualizar en la interfaz.
+
+![Creación de una ruta](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/routes-post.png)
+
+10. **Creación de un vehículo**: Asegurarse de que los usuarios puedan crear vehículos y que los datos se guarden correctamente.
+
+![Creación de un vehículo](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/vehicles-post.png)
+
+# Capítulo VII: DevOps Practices
+
+## 7.1. Continuous Integration
+
+### 7.1.1. Tools and Practices
+
+### 7.1.2. Build & Test Suite Pipeline Components
+
+## 7.2. Continuous Delivery
+
+### 7.2.1. Tools and Practices
+
+### 7.2.2. Stages Deployment Pipeline Components
+
+## 7.3. Continuous Deployment
+
+### 7.3.1. Tools and Practices
+
+### 7.3.2. Production Deployment Pipeline Components
+
 
 # Conclusiones
 
