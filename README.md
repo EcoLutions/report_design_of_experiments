@@ -8999,7 +8999,112 @@ Este archivo es la versión final que fue utilizada para las pruebas de desplieg
 
 ### 5.2.5. Implemented Restful API and/or Serverless Backend Evidence
 
+#### Evidencia de Implementación de Backend y API RESTful
+Para el proyecto WasteTrack, se ha implementado una infraestructura de backend robusta y escalable en la nube, utilizando servicios de Microsoft Azure. El proceso abarcó desde el aprovisionamiento de un servidor virtual hasta su configuración para el despliegue automatizado de la API RESTful mediante contenedores.
+
+A continuación, se detalla el proceso realizado, respaldado por la evidencia visual adjunta.
+
+1. Aprovisionamiento de la Infraestructura en la Nube
+
+El primer paso fue crear los recursos necesarios en Microsoft Azure. Se configuró una máquina virtual (VM) con las siguientes especificaciones para alojar el backend:
+
+Nombre del Recurso: waste-track-platform
+
+Sistema Operativo: Linux (Ubuntu 22.04 LTS)
+
+Capacidad: 4 vCPUs y 16 GB de RAM
+
+Región: Sur de Brasil (South America)
+
+IP Pública Asignada: 20.206.240.65
+
+Este proceso, visible en las capturas del portal de Azure, estableció la base del servidor donde se ejecutará nuestra aplicación.
+
+![1.jpeg](assets/5.product-implementation/backend/implementation/1.jpeg)
+
+![4.jpeg](assets/5.product-implementation/backend/implementation/4.jpeg)
+
+2. Configuración y Acceso Seguro al Servidor
+
+Una vez creada la VM, se estableció una conexión segura desde un equipo local utilizando el protocolo SSH (Secure Shell). Para ello, se gestionó una clave privada (.pem) con los permisos adecuados (chmod 400) para garantizar un acceso restringido y seguro al servidor.
+
+Inmediatamente después de la conexión, se actualizaron todos los paquetes del sistema operativo con sudo apt update && sudo apt upgrade para asegurar que el entorno base estuviera actualizado y protegido.
+
+![3.jpeg](assets/5.product-implementation/backend/implementation/3.jpeg)
+
+![6.jpeg](assets/5.product-implementation/backend/implementation/6.jpeg)
+
+3. Implementación del Entorno de Contenedores con Docker
+
+Para asegurar un despliegue consistente, aislado y escalable de la API, se instaló y configuró un entorno de containerización.
+
+Se instaló Docker y Docker Compose en el servidor Ubuntu.
+
+Se habilitó el servicio de Docker para que se inicie automáticamente con el sistema (systemctl enable docker).
+
+Se configuraron los permisos de usuario para gestionar Docker sin necesidad de privilegios de superusuario en cada comando.
+
+Este entorno permite empaquetar la API RESTful y todas sus dependencias en contenedores, facilitando su despliegue y gestión.
+
+![7.jpeg](assets/5.product-implementation/backend/implementation/7.jpeg)
+
+![9.jpeg](assets/5.product-implementation/backend/implementation/9.jpeg)
+
+4. Preparación para el Despliegue Automatizado (CI/CD)
+
+Finalmente, se preparó el terreno para la Integración y Despliegue Continuo (CI/CD) utilizando GitHub Actions. Se configuraron los "Secrets" en el repositorio del proyecto en GitHub, que incluyen:
+
+Credenciales del servidor (PROD_HOST, PROD_USER, PROD_SSH_KEY): Para que GitHub Actions pueda conectarse al servidor de Azure y desplegar nuevas versiones.
+
+Variables de entorno de la aplicación (PROD_DATABASE_*, JWT_SECRET): Para configurar la aplicación en el entorno de producción de forma segura sin exponer datos sensibles en el código.
+
+Esta configuración es la pieza clave que permite automatizar el despliegue de la API RESTful, haciendo que cualquier cambio en la rama principal del repositorio se refleje automáticamente en el servidor de producción.
+
+![8.jpeg](assets/5.product-implementation/backend/implementation/8.jpeg)
+
 ### 5.2.6. Restful API documentation
+
+#### Documentación de la API RESTful
+Para garantizar la correcta integración, escalabilidad y mantenimiento de los servicios del backend, se ha documentado exhaustivamente la API RESTful del proyecto Waste Track Platform. Se utilizó el estándar OpenAPI 3.0 y la herramienta Swagger UI para generar una documentación interactiva que no solo describe los endpoints, sino que también permite probarlos directamente desde el navegador.
+
+Esta documentación sirve como un contrato claro entre el backend y cualquier cliente que consuma la API (como la aplicación móvil o futuras integraciones).
+
+![1.jpeg](assets/5.product-implementation/backend/apiDocumentation/1.jpeg)
+
+Estructura y Endpoints Disponibles
+La API está organizada en controladores que agrupan funcionalidades relacionadas con los recursos principales del sistema. Cada recurso cuenta con un conjunto completo de operaciones CRUD (Crear, Leer, Actualizar, Eliminar), siguiendo las convenciones estándar de los métodos HTTP (POST, GET, PUT, DELETE).
+
+A continuación, se presenta una visión general de los endpoints documentados:
+
+1. Gestión de Autenticación y Usuarios (/authentication, /users, /roles)
+
+Endpoints cruciales para la seguridad y la gestión de acceso. Permiten el registro (sign-up), inicio de sesión (sign-in) y la obtención de información sobre usuarios y sus roles.
+
+![2.jpeg](assets/5.product-implementation/backend/apiDocumentation/2.jpeg)
+
+2. Gestión de Entidades Centrales (/containers, /vehicles, /routes)
+
+Manejan la lógica de negocio principal, incluyendo la administración de contenedores de residuos, vehículos de recolección y las rutas que estos siguen.
+
+![3.jpeg](assets/5.product-implementation/backend/apiDocumentation/3.jpeg)
+
+![4.jpeg](assets/5.product-implementation/backend/apiDocumentation/4.jpeg)
+
+3. Gestión de Datos Geográficos y Operativos (/districts, /waypoints, /sensor-readings)
+
+Endpoints dedicados a la gestión de distritos, puntos de referencia en las rutas (waypoints) y la recolección de datos de sensores.
+
+![5.jpeg](assets/5.product-implementation/backend/apiDocumentation/5.jpeg)
+
+![6.jpeg](assets/5.product-implementation/backend/apiDocumentation/6.jpeg)
+
+4. Gestión de Perfiles y Actores (/citizens, /drivers, /user-profiles)
+
+Permiten administrar la información de los diferentes tipos de usuarios que interactúan con la plataforma, como ciudadanos, conductores y sus perfiles detallados.
+
+![7.jpeg](assets/5.product-implementation/backend/apiDocumentation/7.jpeg)
+
+![8.jpeg](assets/5.product-implementation/backend/apiDocumentation/8.jpeg)
 
 ### 5.2.7. Team Collaboration Insights
 
