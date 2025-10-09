@@ -8906,6 +8906,59 @@ Pasos para desplegar un landing page en Vercel
 
 ### 5.2.3. Implemented Frontend-Web Application Evidence
 
+#### Pasos de despliegue en Netlify
+
+Elegir a GitHub como Git provider
+
+![connectToGit.png](assets/5.product-implementation/web-application/deploy/connectToGit.png)
+
+Conectar con la organización EcoLutions de GitHub
+
+![selectRepo.png](assets/5.product-implementation/web-application/deploy/selectRepo.png)
+
+Configurar proyecto y deploy command
+
+![lastStep.png](assets/5.product-implementation/web-application/deploy/lastStep.png)
+![lastStep2.png](assets/5.product-implementation/web-application/deploy/lastStep2.png)
+
+Vista final con deploy logs en estado completado
+
+![deployLogs.png](assets/5.product-implementation/web-application/deploy/deployLogs.png)
+
+**Enlace de la aplicacion web de administrador municipal** [https://waste-track-admin-app.netlify.app/dashboard](https://waste-track-admin-app.netlify.app/dashboard)
+
+#### Imagenes de la aplicación web para administrador municipal
+
+![dashboard.png](assets/5.product-implementation/web-application/dashboard.png)
+
+![collaborator_list.png](assets/5.product-implementation/web-application/collaborator_list.png)
+
+![add_collaborator.png](assets/5.product-implementation/web-application/add_collaborator.png)
+
+![edit_collaborator.png](assets/5.product-implementation/web-application/edit_collaborator.png)
+
+![deactivate_collaborator.png](assets/5.product-implementation/web-application/deactivate_collaborator.png)
+
+![no_registered_vehicles.png](assets/5.product-implementation/web-application/no_registered_vehicles.png)
+
+![fleet_list.png](assets/5.product-implementation/web-application/fleet_list.png)
+
+![add_vehicle.png](assets/5.product-implementation/web-application/add_vehicle.png)
+
+![edit_vehicle.png](assets/5.product-implementation/web-application/edit_vehicle.png)
+
+![deleteVehicle.png](assets/5.product-implementation/web-application/deleteVehicle.png)
+
+![no_iot_device.png](assets/5.product-implementation/web-application/no_iot_device.png)
+
+![iot_list.png](assets/5.product-implementation/web-application/iot_list.png)
+
+![add_iot_device.png](assets/5.product-implementation/web-application/add_iot_device.png)
+
+![configure_iot_device.png](assets/5.product-implementation/web-application/configure_iot_device.png)
+
+![deleteIotDevice.png](assets/5.product-implementation/web-application/deleteIotDevice.png)
+
 ### 5.2.4. Implemented Native-Mobile Application Evidence
 
 ### 5.2.5. Implemented Restful API and/or Serverless Backend Evidence
