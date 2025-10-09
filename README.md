@@ -8869,12 +8869,229 @@ Pasos para desplegar un landing page en Vercel
 ## 6.1. Testing Suites & Validation
 
 ### 6.1.1. Core Entities Unit Tests
+**Municipal Operations**
+
+Se validó el aggregate **Driver**, asegurando su correcto comportamiento en operaciones clave de gestión de conductores. Las pruebas siguieron el patrón **Arrange–Act–Assert (AAA)** y fueron ejecutadas con **JUnit 5**, confirmando la estabilidad del modelo de dominio.
+
+**User Story relacionada:**
+*US04 – Gestión de conductores por administrador*
+*Como administrador municipal, quiero crear y gestionar cuentas de conductores de mi distrito para que puedan acceder a la aplicación móvil de rutas.*
+
+**Resumen de pruebas:**
+
+* **Inicio de ruta:** cambia el estado del conductor a **ON_ROUTE**.
+* **Finalización de ruta:** retorna a **AVAILABLE**, suma horas y registra la fecha.
+* **Suspensión:** valida cambio de estado con motivo válido.
+* **Asignación/desasignación de vehículo:** mantiene integridad entre conductor y vehículo.
+
+**Evidencia de ejecución:**
+![DriverTest-Execution](assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.1.core-entities-unit-tests/driver-test-unit.png)
+
+Se validó el aggregate **Vehicle**, encargado de representar las propiedades y comportamientos de los vehículos de recolección dentro del sistema. Las pruebas unitarias siguieron el patrón **Arrange–Act–Assert (AAA)** y fueron ejecutadas con **JUnit 5**, confirmando la consistencia del dominio en la gestión de la flota.
+
+**User Stories relacionadas:**
+*US22 – Monitoreo de flota de vehículos*
+*US23 – Programación de mantenimiento preventivo*
+*US25 – Asignación automática de vehículos*
+
+**Resumen de pruebas:**
+
+* **Creación de placa válida:** valida el formato correcto de placas vehiculares.
+* **Formato inválido:** lanza excepción cuando el formato de placa no cumple el patrón establecido.
+* **Mantenimiento preventivo:** marca el vehículo como necesitado de mantenimiento al superar los **10 000 km**.
+* **Capacidad inválida:** arroja excepción si el volumen o peso son nulos o negativos.
+
+**Conclusión:**
+Las pruebas confirman que el agregado **Vehicle** cumple las reglas de negocio vinculadas al control y mantenimiento de la flota municipal, soportando la trazabilidad y confiabilidad requeridas por las *User Stories US22, US23 y US25.*
+
+**Evidencia de ejecución:**
+![VehicleTest-Execution](assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.1.core-entities-unit-tests/vehicle-test-unit.png)
+
+
+**Container Monitoring**
+
+Se validó el aggregate **Container**, encargado de gestionar la configuración y el estado operativo de los contenedores inteligentes dentro del sistema. Las pruebas siguieron el patrón **Arrange–Act–Assert (AAA)** y fueron ejecutadas con **JUnit 5**, garantizando el correcto funcionamiento de los parámetros de capacidad, ubicación y frecuencia de recolección.
+
+**User Story relacionada:**
+*US11 – Configuración de parámetros de contenedores*
+*Como administrador municipal, quiero configurar parámetros específicos de cada contenedor para personalizar alertas según su ubicación y tipo.*
+
+**Resumen de pruebas:**
+
+* **Creación de contenedor:** inicializa con estado **ACTIVE**, tipo de residuo y nivel vacío.
+* **Actualización de nivel:** actualiza porcentaje y fecha de lectura correctamente.
+* **Reinicio tras recolección:** restablece el nivel a **0%** y guarda la fecha de recolección.
+* **Requerimiento de recolección:** se activa por nivel alto o frecuencia excedida.
+* **Detección de desborde:** identifica cuando el contenedor supera su capacidad.
+* **Cambio de estado:** permite alternar entre **MAINTENANCE**, **ACTIVE** y **DECOMMISSIONED**.
+* **Asignación de sensor:** actualiza el identificador del sensor asociado al contenedor.
+
+**Evidencia de ejecución:**
+![ContainerTest-Execution](assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.1.core-entities-unit-tests/container-test-unit.png)
+
+
+Se validó el aggregate **SensorReading**, responsable de procesar y validar las lecturas de sensores IoT vinculadas a los contenedores. Las pruebas siguieron el patrón **Arrange–Act–Assert (AAA)** y fueron ejecutadas con **JUnit 5**, confirmando la integridad de los datos y la correcta detección de anomalías.
+
+**User Story relacionada:**
+*TS04 – API de datos de sensores IoT*
+*Como developer, quiero implementar endpoints para recibir y procesar datos de sensores IoT para mantener información actualizada de contenedores.*
+
+**Resumen de pruebas:**
+
+* **Creación de lectura:** genera registros válidos con fechas automáticas y estado **VALID**.
+* **Validación exitosa:** marca como válida una lectura dentro de los rangos permitidos.
+* **Batería baja:** identifica la lectura como **ANOMALY** y requiere mantenimiento.
+* **Valor fuera de rango:** lanza excepción al recibir un nivel de llenado inválido.
+
+**Conclusión:**
+Las pruebas confirman que el agregado **SensorReading** cumple con las reglas de validación de datos IoT, asegurando la precisión, consistencia y detección temprana de fallos en la red de monitoreo de contenedores.
+
+**Evidencia de ejecución:**
+![SensorReadingTest-Execution](assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.1.core-entities-unit-tests/sensor-reading-test-unit.png)
 
 ### 6.1.2. Core Integration Tests
 
+**Route Planning Execution**
+
+Se validaron los controladores del bounded context core Route Planning and Execution, asegurando la correcta integración entre los servicios RESTful y el dominio. Las pruebas siguieron el patrón **Arrange–Act–Assert (AAA)** y fueron ejecutadas con **Spring Boot Test** y **Mockito**, confirmando la funcionalidad de los endpoints clave.
+
+**Resumen de pruebas:**
+
+**Route Controller**
+
+Las pruebas tienen como objetivo verificar que el controlador REST de rutas funcione correctamente dentro del contexto real de la aplicación, usando TestRestTemplate para ejecutar peticiones HTTP reales y validar las respuestas del sistema.
+
+* La prueba POST comprueba que se pueda crear una nueva ruta correctamente, devolviendo código 201 Created y los datos esperados.
+
+* La prueba GET (todas las rutas) valida que el sistema liste las rutas existentes con respuesta 200 OK.
+
+* La prueba PUT verifica que una ruta pueda actualizarse exitosamente y que los cambios se reflejen con código 200 OK.
+
+* La prueba GET por ID asegura que una ruta específica pueda consultarse y se devuelva con los datos correctos.
+
+* La prueba DELETE confirma que una ruta pueda eliminarse y que el sistema responda con 204 No Content
+
+En conjunto, estas pruebas comprueban que los endpoints del controlador de rutas funcionan de extremo a extremo, manejan correctamente las operaciones CRUD, responden con los códigos de estado adecuados y se integran de forma coherente dentro del flujo de la aplicación.
+
+**Evidencia de ejecución:**
+![RouteControllerTest](assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.2.core-integration-tests/route-integration-test.png)
+
+
+**Waypoint Controller**
+Las pruebas de integración del WayPointControllerIntegrationTest verifican el correcto funcionamiento del controlador REST de puntos de ruta, asegurando que sus endpoints procesen correctamente las operaciones CRUD y devuelvan las respuestas esperadas dentro del contexto real de la aplicación.
+
+* La prueba de creación valida que el endpoint permita registrar un nuevo WayPoint con los datos enviados y que la respuesta sea 201 Created, confirmando una creación exitosa.
+
+* La prueba de obtención por ID comprueba que el sistema pueda recuperar un WayPoint específico y devuelva la información con código 200 OK.
+
+* La prueba de listado general verifica que el endpoint retorne correctamente todos los WayPoints almacenados y responda con 200 OK.
+
+* La prueba de actualización evalúa que un WayPoint existente pueda modificarse y que el controlador invoque correctamente al servicio correspondiente, reflejando los cambios esperados.
+
+* La prueba de eliminación garantiza que un WayPoint pueda eliminarse correctamente y que el controlador llame al servicio encargado, confirmando el flujo exitoso de eliminación
+
+En conjunto, estas pruebas aseguran que el WayPointControllerImpl maneje correctamente las solicitudes HTTP, integre de forma adecuada con la capa de servicios y mantenga la coherencia en las respuestas del API.
+
+![WaypointControllerTest](assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.2.core-integration-tests/waypoint-integration-test.png)
+
 ### 6.1.3. Core Behavior-Driven Development
 
+**Driver**
+
+Las pruebas a continuacion centran en el comportamiento del aggregate Driver dentro del bounded context de Municipal Operations.
+
+**User Story relacionada:**
+*TS04 – API de datos de sensores IoT*
+*Como developer, quiero implementar endpoints para recibir y procesar datos de sensores IoT para mantener información actualizada de contenedores.*
+
+**Resumen de scenarios**
+
+* **Creación de cuenta de conductor** Simula la creación de un nuevo conductor a partir de datos de registro. Verifica que se generen credenciales y que el estado inicial sea AVAILABLE.
+
+* **Inicio de ruta**  Verifica que un conductor con estado AVAILABLE cambie a ON_ROUTE al iniciar una ruta.
+
+* **Finalización de ruta** Simula un conductor con una ruta activa y horas acumuladas. Al completar la ruta, el estado vuelve a AVAILABLE y se suma la duración al total de horas trabajadas.
+
+* **Suspensión de conductor** Permite suspender un conductor con un motivo. Verifica que su estado pase a SUSPENDED.
+
+* **Asignación y desasignación de vehículo** Comprueba que un vehículo puede ser asignado al conductor (guardando su VehicleId) y luego retirado, dejando el campo vacío (null).
+
+**Evidencia de ejecucion**
+
+![DriverBDDTest](assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.3.core-behavior-driven-development/driver-bdd-test.png)
+
+
+**Sensor Reading**
+
+Las pruebas a continuacion centran en el comportamiento del aggregate SensorReading dentro del bounded context de Container Monitoring.
+
+**User Story relacionada:**
+*US04 – Gestión de conductores por administrador*
+*Como administrador municipal, quiero crear y gestionar cuentas de conductores de mi distrito para que puedan acceder a la aplicación móvil de rutas.*
+
+**Resumen de scenarios**
+
+* **Recepción y almacenamiento exitoso de lectura**  Simula el envío de una lectura IoT válida con encabezados correctos. Verifica que el sistema responda con código 201, marque la lectura como VALID, actualice el nivel del contenedor y publique un evento en tiempo real.
+
+* **Validación exitosa cuando los valores están en rango**  Comprueba que una lectura con valores normales (nivel, temperatura, batería) sea marcada como VALID sin anomalías ni errores de sensor.
+
+* **Anomalía por batería baja** Envía una lectura con batería menor al 10%. El sistema debe responder 201, marcar la lectura como ANOMALY, requerir mantenimiento y generar una alerta de mantenimiento.
+
+* **Error por nivel de llenado inválido**  Envía una lectura con fillLevel fuera del rango permitido (mayor a 100). Se espera una respuesta 400 con el mensaje de error "Percentage must be between 0 and 100".
+
+* **Autenticación requerida**  Verifica que el endpoint rechace solicitudes con autenticación inválida o ausente. Ambos casos deben responder con código 401 (Unauthorized).
+
+* **Actualización del estado del contenedor en tiempo real**  Simula el procesamiento de una lectura válida con nivel alto. El contenedor debe reflejar el nuevo nivel y estado, y confirmarse que se publicó un evento en tiempo real.
+
+**Evidencia de ejecucion**
+![SensorReadingBDDTest](assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.3.core-behavior-driven-development/sensor-reading-bdd-test.png)
+
+
 ### 6.1.4. Core System Tests
+
+Aquí se muestran algunos ejemplos de pruebas del sistema central que se pueden realizar para garantizar su correcto funcionamiento:
+
+1. **Registro de usuarios**: Verificar que los usuarios puedan registrarse correctamente en el sistema, incluyendo la validación de datos y la creación de perfiles.
+
+![Registro de usuarios](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/sign-up.png)
+
+2. **Inicio de sesión**: Asegurarse de que los usuarios puedan iniciar sesión con credenciales válidas y que se manejen correctamente los intentos fallidos.
+
+![Inicio de sesión](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/sign-in.png)
+
+3. **Creación de un distrito**: Probar la funcionalidad de creación de distritos, asegurándose de que los datos se guarden correctamente y que se puedan visualizar en la interfaz.
+
+![Creación de un distrito](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/districts-post.png)
+
+4. **Visualización de distritos**: Verificar que los usuarios puedan ver la lista de distritos creados y que la información mostrada sea precisa.
+
+![Visualización de distritos](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/districts-get.png)
+
+5. **Creación de un contenedor**: Asegurarse de que los usuarios puedan crear contenedores dentro de un distrito y que los datos se guarden correctamente.
+
+![Creación de un contenedor](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/containers-post.png)
+
+6. **Creación de un ciudadano**: Probar la funcionalidad de creación de ciudadanos, asegurándose de que los datos se guarden correctamente y que se puedan visualizar en la interfaz.
+
+![Creación de un ciudadano](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/citizens-post.png)
+
+![Visualización de ciudadanos](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/citizens-post-2.png)
+
+7. **Visualización de ciudadanos**: Verificar que los usuarios puedan ver la lista de ciudadanos creados y que la información mostrada sea precisa.
+
+![Visualización de ciudadanos](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/citizens-get.png)
+
+8. **Creación de un vehículo**: Asegurarse de que los usuarios puedan crear vehículos y que los datos se guarden correctamente.
+
+![Creación de un vehículo](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/vehicles-post.png)
+
+9. **Creación de una ruta**: Probar la funcionalidad de creación de rutas, asegurándose de que los datos se guarden correctamente y que se puedan visualizar en la interfaz.
+
+![Creación de una ruta](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/routes-post.png)
+
+10. **Creación de un vehículo**: Asegurarse de que los usuarios puedan crear vehículos y que los datos se guarden correctamente.
+
+![Creación de un vehículo](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/vehicles-post.png)
 
 # Capítulo VII: DevOps Practices
 
