@@ -8951,6 +8951,49 @@ Las pruebas confirman que el agregado **SensorReading** cumple con las reglas de
 
 ### 6.1.2. Core Integration Tests
 
+**Route Planning Execution**
+
+Se validaron los controladores del bounded context core Route Planning and Execution, asegurando la correcta integración entre los servicios RESTful y el dominio. Las pruebas siguieron el patrón **Arrange–Act–Assert (AAA)** y fueron ejecutadas con **Spring Boot Test** y **Mockito**, confirmando la funcionalidad de los endpoints clave.
+
+**Resumen de pruebas:**
+
+**Route Controller**
+
+Las pruebas tienen como objetivo verificar que el controlador REST de rutas funcione correctamente dentro del contexto real de la aplicación, usando TestRestTemplate para ejecutar peticiones HTTP reales y validar las respuestas del sistema.
+
+* La prueba POST comprueba que se pueda crear una nueva ruta correctamente, devolviendo código 201 Created y los datos esperados.
+
+* La prueba GET (todas las rutas) valida que el sistema liste las rutas existentes con respuesta 200 OK.
+
+* La prueba PUT verifica que una ruta pueda actualizarse exitosamente y que los cambios se reflejen con código 200 OK.
+
+* La prueba GET por ID asegura que una ruta específica pueda consultarse y se devuelva con los datos correctos.
+
+* La prueba DELETE confirma que una ruta pueda eliminarse y que el sistema responda con 204 No Content
+
+En conjunto, estas pruebas comprueban que los endpoints del controlador de rutas funcionan de extremo a extremo, manejan correctamente las operaciones CRUD, responden con los códigos de estado adecuados y se integran de forma coherente dentro del flujo de la aplicación.
+
+**Evidencia de ejecución:**
+![RouteControllerTest](assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.2.core-integration-tests/route-integration-test.png)
+
+
+**Waypoint Controller**
+Las pruebas de integración del WayPointControllerIntegrationTest verifican el correcto funcionamiento del controlador REST de puntos de ruta, asegurando que sus endpoints procesen correctamente las operaciones CRUD y devuelvan las respuestas esperadas dentro del contexto real de la aplicación.
+
+* La prueba de creación valida que el endpoint permita registrar un nuevo WayPoint con los datos enviados y que la respuesta sea 201 Created, confirmando una creación exitosa.
+
+* La prueba de obtención por ID comprueba que el sistema pueda recuperar un WayPoint específico y devuelva la información con código 200 OK.
+
+* La prueba de listado general verifica que el endpoint retorne correctamente todos los WayPoints almacenados y responda con 200 OK.
+
+* La prueba de actualización evalúa que un WayPoint existente pueda modificarse y que el controlador invoque correctamente al servicio correspondiente, reflejando los cambios esperados.
+
+* La prueba de eliminación garantiza que un WayPoint pueda eliminarse correctamente y que el controlador llame al servicio encargado, confirmando el flujo exitoso de eliminación
+
+En conjunto, estas pruebas aseguran que el WayPointControllerImpl maneje correctamente las solicitudes HTTP, integre de forma adecuada con la capa de servicios y mantenga la coherencia en las respuestas del API.
+
+![WaypointControllerTest](assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.2.core-integration-tests/waypoint-integration-test.png)
+
 ### 6.1.3. Core Behavior-Driven Development
 
 **Container Monitoring**
