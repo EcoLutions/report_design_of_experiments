@@ -9375,8 +9375,51 @@ Then debe devolver “false”
 
 And registrar una advertencia en el log “Ubicación fuera del distrito”
 
-
 ### 6.1.4. Core System Tests
+
+Aquí se muestran algunos ejemplos de pruebas del sistema central que se pueden realizar para garantizar su correcto funcionamiento:
+
+1. **Registro de usuarios**: Verificar que los usuarios puedan registrarse correctamente en el sistema, incluyendo la validación de datos y la creación de perfiles.
+
+![Registro de usuarios](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/sign-up.png)
+
+2. **Inicio de sesión**: Asegurarse de que los usuarios puedan iniciar sesión con credenciales válidas y que se manejen correctamente los intentos fallidos.
+
+![Inicio de sesión](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/sign-in.png)
+
+3. **Creación de un distrito**: Probar la funcionalidad de creación de distritos, asegurándose de que los datos se guarden correctamente y que se puedan visualizar en la interfaz.
+
+![Creación de un distrito](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/districts-post.png)
+
+4. **Visualización de distritos**: Verificar que los usuarios puedan ver la lista de distritos creados y que la información mostrada sea precisa.
+
+![Visualización de distritos](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/districts-get.png)
+
+5. **Creación de un contenedor**: Asegurarse de que los usuarios puedan crear contenedores dentro de un distrito y que los datos se guarden correctamente.
+
+![Creación de un contenedor](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/containers-post.png)
+
+6. **Creación de un ciudadano**: Probar la funcionalidad de creación de ciudadanos, asegurándose de que los datos se guarden correctamente y que se puedan visualizar en la interfaz.
+
+![Creación de un ciudadano](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/citizens-post.png)
+
+![Visualización de ciudadanos](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/citizens-post-2.png)
+
+7. **Visualización de ciudadanos**: Verificar que los usuarios puedan ver la lista de ciudadanos creados y que la información mostrada sea precisa.
+
+![Visualización de ciudadanos](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/citizens-get.png)
+
+8. **Creación de un vehículo**: Asegurarse de que los usuarios puedan crear vehículos y que los datos se guarden correctamente.
+
+![Creación de un vehículo](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/vehicles-post.png)
+
+9. **Creación de una ruta**: Probar la funcionalidad de creación de rutas, asegurándose de que los datos se guarden correctamente y que se puedan visualizar en la interfaz.
+
+![Creación de una ruta](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/routes-post.png)
+
+10. **Creación de un vehículo**: Asegurarse de que los usuarios puedan crear vehículos y que los datos se guarden correctamente.
+
+![Creación de un vehículo](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/vehicles-post.png)
 
 # Capítulo VII: DevOps Practices
 
