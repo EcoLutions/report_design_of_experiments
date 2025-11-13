@@ -2689,7 +2689,7 @@ Permite al administrador ver y editar su información personal, cambiar su contr
 ![logOutConfirmation.png](assets/images/chapter4/webApplicationUxUi/mockUps/municipalAdmin/logOutConfirmation.png)
 
 #### Notificación toast
-Debe aparecer como confirmación o feedback inmediato después de que el administrador realiza una acción clave, como crear una ruta o asignar un conductor. Es un mensaje breve que asegura al usuario que su acción fue exitosa sin interrumpir su flujo de trabajo. También, se utiliza para notificar errores críticos, como problemas de conexión a internet.
+Debe aparecer como confirmación     o feedback inmediato después de que el administrador realiza una acción clave, como crear una ruta o asignar un conductor. Es un mensaje breve que asegura al usuario que su acción fue exitosa sin interrumpir su flujo de trabajo. También, se utiliza para notificar errores críticos, como problemas de conexión a internet.
 
 ![updateNotificationToast.png](assets/images/chapter4/webApplicationUxUi/mockUps/municipalAdmin/updateNotificationToast.png)
 ![updatedReportToastNotification.png](assets/images/chapter4/webApplicationUxUi/mockUps/municipalAdmin/updatedReportToastNotification.png)
@@ -5246,6 +5246,43 @@ Aquí se muestran algunos ejemplos de pruebas del sistema central que se pueden 
 
 ![Creación de un vehículo](./assets/6.product-verification-validation/6.1.testing-suites-validation/6.1.4.core-system-tests/vehicles-post.png)
 
+
+## 6.2. Static testing & Verification
+
+### 6.2.1. Static Code Analysis
+
+#### 6.2.1.1. Coding standard & Code conventions
+
+#### 6.2.1.2. Code Quality & Code Security.
+
+### 6.2.2. Reviews
+
+## 6.3. Static testing & Verification
+
+### 6.3.1. Diseño de Entrevistas
+
+### 6.3.2. Registro de Entrevistas
+
+### 6.3.3. Evaluaciones según heurísticas
+
+## 6.4. Auditoría de Experiencias de Usuario
+
+### 6.4.1. Auditoria Realizada
+
+#### 6.4.1.1. Información del grupo auditado
+
+#### 6.4.1.2. Cronograma de auditoría realizada
+
+#### 6.4.1.3. Contenido de auditoría realizada
+
+### 6.4.2. Auditoria Recibida
+
+#### 6.4.1.1. Información del grupo auditor
+
+#### 6.4.1.2. Cronograma de auditoría recibida
+
+#### 6.4.1.3. Contenido de auditoría recibida
+
 # Capítulo VII: DevOps Practices
 
 ## 7.1. Continuous Integration
@@ -5747,6 +5784,55 @@ echo "✅ Deployment completed successfully!"
 - **Principio de menor privilegio**: Usuario del servidor con permisos mínimos necesarios
 - **Auditoría completa**: Logging detallado de todas las operaciones realizadas
 - **Validación de integridad**: Verificación automática de imágenes antes del despliegue
+
+## 7.4. Continuous Monitoring
+
+### 7.4.1. Tools and Practices
+
+### 7.4.2. Monitoring Pipeline Components
+
+### 7.4.3. Alerting Pipeline Components
+
+### 7.4.4. Notification Pipeline Components
+
+
+# Capítulo VIII: Experiment-Driven Development
+
+## 8.1.  Experiment Planning
+
+### 8.1.1. Tools and Practices
+
+### 8.1.2. Raw Material: Assumptions, Knowledge Gaps, Ideas, Claims
+
+### 8.1.3. Experiment-Ready Questions
+
+### 8.1.4. Question Backlog
+
+### 8.1.5. Experiment Cards
+
+## 8.2.  Experiment Design
+
+### 8.2.1. Hypotheses
+
+### 8.2.2. Domain Business Metrics
+
+### 8.2.3. Measures
+
+### 8.2.4. Conditions
+
+### 8.2.5. Scale Calculations and Decisions
+
+### 8.2.6. Methods Selection
+
+### 8.2.7. Data Analytics: Goals, KPIs and Metrics Selection
+
+### 8.2.8. Web and Mobile Tracking Plan.
+
+## 8.2.  Experimentation
+
+### 8.2.1. To-Be User Stories
+
+### 8.2.2. To-Be Product Backlog
 
 
 # Conclusiones
