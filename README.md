@@ -6136,6 +6136,20 @@ El pipeline de monitoreo de WasteTrack sigue un flujo que permite capturar, proc
 
 ### 7.4.3. Alerting Pipeline Components
 
+El sistema de alertas de WasteTrack permite detectar condiciones críticas y notificar al equipo antes de que afecten a los usuarios.
+
+- **Prometheus + Alertmanager:**
+    - Reglas para latencia elevada, errores 5xx, caídas del servicio o falta de telemetría de sensores.
+    - Alertmanager gestiona el envío de alertas según el nivel (warning, critical).
+
+- **Grafana Alerts:**
+    - Alertas definidas directamente en dashboards cuando una métrica supera umbrales (CPU, memoria, tasa de errores).
+
+- **Alertas de infraestructura:**
+    - Herramientas del proveedor notifican reinicios, fallos de despliegue o consumo excesivo de recursos.
+
+![Grafana](./assets/7.devops-practices/7.4.continuous-monitoring/7.4.3.alerting-pipeline-components/grafana.png)
+
 ### 7.4.4. Notification Pipeline Components
 
 # Capítulo VIII: Experiment-Driven Development
