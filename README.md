@@ -5271,9 +5271,223 @@ Aquí se muestran algunos ejemplos de pruebas del sistema central que se pueden 
 
 #### 6.4.1.1. Información del grupo auditado
 
+El grupo auditado está conformado por estudiantes de la carrera de Ingeniería de Software de la Universidad Peruana de Ciencias Aplicadas (UPC), quienes desarrollan el proyecto denominado *OnControl*. Este proyecto forma parte del curso de Diseño de Experimento de Software y se presenta como una propuesta tecnológica orientada al sector salud oncológica en el Perú.
+
+El proyecto OnControl busca brindar una solución integral para mejorar el seguimiento, organización y monitoreo de pacientes con diagnóstico oncológico, así como optimizar el flujo de trabajo de los médicos oncólogos. El grupo auditado ha diseñado y desarrollado una plataforma que integra:
+
+• Una aplicación web dirigida a médicos oncólogos.
+• Una aplicación móvil dirigida a pacientes oncológicos y sus cuidadores.
+• Un módulo de monitoreo basado en sensores IoT para registrar signos vitales como saturación de oxígeno, ritmo cardíaco y temperatura corporal.
+
+El enfoque del proyecto combina gestión clínica, accesibilidad de información y monitoreo en tiempo real. Los médicos pueden visualizar el historial clínico, registrar tratamientos, gestionar citas y acceder a reportes generados por la aplicación. Por su parte, los pacientes pueden revisar sus citas, recibir recordatorios y visualizar sus métricas de salud capturadas por los sensores.
+
+El proyecto presentado por el grupo auditado evidencia un trabajo multidisciplinario que involucra diseño UI/UX, desarrollo frontend y backend, integración con dispositivos IoT y definición de flujos de usuario orientados al ámbito clínico. El equipo proporcionó para la auditoría diversos insumos, incluyendo prototipos navegables, wireframes, capturas de la aplicación web, y documentación funcional del proyecto.
+
+El alcance evaluado se centró en las funcionalidades desplegadas por el grupo en la plataforma web, principalmente enfocadas en gestión de doctores, panel de organización, manejo de pacientes, generación de reportes y mecanismos de navegación interna.
+
 #### 6.4.1.2. Cronograma de auditoría realizada
 
+| Fecha      | Actividad                                | Descripción                                                                                                       |
+|------------| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| 11/11/2025 | Reunión inicial con el equipo auditado   | Se revisó el alcance de la evaluación, las tareas a analizar y los entregables esperados.                         |
+| 12/11/2025 | Revisión del material proporcionado      | Se analizaron los prototipos, wireframes, landing page, flujos y funcionalidades enviadas por el equipo auditado. |
+| 13/11/2025 | Ejecución de auditoría heurística        | Se evaluó la interfaz utilizando las 10 heurísticas de Nielsen y principios de arquitectura de información.       |
+| 13/11/2025 | Registro y clasificación de hallazgos    | Se documentaron los problemas, su severidad y la heurística violada.                                              |
+| 13/11/2025 | Validación y consolidación de resultados | Se revisaron los hallazgos para asegurar consistencia y claridad.                                                 |
+| 13/11/2025 | Elaboración del informe final            | Se redactó el documento formal de auditoría con recomendaciones y tabla resumen.                                  |
+| 13/11/2025 | Presentación y entrega del informe       | Se entregó el informe final al grupo auditado y se resolvieron dudas.                                             |
+
+
 #### 6.4.1.3. Contenido de auditoría realizada
+
+**UX Heuristics & Principles Evaluation**
+Usability – Inclusive Design – Information Architecture
+
+**CARRERA:** Ingeniería de Software
+**CURSO:** Diseño de Experimento de Software
+**PROFESORES:** Ivan Robles
+**AUDITOR:** Ecolutions - Grupo 2
+**CLIENTE:** OnControl - Grupo X
+
+**APP A EVALUAR:**
+OnControl - Web Application
+
+**TAREAS A EVALUAR:**
+El alcance de esta evaluación incluye la revisión de la usabilidad de las siguientes tareas:
+
+**Site Web**
+
+| ID | Tarea                                                              |
+| -- | ------------------------------------------------------------------ |
+| 1  | Inicio de sesión                                                   |
+| 2  | Recuperación de contraseña                                         |
+| 3  | Navegación del panel del administrador (Dashboard de Organización) |
+| 4  | Gestión de doctores (listar, ver, agregar)                         |
+| 5  | Panel médico (Dashboard, pacientes, citas, reportes)               |
+| 6  | Generación de reportes y exportación a PDF                         |
+
+No están incluidas en esta versión de la evaluación las siguientes tareas debido a que no están incluidas en su landing page, wireframes o prototipos. Asimismo, solo se presenta lo asociado al segmento objetivo “niño autista”, ya que el segmento profesor no fue desarrollado por el equipo auditado.
+
+**Site Web**
+
+| ID | Tarea                                       |
+| -- | ------------------------------------------- |
+| 1  | Gestión de pacientes (crear/editar)         |
+| 2  | Gestión de tratamientos                     |
+| 3  | Gestión del calendario médico               |
+| 4  | Funciones avanzadas de reportes predictivos |
+| 5  | Administración de organizaciones o clínicas |
+
+**ESCALA DE SEVERIDAD:**
+Los errores serán puntuados tomando en cuenta la siguiente escala:
+
+| Nivel | Descripción                                                                                                                            |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| 1     | Problema superficial: puede ser superado fácilmente o es poco frecuente. No necesita ser corregido a menos que haya tiempo disponible. |
+| 2     | Problema menor: ocurre con más frecuencia o es más difícil de superar. Prioridad baja para el siguiente release.                       |
+| 3     | Problema mayor: ocurre frecuentemente o los usuarios no pueden resolverlo. Debe corregirse con prioridad alta.                         |
+| 4     | Problema muy grave: impide continuar con el uso de la herramienta. Debe corregirse antes del lanzamiento.                              |
+
+
+
+**TABLA RESUMEN**
+
+| Nº | Problema                                                                 | Severidad | Heurística violada                 |
+| -- | ------------------------------------------------------------------------ | --------- | ---------------------------------- |
+| 1  | El botón “Volver al inicio de sesión” no respeta el estándar de posición | 2         | Consistencia y estándares          |
+| 2  | Tiempo de carga excesivo en el Dashboard de Organización                 | 3         | Eficiencia y uso flexible          |
+| 3  | Botones “Generar Reporte” y “Exportar PDF” no funcionan                  | 4         | Visibilidad del estado del sistema |
+| 4  | Desbordamiento de contenido en los chips de contacto                     | 2         | Diseño estético y minimalista      |
+| 5  | Formulario de agregar doctor excesivamente largo                         | 2         | Minimalismo y estilo               |
+| 6  | Menú lateral sin etiquetas en estado colapsado                           | 2         | Reconocer por encima del recuerdo  |
+| 7  | Menú de perfil con demasiada transparencia                               | 2         | Visibilidad del estado del sistema |
+| 8  | Checkbox poco distinguibles al reportar un síntoma                       | 2         | Visibilidad del estado del sistema |
+
+**DETALLES DE LOS PROBLEMAS**
+
+**Problema 1: Posición inconsistente del botón “Volver al inicio de sesión”**
+
+**Severidad:** 2
+**Heurística violada:** Consistencia y estándares
+
+**Problema:**
+En la pantalla de recuperación de contraseña, el botón aparece centrado. Esto rompe el estándar de navegación donde los controles de retorno se ubican arriba a la izquierda.
+
+**Evidencia:**
+![Evidencia Problema 1](assets/6.product-verification-validation/6.4.auditoria-experiencias-de-usuario/6.4.1.3.contenido-de-auditoría-realizada/issue-1.png)
+
+**Recomendaciones:**
+• Mover el control a la esquina superior izquierda.
+
+**Problema 2: Tiempo de carga excesivo en el Dashboard de Organización**
+
+**Severidad:** 3
+**Heurística violada:** Eficiencia y uso flexible
+
+**Problema:**
+Aunque existe un loader, los datos tardan 4–5 segundos en aparecer. Esto afecta la percepción de rendimiento.
+
+**Evidencia:**
+![Evidencia Problema 2](assets/6.product-verification-validation/6.4.auditoria-experiencias-de-usuario/6.4.1.3.contenido-de-auditoría-realizada/issue-2.png)
+
+**Recomendaciones:**
+• Optimizar consultas o reducir datos cargados inicialmente.
+• Si no es posible reducir el tiempo, mejorar el feedback:
+– Animaciones suaves
+– Mensaje: “Cargando datos de tu organización…”
+
+**Problema 3: Botones “Generar Reporte” y “Exportar PDF” no funcionan**
+
+**Severidad:** 4
+**Heurística violada:** Prevención de errores y visibilidad del estado del sistema
+
+**Problema:**
+Los botones son clickeables pero no producen acción visible ni muestran errores. El sistema no comunica procesamiento ni fallas.
+
+**Evidencia:**
+![Evidencia Problema 3](assets/6.product-verification-validation/6.4.auditoria-experiencias-de-usuario/6.4.1.3.contenido-de-auditoría-realizada/issue-3.png)
+
+**Recomendaciones:**
+• Proveer feedback inmediato (cambiar texto a “Generando…”).
+• Mostrar loader dentro del botón.
+• Deshabilitar interacción mientras se procesa.
+• Manejar errores del backend.
+
+**Problema 4: Desbordamiento de contenido en los chips de contacto**
+
+**Severidad:** 2
+**Heurística violada:** Diseño estético y minimalista
+
+**Problema:**
+En dispositivos móviles, el email en el chip se desborda o roza los bordes, reduciendo legibilidad.
+
+**Evidencia:**
+![Evidencia Problema 4](assets/6.product-verification-validation/6.4.auditoria-experiencias-de-usuario/6.4.1.3.contenido-de-auditoría-realizada/issue-4.png)
+
+**Recomendaciones:**
+• Incrementar padding horizontal.
+• Permitir truncado elegante (“correo_largo…@gmail.com”).
+
+**Problema 5: Formulario de agregar paciente demasiado largo**
+
+**Severidad:** 2
+**Heurística violada:** Diseño estético y minimalista
+
+**Problema:**
+Se requiere un largo scroll. El exceso de campos genera fatiga y errores.
+
+**Evidencia:**
+![Evidencia Problema 5](assets/6.product-verification-validation/6.4.auditoria-experiencias-de-usuario/6.4.1.3.contenido-de-auditoría-realizada/issue-5.png)
+
+**Recomendaciones:**
+• Implementar formulario multipaso (wizard).
+• Mostrar ciertas secciones bajo demanda.
+• Indicar progreso.
+
+**Problema 6: Menú lateral sin etiquetas en estado colapsado**
+
+**Severidad:** 2
+**Heurística violada:** Reconocer por encima del recuerdo
+
+**Problema:**
+Solo se muestran iconos. El usuario debe recordar qué icono representa cada sección.
+
+**Evidencia:**
+![Evidencia Problema 6](assets/6.product-verification-validation/6.4.auditoria-experiencias-de-usuario/6.4.1.3.contenido-de-auditoría-realizada/issue-6.png)
+
+**Recomendaciones:**
+• Agregar labels descriptivos.
+• Expandir menú al hacer hover.
+
+**Problema 7: Menú de perfil con demasiada transparencia**
+
+**Severidad:** 2
+**Heurística violada:** Visibilidad del estado del sistema
+
+**Problema:**
+El fondo transparente dificulta lectura si hay contenido detrás.
+
+**Evidencia:**
+![Evidencia Problema 7](assets/6.product-verification-validation/6.4.auditoria-experiencias-de-usuario/6.4.1.3.contenido-de-auditoría-realizada/issue-7.png)
+
+**Recomendaciones:**
+• Usar fondo sólido o con mayor opacidad.
+
+**Problema 8: Checkbox poco distinguibles en la pantalla de Reportar Síntoma**
+
+**Severidad:** 2
+**Heurística violada:** Visibilidad del estado del sistema
+
+**Problema:**
+Los checkbox se confunden con el fondo gris, no parecen elementos seleccionables.
+
+**Evidencia:**
+![Evidencia Problema 8](assets/6.product-verification-validation/6.4.auditoria-experiencias-de-usuario/6.4.1.3.contenido-de-auditoría-realizada/issue-8.png)
+
+**Recomendaciones:**
+• Ajustar color del borde para mejorar contraste.
+
+umeración automática**, ponerlo en **formato PDF**, o convertirlo en tu **sección final para TB3**.
 
 ### 6.4.2. Auditoria Recibida
 
