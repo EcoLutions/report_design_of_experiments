@@ -5295,7 +5295,7 @@ Aquí se muestran algunos ejemplos de pruebas del sistema central que se pueden 
 
 ### 6.2.2. Reviews
 
-## 6.3. Static testing & Verification
+## 6.3. Validation Interviews
 
 ### 6.3.1. Diseño de Entrevistas
 
@@ -5315,11 +5315,11 @@ Aquí se muestran algunos ejemplos de pruebas del sistema central que se pueden 
 
 ### 6.4.2. Auditoria Recibida
 
-#### 6.4.1.1. Información del grupo auditor
+#### 6.4.2.1. Información del grupo auditor
 
-#### 6.4.1.2. Cronograma de auditoría recibida
+#### 6.4.2.2. Cronograma de auditoría recibida
 
-#### 6.4.1.3. Contenido de auditoría recibida
+#### 6.4.2.3. Resumen de modificaciones para subsanar hallazgos
 
 # Capítulo VII: DevOps Practices
 
