@@ -472,6 +472,9 @@ Este patrón de colaboración sienta las bases para el éxito continuo del proye
     * [8.2.5. Methods Selection](#825-methods-selection)
     * [8.2.6. Data Analytics: Goals, KPIs and Metrics Selection](#826-data-analytics-goals-kpis-and-metrics-selection)
     * [8.2.7. Web and Mobile Tracking Plan](#827-web-and-mobile-tracking-plan)
+  * [8.3. Experimentation](#83-experimentation)
+    * [8.3.1. To-Be User Stories](#831-to-be-user-stories)
+    * [8.3.2. To-Be Product Backlog](#832-to-be-product-backlog)
 * [Conclusiones](#conclusiones)
 * [Bibliografía](#bibliografía)
 * [Anexos](#anexos)
@@ -6290,11 +6293,11 @@ Hypothesis: Se espera aumentar la satisfacción con la plataforma y mejorar la a
 
 ### 8.2.8. Web and Mobile Tracking Plan.
 
-## 8.2.  Experimentation
+## 8.3.  Experimentation
 
-### 8.2.1. To-Be User Stories
+### 8.3.1. To-Be User Stories
 
-### 8.2.2. To-Be Product Backlog
+### 8.3.2. To-Be Product Backlog
 
 
 # Conclusiones
