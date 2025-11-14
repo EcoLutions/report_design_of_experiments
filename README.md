@@ -5421,6 +5421,81 @@ Para garantizar un código limpio, mantenible y coherente entre todos los miembr
 
 #### 6.2.1.2. Code Quality & Code Security.
 
+Para garantizar que WasteTrack mantenga un código robusto, seguro y de alta calidad, se aplicó un proceso continuo de análisis estático y verificación de métricas en todas las tecnologías empleadas: backend (Java Spring Boot), web apps (Angular), landing page (Next.js), y mobile (Flutter). El equipo evaluó tanto la calidad del código como la presencia de vulnerabilidades comunes, integrando herramientas automatizadas en el flujo de desarrollo.
+
+---
+
+**1. Evaluación de la calidad del código**
+
+- Se monitorean métricas clave como:
+    - Complejidad ciclomática.
+    - Duplicación de código.
+    - Mantenibilidad y presencia de code smells.
+    - Variables y funciones no utilizadas.
+    - Cobertura de pruebas unitarias en backend y mobile.
+
+- WasteTrack utiliza herramientas especializadas según cada tecnología:
+    - **Backend (Java):** SonarQube, SpotBugs, PMD y SonarLint.
+    - **Angular y Next.js (TypeScript):** ESLint + SonarQube.
+    - **Flutter (Dart):** dart analyze + SonarQube.
+
+- Los reportes de SonarQube permiten identificar:
+    - Métodos con complejidad excesiva en servicios de dominio.
+    - Duplicación en componentes frontend.
+    - Excepciones no controladas en controladores Spring Boot.
+    - Lógica redundante en servicios móviles.
+
+---
+
+**2. Seguridad del código**
+
+Para proteger a WasteTrack de ataques comunes y asegurar que los datos municipales y de sensores IoT se mantengan seguros, se implementaron las siguientes medidas:
+
+- **Inyección SQL (SQL Injection)**
+    - Todas las consultas en el backend se realizan mediante Spring Data JPA con parámetros, evitando concatenación de strings.
+    - Se utilizan consultas JPQL tipeadas y repositorios seguros.
+
+- **Cross-Site Scripting (XSS)**
+    - En Angular se aplica el sistema de sanitización automática del framework, especialmente al manejar datos dinámicos provenientes del backend.
+    - Se evita el uso de `innerHTML` salvo en casos estrictamente necesarios, aplicando `DomSanitizer`.
+    - En Next.js se evita interpolación insegura en componentes y se habilitan políticas de Content Security Policy (CSP) en producción.
+
+- **Cross-Site Request Forgery (CSRF)**
+    - La comunicación entre frontend y backend utiliza exclusivamente tokens JWT por encabezado HTTP `Authorization`, evitando sesiones vulnerables.
+
+- **Manejo de información sensible**
+    - Tokens JWT poseen expiración definida y se transmiten únicamente por HTTPS.
+    - Las credenciales de acceso a la plataforma IoT (sensores, gateways, APIs) se gestionan mediante variables de entorno y no se almacenan en el repositorio.
+    - En la app móvil, los tokens se almacenan usando mecanismos seguros como `flutter_secure_storage`.
+
+- **Validación de entradas**
+    - Se validan los payloads en controladores del backend con `@Valid` y anotaciones de Bean Validation.
+    - En Angular y Next.js se validan formularios mediante Reactive Forms y validaciones del lado del cliente.
+    - En Flutter se implementan validadores antes de enviar cualquier dato al backend.
+
+---
+
+**3. Herramientas complementarias utilizadas**
+
+- **SonarQube**: análisis profundo del código en backend, frontend y mobile (bugs, vulnerabilidades, code smells, duplicación).
+- **SonarLint**: detección inmediata de problemas dentro de IntelliJ, VSCode y Android Studio.
+- **ESLint**: verificación de estilo, errores comunes y vulnerabilidades básicas en Angular y Next.js.
+- **dart analyze** y **flutter analyze**: aseguramiento de calidad en Flutter.
+- **Dependabot (GitHub)**: detección de dependencias desactualizadas o vulnerables en todos los repositorios.
+
+---
+
+**4. Resultados generales del proceso de análisis**
+
+- Reducción significativa de duplicación en componentes Angular y Next.js.
+- Identificación y refactorización de métodos con alta complejidad en servicios del backend (estrategias de optimización de rutas, cálculo de permanencia, etc.).
+- Eliminación de variables y archivos no utilizados en repositorios frontend.
+- Corrección de posibles puntos de XSS en Angular durante la manipulación de contenido dinámico.
+- Validación más estricta de payloads en endpoints críticos del backend (altas de sensores, telemetría, alertas).
+- Aseguramiento de que los tokens sean manejados bajo prácticas seguras en la app móvil y en los frontends.
+
+Estas acciones fortalecieron la calidad estructural del sistema y aseguraron que WasteTrack sea resistente a vulnerabilidades comunes, manteniendo la seguridad de los datos municipales y ambientales gestionados por la plataforma.
+
 ### 6.2.2. Reviews
 
 ## 6.3. Validation Interviews
