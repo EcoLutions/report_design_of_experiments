@@ -5498,6 +5498,80 @@ Estas acciones fortalecieron la calidad estructural del sistema y aseguraron que
 
 ### 6.2.2. Reviews
 
+Para garantizar la calidad, consistencia y seguridad del código en WasteTrack, el equipo implementó un proceso riguroso de revisiones que combina evaluaciones manuales, revisiones entre pares y análisis automático. Este proceso asegura que cada cambio que entra al sistema sea seguro, mantenible y coherente con las buenas prácticas de desarrollo adoptadas para el backend (Spring Boot), web apps (Angular), landing page (Next.js) y mobile (Flutter).
+
+---
+
+**1. Tipos de revisión**
+
+- **Revisión entre pares (Peer Review)**
+    - Todo cambio debe ser revisado por al menos un miembro del equipo antes de integrarse.
+    - Se evalúa legibilidad, claridad, mantenibilidad, y adherencia a estándares específicos por tecnología.
+
+- **Revisión formal**
+    - Para funcionalidades críticas del dominio (optimización de rutas, alertas de desborde, procesamiento IoT), se realiza una revisión estructurada utilizando un checklist técnico.
+    - Participan al menos dos desarrolladores y, cuando corresponde, líderes de dominio.
+
+- **Revisión automática**
+    - Herramientas como **SonarQube**, **SonarLint**, **ESLint**, **dart analyze** y **GitHub Actions** detectan de manera automatizada errores, vulnerabilidades y code smells antes del merge.
+    - Permiten identificar complejidad elevada, duplicación, problemas de estilo o inseguridad en el manejo de datos.
+
+---
+
+**2. Proceso de revisión**
+
+- **Pull Requests (PR)**
+    - Cada cambio debe entrar mediante un PR con una descripción clara del alcance, el motivo del cambio y las pruebas realizadas.
+    - Los PR deben vincularse a una historia de usuario o issue del sistema (GitHub Projects o Jira).
+
+- **Checklist de revisión**
+    - Claridad y legibilidad del código.
+    - Cumplimiento de las convenciones de estilo (Java, TypeScript y Dart).
+    - Validación de datos y manejo adecuado de errores.
+    - Ausencia de duplicación y complejidad excesiva.
+    - Seguridad: sin puntos vulnerables a XSS, SQL Injection u otros ataques.
+    - Verificación de que los cambios no rompen flujos existentes.
+
+- **Comentarios y feedback constructivo**
+    - Los revisores deben justificar cada observación y sugerir alternativas viables.
+    - Se promueve una cultura de mejora continua y aprendizaje colaborativo.
+
+- **Aprobación de PR**
+    - Ningún cambio se fusiona a la rama develop o main sin al menos **una aprobación externa**.
+    - Los PR que afectan módulos sensibles requieren doble aprobación.
+    - Los cambios deben pasar los checks automáticos de CI/CD antes de poder aceptarse.
+
+---
+
+**3. Criterios de aceptación**
+
+- Cumplimiento de estándares de estilo y estructura definidos para cada tecnología.
+- Ausencia de vulnerabilidades detectadas por análisis estático (SQL Injection, XSS, malas prácticas de manejo de tokens).
+- Pruebas exitosas tanto en backend (JUnit) como en frontend/mobile.
+- Cobertura mínima recomendada: **superior al 80%** para módulos críticos.
+- No generar regresiones o fallos en módulos existentes.
+- Mantener coherencia con los principios de DDD en bounded contexts (Routing, Monitoring, Alerts, WasteBinManagement).
+
+---
+
+**4. Frecuencia de las revisiones**
+
+- Las revisiones se realizan constantemente como parte del flujo diario de trabajo.
+- Se intensifican durante el cierre de cada sprint para garantizar que todo el código que avance a releases mantenga el nivel esperado.
+- En funcionalidades clave del dominio, se aplican revisiones especiales antes de pasar al entorno de pruebas (staging).
+
+---
+
+**5. Resultados del proceso de revisión en WasteTrack**
+
+- Identificación temprana de duplicación en componentes Angular y Next.js.
+- Reducción de complejidad en servicios del backend relacionados con algoritmos de optimización de rutas.
+- Eliminación de prácticas inseguras en la manipulación del DOM en Angular.
+- Corrección del uso incorrecto de proveedores en Flutter y componentes mal estructurados.
+- Mejoras en la documentación interna del dominio y en la consistencia entre bounded contexts.
+
+Este proceso garantiza que WasteTrack mantenga una base de código robusta, segura y alineada con los estándares de ingeniería requeridos para una solución IoT crítica orientada a municipalidades.
+
 ## 6.3. Validation Interviews
 
 ### 6.3.1. Diseño de Entrevistas
