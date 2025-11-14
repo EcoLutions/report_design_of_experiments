@@ -5291,9 +5291,286 @@ Aquí se muestran algunos ejemplos de pruebas del sistema central que se pueden 
 
 #### 6.2.1.1. Coding standard & Code conventions
 
+Para garantizar un código limpio, mantenible y coherente entre todos los miembros del equipo de EcoLutions, se establecieron estándares de codificación alineados con las buenas prácticas de Java, Spring Boot y Domain-Driven Design (DDD). Estos lineamientos aseguran que la base de código de WasteTrack sea clara, escalable y fácil de extender conforme la plataforma crece.
+
+**1. Estándares generales**
+
+- Clean Code
+    - Uso de nombres significativos para clases, variables, métodos y paquetes.
+    - Métodos con una única responsabilidad.
+    - Eliminación de código duplicado o muerto.
+    - Comentarios solo cuando la lógica es compleja; el código debe ser autoexplicativo.
+
+- Consistencia visual
+    - Estilos de formato automáticos según cada tecnología (Google Java Format, Prettier, ESLint).
+    - Indentación consistente (Java: 4 espacios, TS/Dart: 2 espacios).
+    - Orden uniforme de imports y uso de linters para estandarizar estilo.
+
+---
+
+**2. Estándares de backend (Java + Spring Boot)**
+
+- Naming Conventions
+    - Clases y métodos: PascalCase
+    - Variables y atributos: camelCase
+    - Constantes: MAYÚSCULAS_CON_GUIONES
+    - Paquetes: minúsculas
+
+- Uso correcto de Spring Boot
+    - Inyección de dependencias mediante constructor injection.
+    - Separación por capas siguiendo DDD: domain, application, infrastructure, api.
+    - Controladores ligeros, sin lógica de negocio.
+    - Configuración externa con application.yml y @ConfigurationProperties.
+
+- Calidad de código
+    - Validación con Checkstyle, PMD, SpotBugs y SonarLint.
+    - GitHub Actions ejecuta análisis estático en cada pull request.
+
+---
+
+**3. Estándares para landing page (Next.js + TypeScript)**
+
+- Uso de ESLint y Prettier con configuraciones recomendadas de Next.js.
+- Componentes escritos como funciones puras y reutilizables.
+- Estructura de carpetas clara: app/, components/, hooks/, lib/, styles/.
+- Tipado estricto con TypeScript (evitar "any").
+- Nombres descriptivos para props, métodos y hooks personalizados.
+- No incluir lógica pesada en componentes: mover cálculo y utilidades a helpers o servicios.
+- Uso de React Server Components cuando corresponde para mejorar rendimiento.
+
+---
+
+**4. Estándares para web app (Angular + TypeScript)**
+
+- Conventions Angular
+    - Componentes, módulos y servicios nombrados usando PascalCase.
+    - Variables, funciones y parámetros en camelCase.
+    - Separación clara de responsabilidades por archivos: .ts, .html, .scss.
+
+- Buenas prácticas
+    - Tipado estricto, uso de interfaces y modelos de dominio.
+    - Servicios con responsabilidad específica; evitar lógica en componentes.
+    - Uso de RxJS con buenas prácticas (unsubscribe, async pipe).
+
+- Herramientas
+    - ESLint + Prettier para formateo y estilo.
+    - Angular CLI para mantener convención en creación de archivos.
+
+---
+
+**5. Estándares para mobile app (Flutter + Dart)**
+
+- Clean Dart
+    - Indentación automática con dart format.
+    - Métodos y variables en camelCase; clases en PascalCase.
+    - Widgets pequeños, declarativos y reutilizables.
+    - Arquitectura por capas utilizando patrones como BLoC, Riverpod o Provider.
+
+- Código seguro y mantenible
+    - Evitar lógica dentro de widgets: usar controladores o blocs.
+    - Tipado estricto y uso adecuado de null safety.
+    - Mantener carpetas por dominios: ui/, data/, domain/, widgets/.
+
+- Validación
+    - Flutter analyze para revisión del código.
+    - Tests unitarios para lógica de negocio.
+
+---
+
+**6. Domain-Driven Design (DDD)**
+
+- Bounded Contexts
+    - Separación clara del dominio en módulos como Monitoring, Routing, WasteBinManagement y Alerts.
+
+- Patrones aplicados
+    - Entidades con identidad persistente.
+    - Value Objects inmutables (FillLevel, GeoLocation).
+    - Domain Services para lógica sin dueño claro.
+    - Repositorios como abstracción del acceso a datos.
+    - Agregados con reglas e invariantes.
+
+- Lenguaje ubicuo
+    - Uso consistente de términos del negocio: nivel de llenado, sensor IoT, permanencia, ruta óptima, alerta de desborde.
+
+---
+
+**7. Herramientas de análisis y verificación**
+
+- Backend: Checkstyle, PMD, SpotBugs, SonarLint.
+- Frontend (Next.js / Angular): ESLint + Prettier.
+- Mobile (Flutter): flutter analyze + linters oficiales.
+- GitHub Actions
+    - Corre validaciones automáticas en cada PR para garantizar consistencia.
+
+---
+
+**8. Prácticas de documentación**
+
+- Backend: JavaDoc en métodos públicos y servicios.
+- Frontend y mobile: comentarios mínimos cuando la lógica no sea evidente.
+- Uso de ADR (Architecture Decision Records) para registrar decisiones clave.
+- Convenciones de commits siguiendo Conventional Commits.
+
+---
+
+**9. Ejecución en equipo**
+
+- Revisión obligatoria de cada Pull Request.
+- Evaluación de estilo, legibilidad, claridad y adherencia a estándares.
+- Se mantienen reglas para reducir deuda técnica y mejorar la mantenibilidad de WasteTrack.
+
 #### 6.2.1.2. Code Quality & Code Security.
 
+Para garantizar que WasteTrack mantenga un código robusto, seguro y de alta calidad, se aplicó un proceso continuo de análisis estático y verificación de métricas en todas las tecnologías empleadas: backend (Java Spring Boot), web apps (Angular), landing page (Next.js), y mobile (Flutter). El equipo evaluó tanto la calidad del código como la presencia de vulnerabilidades comunes, integrando herramientas automatizadas en el flujo de desarrollo.
+
+---
+
+**1. Evaluación de la calidad del código**
+
+- Se monitorean métricas clave como:
+    - Complejidad ciclomática.
+    - Duplicación de código.
+    - Mantenibilidad y presencia de code smells.
+    - Variables y funciones no utilizadas.
+    - Cobertura de pruebas unitarias en backend y mobile.
+
+- WasteTrack utiliza herramientas especializadas según cada tecnología:
+    - **Backend (Java):** SonarQube, SpotBugs, PMD y SonarLint.
+    - **Angular y Next.js (TypeScript):** ESLint + SonarQube.
+    - **Flutter (Dart):** dart analyze + SonarQube.
+
+- Los reportes de SonarQube permiten identificar:
+    - Métodos con complejidad excesiva en servicios de dominio.
+    - Duplicación en componentes frontend.
+    - Excepciones no controladas en controladores Spring Boot.
+    - Lógica redundante en servicios móviles.
+
+---
+
+**2. Seguridad del código**
+
+Para proteger a WasteTrack de ataques comunes y asegurar que los datos municipales y de sensores IoT se mantengan seguros, se implementaron las siguientes medidas:
+
+- **Inyección SQL (SQL Injection)**
+    - Todas las consultas en el backend se realizan mediante Spring Data JPA con parámetros, evitando concatenación de strings.
+    - Se utilizan consultas JPQL tipeadas y repositorios seguros.
+
+- **Cross-Site Scripting (XSS)**
+    - En Angular se aplica el sistema de sanitización automática del framework, especialmente al manejar datos dinámicos provenientes del backend.
+    - Se evita el uso de `innerHTML` salvo en casos estrictamente necesarios, aplicando `DomSanitizer`.
+    - En Next.js se evita interpolación insegura en componentes y se habilitan políticas de Content Security Policy (CSP) en producción.
+
+- **Cross-Site Request Forgery (CSRF)**
+    - La comunicación entre frontend y backend utiliza exclusivamente tokens JWT por encabezado HTTP `Authorization`, evitando sesiones vulnerables.
+
+- **Manejo de información sensible**
+    - Tokens JWT poseen expiración definida y se transmiten únicamente por HTTPS.
+    - Las credenciales de acceso a la plataforma IoT (sensores, gateways, APIs) se gestionan mediante variables de entorno y no se almacenan en el repositorio.
+    - En la app móvil, los tokens se almacenan usando mecanismos seguros como `flutter_secure_storage`.
+
+- **Validación de entradas**
+    - Se validan los payloads en controladores del backend con `@Valid` y anotaciones de Bean Validation.
+    - En Angular y Next.js se validan formularios mediante Reactive Forms y validaciones del lado del cliente.
+    - En Flutter se implementan validadores antes de enviar cualquier dato al backend.
+
+---
+
+**3. Herramientas complementarias utilizadas**
+
+- **SonarQube**: análisis profundo del código en backend, frontend y mobile (bugs, vulnerabilidades, code smells, duplicación).
+- **SonarLint**: detección inmediata de problemas dentro de IntelliJ, VSCode y Android Studio.
+- **ESLint**: verificación de estilo, errores comunes y vulnerabilidades básicas en Angular y Next.js.
+- **dart analyze** y **flutter analyze**: aseguramiento de calidad en Flutter.
+- **Dependabot (GitHub)**: detección de dependencias desactualizadas o vulnerables en todos los repositorios.
+
+---
+
+**4. Resultados generales del proceso de análisis**
+
+- Reducción significativa de duplicación en componentes Angular y Next.js.
+- Identificación y refactorización de métodos con alta complejidad en servicios del backend (estrategias de optimización de rutas, cálculo de permanencia, etc.).
+- Eliminación de variables y archivos no utilizados en repositorios frontend.
+- Corrección de posibles puntos de XSS en Angular durante la manipulación de contenido dinámico.
+- Validación más estricta de payloads en endpoints críticos del backend (altas de sensores, telemetría, alertas).
+- Aseguramiento de que los tokens sean manejados bajo prácticas seguras en la app móvil y en los frontends.
+
+Estas acciones fortalecieron la calidad estructural del sistema y aseguraron que WasteTrack sea resistente a vulnerabilidades comunes, manteniendo la seguridad de los datos municipales y ambientales gestionados por la plataforma.
+
 ### 6.2.2. Reviews
+
+Para garantizar la calidad, consistencia y seguridad del código en WasteTrack, el equipo implementó un proceso riguroso de revisiones que combina evaluaciones manuales, revisiones entre pares y análisis automático. Este proceso asegura que cada cambio que entra al sistema sea seguro, mantenible y coherente con las buenas prácticas de desarrollo adoptadas para el backend (Spring Boot), web apps (Angular), landing page (Next.js) y mobile (Flutter).
+
+---
+
+**1. Tipos de revisión**
+
+- **Revisión entre pares (Peer Review)**
+    - Todo cambio debe ser revisado por al menos un miembro del equipo antes de integrarse.
+    - Se evalúa legibilidad, claridad, mantenibilidad, y adherencia a estándares específicos por tecnología.
+
+- **Revisión formal**
+    - Para funcionalidades críticas del dominio (optimización de rutas, alertas de desborde, procesamiento IoT), se realiza una revisión estructurada utilizando un checklist técnico.
+    - Participan al menos dos desarrolladores y, cuando corresponde, líderes de dominio.
+
+- **Revisión automática**
+    - Herramientas como **SonarQube**, **SonarLint**, **ESLint**, **dart analyze** y **GitHub Actions** detectan de manera automatizada errores, vulnerabilidades y code smells antes del merge.
+    - Permiten identificar complejidad elevada, duplicación, problemas de estilo o inseguridad en el manejo de datos.
+
+---
+
+**2. Proceso de revisión**
+
+- **Pull Requests (PR)**
+    - Cada cambio debe entrar mediante un PR con una descripción clara del alcance, el motivo del cambio y las pruebas realizadas.
+    - Los PR deben vincularse a una historia de usuario o issue del sistema (GitHub Projects o Jira).
+
+- **Checklist de revisión**
+    - Claridad y legibilidad del código.
+    - Cumplimiento de las convenciones de estilo (Java, TypeScript y Dart).
+    - Validación de datos y manejo adecuado de errores.
+    - Ausencia de duplicación y complejidad excesiva.
+    - Seguridad: sin puntos vulnerables a XSS, SQL Injection u otros ataques.
+    - Verificación de que los cambios no rompen flujos existentes.
+
+- **Comentarios y feedback constructivo**
+    - Los revisores deben justificar cada observación y sugerir alternativas viables.
+    - Se promueve una cultura de mejora continua y aprendizaje colaborativo.
+
+- **Aprobación de PR**
+    - Ningún cambio se fusiona a la rama develop o main sin al menos **una aprobación externa**.
+    - Los PR que afectan módulos sensibles requieren doble aprobación.
+    - Los cambios deben pasar los checks automáticos de CI/CD antes de poder aceptarse.
+
+---
+
+**3. Criterios de aceptación**
+
+- Cumplimiento de estándares de estilo y estructura definidos para cada tecnología.
+- Ausencia de vulnerabilidades detectadas por análisis estático (SQL Injection, XSS, malas prácticas de manejo de tokens).
+- Pruebas exitosas tanto en backend (JUnit) como en frontend/mobile.
+- Cobertura mínima recomendada: **superior al 80%** para módulos críticos.
+- No generar regresiones o fallos en módulos existentes.
+- Mantener coherencia con los principios de DDD en bounded contexts (Routing, Monitoring, Alerts, WasteBinManagement).
+
+---
+
+**4. Frecuencia de las revisiones**
+
+- Las revisiones se realizan constantemente como parte del flujo diario de trabajo.
+- Se intensifican durante el cierre de cada sprint para garantizar que todo el código que avance a releases mantenga el nivel esperado.
+- En funcionalidades clave del dominio, se aplican revisiones especiales antes de pasar al entorno de pruebas (staging).
+
+---
+
+**5. Resultados del proceso de revisión en WasteTrack**
+
+- Identificación temprana de duplicación en componentes Angular y Next.js.
+- Reducción de complejidad en servicios del backend relacionados con algoritmos de optimización de rutas.
+- Eliminación de prácticas inseguras en la manipulación del DOM en Angular.
+- Corrección del uso incorrecto de proveedores en Flutter y componentes mal estructurados.
+- Mejoras en la documentación interna del dominio y en la consistencia entre bounded contexts.
+
+Este proceso garantiza que WasteTrack mantenga una base de código robusta, segura y alineada con los estándares de ingeniería requeridos para una solución IoT crítica orientada a municipalidades.
 
 ## 6.3. Validation Interviews
 
