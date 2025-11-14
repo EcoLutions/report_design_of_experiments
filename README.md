@@ -5291,6 +5291,134 @@ Aquí se muestran algunos ejemplos de pruebas del sistema central que se pueden 
 
 #### 6.2.1.1. Coding standard & Code conventions
 
+Para garantizar un código limpio, mantenible y coherente entre todos los miembros del equipo de EcoLutions, se establecieron estándares de codificación alineados con las buenas prácticas de Java, Spring Boot y Domain-Driven Design (DDD). Estos lineamientos aseguran que la base de código de WasteTrack sea clara, escalable y fácil de extender conforme la plataforma crece.
+
+**1. Estándares generales**
+
+- Clean Code
+    - Uso de nombres significativos para clases, variables, métodos y paquetes.
+    - Métodos con una única responsabilidad.
+    - Eliminación de código duplicado o muerto.
+    - Comentarios solo cuando la lógica es compleja; el código debe ser autoexplicativo.
+
+- Consistencia visual
+    - Estilos de formato automáticos según cada tecnología (Google Java Format, Prettier, ESLint).
+    - Indentación consistente (Java: 4 espacios, TS/Dart: 2 espacios).
+    - Orden uniforme de imports y uso de linters para estandarizar estilo.
+
+---
+
+**2. Estándares de backend (Java + Spring Boot)**
+
+- Naming Conventions
+    - Clases y métodos: PascalCase
+    - Variables y atributos: camelCase
+    - Constantes: MAYÚSCULAS_CON_GUIONES
+    - Paquetes: minúsculas
+
+- Uso correcto de Spring Boot
+    - Inyección de dependencias mediante constructor injection.
+    - Separación por capas siguiendo DDD: domain, application, infrastructure, api.
+    - Controladores ligeros, sin lógica de negocio.
+    - Configuración externa con application.yml y @ConfigurationProperties.
+
+- Calidad de código
+    - Validación con Checkstyle, PMD, SpotBugs y SonarLint.
+    - GitHub Actions ejecuta análisis estático en cada pull request.
+
+---
+
+**3. Estándares para landing page (Next.js + TypeScript)**
+
+- Uso de ESLint y Prettier con configuraciones recomendadas de Next.js.
+- Componentes escritos como funciones puras y reutilizables.
+- Estructura de carpetas clara: app/, components/, hooks/, lib/, styles/.
+- Tipado estricto con TypeScript (evitar "any").
+- Nombres descriptivos para props, métodos y hooks personalizados.
+- No incluir lógica pesada en componentes: mover cálculo y utilidades a helpers o servicios.
+- Uso de React Server Components cuando corresponde para mejorar rendimiento.
+
+---
+
+**4. Estándares para web app (Angular + TypeScript)**
+
+- Conventions Angular
+    - Componentes, módulos y servicios nombrados usando PascalCase.
+    - Variables, funciones y parámetros en camelCase.
+    - Separación clara de responsabilidades por archivos: .ts, .html, .scss.
+
+- Buenas prácticas
+    - Tipado estricto, uso de interfaces y modelos de dominio.
+    - Servicios con responsabilidad específica; evitar lógica en componentes.
+    - Uso de RxJS con buenas prácticas (unsubscribe, async pipe).
+
+- Herramientas
+    - ESLint + Prettier para formateo y estilo.
+    - Angular CLI para mantener convención en creación de archivos.
+
+---
+
+**5. Estándares para mobile app (Flutter + Dart)**
+
+- Clean Dart
+    - Indentación automática con dart format.
+    - Métodos y variables en camelCase; clases en PascalCase.
+    - Widgets pequeños, declarativos y reutilizables.
+    - Arquitectura por capas utilizando patrones como BLoC, Riverpod o Provider.
+
+- Código seguro y mantenible
+    - Evitar lógica dentro de widgets: usar controladores o blocs.
+    - Tipado estricto y uso adecuado de null safety.
+    - Mantener carpetas por dominios: ui/, data/, domain/, widgets/.
+
+- Validación
+    - Flutter analyze para revisión del código.
+    - Tests unitarios para lógica de negocio.
+
+---
+
+**6. Domain-Driven Design (DDD)**
+
+- Bounded Contexts
+    - Separación clara del dominio en módulos como Monitoring, Routing, WasteBinManagement y Alerts.
+
+- Patrones aplicados
+    - Entidades con identidad persistente.
+    - Value Objects inmutables (FillLevel, GeoLocation).
+    - Domain Services para lógica sin dueño claro.
+    - Repositorios como abstracción del acceso a datos.
+    - Agregados con reglas e invariantes.
+
+- Lenguaje ubicuo
+    - Uso consistente de términos del negocio: nivel de llenado, sensor IoT, permanencia, ruta óptima, alerta de desborde.
+
+---
+
+**7. Herramientas de análisis y verificación**
+
+- Backend: Checkstyle, PMD, SpotBugs, SonarLint.
+- Frontend (Next.js / Angular): ESLint + Prettier.
+- Mobile (Flutter): flutter analyze + linters oficiales.
+- GitHub Actions
+    - Corre validaciones automáticas en cada PR para garantizar consistencia.
+
+---
+
+**8. Prácticas de documentación**
+
+- Backend: JavaDoc en métodos públicos y servicios.
+- Frontend y mobile: comentarios mínimos cuando la lógica no sea evidente.
+- Uso de ADR (Architecture Decision Records) para registrar decisiones clave.
+- Convenciones de commits siguiendo Conventional Commits.
+
+---
+
+**9. Ejecución en equipo**
+
+- Revisión obligatoria de cada Pull Request.
+- Evaluación de estilo, legibilidad, claridad y adherencia a estándares.
+- Se mantienen reglas para reducir deuda técnica y mejorar la mantenibilidad de WasteTrack.
+
 #### 6.2.1.2. Code Quality & Code Security.
 
 ### 6.2.2. Reviews
