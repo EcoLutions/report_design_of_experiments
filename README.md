@@ -6104,12 +6104,67 @@ echo "✅ Deployment completed successfully!"
 
 ### 7.4.1. Tools and Practices
 
+WasteTrack utiliza un conjunto de herramientas que permiten monitorear continuamente la salud del backend, el uso del frontend y la estabilidad de la app móvil. Estas prácticas ayudan a detectar problemas de rendimiento y asegurar una operación estable para municipalidades y operarios.
+
+- **Spring Boot Actuator:** expone métricas del estado del backend, latencia y uso de recursos.
+- **Prometheus + Grafana:** Prometheus recolecta métricas del backend y Grafana las visualiza en dashboards que permiten detectar anomalías.
+- **Google Analytics / GA4:** analiza navegación, interacción y tiempos de carga en las interfaces web (Angular y Next.js).
+- **Google Lighthouse:** audita rendimiento, accesibilidad y buenas prácticas del frontend.
+- **Crashlytics y Firebase Performance:** monitorean fallos y rendimiento de la app móvil desarrollada en Flutter.
+- **Log Stream del proveedor (Render/Azure):** muestra errores y eventos del backend en tiempo real.
+
+![Google Analytics](./assets/7.devops-practices/7.4.continuous-monitoring/7.4.1.tools-practices/google-analytics.png)
+
 ### 7.4.2. Monitoring Pipeline Components
+
+El pipeline de monitoreo de WasteTrack sigue un flujo que permite capturar, procesar y visualizar información crítica del sistema.
+
+1. **Recolección de datos**
+    - Backend: métricas expuestas por Actuator (/metrics, /health).
+    - Frontend: datos de uso capturados por GA4 y auditorías de Lighthouse.
+    - Mobile: errores y rendimiento enviados por Crashlytics/Performance.
+
+2. **Scraping y almacenamiento**
+    - Prometheus consulta periódicamente las métricas del backend y mantiene un historial para análisis.
+    - Los logs se almacenan en el panel del proveedor para facilitar diagnóstico.
+
+3. **Visualización**
+    - Grafana muestra métricas del backend en tiempo real.
+    - Firebase Console y GA4 muestran fallos y comportamiento de usuarios.
+
+![Google Lighthouse](./assets/7.devops-practices/7.4.continuous-monitoring/7.4.2.monitoring-pipeline-components/google-lighthouse.png)
 
 ### 7.4.3. Alerting Pipeline Components
 
+El sistema de alertas de WasteTrack permite detectar condiciones críticas y notificar al equipo antes de que afecten a los usuarios.
+
+- **Prometheus + Alertmanager:**
+    - Reglas para latencia elevada, errores 5xx, caídas del servicio o falta de telemetría de sensores.
+    - Alertmanager gestiona el envío de alertas según el nivel (warning, critical).
+
+- **Grafana Alerts:**
+    - Alertas definidas directamente en dashboards cuando una métrica supera umbrales (CPU, memoria, tasa de errores).
+
+- **Alertas de infraestructura:**
+    - Herramientas del proveedor notifican reinicios, fallos de despliegue o consumo excesivo de recursos.
+
+![Grafana](./assets/7.devops-practices/7.4.continuous-monitoring/7.4.3.alerting-pipeline-components/grafana.png)
+
 ### 7.4.4. Notification Pipeline Components
 
+El pipeline de notificaciones garantiza que los desarrolladores y responsables del sistema reciban información inmediata ante incidentes o resultados del pipeline CI/CD.
+
+- **Canales de notificación:**
+    - Correo electrónico, Slack, Teams o canales configurados desde Alertmanager.
+    - Notificaciones del proveedor (Render/Azure) por caída del servicio o consumo anómalo.
+
+- **Notificaciones de CI/CD (GitHub Actions):**
+    - Avisos automáticos cuando un build falla, un test no pasa o un despliegue no se completa correctamente.
+
+- **Reportes automáticos:**
+    - Resúmenes periódicos de métricas clave, uptime y errores críticos.
+
+![Github Actions](./assets/7.devops-practices/7.4.continuous-monitoring/7.4.4.notification-pipeline-components/github-actions.png)
 
 # Capítulo VIII: Experiment-Driven Development
 
