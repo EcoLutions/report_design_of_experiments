@@ -6104,12 +6104,22 @@ echo "✅ Deployment completed successfully!"
 
 ### 7.4.1. Tools and Practices
 
+WasteTrack utiliza un conjunto de herramientas que permiten monitorear continuamente la salud del backend, el uso del frontend y la estabilidad de la app móvil. Estas prácticas ayudan a detectar problemas de rendimiento y asegurar una operación estable para municipalidades y operarios.
+
+- **Spring Boot Actuator:** expone métricas del estado del backend, latencia y uso de recursos.
+- **Prometheus + Grafana:** Prometheus recolecta métricas del backend y Grafana las visualiza en dashboards que permiten detectar anomalías.
+- **Google Analytics / GA4:** analiza navegación, interacción y tiempos de carga en las interfaces web (Angular y Next.js).
+- **Google Lighthouse:** audita rendimiento, accesibilidad y buenas prácticas del frontend.
+- **Crashlytics y Firebase Performance:** monitorean fallos y rendimiento de la app móvil desarrollada en Flutter.
+- **Log Stream del proveedor (Render/Azure):** muestra errores y eventos del backend en tiempo real.
+
+![Google Analytics](./assets/7.devops-practices/7.4.continuous-monitoring/7.4.1.tools-practices/google-analytics.png)
+
 ### 7.4.2. Monitoring Pipeline Components
 
 ### 7.4.3. Alerting Pipeline Components
 
 ### 7.4.4. Notification Pipeline Components
-
 
 # Capítulo VIII: Experiment-Driven Development
 
