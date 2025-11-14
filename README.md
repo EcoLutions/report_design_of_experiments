@@ -6117,6 +6117,23 @@ WasteTrack utiliza un conjunto de herramientas que permiten monitorear continuam
 
 ### 7.4.2. Monitoring Pipeline Components
 
+El pipeline de monitoreo de WasteTrack sigue un flujo que permite capturar, procesar y visualizar información crítica del sistema.
+
+1. **Recolección de datos**
+    - Backend: métricas expuestas por Actuator (/metrics, /health).
+    - Frontend: datos de uso capturados por GA4 y auditorías de Lighthouse.
+    - Mobile: errores y rendimiento enviados por Crashlytics/Performance.
+
+2. **Scraping y almacenamiento**
+    - Prometheus consulta periódicamente las métricas del backend y mantiene un historial para análisis.
+    - Los logs se almacenan en el panel del proveedor para facilitar diagnóstico.
+
+3. **Visualización**
+    - Grafana muestra métricas del backend en tiempo real.
+    - Firebase Console y GA4 muestran fallos y comportamiento de usuarios.
+
+![Google Lighthouse](./assets/7.devops-practices/7.4.continuous-monitoring/7.4.2.monitoring-pipeline-components/google-lighthouse.png)
+
 ### 7.4.3. Alerting Pipeline Components
 
 ### 7.4.4. Notification Pipeline Components
