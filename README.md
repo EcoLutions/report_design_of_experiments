@@ -6113,17 +6113,109 @@ echo "✅ Deployment completed successfully!"
 
 # Capítulo VIII: Experiment-Driven Development
 
-## 8.1.  Experiment Planning
 
-### 8.1.1. Tools and Practices
+## 8.1. Experiment Planning
+
+### 8.1.1. As-Is Summary
+WasteTrack es una plataforma municipal para la gestión operativa de residuos sólidos, orientada a optimizar la recolección, supervisión y trazabilidad de contenedores mediante un ecosistema compuesto por un backend en Spring Boot, un frontend en Angular y microservicios especializados. El sistema actualmente permite registrar contenedores, visualizar rutas, gestionar reportes ciudadanos y monitorear la recolección según el distrito. Sin embargo, existen brechas que limitan su eficiencia y adopción por parte de operadores municipales y supervisores de campo.
+
+Problemas identificados:
+
+* Baja visibilidad operativa: No existe un módulo avanzado de analítica que permita identificar contenedores críticos, rutas saturadas o zonas con alta generación de residuos.
+* Escasez de herramientas predictivas: No se proyecta cuándo un contenedor alcanzará su capacidad máxima o cuándo fallará un sensor.
+* Interacción limitada con reportes ciudadanos: Los usuarios municipales tienen dificultades para priorizar reportes según criticidad y patrón histórico.
+* Falta de segmentación por distrito: La plataforma no personaliza vistas ni métricas por municipio, lo que reduce la eficiencia de administradores locales.
+* Carga inicial lenta: Algunos módulos presentan retrasos de 4–5 segundos sin un feedback claro, lo que afecta la experiencia de uso.
+
+Objetivos de mejora:
+
+* Implementar un sistema de analítica operativa que permita detectar contenedores críticos y predecir llenado.
+* Reducir tiempos de carga mediante optimización de consultas y caché.
+* Priorizar reportes ciudadanos mediante modelos básicos de severidad.
+* Mejorar la gestión de rutas mediante visualización inteligente y patrones de saturación.
+* Aumentar la adopción del sistema por parte de operadores municipales a través de una experiencia más clara y eficiente.
+
+
 
 ### 8.1.2. Raw Material: Assumptions, Knowledge Gaps, Ideas, Claims
 
+Assumptions:
+
+* Los administradores municipales necesitan visualizar contenedores críticos en tiempo real para mejorar la toma de decisiones.
+* Los supervisores requieren predicciones simples sobre llenado para planificar rutas más eficientes.
+* Los operadores móviles valoran vistas minimalistas y acciones rápidas al gestionar reportes ciudadanos.
+* Los sensores IoT tienen un patrón predecible de fallas o inconsistencias.
+
+Knowledge Gaps:
+
+* ¿Qué métricas son más relevantes para los administradores: volumen, peso, frecuencia de llenado o alertas por sensor?
+* ¿Qué factores determinan la priorización real de reportes ciudadanos?
+* ¿Qué tipo de dashboards facilitan la gestión diaria de residuos por distrito?
+* ¿Cómo influye la latencia o demora en la carga de la plataforma en la adopción del sistema?
+
+Ideas:
+
+* Implementar dashboards de contenedores críticos, tendencias de saturación y predicción de llenado.
+* Añadir un panel de priorización inteligente de reportes ciudadanos basado en severidad e historial.
+* Crear vistas optimizadas por distrito con métricas relevantes para la realidad de cada municipio.
+* Habilitar una etapa de precarga (skeleton loading) para reducir fricción en módulos lentos.
+
+Claims:
+
+* Un dashboard de contenedores críticos puede reducir el tiempo de respuesta a incidencias en un 35%.
+* La predicción de llenado puede optimizar rutas y disminuir desbordes en un 25%.
+* La priorización inteligente de reportes ciudadanos puede reducir la resolución tardía en un 40%.
+* Mejorar la experiencia de carga puede aumentar la adopción del sistema en un 20%.
+
+
 ### 8.1.3. Experiment-Ready Questions
+Las siguientes preguntas guían la validación de hipótesis a través de experimentos iterativos. Se evaluaron mediante los criterios de Confianza, Riesgo, Impacto e Interés para determinar su relevancia estratégica.
+
+| Pregunta                                                                           | Confianza | Riesgo | Impacto | Interés | Total |
+| ---------------------------------------------------------------------------------- | --------- | ------ | ------- | ------- | ----- |
+| ¿Mejorará la eficiencia operativa un dashboard de contenedores críticos?           | 7         | 3      | 9       | 8       | 27    |
+| ¿Reducirá desbordes la predicción de llenado basada en datos históricos?           | 6         | 4      | 9       | 7       | 26    |
+| ¿Aumentará la rapidez de gestión un módulo de priorización de reportes ciudadanos? | 7         | 3      | 8       | 7       | 25    |
+| ¿Mejorará la adopción la optimización de carga mediante skeleton loading?          | 8         | 2      | 7       | 6       | 23    |
+| ¿Incrementará la precisión de planificación segmentar métricas por distrito?       | 6         | 3      | 7       | 6       | 22    |
+
 
 ### 8.1.4. Question Backlog
+El Question Backlog prioriza las preguntas experimentales más relevantes para el desarrollo estratégico de WasteTrack. Representan las incertidumbres que, al resolverse, generan mayor aprendizaje y reducen riesgos.
+
+| # | Pregunta                                                                           | Prioridad |
+| - | ---------------------------------------------------------------------------------- | --------- |
+| 1 | ¿Mejorará la eficiencia operativa un dashboard de contenedores críticos?           | 2         |
+| 2 | ¿Reducirá desbordes la predicción de llenado basada en datos históricos?           | 3         |
+| 3 | ¿Aumentará la rapidez de gestión un módulo de priorización de reportes ciudadanos? | 4         |
+| 4 | ¿Mejorará la adopción la optimización de carga mediante skeleton loading?          | 5         |
+
 
 ### 8.1.5. Experiment Cards
+
+Experimento 1: ¿Mejorará la eficiencia operativa un dashboard de contenedores críticos?
+Question: ¿Mejorará la eficiencia operativa un dashboard de contenedores críticos?
+Why: Los administradores municipales requieren identificar rápidamente contenedores con riesgo de desborde. Actualmente deben revisar múltiples vistas, lo que ralentiza la toma de decisiones. Un dashboard con métricas en tiempo real permitiría detectar anomalías, priorizar acciones y asignar personal de forma más eficiente.
+What: Implementar un dashboard que muestre contenedores críticos según volumen, peso, frecuencia de llenado y fallas de sensor. Incluir alertas visuales, ordenamiento por severidad y un mapa resaltado.
+Hypothesis: Con este dashboard, se espera reducir en un 35% el tiempo de respuesta ante contenedores críticos y mejorar la coordinación operativa entre distritos.
+
+Experimento 2: ¿Reducirá desbordes la predicción de llenado basada en datos históricos?
+Question: ¿Reducirá desbordes la predicción de llenado basada en datos históricos?
+Why: Los desbordes generan costos adicionales y afectan el orden público. Las rutas actuales no consideran el ritmo real de llenado de cada contenedor. La predicción basada en patrones históricos ayudaría a anticipar momentos críticos.
+What: Entrenar un modelo simple de tendencia lineal o moving average que prediga cuándo un contenedor alcanzará su capacidad máxima, y representarlo visualmente en el panel de supervisión.
+Hypothesis: La predicción permitirá reducir en 25% los desbordes y mejorará la planificación de rutas.
+
+Experimento 3: ¿Aumentará la rapidez de gestión un módulo de priorización de reportes ciudadanos?
+Question: ¿Aumentará la rapidez de gestión un módulo de priorización de reportes ciudadanos?
+Why: Los administradores reciben reportes sin un criterio claro de urgencia. Esto genera tiempos de resolución inconsistente. Un sistema de priorización inteligente permitiría ordenar los reportes según severidad, ubicación, historial y tipo.
+What: Implementar un algoritmo básico de clasificación que asigne una prioridad automática al reporte (Alta/Media/Baja) y lo destaque visualmente en el módulo de gestión.
+Hypothesis: Se espera que la priorización reduzca en 40% el tiempo promedio de resolución de reportes.
+
+Experimento 4: ¿Mejorará la adopción la optimización de carga mediante skeleton loading?
+Question: ¿Mejorará la adopción la optimización de carga mediante skeleton loading?
+Why: Algunos módulos demoran en cargar 4–5 segundos sin ofrecer retroalimentación visual. Esto disminuye la percepción de rendimiento y afecta la adopción. Mostrar un skeleton loading incrementaría la claridad y reduciría la fricción.
+What: Implementar skeletons para los módulos más lentos: lista de reportes ciudadanos, vista de rutas y panel de contenedores.
+Hypothesis: Se espera aumentar la satisfacción con la plataforma y mejorar la adopción en un 20%.
 
 ## 8.2.  Experiment Design
 
