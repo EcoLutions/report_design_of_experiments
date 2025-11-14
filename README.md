@@ -6152,6 +6152,20 @@ El sistema de alertas de WasteTrack permite detectar condiciones críticas y not
 
 ### 7.4.4. Notification Pipeline Components
 
+El pipeline de notificaciones garantiza que los desarrolladores y responsables del sistema reciban información inmediata ante incidentes o resultados del pipeline CI/CD.
+
+- **Canales de notificación:**
+    - Correo electrónico, Slack, Teams o canales configurados desde Alertmanager.
+    - Notificaciones del proveedor (Render/Azure) por caída del servicio o consumo anómalo.
+
+- **Notificaciones de CI/CD (GitHub Actions):**
+    - Avisos automáticos cuando un build falla, un test no pasa o un despliegue no se completa correctamente.
+
+- **Reportes automáticos:**
+    - Resúmenes periódicos de métricas clave, uptime y errores críticos.
+
+![Github Actions](./assets/7.devops-practices/7.4.continuous-monitoring/7.4.4.notification-pipeline-components/github-actions.png)
+
 # Capítulo VIII: Experiment-Driven Development
 
 ## 8.1.  Experiment Planning
