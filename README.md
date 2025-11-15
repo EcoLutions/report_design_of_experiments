@@ -6175,14 +6175,13 @@ El pipeline de notificaciones garantiza que los desarrolladores y responsables d
 ## 8.1. Experiment Planning
 
 ### 8.1.1. As-Is Summary
-WasteTrack es una plataforma municipal para la gestión operativa de residuos sólidos, orientada a optimizar la recolección, supervisión y trazabilidad de contenedores mediante un ecosistema compuesto por un backend en Spring Boot, un frontend en Angular y microservicios especializados. El sistema actualmente permite registrar contenedores, visualizar rutas, gestionar reportes ciudadanos y monitorear la recolección según el distrito. Sin embargo, existen brechas que limitan su eficiencia y adopción por parte de operadores municipales y supervisores de campo.
+WasteTrack es una plataforma municipal para la gestión operativa de residuos sólidos, orientada a optimizar la recolección, supervisión y trazabilidad de contenedores. El sistema actualmente permite registrar contenedores, visualizar rutas, gestionar reportes ciudadanos y monitorear la recolección según el distrito. Sin embargo, existen brechas que limitan su eficiencia y adopción por parte de operadores municipales y supervisores de campo.
 
 Problemas identificados:
 
 * Baja visibilidad operativa: No existe un módulo avanzado de analítica que permita identificar contenedores críticos, rutas saturadas o zonas con alta generación de residuos.
 * Escasez de herramientas predictivas: No se proyecta cuándo un contenedor alcanzará su capacidad máxima o cuándo fallará un sensor.
 * Interacción limitada con reportes ciudadanos: Los usuarios municipales tienen dificultades para priorizar reportes según criticidad y patrón histórico.
-* Falta de segmentación por distrito: La plataforma no personaliza vistas ni métricas por municipio, lo que reduce la eficiencia de administradores locales.
 * Carga inicial lenta: Algunos módulos presentan retrasos de 4–5 segundos sin un feedback claro, lo que afecta la experiencia de uso.
 
 Objetivos de mejora:
@@ -6192,7 +6191,6 @@ Objetivos de mejora:
 * Priorizar reportes ciudadanos mediante modelos básicos de severidad.
 * Mejorar la gestión de rutas mediante visualización inteligente y patrones de saturación.
 * Aumentar la adopción del sistema por parte de operadores municipales a través de una experiencia más clara y eficiente.
-
 
 
 ### 8.1.2. Raw Material: Assumptions, Knowledge Gaps, Ideas, Claims
@@ -6251,29 +6249,45 @@ El Question Backlog prioriza las preguntas experimentales más relevantes para e
 
 ### 8.1.5. Experiment Cards
 
-Experimento 1: ¿Mejorará la eficiencia operativa un dashboard de contenedores críticos?
-Question: ¿Mejorará la eficiencia operativa un dashboard de contenedores críticos?
-Why: Los administradores municipales requieren identificar rápidamente contenedores con riesgo de desborde. Actualmente deben revisar múltiples vistas, lo que ralentiza la toma de decisiones. Un dashboard con métricas en tiempo real permitiría detectar anomalías, priorizar acciones y asignar personal de forma más eficiente.
-What: Implementar un dashboard que muestre contenedores críticos según volumen, peso, frecuencia de llenado y fallas de sensor. Incluir alertas visuales, ordenamiento por severidad y un mapa resaltado.
-Hypothesis: Con este dashboard, se espera reducir en un 35% el tiempo de respuesta ante contenedores críticos y mejorar la coordinación operativa entre distritos.
+**Experimento 1: ¿Mejorará la eficiencia operativa un dashboard de contenedores críticos?**
 
-Experimento 2: ¿Reducirá desbordes la predicción de llenado basada en datos históricos?
-Question: ¿Reducirá desbordes la predicción de llenado basada en datos históricos?
-Why: Los desbordes generan costos adicionales y afectan el orden público. Las rutas actuales no consideran el ritmo real de llenado de cada contenedor. La predicción basada en patrones históricos ayudaría a anticipar momentos críticos.
-What: Entrenar un modelo simple de tendencia lineal o moving average que prediga cuándo un contenedor alcanzará su capacidad máxima, y representarlo visualmente en el panel de supervisión.
-Hypothesis: La predicción permitirá reducir en 25% los desbordes y mejorará la planificación de rutas.
+| Componente     | Descripción                                                                                                                                                                                                                                                                                                        |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Question**   | ¿Mejorará la eficiencia operativa un dashboard de contenedores críticos?                                                                                                                                                                                                                                           |
+| **Why**        | Los administradores municipales requieren identificar rápidamente contenedores con riesgo de desborde. Actualmente deben revisar múltiples vistas, lo que ralentiza la toma de decisiones. Un dashboard centralizado permitiría detectar anomalías, priorizar acciones y asignar personal de manera más eficiente. |
+| **What**       | Implementar un dashboard que muestre contenedores críticos según volumen, peso, frecuencia de llenado y fallas de sensor. Incluir alertas visuales, filtros, orden por severidad y un mapa con zonas de riesgo.                                                                                                    |
+| **Hypothesis** | Con este dashboard, el tiempo de respuesta ante contenedores críticos se reducirá en un 35%, mejorando la coordinación operativa entre distritos.                                                                                                                                                                  |
 
-Experimento 3: ¿Aumentará la rapidez de gestión un módulo de priorización de reportes ciudadanos?
-Question: ¿Aumentará la rapidez de gestión un módulo de priorización de reportes ciudadanos?
-Why: Los administradores reciben reportes sin un criterio claro de urgencia. Esto genera tiempos de resolución inconsistente. Un sistema de priorización inteligente permitiría ordenar los reportes según severidad, ubicación, historial y tipo.
-What: Implementar un algoritmo básico de clasificación que asigne una prioridad automática al reporte (Alta/Media/Baja) y lo destaque visualmente en el módulo de gestión.
-Hypothesis: Se espera que la priorización reduzca en 40% el tiempo promedio de resolución de reportes.
 
-Experimento 4: ¿Mejorará la adopción la optimización de carga mediante skeleton loading?
-Question: ¿Mejorará la adopción la optimización de carga mediante skeleton loading?
-Why: Algunos módulos demoran en cargar 4–5 segundos sin ofrecer retroalimentación visual. Esto disminuye la percepción de rendimiento y afecta la adopción. Mostrar un skeleton loading incrementaría la claridad y reduciría la fricción.
-What: Implementar skeletons para los módulos más lentos: lista de reportes ciudadanos, vista de rutas y panel de contenedores.
-Hypothesis: Se espera aumentar la satisfacción con la plataforma y mejorar la adopción en un 20%.
+**Experimento 2: ¿Reducirá desbordes la predicción de llenado basada en datos históricos?**
+
+| Componente     | Descripción                                                                                                                                                                                                                                                           |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Question**   | ¿Reducirá desbordes la predicción de llenado basada en datos históricos?                                                                                                                                                                                              |
+| **Why**        | Los desbordes generan costos adicionales, quejas ciudadanas y complicaciones operativas. Las rutas actuales no consideran el ritmo real de llenado de cada contenedor. Predecir el llenado permitiría planificar recolecciones más eficientes y evitar acumulaciones. |
+| **What**       | Entrenar un modelo simple (tendencias históricas o promedios móviles) que estime cuándo un contenedor alcanzará su capacidad máxima y mostrar esta predicción en el panel principal con indicadores de riesgo.                                                        |
+| **Hypothesis** | La predicción reducirá los desbordes en un 25% y permitirá optimizar las rutas de recolección.                                                                                                                                                                        |
+
+
+**Experimento 3: ¿Aumentará la rapidez de gestión un módulo de priorización de reportes ciudadanos?**
+
+| Componente     | Descripción                                                                                                                                                                                                                            |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Question**   | ¿Aumentará la rapidez de gestión un módulo de priorización de reportes ciudadanos?                                                                                                                                                     |
+| **Why**        | Los administradores gestionan los reportes sin un criterio claro de urgencia, lo que causa inconsistencia en los tiempos de resolución. Un sistema de priorización automática permitiría identificar casos críticos con mayor rapidez. |
+| **What**       | Implementar un algoritmo básico que clasifique los reportes en Alta, Media o Baja prioridad según tipo de reporte, zona, frecuencia histórica e impacto. Mostrar las prioridades mediante colores y ordenamiento.                      |
+| **Hypothesis** | La priorización reducirá en un 40% el tiempo promedio de resolución de reportes críticos.                                                                                                                                              |
+
+
+**Experimento 4: ¿Mejorará la adopción la optimización de carga mediante skeleton loading?**
+
+| Componente     | Descripción                                                                                                                                                                                                     |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Question**   | ¿Mejorará la adopción la optimización de carga mediante skeleton loading?                                                                                                                                       |
+| **Why**        | Algunos módulos tardan 4–5 segundos en cargar sin feedback visual, lo que genera incertidumbre y percepción de bajo rendimiento. Skeleton loading puede mejorar la experiencia percibida y reducir la fricción. |
+| **What**       | Implementar skeletons y estados de carga en los módulos de reportes ciudadanos, rutas y contenedores. Medir interacción, abandono y tiempos percibidos.                                                         |
+| **Hypothesis** | La adopción del sistema aumentará un 20% debido a una experiencia más fluida y clara durante la carga.                                                                                                          |
+
 
 ## 8.2.  Experiment Design
 
