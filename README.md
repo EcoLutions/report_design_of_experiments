@@ -6754,6 +6754,50 @@ Este esquema permite tomar decisiones fundamentadas en métricas para validar, a
 
 ### 8.2.6. Methods Selection
 
+Para evaluar las hipótesis de WasteTrack se seleccionan métodos sencillos, medibles y adecuados al contexto municipal e IoT. El objetivo es identificar cambios reales en eficiencia, adopción y percepción sin requerir experimentos excesivamente complejos.
+
+---
+
+Métodos principales seleccionados
+
+- **A/B Testing:**  
+  Se utilizará para comparar versiones del dashboard (con indicadores de confiabilidad vs sin indicadores) y variaciones en la app ciudadana (con información transparente vs sin ella).
+
+- **Comparación pre/post piloto:**  
+  Método central para medir la reducción en tiempo de ruta, consumo de combustible y desviaciones. Las métricas operativas (RCT, FCR, RDR) se comparan antes y después de usar WasteTrack.
+
+- **Tracking basado en eventos:**  
+  Firebase Analytics y GA4 registrarán adopción de conductores, rutas completadas, uso de funcionalidades ciudadanas y consultas al dashboard.
+
+- **Muestreo por zonas (estratificado):**  
+  Se seleccionan rutas representativas (residencial, comercial, alta densidad) para asegurar que los resultados no dependan de una única zona.
+
+- **Encuestas breves (pre y post):**  
+  Para medir satisfacción ciudadana (CSI) y percepción de confiabilidad del dato entre administradores municipales.
+
+---
+
+Parámetros estadísticos básicos
+
+- **Nivel de significancia (α):** 0.05
+- **Potencia estadística:** 80%
+- **Efecto mínimo detectable (MDE):**
+    - Rutas: 15% reducción en tiempo
+    - Combustible: 10% reducción
+    - Adopción conductores: +20%
+    - Satisfacción ciudadana: +25%
+
+---
+
+Herramientas recomendadas
+
+- Firebase Analytics (conductores y ciudadanos)
+- Google Analytics (landing page / portal informativo)
+- Prometheus + Grafana (métricas IoT y backend)
+- Google Forms o Typeform (encuestas pre/post)
+
+Estas herramientas y métodos permiten evaluar de manera práctica, rápida y confiable el impacto de WasteTrack en las zonas piloto.
+
 ### 8.2.7. Data Analytics: Goals, KPIs and Metrics Selection
 
 ### 8.2.8. Web and Mobile Tracking Plan.
