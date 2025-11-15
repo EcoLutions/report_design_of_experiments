@@ -6675,6 +6675,83 @@ Condiciones para la hipótesis: Percepción ciudadana del servicio de limpieza
 
 ### 8.2.5. Scale Calculations and Decisions
 
+Este enfoque utiliza métricas para evaluar el cumplimiento de las hipótesis en WasteTrack.  
+Cada hipótesis se asocia con un indicador de éxito:
+
+- Se considera **desfavorable** cuando el valor está por debajo del mínimo esperado.
+- **Aceptable** cuando se encuentra entre el mínimo y el valor objetivo.
+- **Ideal** cuando la métrica alcanza plenamente el objetivo planteado.
+- **Excelente** cuando el valor supera el objetivo en un 25% o más, indicando un éxito significativo.
+
+Este esquema permite tomar decisiones fundamentadas en métricas para validar, ajustar o escalar las hipótesis del proyecto.
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%; text-align:center;">
+  <thead>
+    <tr>
+      <th style="width:30%;">Scale Calculation</th>
+      <th style="width:30%;">Decision</th>
+      <th style="width:10%;">Desfavorable</th>
+      <th style="width:10%;">Aceptable</th>
+      <th style="width:10%;">Ideal</th>
+      <th style="width:10%;">Excelente</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left;">
+        Creemos que al utilizar el algoritmo de optimización de rutas de WasteTrack, se reducirá el tiempo total de recolección (RCT) en al menos 15% y el consumo de combustible (FCR) en al menos 10% en las zonas piloto.  
+        Sabremos que esto es cierto cuando los indicadores RCT y FCR se mantengan dentro o por encima de esas metas durante el piloto.
+      </td>
+      <td style="text-align:left;">
+        Si los resultados alcanzan o superan los objetivos, se recomienda escalar el uso de WasteTrack a más rutas y distritos municipales. En caso contrario, revisar parámetros del algoritmo y la capacitación a conductores.
+      </td>
+      <td></td>
+      <td></td>
+      <td><strong>X</strong></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td style="text-align:left;">
+        Creemos que al mostrar indicadores de confiabilidad de sensores (SUR, VRR, TFC) los administradores percibirán los datos como más confiables y usarán con mayor frecuencia el dashboard para la toma de decisiones.  
+        Sabremos que esto es cierto cuando SUR ≥ 95%, VRR ≥ 90% y aumente la frecuencia de consultas al dashboard.
+      </td>
+      <td style="text-align:left;">
+        Si las métricas de confiabilidad se mantienen altas y la percepción de confianza mejora, se consolidará esta vista como estándar y se priorizará inversión en mantenimiento preventivo de sensores.
+      </td>
+      <td></td>
+      <td><strong>X</strong></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td style="text-align:left;">
+        Creemos que al ofrecer rutas guiadas y una app móvil simple, la tasa de adopción de conductores (DAA) será de al menos 80% y el porcentaje de rutas completadas siguiendo la optimización será mayor al 70%.  
+        Sabremos que esto es cierto cuando la mayoría de conductores utilice activamente la app durante sus recorridos.
+      </td>
+      <td style="text-align:left;">
+        Si la adopción es alta, se validará el diseño actual de la app y se podrá introducir gradualmente funcionalidades avanzadas. Si es baja, se revisarán la interfaz, la capacitación y las condiciones de uso en campo.
+      </td>
+      <td></td>
+      <td><strong>X</strong></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td style="text-align:left;">
+        Creemos que al brindar información transparente al ciudadano (estado de contenedores y horarios de recolección), el Citizen Satisfaction Index (CSI) aumentará al menos en 25% en las zonas piloto frente a la línea base.  
+        Sabremos que esto es cierto cuando las encuestas de satisfacción muestren esta mejora sostenida.
+      </td>
+      <td style="text-align:left;">
+        Si la satisfacción mejora, se recomendará integrar WasteTrack como herramienta de transparencia y comunicación estándar en el distrito, y considerar nuevas funcionalidades de participación ciudadana.
+      </td>
+      <td></td>
+      <td></td>
+      <td><strong>X</strong></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
 ### 8.2.6. Methods Selection
 
 ### 8.2.7. Data Analytics: Goals, KPIs and Metrics Selection
