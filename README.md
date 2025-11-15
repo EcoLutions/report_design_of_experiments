@@ -6800,6 +6800,77 @@ Estas herramientas y métodos permiten evaluar de manera práctica, rápida y co
 
 ### 8.2.7. Data Analytics: Goals, KPIs and Metrics Selection
 
+El objetivo de esta sección es definir una estrategia analítica clara para medir el impacto de WasteTrack en eficiencia operativa, adopción tecnológica y percepción ciudadana. Cada KPI está alineado a un objetivo estratégico del producto y utiliza las métricas oficiales definidas previamente.
+
+---
+
+Objetivos del Producto (Goals)
+
+| Objetivo Clave | Descripción |
+|----------------|-------------|
+| Optimizar la eficiencia operativa municipal | Reducir tiempos de ruta, consumo de combustible y desviaciones mediante rutas inteligentes. |
+| Garantizar calidad y confiabilidad de datos IoT | Monitorear estabilidad, precisión y frecuencia de lectura de sensores para toma de decisiones. |
+| Aumentar la adopción de la app de conductores | Lograr que la mayoría de operarios utilicen WasteTrack como herramienta principal en campo. |
+| Mejorar la percepción ciudadana del servicio de limpieza | Incrementar satisfacción mediante información transparente y en tiempo real. |
+| Monitorear comportamiento en web y app | Analizar uso de landing page, portal ciudadano y app móvil. |
+
+---
+
+KPIs y Métricas Seleccionadas
+
+| Objetivo Estratégico | KPI | Métricas Específicas | Herramienta |
+|----------------------|-----|----------------------|-------------|
+| **Eficiencia operativa** | Reducción de tiempo de ruta (RCT) | Variación % pre/post; minutos reducidos por recorrido | Backend + GPS + Grafana |
+| | Reducción de consumo de combustible (FCR) | % de combustible ahorrado | Registros municipales |
+| | Desviaciones de ruta (RDR) | % de desvíos por ruta | GPS + Prometheus |
+| **Confiabilidad IoT** | Uptime de sensores (SUR) | % de tiempo activo | Prometheus |
+| | Lecturas válidas (VRR) | % lecturas no erróneas | Backend IoT |
+| | Consistencia de telemetría (TFC) | % lecturas recibidas vs esperadas | Gateway IoT |
+| **Adopción conductores** | Tasa de adopción (DAA) | % conductores activos | Firebase Analytics |
+| | Rutas completadas según optimización | % rutas completadas sin desviación relevante | GPS tracking |
+| **Percepción ciudadana** | Citizen Satisfaction Index (CSI) | Promedio encuestas 1–5 | Formularios pre/post |
+| | Information Transparency Score (ITS) | % uso de funciones de transparencia | GA4 + App logs |
+| **Uso de plataforma web/móvil** | Usuarios activos (DAU/WAU) | Actividad diaria/semanal | GA4 + Firebase |
+| | Interacción en portal ciudadano | Vistas de horarios, estado contenedores | GA4 |
+| | Tasa de rebote landing page | % sesiones sin interacción | GA4 |
+
+---
+
+Eventos de Tracking Recomendados
+
+Eventos clave para entender comportamiento de usuarios:
+
+- **conductores_ruta_iniciada** – inicio de recorrido optimizado
+- **conductores_punto_confirmado** – parada completada
+- **dashboard_sensor_viewed** – consulta de estado de sensor
+- **ciudadano_consulta_estado** – vista del estado de contenedor
+- **ciudadano_consulta_horario** – consulta de horarios de recolección
+- **landingpage_cta_click** – clics en botones principales
+- **app_abierta** / **screen_view** – eventos base de navegación
+
+---
+
+Visualización de Datos
+
+Se utilizarán dashboards centralizados para análisis continuo:
+
+- **Grafana:** métricas IoT, sensores, backend, rutas.
+- **GA4 dashboards:** comportamiento web y portal ciudadano.
+- **Firebase Dashboards:** uso móvil y adopción conductores.
+- **Google Data Studio:** reportes ejecutivos para municipalidades.
+
+---
+
+Frecuencia de Análisis
+
+- **Diario:** DAU, ITS, DAA, estado de sensores.
+- **Semanal:** RCT, FCR, RDR, tendencias de uso y adopción.
+- **Mensual:** CSI, análisis comparativo zona piloto vs control, reportes de confiabilidad IoT.
+
+---
+
+Estos KPIs permiten evaluar de manera clara, continua y basada en datos si WasteTrack está generando el impacto esperado en eficiencia municipal, calidad técnica y experiencia de usuarios.
+
 ### 8.2.8. Web and Mobile Tracking Plan.
 
 ## 8.3.  Experimentation
