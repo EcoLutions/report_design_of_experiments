@@ -466,12 +466,13 @@ Este patrón de colaboración sienta las bases para el éxito continuo del proye
     * [8.1.5. Experiment Cards](#815-experiment-cards)
   * [8.2. Experiment Design](#82-experiment-design)
     * [8.2.1. Hypotheses](#821-hypotheses)
-    * [8.2.2. Measures](#822-measures)
-    * [8.2.3. Conditions](#823-conditions)
-    * [8.2.4. Scale Calculations and Decisions](#824-scale-calculations-and-decisions)
-    * [8.2.5. Methods Selection](#825-methods-selection)
-    * [8.2.6. Data Analytics: Goals, KPIs and Metrics Selection](#826-data-analytics-goals-kpis-and-metrics-selection)
-    * [8.2.7. Web and Mobile Tracking Plan](#827-web-and-mobile-tracking-plan)
+    * [8.2.2. Domain Business Metrics](#822-domain-business-metrics)
+    * [8.2.3. Measures](#823-measures)
+    * [8.2.4. Conditions](#824-conditions)
+    * [8.2.5. Scale Calculations and Decisions](#825-scale-calculations-and-decisions)
+    * [8.2.6. Methods Selection](#826-methods-selection)
+    * [8.2.7. Data Analytics: Goals, KPIs and Metrics Selection](#827-data-analytics-goals-kpis-and-metrics-selection)
+    * [8.2.8. Web and Mobile Tracking Plan](#828-web-and-mobile-tracking-plan)
   * [8.3. Experimentation](#83-experimentation)
     * [8.3.1. To-Be User Stories](#831-to-be-user-stories)
     * [8.3.2. To-Be Product Backlog](#832-to-be-product-backlog)
@@ -6392,6 +6393,98 @@ A continuación, se presentan las hipótesis experimentales para validar las pri
 </table>
 
 ### 8.2.2. Domain Business Metrics
+
+Las siguientes métricas representan los indicadores oficiales del dominio de WasteTrack. Todas las hipótesis y experimentos utilizarán únicamente estas métricas para asegurar consistencia, trazabilidad y evitar vanity metrics. Cada métrica incluye su fórmula, técnica de recolección y meta asociada.
+
+---
+
+**1. Operational Efficiency Metrics (Eficiencia Operativa)**
+
+**1.1. Reduction in Collection Time (RCT)**
+- Fórmula: RCT = ((Tiempo_baseline - Tiempo_post) / Tiempo_baseline) * 100
+- Recolección: GPS de camiones + timestamps de inicio/fin de ruta (app móvil).
+- Meta: Reducción ≥ 15% en zonas piloto.
+
+**1.2. Fuel Consumption Reduction (FCR)**
+- Fórmula: FCR = ((Combustible_baseline - Combustible_post) / Combustible_baseline) * 100
+- Recolección: Declaraciones municipales, sensores de odómetro, registros semanales.
+- Meta: Reducción ≥ 10%.
+
+**1.3. Route Deviation Rate (RDR)**
+- Fórmula: RDR = (Desviaciones_detectadas / Rutas_planificadas) * 100
+- Recolección: Comparación GPS vs ruta generada.
+- Meta: ≤ 5%.
+
+---
+
+**2. IoT Sensor Reliability Metrics (Calidad de Datos de Sensores)**
+
+**2.1. Sensor Uptime Rate (SUR)**
+- Fórmula: SUR = (Tiempo_sensor_activo / Tiempo_total) * 100
+- Recolección: Telemetría Actuator + gateway IoT.
+- Meta: ≥ 95%.
+
+**2.2. Valid Reading Rate (VRR)**
+- Fórmula: VRR = (Lecturas_validas / Lecturas_totales) * 100
+- Recolección: Filtros de señal, detección de outliers.
+- Meta: ≥ 90%.
+
+**2.3. Telemetry Frequency Consistency (TFC)**
+- Fórmula: TFC = (Lecturas_recibidas / Lecturas_esperadas) * 100
+- Recolección: Prometheus + logs de gateway.
+- Meta: ≥ 85%.
+
+---
+
+**3. User Adoption Metrics (Adopción Operativa)**
+
+**3.1. Driver App Adoption Rate (DAA)**
+- Fórmula: DAA = (Conductores_activos / Conductores_registrados) * 100
+- Recolección: Firebase Analytics + logs de sesiones.
+- Meta: ≥ 80%.
+
+**3.2. Task Completion Without Assistance (TCWA)**
+- Fórmula: TCWA = (Tareas_completadas_sin_ayuda / Tareas_totales) * 100
+- Recolección: Pruebas de usabilidad + formularios de feedback.
+- Meta: ≥ 90%.
+
+---
+
+**4. Citizen Experience Metrics (Satisfacción del Servicio)**
+
+**4.1. Citizen Satisfaction Index (CSI)**
+- Fórmula: Promedio ponderado de encuestas sobre percepción del servicio (escala 1–5)
+- Recolección: Encuestas antes y después del piloto.
+- Meta: Aumento ≥ 25%.
+
+**4.2. Information Transparency Score (ITS)**
+- Fórmula: ITS = (Funciones_transparentes_usadas / Funciones_transparentes_disponibles) * 100  
+  (Ej.: horarios, estado de contenedores, próximas rutas)
+- Recolección: GA4 + logs de la app ciudadana.
+- Meta: ≥ 60% de uso sostenido.
+
+---
+
+**5. System Stability & Performance Metrics**
+
+**5.1. API Response Time (ART)**
+- Fórmula: Promedio de latencia de los endpoints críticos (ms)
+- Recolección: Prometheus + APM.
+- Meta: ≤ 500 ms promedio.
+
+**5.2. Error Rate (ER)**
+- Fórmula: ER = (Errores_5xx / Requests_totales) * 100
+- Recolección: Logs del backend + Grafana.
+- Meta: ≤ 1%.
+
+**5.3. Mobile Crash-Free Users (CFU)**
+- Fórmula: CFU = (Usuarios_sin_crashes / Usuarios_totales) * 100
+- Recolección: Firebase Crashlytics.
+- Meta: ≥ 98%.
+
+---
+
+Estas métricas serán las únicas fuentes válidas para evaluar hipótesis, diseñar experimentos y tomar decisiones durante el desarrollo, piloto municipal y fases posteriores de adopción.
 
 ### 8.2.3. Measures
 
