@@ -6836,20 +6836,6 @@ KPIs y Métricas Seleccionadas
 
 ---
 
-Eventos de Tracking Recomendados
-
-Eventos clave para entender comportamiento de usuarios:
-
-- **conductores_ruta_iniciada** – inicio de recorrido optimizado
-- **conductores_punto_confirmado** – parada completada
-- **dashboard_sensor_viewed** – consulta de estado de sensor
-- **ciudadano_consulta_estado** – vista del estado de contenedor
-- **ciudadano_consulta_horario** – consulta de horarios de recolección
-- **landingpage_cta_click** – clics en botones principales
-- **app_abierta** / **screen_view** – eventos base de navegación
-
----
-
 Visualización de Datos
 
 Se utilizarán dashboards centralizados para análisis continuo:
