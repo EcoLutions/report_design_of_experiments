@@ -466,12 +466,13 @@ Este patrón de colaboración sienta las bases para el éxito continuo del proye
     * [8.1.5. Experiment Cards](#815-experiment-cards)
   * [8.2. Experiment Design](#82-experiment-design)
     * [8.2.1. Hypotheses](#821-hypotheses)
-    * [8.2.2. Measures](#822-measures)
-    * [8.2.3. Conditions](#823-conditions)
-    * [8.2.4. Scale Calculations and Decisions](#824-scale-calculations-and-decisions)
-    * [8.2.5. Methods Selection](#825-methods-selection)
-    * [8.2.6. Data Analytics: Goals, KPIs and Metrics Selection](#826-data-analytics-goals-kpis-and-metrics-selection)
-    * [8.2.7. Web and Mobile Tracking Plan](#827-web-and-mobile-tracking-plan)
+    * [8.2.2. Domain Business Metrics](#822-domain-business-metrics)
+    * [8.2.3. Measures](#823-measures)
+    * [8.2.4. Conditions](#824-conditions)
+    * [8.2.5. Scale Calculations and Decisions](#825-scale-calculations-and-decisions)
+    * [8.2.6. Methods Selection](#826-methods-selection)
+    * [8.2.7. Data Analytics: Goals, KPIs and Metrics Selection](#827-data-analytics-goals-kpis-and-metrics-selection)
+    * [8.2.8. Web and Mobile Tracking Plan](#828-web-and-mobile-tracking-plan)
   * [8.3. Experimentation](#83-experimentation)
     * [8.3.1. To-Be User Stories](#831-to-be-user-stories)
     * [8.3.2. To-Be Product Backlog](#832-to-be-product-backlog)
@@ -6293,19 +6294,640 @@ El Question Backlog prioriza las preguntas experimentales más relevantes para e
 
 ### 8.2.1. Hypotheses
 
+A continuación, se presentan las hipótesis experimentales para validar las principales suposiciones del sistema WasteTrack en relación con eficiencia operativa, confiabilidad de la información, adopción de usuarios municipales y experiencia del operario.
+
+---
+
+<table>
+  <tr>
+    <th colspan="2">Eficiencia de rutas de recolección</th>
+  </tr>
+  <tr>
+    <th>Question</th>
+    <th>¿La optimización automática de rutas basada en nivel de llenado y permanencia reducirá los costos operativos municipales?</th>
+  </tr>
+  <tr>
+    <td>Belief</td>
+    <td>Cremos que utilizar datos IoT en tiempo real permitirá reducir recorridos innecesarios y mejorar el uso de combustible y horas hombre.</td>
+  </tr>
+  <tr>
+    <td>Hypothesis</td>
+    <td>Si los administradores usan el dashboard de optimización, se reducirá en al menos un 15% el tiempo total de recolección en los puntos piloto.</td>
+  </tr>
+  <tr>
+    <td>Null Hypothesis</td>
+    <td>El uso del dashboard no generará una reducción significativa en los tiempos de recolección.</td>
+  </tr>
+</table>
+
+---
+
+<table>
+  <tr>
+    <th colspan="2">Confiabilidad de los datos IoT</th>
+  </tr>
+  <tr>
+    <th>Question</th>
+    <th>¿La información capturada por sensores IoT será percibida como confiable para la toma de decisiones operativas?</th>
+  </tr>
+  <tr>
+    <td>Belief</td>
+    <td>Si el sistema muestra historial, calibración y estado del sensor, los administradores confiarán más en decisiones basadas en datos.</td>
+  </tr>
+  <tr>
+    <td>Hypothesis</td>
+    <td>Mostrar indicadores de confiabilidad del sensor (porcentaje de precisión, frecuencia de lectura, estado) aumentará la percepción de confianza en un 30%.</td>
+  </tr>
+  <tr>
+    <td>Null Hypothesis</td>
+    <td>Los indicadores de confiabilidad no influirán en la percepción del usuario sobre la calidad del dato.</td>
+  </tr>
+</table>
+
+---
+
+<table>
+  <tr>
+    <th colspan="2">Adopción de la aplicación móvil de conductores</th>
+  </tr>
+  <tr>
+    <th>Question</th>
+    <th>¿Los conductores utilizarán de manera efectiva la app móvil para seguir rutas optimizadas durante sus recorridos?</th>
+  </tr>
+  <tr>
+    <td>Belief</td>
+    <td>Cremos que una interfaz simple con navegación paso a paso aumentará el uso diario de la app por parte de los operarios.</td>
+  </tr>
+  <tr>
+    <td>Hypothesis</td>
+    <td>Si la app móvil incluye rutas guiadas y alertas claras, al menos el 80% de los conductores la utilizará durante más del 70% de su recorrido.</td>
+  </tr>
+  <tr>
+    <td>Null Hypothesis</td>
+    <td>La funcionalidad de rutas guiadas no tendrá un impacto significativo en la adopción diaria de la app.</td>
+  </tr>
+</table>
+
+---
+
+<table>
+  <tr>
+    <th colspan="2">Percepción ciudadana del servicio de limpieza</th>
+  </tr>
+  <tr>
+    <th>Question</th>
+    <th>¿Ofrecer información transparente sobre la frecuencia de recolección mejora la satisfacción ciudadana?</th>
+  </tr>
+  <tr>
+    <td>Belief</td>
+    <td>Creemos que cuando los ciudadanos pueden visualizar horarios, estado de los contenedores y alertas, perciben un servicio más eficiente.</td>
+  </tr>
+  <tr>
+    <td>Hypothesis</td>
+    <td>La disponibilidad de información en la app ciudadana aumentará en 25% la percepción positiva del servicio en la zona piloto.</td>
+  </tr>
+  <tr>
+    <td>Null Hypothesis</td>
+    <td>Proveer información del servicio no influirá significativamente en la satisfacción ciudadana.</td>
+  </tr>
+</table>
+
 ### 8.2.2. Domain Business Metrics
+
+Las siguientes métricas representan los indicadores oficiales del dominio de WasteTrack. Todas las hipótesis y experimentos utilizarán únicamente estas métricas para asegurar consistencia, trazabilidad y evitar vanity metrics. Cada métrica incluye su fórmula, técnica de recolección y meta asociada.
+
+---
+
+**1. Operational Efficiency Metrics (Eficiencia Operativa)**
+
+**1.1. Reduction in Collection Time (RCT)**
+- Fórmula: RCT = ((Tiempo_baseline - Tiempo_post) / Tiempo_baseline) * 100
+- Recolección: GPS de camiones + timestamps de inicio/fin de ruta (app móvil).
+- Meta: Reducción ≥ 15% en zonas piloto.
+
+**1.2. Fuel Consumption Reduction (FCR)**
+- Fórmula: FCR = ((Combustible_baseline - Combustible_post) / Combustible_baseline) * 100
+- Recolección: Declaraciones municipales, sensores de odómetro, registros semanales.
+- Meta: Reducción ≥ 10%.
+
+**1.3. Route Deviation Rate (RDR)**
+- Fórmula: RDR = (Desviaciones_detectadas / Rutas_planificadas) * 100
+- Recolección: Comparación GPS vs ruta generada.
+- Meta: ≤ 5%.
+
+---
+
+**2. IoT Sensor Reliability Metrics (Calidad de Datos de Sensores)**
+
+**2.1. Sensor Uptime Rate (SUR)**
+- Fórmula: SUR = (Tiempo_sensor_activo / Tiempo_total) * 100
+- Recolección: Telemetría Actuator + gateway IoT.
+- Meta: ≥ 95%.
+
+**2.2. Valid Reading Rate (VRR)**
+- Fórmula: VRR = (Lecturas_validas / Lecturas_totales) * 100
+- Recolección: Filtros de señal, detección de outliers.
+- Meta: ≥ 90%.
+
+**2.3. Telemetry Frequency Consistency (TFC)**
+- Fórmula: TFC = (Lecturas_recibidas / Lecturas_esperadas) * 100
+- Recolección: Prometheus + logs de gateway.
+- Meta: ≥ 85%.
+
+---
+
+**3. User Adoption Metrics (Adopción Operativa)**
+
+**3.1. Driver App Adoption Rate (DAA)**
+- Fórmula: DAA = (Conductores_activos / Conductores_registrados) * 100
+- Recolección: Firebase Analytics + logs de sesiones.
+- Meta: ≥ 80%.
+
+**3.2. Task Completion Without Assistance (TCWA)**
+- Fórmula: TCWA = (Tareas_completadas_sin_ayuda / Tareas_totales) * 100
+- Recolección: Pruebas de usabilidad + formularios de feedback.
+- Meta: ≥ 90%.
+
+---
+
+**4. Citizen Experience Metrics (Satisfacción del Servicio)**
+
+**4.1. Citizen Satisfaction Index (CSI)**
+- Fórmula: Promedio ponderado de encuestas sobre percepción del servicio (escala 1–5)
+- Recolección: Encuestas antes y después del piloto.
+- Meta: Aumento ≥ 25%.
+
+**4.2. Information Transparency Score (ITS)**
+- Fórmula: ITS = (Funciones_transparentes_usadas / Funciones_transparentes_disponibles) * 100  
+  (Ej.: horarios, estado de contenedores, próximas rutas)
+- Recolección: GA4 + logs de la app ciudadana.
+- Meta: ≥ 60% de uso sostenido.
+
+---
+
+**5. System Stability & Performance Metrics**
+
+**5.1. API Response Time (ART)**
+- Fórmula: Promedio de latencia de los endpoints críticos (ms)
+- Recolección: Prometheus + APM.
+- Meta: ≤ 500 ms promedio.
+
+**5.2. Error Rate (ER)**
+- Fórmula: ER = (Errores_5xx / Requests_totales) * 100
+- Recolección: Logs del backend + Grafana.
+- Meta: ≤ 1%.
+
+**5.3. Mobile Crash-Free Users (CFU)**
+- Fórmula: CFU = (Usuarios_sin_crashes / Usuarios_totales) * 100
+- Recolección: Firebase Crashlytics.
+- Meta: ≥ 98%.
+
+---
+
+Estas métricas serán las únicas fuentes válidas para evaluar hipótesis, diseñar experimentos y tomar decisiones durante el desarrollo, piloto municipal y fases posteriores de adopción.
 
 ### 8.2.3. Measures
 
+Las siguientes medidas permiten validar empíricamente cada hipótesis planteada, conectando preguntas clave con los indicadores que serán monitoreados durante el experimento.
+
+---
+
+Medida 1: Eficiencia de rutas de recolección
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%;">
+  <tr>
+    <th style="width:20%;">Question</th>
+    <td>¿La optimización automática de rutas basada en nivel de llenado y permanencia reducirá los costos operativos municipales?</td>
+  </tr>
+  <tr>
+    <th>Measure</th>
+    <td>
+      Comparar los tiempos reales de recolección antes y después del uso del dashboard de optimización.  
+      Medir la reducción de duración de ruta, el consumo de combustible y el número de paradas innecesarias.  
+      Registrar desvíos respecto a la ruta sugerida mediante GPS y compararlos contra el baseline municipal.
+    </td>
+  </tr>
+</table>
+
+---
+
+Medida 2: Confiabilidad percibida de los datos IoT
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%;">
+  <tr>
+    <th style="width:20%;">Question</th>
+    <td>¿La información capturada por sensores IoT será percibida como confiable para la toma de decisiones operativas?</td>
+  </tr>
+  <tr>
+    <th>Measure</th>
+    <td>
+      Aplicar encuestas de percepción a administradores antes y después de mostrar indicadores de salud del sensor (uptime, frecuencia de lectura, precisión).  
+      Medir el uso de funciones de confiabilidad (historial del sensor, verificación de lecturas).  
+      Comparar el nivel de confianza reportado usando una escala Likert y el número de consultas a datos históricos.
+    </td>
+  </tr>
+</table>
+
+---
+
+Medida 3: Adopción de la app móvil por parte de conductores
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%;">
+  <tr>
+    <th style="width:20%;">Question</th>
+    <td>¿Los conductores utilizarán de manera efectiva la app móvil para seguir rutas optimizadas durante sus recorridos?</td>
+  </tr>
+  <tr>
+    <th>Measure</th>
+    <td>
+      Registrar sesiones activas, duración del uso y frecuencia con la que siguen rutas sugeridas (Firebase Analytics).  
+      Medir adherencia a rutas comparando rutas completadas vs. desvíos detectados por GPS.  
+      Realizar pruebas de usabilidad para validar tareas completadas sin asistencia.
+    </td>
+  </tr>
+</table>
+
+---
+
+Medida 4: Percepción ciudadana del servicio de limpieza
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%;">
+  <tr>
+    <th style="width:20%;">Question</th>
+    <td>¿Ofrecer información transparente sobre horarios y estado de contenedores mejora la satisfacción ciudadana?</td>
+  </tr>
+  <tr>
+    <th>Measure</th>
+    <td>
+      Realizar encuestas antes y después del piloto para medir cambios en satisfacción (escala 1–5).  
+      Analizar métricas de uso en la app ciudadana: vistas de estado del contenedor, consultas a horarios y revisiones de rutas próximas (GA4).  
+      Comparar zonas piloto vs. zonas sin acceso a esta información para evaluar impacto.
+    </td>
+  </tr>
+</table>
+
 ### 8.2.4. Conditions
+
+A continuación se definen las condiciones experimentales y de control para cada una de las hipótesis de WasteTrack. Estas condiciones orientan cómo se configurarán los pilotos y qué cambios se introducirán en cada escenario.
+
+---
+
+Condiciones para la hipótesis: Eficiencia de rutas de recolección
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%;">
+  <tr>
+    <th style="width:20%;">Question</th>
+    <td>¿La optimización automática de rutas basada en nivel de llenado y permanencia reducirá los costos operativos municipales?</td>
+  </tr>
+  <tr>
+    <th>Condición Experimental</th>
+    <td>
+      Las rutas se generan utilizando el algoritmo de optimización de WasteTrack.  
+      Los conductores siguen las rutas sugeridas desde la app móvil durante todo el piloto.
+    </td>
+  </tr>
+  <tr>
+    <th>Condición de Control</th>
+    <td>
+      Las rutas se planifican mediante el esquema tradicional de la municipalidad (rutas fijas o planificación manual), sin apoyo del algoritmo de WasteTrack.  
+      Los equipos no reciben instrucciones optimizadas en la app.
+    </td>
+  </tr>
+</table>
+
+---
+
+Condiciones para la hipótesis: Confiabilidad percibida de los datos IoT
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%;">
+  <tr>
+    <th style="width:20%;">Question</th>
+    <td>¿La información capturada por sensores IoT será percibida como confiable para la toma de decisiones operativas?</td>
+  </tr>
+  <tr>
+    <th>Condición Experimental</th>
+    <td>
+      El dashboard muestra indicadores de confiabilidad del sensor: uptime, frecuencia de lectura, histórico, alertas de fallos y último mantenimiento.  
+      Los administradores pueden revisar estos datos antes de tomar decisiones operativas.
+    </td>
+  </tr>
+  <tr>
+    <th>Condición de Control</th>
+    <td>
+      El dashboard solo muestra el nivel de llenado del contenedor sin indicadores de salud del sensor.  
+      No se presentan métricas de calidad de datos ni alertas de fallos.
+    </td>
+  </tr>
+</table>
+
+---
+
+Condiciones para la hipótesis: Adopción de la app móvil de conductores
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%;">
+  <tr>
+    <th style="width:20%;">Question</th>
+    <td>¿Los conductores utilizarán de manera efectiva la app móvil para seguir rutas optimizadas durante sus recorridos?</td>
+  </tr>
+  <tr>
+    <th>Condición Experimental</th>
+    <td>
+      La app incluye navegación guiada paso a paso, alertas de contenedores críticos y confirmación de cada parada.  
+      Se realiza una capacitación inicial y se mide el uso durante la operación real.
+    </td>
+  </tr>
+  <tr>
+    <th>Condición de Control</th>
+    <td>
+      La app solo muestra un listado simple de puntos sin navegación guiada ni alertas.  
+      Los conductores dependen de métodos tradicionales (mapas estáticos, rutas conocidas, instrucciones verbales).
+    </td>
+  </tr>
+</table>
+
+---
+
+Condiciones para la hipótesis: Percepción ciudadana del servicio de limpieza
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%;">
+  <tr>
+    <th style="width:20%;">Question</th>
+    <td>¿Ofrecer información transparente sobre horarios y estado de contenedores mejora la satisfacción del ciudadano?</td>
+  </tr>
+  <tr>
+    <th>Condición Experimental</th>
+    <td>
+      En la zona piloto, los ciudadanos acceden a la app o portal donde pueden ver:  
+      - horarios estimados de recolección  
+      - estado de los contenedores  
+      - alertas relevantes  
+      La municipalidad comunica activamente este acceso.
+    </td>
+  </tr>
+  <tr>
+    <th>Condición de Control</th>
+    <td>
+      En la zona de control, los ciudadanos no reciben acceso a información en tiempo real ni funcionalidades adicionales de transparencia.  
+      Se mantiene la comunicación tradicional existente.
+    </td>
+  </tr>
+</table>
 
 ### 8.2.5. Scale Calculations and Decisions
 
+Este enfoque utiliza métricas para evaluar el cumplimiento de las hipótesis en WasteTrack.  
+Cada hipótesis se asocia con un indicador de éxito:
+
+- Se considera **desfavorable** cuando el valor está por debajo del mínimo esperado.
+- **Aceptable** cuando se encuentra entre el mínimo y el valor objetivo.
+- **Ideal** cuando la métrica alcanza plenamente el objetivo planteado.
+- **Excelente** cuando el valor supera el objetivo en un 25% o más, indicando un éxito significativo.
+
+Este esquema permite tomar decisiones fundamentadas en métricas para validar, ajustar o escalar las hipótesis del proyecto.
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%; text-align:center;">
+  <thead>
+    <tr>
+      <th style="width:30%;">Scale Calculation</th>
+      <th style="width:30%;">Decision</th>
+      <th style="width:10%;">Desfavorable</th>
+      <th style="width:10%;">Aceptable</th>
+      <th style="width:10%;">Ideal</th>
+      <th style="width:10%;">Excelente</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left;">
+        Creemos que al utilizar el algoritmo de optimización de rutas de WasteTrack, se reducirá el tiempo total de recolección (RCT) en al menos 15% y el consumo de combustible (FCR) en al menos 10% en las zonas piloto.  
+        Sabremos que esto es cierto cuando los indicadores RCT y FCR se mantengan dentro o por encima de esas metas durante el piloto.
+      </td>
+      <td style="text-align:left;">
+        Si los resultados alcanzan o superan los objetivos, se recomienda escalar el uso de WasteTrack a más rutas y distritos municipales. En caso contrario, revisar parámetros del algoritmo y la capacitación a conductores.
+      </td>
+      <td></td>
+      <td></td>
+      <td><strong>X</strong></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td style="text-align:left;">
+        Creemos que al mostrar indicadores de confiabilidad de sensores (SUR, VRR, TFC) los administradores percibirán los datos como más confiables y usarán con mayor frecuencia el dashboard para la toma de decisiones.  
+        Sabremos que esto es cierto cuando SUR ≥ 95%, VRR ≥ 90% y aumente la frecuencia de consultas al dashboard.
+      </td>
+      <td style="text-align:left;">
+        Si las métricas de confiabilidad se mantienen altas y la percepción de confianza mejora, se consolidará esta vista como estándar y se priorizará inversión en mantenimiento preventivo de sensores.
+      </td>
+      <td></td>
+      <td><strong>X</strong></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td style="text-align:left;">
+        Creemos que al ofrecer rutas guiadas y una app móvil simple, la tasa de adopción de conductores (DAA) será de al menos 80% y el porcentaje de rutas completadas siguiendo la optimización será mayor al 70%.  
+        Sabremos que esto es cierto cuando la mayoría de conductores utilice activamente la app durante sus recorridos.
+      </td>
+      <td style="text-align:left;">
+        Si la adopción es alta, se validará el diseño actual de la app y se podrá introducir gradualmente funcionalidades avanzadas. Si es baja, se revisarán la interfaz, la capacitación y las condiciones de uso en campo.
+      </td>
+      <td></td>
+      <td><strong>X</strong></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td style="text-align:left;">
+        Creemos que al brindar información transparente al ciudadano (estado de contenedores y horarios de recolección), el Citizen Satisfaction Index (CSI) aumentará al menos en 25% en las zonas piloto frente a la línea base.  
+        Sabremos que esto es cierto cuando las encuestas de satisfacción muestren esta mejora sostenida.
+      </td>
+      <td style="text-align:left;">
+        Si la satisfacción mejora, se recomendará integrar WasteTrack como herramienta de transparencia y comunicación estándar en el distrito, y considerar nuevas funcionalidades de participación ciudadana.
+      </td>
+      <td></td>
+      <td></td>
+      <td><strong>X</strong></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
 ### 8.2.6. Methods Selection
+
+Para evaluar las hipótesis de WasteTrack se seleccionan métodos sencillos, medibles y adecuados al contexto municipal e IoT. El objetivo es identificar cambios reales en eficiencia, adopción y percepción sin requerir experimentos excesivamente complejos.
+
+---
+
+Métodos principales seleccionados
+
+- **A/B Testing:**  
+  Se utilizará para comparar versiones del dashboard (con indicadores de confiabilidad vs sin indicadores) y variaciones en la app ciudadana (con información transparente vs sin ella).
+
+- **Comparación pre/post piloto:**  
+  Método central para medir la reducción en tiempo de ruta, consumo de combustible y desviaciones. Las métricas operativas (RCT, FCR, RDR) se comparan antes y después de usar WasteTrack.
+
+- **Tracking basado en eventos:**  
+  Firebase Analytics y GA4 registrarán adopción de conductores, rutas completadas, uso de funcionalidades ciudadanas y consultas al dashboard.
+
+- **Muestreo por zonas (estratificado):**  
+  Se seleccionan rutas representativas (residencial, comercial, alta densidad) para asegurar que los resultados no dependan de una única zona.
+
+- **Encuestas breves (pre y post):**  
+  Para medir satisfacción ciudadana (CSI) y percepción de confiabilidad del dato entre administradores municipales.
+
+---
+
+Parámetros estadísticos básicos
+
+- **Nivel de significancia (α):** 0.05
+- **Potencia estadística:** 80%
+- **Efecto mínimo detectable (MDE):**
+    - Rutas: 15% reducción en tiempo
+    - Combustible: 10% reducción
+    - Adopción conductores: +20%
+    - Satisfacción ciudadana: +25%
+
+---
+
+Herramientas recomendadas
+
+- Firebase Analytics (conductores y ciudadanos)
+- Google Analytics (landing page / portal informativo)
+- Prometheus + Grafana (métricas IoT y backend)
+- Google Forms o Typeform (encuestas pre/post)
+
+Estas herramientas y métodos permiten evaluar de manera práctica, rápida y confiable el impacto de WasteTrack en las zonas piloto.
 
 ### 8.2.7. Data Analytics: Goals, KPIs and Metrics Selection
 
+El objetivo de esta sección es definir una estrategia analítica clara para medir el impacto de WasteTrack en eficiencia operativa, adopción tecnológica y percepción ciudadana. Cada KPI está alineado a un objetivo estratégico del producto y utiliza las métricas oficiales definidas previamente.
+
+---
+
+Objetivos del Producto (Goals)
+
+| Objetivo Clave | Descripción |
+|----------------|-------------|
+| Optimizar la eficiencia operativa municipal | Reducir tiempos de ruta, consumo de combustible y desviaciones mediante rutas inteligentes. |
+| Garantizar calidad y confiabilidad de datos IoT | Monitorear estabilidad, precisión y frecuencia de lectura de sensores para toma de decisiones. |
+| Aumentar la adopción de la app de conductores | Lograr que la mayoría de operarios utilicen WasteTrack como herramienta principal en campo. |
+| Mejorar la percepción ciudadana del servicio de limpieza | Incrementar satisfacción mediante información transparente y en tiempo real. |
+| Monitorear comportamiento en web y app | Analizar uso de landing page, portal ciudadano y app móvil. |
+
+---
+
+KPIs y Métricas Seleccionadas
+
+| Objetivo Estratégico | KPI | Métricas Específicas | Herramienta |
+|----------------------|-----|----------------------|-------------|
+| **Eficiencia operativa** | Reducción de tiempo de ruta (RCT) | Variación % pre/post; minutos reducidos por recorrido | Backend + GPS + Grafana |
+| | Reducción de consumo de combustible (FCR) | % de combustible ahorrado | Registros municipales |
+| | Desviaciones de ruta (RDR) | % de desvíos por ruta | GPS + Prometheus |
+| **Confiabilidad IoT** | Uptime de sensores (SUR) | % de tiempo activo | Prometheus |
+| | Lecturas válidas (VRR) | % lecturas no erróneas | Backend IoT |
+| | Consistencia de telemetría (TFC) | % lecturas recibidas vs esperadas | Gateway IoT |
+| **Adopción conductores** | Tasa de adopción (DAA) | % conductores activos | Firebase Analytics |
+| | Rutas completadas según optimización | % rutas completadas sin desviación relevante | GPS tracking |
+| **Percepción ciudadana** | Citizen Satisfaction Index (CSI) | Promedio encuestas 1–5 | Formularios pre/post |
+| | Information Transparency Score (ITS) | % uso de funciones de transparencia | GA4 + App logs |
+| **Uso de plataforma web/móvil** | Usuarios activos (DAU/WAU) | Actividad diaria/semanal | GA4 + Firebase |
+| | Interacción en portal ciudadano | Vistas de horarios, estado contenedores | GA4 |
+| | Tasa de rebote landing page | % sesiones sin interacción | GA4 |
+
+---
+
+Visualización de Datos
+
+Se utilizarán dashboards centralizados para análisis continuo:
+
+- **Grafana:** métricas IoT, sensores, backend, rutas.
+- **GA4 dashboards:** comportamiento web y portal ciudadano.
+- **Firebase Dashboards:** uso móvil y adopción conductores.
+- **Google Data Studio:** reportes ejecutivos para municipalidades.
+
+---
+
+Frecuencia de Análisis
+
+- **Diario:** DAU, ITS, DAA, estado de sensores.
+- **Semanal:** RCT, FCR, RDR, tendencias de uso y adopción.
+- **Mensual:** CSI, análisis comparativo zona piloto vs control, reportes de confiabilidad IoT.
+
+---
+
+Estos KPIs permiten evaluar de manera clara, continua y basada en datos si WasteTrack está generando el impacto esperado en eficiencia municipal, calidad técnica y experiencia de usuarios.
+
 ### 8.2.8. Web and Mobile Tracking Plan.
+
+El objetivo del plan de tracking es asegurar una medición consistente del comportamiento de usuarios (conductores, administradores y ciudadanos) en la web y en la app móvil de WasteTrack, permitiendo evaluar adopción, eficiencia operativa y uso de funcionalidades clave.
+
+---
+
+Objetivo del Tracking Plan
+
+- Medir interacciones clave de conductores y administradores.
+- Evaluar el uso del portal ciudadano y la landing page.
+- Detectar fricción en rutas, consultas y flujo operativo.
+- Respaldar KPIs definidos (RCT, DAA, ITS, etc.).
+
+---
+
+Herramientas Utilizadas
+
+- **Firebase Analytics** (Android/iOS)
+- **Google Analytics 4 (GA4)** (web y landing page)
+- **Google Tag Manager** (web)
+- **Prometheus / Grafana** (tracking técnico: telemetría, uptime, rendimiento)
+
+---
+
+Eventos Principales
+
+| Plataforma | Evento | Descripción | Parámetros Clave | Objetivo |
+|-----------|--------|-------------|------------------|----------|
+| Web/Móvil | `app_open` | Inicio de sesión o apertura | `platform`, `user_role` | Medir DAU/WAU |
+| Móvil (conductores) | `route_started` | Inicio de ruta optimizada | `route_id`, `vehicle_id` | Medir adopción del sistema |
+| Móvil (conductores) | `stop_completed` | Parada completada | `stop_id`, `timestamp` | Evaluar cumplimiento de rutas |
+| Web/Móvil | `container_status_viewed` | Ciudadano o admin ve estado de contenedor | `container_id`, `fill_level` | Medir interés y transparencia |
+| Web/Móvil | `schedule_checked` | Consulta de horarios | `district`, `timestamp` | Usabilidad del portal ciudadano |
+| Web | `cta_click` | Clicks en botones clave de la landing | `cta_type` | Medir conversión web |
+| Web/Móvil | `sensor_alert_viewed` | Visualización de alerta IoT | `alert_type`, `severity` | Evaluar atención a incidencias |
+| Web/Móvil | `session_duration` | Duración de sesión | `duration_sec`, `user_role` | Engagement general |
+
+---
+
+Convenciones de Nombres
+
+- Formato: **snake_case**.
+- Evitar abreviaturas confusas.
+- Parámetros siempre en minúscula.
+
+Ejemplos correctos: `route_started`, `schedule_checked`, `container_status_viewed`.
+
+---
+
+Reglas de Calidad y Validación
+
+- Todos los eventos se prueban en **ambiente staging**.
+- Validación con **Firebase DebugView** y **GA4 Debugger**.
+- Auditoría mensual para evitar duplicados o pérdidas de datos.
+
+---
+
+Mapeo a KPIs
+
+| Evento | KPI Asociado |
+|--------|--------------|
+| `route_started`, `stop_completed` | DAA, RCT, RDR |
+| `container_status_viewed` | ITS, CSI |
+| `schedule_checked` | ITS |
+| `cta_click` | Conversión landing |
+| `session_duration` | Engagement (DAU/WAU) |
+| `sensor_alert_viewed` | Calidad de respuesta operativa |
+
+---
+
+Este tracking plan garantiza que WasteTrack pueda medir con precisión el uso real del sistema, compararlo con los KPIs definidos y orientar decisiones de diseño, producto y operación municipal.
 
 ## 8.3.  Experimentation
 
