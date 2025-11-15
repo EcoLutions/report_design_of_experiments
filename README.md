@@ -6568,6 +6568,111 @@ Medida 4: Percepción ciudadana del servicio de limpieza
 
 ### 8.2.4. Conditions
 
+A continuación se definen las condiciones experimentales y de control para cada una de las hipótesis de WasteTrack. Estas condiciones orientan cómo se configurarán los pilotos y qué cambios se introducirán en cada escenario.
+
+---
+
+Condiciones para la hipótesis: Eficiencia de rutas de recolección
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%;">
+  <tr>
+    <th style="width:20%;">Question</th>
+    <td>¿La optimización automática de rutas basada en nivel de llenado y permanencia reducirá los costos operativos municipales?</td>
+  </tr>
+  <tr>
+    <th>Condición Experimental</th>
+    <td>
+      Las rutas se generan utilizando el algoritmo de optimización de WasteTrack.  
+      Los conductores siguen las rutas sugeridas desde la app móvil durante todo el piloto.
+    </td>
+  </tr>
+  <tr>
+    <th>Condición de Control</th>
+    <td>
+      Las rutas se planifican mediante el esquema tradicional de la municipalidad (rutas fijas o planificación manual), sin apoyo del algoritmo de WasteTrack.  
+      Los equipos no reciben instrucciones optimizadas en la app.
+    </td>
+  </tr>
+</table>
+
+---
+
+Condiciones para la hipótesis: Confiabilidad percibida de los datos IoT
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%;">
+  <tr>
+    <th style="width:20%;">Question</th>
+    <td>¿La información capturada por sensores IoT será percibida como confiable para la toma de decisiones operativas?</td>
+  </tr>
+  <tr>
+    <th>Condición Experimental</th>
+    <td>
+      El dashboard muestra indicadores de confiabilidad del sensor: uptime, frecuencia de lectura, histórico, alertas de fallos y último mantenimiento.  
+      Los administradores pueden revisar estos datos antes de tomar decisiones operativas.
+    </td>
+  </tr>
+  <tr>
+    <th>Condición de Control</th>
+    <td>
+      El dashboard solo muestra el nivel de llenado del contenedor sin indicadores de salud del sensor.  
+      No se presentan métricas de calidad de datos ni alertas de fallos.
+    </td>
+  </tr>
+</table>
+
+---
+
+Condiciones para la hipótesis: Adopción de la app móvil de conductores
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%;">
+  <tr>
+    <th style="width:20%;">Question</th>
+    <td>¿Los conductores utilizarán de manera efectiva la app móvil para seguir rutas optimizadas durante sus recorridos?</td>
+  </tr>
+  <tr>
+    <th>Condición Experimental</th>
+    <td>
+      La app incluye navegación guiada paso a paso, alertas de contenedores críticos y confirmación de cada parada.  
+      Se realiza una capacitación inicial y se mide el uso durante la operación real.
+    </td>
+  </tr>
+  <tr>
+    <th>Condición de Control</th>
+    <td>
+      La app solo muestra un listado simple de puntos sin navegación guiada ni alertas.  
+      Los conductores dependen de métodos tradicionales (mapas estáticos, rutas conocidas, instrucciones verbales).
+    </td>
+  </tr>
+</table>
+
+---
+
+Condiciones para la hipótesis: Percepción ciudadana del servicio de limpieza
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%;">
+  <tr>
+    <th style="width:20%;">Question</th>
+    <td>¿Ofrecer información transparente sobre horarios y estado de contenedores mejora la satisfacción del ciudadano?</td>
+  </tr>
+  <tr>
+    <th>Condición Experimental</th>
+    <td>
+      En la zona piloto, los ciudadanos acceden a la app o portal donde pueden ver:  
+      - horarios estimados de recolección  
+      - estado de los contenedores  
+      - alertas relevantes  
+      La municipalidad comunica activamente este acceso.
+    </td>
+  </tr>
+  <tr>
+    <th>Condición de Control</th>
+    <td>
+      En la zona de control, los ciudadanos no reciben acceso a información en tiempo real ni funcionalidades adicionales de transparencia.  
+      Se mantiene la comunicación tradicional existente.
+    </td>
+  </tr>
+</table>
+
 ### 8.2.5. Scale Calculations and Decisions
 
 ### 8.2.6. Methods Selection
