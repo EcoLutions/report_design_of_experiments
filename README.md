@@ -6859,6 +6859,76 @@ Estos KPIs permiten evaluar de manera clara, continua y basada en datos si Waste
 
 ### 8.2.8. Web and Mobile Tracking Plan.
 
+El objetivo del plan de tracking es asegurar una medición consistente del comportamiento de usuarios (conductores, administradores y ciudadanos) en la web y en la app móvil de WasteTrack, permitiendo evaluar adopción, eficiencia operativa y uso de funcionalidades clave.
+
+---
+
+Objetivo del Tracking Plan
+
+- Medir interacciones clave de conductores y administradores.
+- Evaluar el uso del portal ciudadano y la landing page.
+- Detectar fricción en rutas, consultas y flujo operativo.
+- Respaldar KPIs definidos (RCT, DAA, ITS, etc.).
+
+---
+
+Herramientas Utilizadas
+
+- **Firebase Analytics** (Android/iOS)
+- **Google Analytics 4 (GA4)** (web y landing page)
+- **Google Tag Manager** (web)
+- **Prometheus / Grafana** (tracking técnico: telemetría, uptime, rendimiento)
+
+---
+
+Eventos Principales
+
+| Plataforma | Evento | Descripción | Parámetros Clave | Objetivo |
+|-----------|--------|-------------|------------------|----------|
+| Web/Móvil | `app_open` | Inicio de sesión o apertura | `platform`, `user_role` | Medir DAU/WAU |
+| Móvil (conductores) | `route_started` | Inicio de ruta optimizada | `route_id`, `vehicle_id` | Medir adopción del sistema |
+| Móvil (conductores) | `stop_completed` | Parada completada | `stop_id`, `timestamp` | Evaluar cumplimiento de rutas |
+| Web/Móvil | `container_status_viewed` | Ciudadano o admin ve estado de contenedor | `container_id`, `fill_level` | Medir interés y transparencia |
+| Web/Móvil | `schedule_checked` | Consulta de horarios | `district`, `timestamp` | Usabilidad del portal ciudadano |
+| Web | `cta_click` | Clicks en botones clave de la landing | `cta_type` | Medir conversión web |
+| Web/Móvil | `sensor_alert_viewed` | Visualización de alerta IoT | `alert_type`, `severity` | Evaluar atención a incidencias |
+| Web/Móvil | `session_duration` | Duración de sesión | `duration_sec`, `user_role` | Engagement general |
+
+---
+
+Convenciones de Nombres
+
+- Formato: **snake_case**.
+- Evitar abreviaturas confusas.
+- Parámetros siempre en minúscula.
+
+Ejemplos correctos: `route_started`, `schedule_checked`, `container_status_viewed`.
+
+---
+
+Reglas de Calidad y Validación
+
+- Todos los eventos se prueban en **ambiente staging**.
+- Validación con **Firebase DebugView** y **GA4 Debugger**.
+- Auditoría mensual para evitar duplicados o pérdidas de datos.
+
+---
+
+Mapeo a KPIs
+
+| Evento | KPI Asociado |
+|--------|--------------|
+| `route_started`, `stop_completed` | DAA, RCT, RDR |
+| `container_status_viewed` | ITS, CSI |
+| `schedule_checked` | ITS |
+| `cta_click` | Conversión landing |
+| `session_duration` | Engagement (DAU/WAU) |
+| `sensor_alert_viewed` | Calidad de respuesta operativa |
+
+---
+
+Este tracking plan garantiza que WasteTrack pueda medir con precisión el uso real del sistema, compararlo con los KPIs definidos y orientar decisiones de diseño, producto y operación municipal.
+
 ## 8.3.  Experimentation
 
 ### 8.3.1. To-Be User Stories
