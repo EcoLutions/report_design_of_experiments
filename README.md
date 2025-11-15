@@ -6488,6 +6488,84 @@ Estas métricas serán las únicas fuentes válidas para evaluar hipótesis, dis
 
 ### 8.2.3. Measures
 
+Las siguientes medidas permiten validar empíricamente cada hipótesis planteada, conectando preguntas clave con los indicadores que serán monitoreados durante el experimento.
+
+---
+
+Medida 1: Eficiencia de rutas de recolección
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%;">
+  <tr>
+    <th style="width:20%;">Question</th>
+    <td>¿La optimización automática de rutas basada en nivel de llenado y permanencia reducirá los costos operativos municipales?</td>
+  </tr>
+  <tr>
+    <th>Measure</th>
+    <td>
+      Comparar los tiempos reales de recolección antes y después del uso del dashboard de optimización.  
+      Medir la reducción de duración de ruta, el consumo de combustible y el número de paradas innecesarias.  
+      Registrar desvíos respecto a la ruta sugerida mediante GPS y compararlos contra el baseline municipal.
+    </td>
+  </tr>
+</table>
+
+---
+
+Medida 2: Confiabilidad percibida de los datos IoT
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%;">
+  <tr>
+    <th style="width:20%;">Question</th>
+    <td>¿La información capturada por sensores IoT será percibida como confiable para la toma de decisiones operativas?</td>
+  </tr>
+  <tr>
+    <th>Measure</th>
+    <td>
+      Aplicar encuestas de percepción a administradores antes y después de mostrar indicadores de salud del sensor (uptime, frecuencia de lectura, precisión).  
+      Medir el uso de funciones de confiabilidad (historial del sensor, verificación de lecturas).  
+      Comparar el nivel de confianza reportado usando una escala Likert y el número de consultas a datos históricos.
+    </td>
+  </tr>
+</table>
+
+---
+
+Medida 3: Adopción de la app móvil por parte de conductores
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%;">
+  <tr>
+    <th style="width:20%;">Question</th>
+    <td>¿Los conductores utilizarán de manera efectiva la app móvil para seguir rutas optimizadas durante sus recorridos?</td>
+  </tr>
+  <tr>
+    <th>Measure</th>
+    <td>
+      Registrar sesiones activas, duración del uso y frecuencia con la que siguen rutas sugeridas (Firebase Analytics).  
+      Medir adherencia a rutas comparando rutas completadas vs. desvíos detectados por GPS.  
+      Realizar pruebas de usabilidad para validar tareas completadas sin asistencia.
+    </td>
+  </tr>
+</table>
+
+---
+
+Medida 4: Percepción ciudadana del servicio de limpieza
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%;">
+  <tr>
+    <th style="width:20%;">Question</th>
+    <td>¿Ofrecer información transparente sobre horarios y estado de contenedores mejora la satisfacción ciudadana?</td>
+  </tr>
+  <tr>
+    <th>Measure</th>
+    <td>
+      Realizar encuestas antes y después del piloto para medir cambios en satisfacción (escala 1–5).  
+      Analizar métricas de uso en la app ciudadana: vistas de estado del contenedor, consultas a horarios y revisiones de rutas próximas (GA4).  
+      Comparar zonas piloto vs. zonas sin acceso a esta información para evaluar impacto.
+    </td>
+  </tr>
+</table>
+
 ### 8.2.4. Conditions
 
 ### 8.2.5. Scale Calculations and Decisions
