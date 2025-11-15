@@ -6293,6 +6293,104 @@ El Question Backlog prioriza las preguntas experimentales más relevantes para e
 
 ### 8.2.1. Hypotheses
 
+A continuación, se presentan las hipótesis experimentales para validar las principales suposiciones del sistema WasteTrack en relación con eficiencia operativa, confiabilidad de la información, adopción de usuarios municipales y experiencia del operario.
+
+---
+
+<table>
+  <tr>
+    <th colspan="2">Eficiencia de rutas de recolección</th>
+  </tr>
+  <tr>
+    <th>Question</th>
+    <th>¿La optimización automática de rutas basada en nivel de llenado y permanencia reducirá los costos operativos municipales?</th>
+  </tr>
+  <tr>
+    <td>Belief</td>
+    <td>Cremos que utilizar datos IoT en tiempo real permitirá reducir recorridos innecesarios y mejorar el uso de combustible y horas hombre.</td>
+  </tr>
+  <tr>
+    <td>Hypothesis</td>
+    <td>Si los administradores usan el dashboard de optimización, se reducirá en al menos un 15% el tiempo total de recolección en los puntos piloto.</td>
+  </tr>
+  <tr>
+    <td>Null Hypothesis</td>
+    <td>El uso del dashboard no generará una reducción significativa en los tiempos de recolección.</td>
+  </tr>
+</table>
+
+---
+
+<table>
+  <tr>
+    <th colspan="2">Confiabilidad de los datos IoT</th>
+  </tr>
+  <tr>
+    <th>Question</th>
+    <th>¿La información capturada por sensores IoT será percibida como confiable para la toma de decisiones operativas?</th>
+  </tr>
+  <tr>
+    <td>Belief</td>
+    <td>Si el sistema muestra historial, calibración y estado del sensor, los administradores confiarán más en decisiones basadas en datos.</td>
+  </tr>
+  <tr>
+    <td>Hypothesis</td>
+    <td>Mostrar indicadores de confiabilidad del sensor (porcentaje de precisión, frecuencia de lectura, estado) aumentará la percepción de confianza en un 30%.</td>
+  </tr>
+  <tr>
+    <td>Null Hypothesis</td>
+    <td>Los indicadores de confiabilidad no influirán en la percepción del usuario sobre la calidad del dato.</td>
+  </tr>
+</table>
+
+---
+
+<table>
+  <tr>
+    <th colspan="2">Adopción de la aplicación móvil de conductores</th>
+  </tr>
+  <tr>
+    <th>Question</th>
+    <th>¿Los conductores utilizarán de manera efectiva la app móvil para seguir rutas optimizadas durante sus recorridos?</th>
+  </tr>
+  <tr>
+    <td>Belief</td>
+    <td>Cremos que una interfaz simple con navegación paso a paso aumentará el uso diario de la app por parte de los operarios.</td>
+  </tr>
+  <tr>
+    <td>Hypothesis</td>
+    <td>Si la app móvil incluye rutas guiadas y alertas claras, al menos el 80% de los conductores la utilizará durante más del 70% de su recorrido.</td>
+  </tr>
+  <tr>
+    <td>Null Hypothesis</td>
+    <td>La funcionalidad de rutas guiadas no tendrá un impacto significativo en la adopción diaria de la app.</td>
+  </tr>
+</table>
+
+---
+
+<table>
+  <tr>
+    <th colspan="2">Percepción ciudadana del servicio de limpieza</th>
+  </tr>
+  <tr>
+    <th>Question</th>
+    <th>¿Ofrecer información transparente sobre la frecuencia de recolección mejora la satisfacción ciudadana?</th>
+  </tr>
+  <tr>
+    <td>Belief</td>
+    <td>Creemos que cuando los ciudadanos pueden visualizar horarios, estado de los contenedores y alertas, perciben un servicio más eficiente.</td>
+  </tr>
+  <tr>
+    <td>Hypothesis</td>
+    <td>La disponibilidad de información en la app ciudadana aumentará en 25% la percepción positiva del servicio en la zona piloto.</td>
+  </tr>
+  <tr>
+    <td>Null Hypothesis</td>
+    <td>Proveer información del servicio no influirá significativamente en la satisfacción ciudadana.</td>
+  </tr>
+</table>
+
 ### 8.2.2. Domain Business Metrics
 
 ### 8.2.3. Measures
