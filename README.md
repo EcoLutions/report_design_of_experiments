@@ -6958,6 +6958,28 @@ Este tracking plan garantiza que WasteTrack pueda medir con precisión el uso re
 
 ### 8.3.2. To-Be Product Backlog
 
+| Orden | ID   | Título                            | Descripción                                                                                                              | Story Points |
+|-------|------|-----------------------------------|--------------------------------------------------------------------------------------------------------------------------|--------------|
+| 1     | US02 | Generación de rutas optimizadas   | Como administrador, quiero generar rutas optimizadas basadas en sensores e históricos para reducir tiempo y combustible. | 5            |
+| 2     | US06 | Visualizar ruta asignada          | Como conductor, quiero ver mi ruta asignada con paradas para completar mi jornada de recolección.                        | 5            |
+| 3     | US03 | Alertas por contenedores críticos | Como administrador, quiero recibir alertas cuando un contenedor supere su nivel crítico para actuar rápidamente.         | 3            |
+| 4     | US01 | Dashboard de contenedores         | Como administrador, quiero visualizar el estado de llenado de los contenedores para priorizar rutas.                     | 3            |
+| 5     | US08 | Marcar punto atendido             | Como conductor, quiero marcar cada punto como atendido para actualizar mi progreso.                                      | 3            |
+| 6     | US09 | Reportar incidencias              | Como conductor, quiero reportar incidencias (daño, bloqueo) para informar problemas en campo.                            | 2            |
+| 7     | US14 | Configuración de umbrales         | Como administrador, quiero configurar umbrales de alerta para adecuarlos a mi política.                                  | 2            |
+| 8     | US17 | Salud de sensores                 | Como administrador, quiero monitorear la salud de sensores (uptime, lecturas válidas) para detectar fallas.              | 3            |
+| 9     | US04 | Métricas operativas               | Como administrador, quiero revisar métricas diarias (tiempo por ruta, desvíos, combustible) para evaluar desempeño.      | 5            |
+| 10    | US05 | Exportación de reportes           | Como administrador, quiero exportar reportes operativos en PDF o Excel para presentarlos en reuniones.                   | 2            |
+| 11    | US07 | Notificaciones de cambios         | Como conductor, quiero recibir notificaciones ante cambios de ruta o emergencias.                                        | 2            |
+| 12    | US18 | Modo offline                      | Como conductor, quiero usar la app sin internet para continuar mi registro.                                              | 3            |
+| 13    | US13 | Mapa de calor de incidencias      | Como administrador, quiero visualizar un mapa de calor para identificar zonas críticas.                                  | 3            |
+| 14    | US10 | Consultar horarios                | Como ciudadano, quiero ver horarios de recolección por calle para saber cuándo sacar mis residuos.                       | 2            |
+| 15    | US11 | Estado de contenedores            | Como ciudadano, quiero ver el estado de contenedores cercanos para evitar puntos saturados.                              | 2            |
+| 16    | US12 | Transparencia del servicio        | Como ciudadano, quiero ver rutas completadas en mi distrito para aumentar mi confianza.                                  | 2            |
+| 17    | US19 | Información clara de producto     | Como visitante, quiero una landing clara para entender qué ofrece WasteTrack.                                            | 1            |
+| 18    | US20 | Solicitar demo                    | Como visitante, quiero solicitar una demo municipal mediante un formulario rápido.                                       | 1            |
+| 19    | US15 | Gestión de usuarios               | Como administrador, quiero gestionar usuarios y roles municipales para garantizar accesos correctos.                     | 2            |
+| 20    | US16 | Ver rutas completadas             | Como ciudadano, quiero revisar rutas completadas para validar cumplimiento municipal.                                    | 2            |
 
 # Conclusiones
 
