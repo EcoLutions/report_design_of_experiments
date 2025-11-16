@@ -466,12 +466,16 @@ Este patrón de colaboración sienta las bases para el éxito continuo del proye
     * [8.1.5. Experiment Cards](#815-experiment-cards)
   * [8.2. Experiment Design](#82-experiment-design)
     * [8.2.1. Hypotheses](#821-hypotheses)
-    * [8.2.2. Measures](#822-measures)
-    * [8.2.3. Conditions](#823-conditions)
-    * [8.2.4. Scale Calculations and Decisions](#824-scale-calculations-and-decisions)
-    * [8.2.5. Methods Selection](#825-methods-selection)
-    * [8.2.6. Data Analytics: Goals, KPIs and Metrics Selection](#826-data-analytics-goals-kpis-and-metrics-selection)
-    * [8.2.7. Web and Mobile Tracking Plan](#827-web-and-mobile-tracking-plan)
+    * [8.2.2. Domain Business Metrics](#822-domain-business-metrics)
+    * [8.2.3. Measures](#823-measures)
+    * [8.2.4. Conditions](#824-conditions)
+    * [8.2.5. Scale Calculations and Decisions](#825-scale-calculations-and-decisions)
+    * [8.2.6. Methods Selection](#826-methods-selection)
+    * [8.2.7. Data Analytics: Goals, KPIs and Metrics Selection](#827-data-analytics-goals-kpis-and-metrics-selection)
+    * [8.2.8. Web and Mobile Tracking Plan](#828-web-and-mobile-tracking-plan)
+  * [8.3. Experimentation](#83-experimentation)
+    * [8.3.1. To-Be User Stories](#831-to-be-user-stories)
+    * [8.3.2. To-Be Product Backlog](#832-to-be-product-backlog)
 * [Conclusiones](#conclusiones)
 * [Bibliografía](#bibliografía)
 * [Anexos](#anexos)
@@ -5291,9 +5295,286 @@ Aquí se muestran algunos ejemplos de pruebas del sistema central que se pueden 
 
 #### 6.2.1.1. Coding standard & Code conventions
 
+Para garantizar un código limpio, mantenible y coherente entre todos los miembros del equipo de EcoLutions, se establecieron estándares de codificación alineados con las buenas prácticas de Java, Spring Boot y Domain-Driven Design (DDD). Estos lineamientos aseguran que la base de código de WasteTrack sea clara, escalable y fácil de extender conforme la plataforma crece.
+
+**1. Estándares generales**
+
+- Clean Code
+    - Uso de nombres significativos para clases, variables, métodos y paquetes.
+    - Métodos con una única responsabilidad.
+    - Eliminación de código duplicado o muerto.
+    - Comentarios solo cuando la lógica es compleja; el código debe ser autoexplicativo.
+
+- Consistencia visual
+    - Estilos de formato automáticos según cada tecnología (Google Java Format, Prettier, ESLint).
+    - Indentación consistente (Java: 4 espacios, TS/Dart: 2 espacios).
+    - Orden uniforme de imports y uso de linters para estandarizar estilo.
+
+---
+
+**2. Estándares de backend (Java + Spring Boot)**
+
+- Naming Conventions
+    - Clases y métodos: PascalCase
+    - Variables y atributos: camelCase
+    - Constantes: MAYÚSCULAS_CON_GUIONES
+    - Paquetes: minúsculas
+
+- Uso correcto de Spring Boot
+    - Inyección de dependencias mediante constructor injection.
+    - Separación por capas siguiendo DDD: domain, application, infrastructure, api.
+    - Controladores ligeros, sin lógica de negocio.
+    - Configuración externa con application.yml y @ConfigurationProperties.
+
+- Calidad de código
+    - Validación con Checkstyle, PMD, SpotBugs y SonarLint.
+    - GitHub Actions ejecuta análisis estático en cada pull request.
+
+---
+
+**3. Estándares para landing page (Next.js + TypeScript)**
+
+- Uso de ESLint y Prettier con configuraciones recomendadas de Next.js.
+- Componentes escritos como funciones puras y reutilizables.
+- Estructura de carpetas clara: app/, components/, hooks/, lib/, styles/.
+- Tipado estricto con TypeScript (evitar "any").
+- Nombres descriptivos para props, métodos y hooks personalizados.
+- No incluir lógica pesada en componentes: mover cálculo y utilidades a helpers o servicios.
+- Uso de React Server Components cuando corresponde para mejorar rendimiento.
+
+---
+
+**4. Estándares para web app (Angular + TypeScript)**
+
+- Conventions Angular
+    - Componentes, módulos y servicios nombrados usando PascalCase.
+    - Variables, funciones y parámetros en camelCase.
+    - Separación clara de responsabilidades por archivos: .ts, .html, .scss.
+
+- Buenas prácticas
+    - Tipado estricto, uso de interfaces y modelos de dominio.
+    - Servicios con responsabilidad específica; evitar lógica en componentes.
+    - Uso de RxJS con buenas prácticas (unsubscribe, async pipe).
+
+- Herramientas
+    - ESLint + Prettier para formateo y estilo.
+    - Angular CLI para mantener convención en creación de archivos.
+
+---
+
+**5. Estándares para mobile app (Flutter + Dart)**
+
+- Clean Dart
+    - Indentación automática con dart format.
+    - Métodos y variables en camelCase; clases en PascalCase.
+    - Widgets pequeños, declarativos y reutilizables.
+    - Arquitectura por capas utilizando patrones como BLoC, Riverpod o Provider.
+
+- Código seguro y mantenible
+    - Evitar lógica dentro de widgets: usar controladores o blocs.
+    - Tipado estricto y uso adecuado de null safety.
+    - Mantener carpetas por dominios: ui/, data/, domain/, widgets/.
+
+- Validación
+    - Flutter analyze para revisión del código.
+    - Tests unitarios para lógica de negocio.
+
+---
+
+**6. Domain-Driven Design (DDD)**
+
+- Bounded Contexts
+    - Separación clara del dominio en módulos como Monitoring, Routing, WasteBinManagement y Alerts.
+
+- Patrones aplicados
+    - Entidades con identidad persistente.
+    - Value Objects inmutables (FillLevel, GeoLocation).
+    - Domain Services para lógica sin dueño claro.
+    - Repositorios como abstracción del acceso a datos.
+    - Agregados con reglas e invariantes.
+
+- Lenguaje ubicuo
+    - Uso consistente de términos del negocio: nivel de llenado, sensor IoT, permanencia, ruta óptima, alerta de desborde.
+
+---
+
+**7. Herramientas de análisis y verificación**
+
+- Backend: Checkstyle, PMD, SpotBugs, SonarLint.
+- Frontend (Next.js / Angular): ESLint + Prettier.
+- Mobile (Flutter): flutter analyze + linters oficiales.
+- GitHub Actions
+    - Corre validaciones automáticas en cada PR para garantizar consistencia.
+
+---
+
+**8. Prácticas de documentación**
+
+- Backend: JavaDoc en métodos públicos y servicios.
+- Frontend y mobile: comentarios mínimos cuando la lógica no sea evidente.
+- Uso de ADR (Architecture Decision Records) para registrar decisiones clave.
+- Convenciones de commits siguiendo Conventional Commits.
+
+---
+
+**9. Ejecución en equipo**
+
+- Revisión obligatoria de cada Pull Request.
+- Evaluación de estilo, legibilidad, claridad y adherencia a estándares.
+- Se mantienen reglas para reducir deuda técnica y mejorar la mantenibilidad de WasteTrack.
+
 #### 6.2.1.2. Code Quality & Code Security.
 
+Para garantizar que WasteTrack mantenga un código robusto, seguro y de alta calidad, se aplicó un proceso continuo de análisis estático y verificación de métricas en todas las tecnologías empleadas: backend (Java Spring Boot), web apps (Angular), landing page (Next.js), y mobile (Flutter). El equipo evaluó tanto la calidad del código como la presencia de vulnerabilidades comunes, integrando herramientas automatizadas en el flujo de desarrollo.
+
+---
+
+**1. Evaluación de la calidad del código**
+
+- Se monitorean métricas clave como:
+    - Complejidad ciclomática.
+    - Duplicación de código.
+    - Mantenibilidad y presencia de code smells.
+    - Variables y funciones no utilizadas.
+    - Cobertura de pruebas unitarias en backend y mobile.
+
+- WasteTrack utiliza herramientas especializadas según cada tecnología:
+    - **Backend (Java):** SonarQube, SpotBugs, PMD y SonarLint.
+    - **Angular y Next.js (TypeScript):** ESLint + SonarQube.
+    - **Flutter (Dart):** dart analyze + SonarQube.
+
+- Los reportes de SonarQube permiten identificar:
+    - Métodos con complejidad excesiva en servicios de dominio.
+    - Duplicación en componentes frontend.
+    - Excepciones no controladas en controladores Spring Boot.
+    - Lógica redundante en servicios móviles.
+
+---
+
+**2. Seguridad del código**
+
+Para proteger a WasteTrack de ataques comunes y asegurar que los datos municipales y de sensores IoT se mantengan seguros, se implementaron las siguientes medidas:
+
+- **Inyección SQL (SQL Injection)**
+    - Todas las consultas en el backend se realizan mediante Spring Data JPA con parámetros, evitando concatenación de strings.
+    - Se utilizan consultas JPQL tipeadas y repositorios seguros.
+
+- **Cross-Site Scripting (XSS)**
+    - En Angular se aplica el sistema de sanitización automática del framework, especialmente al manejar datos dinámicos provenientes del backend.
+    - Se evita el uso de `innerHTML` salvo en casos estrictamente necesarios, aplicando `DomSanitizer`.
+    - En Next.js se evita interpolación insegura en componentes y se habilitan políticas de Content Security Policy (CSP) en producción.
+
+- **Cross-Site Request Forgery (CSRF)**
+    - La comunicación entre frontend y backend utiliza exclusivamente tokens JWT por encabezado HTTP `Authorization`, evitando sesiones vulnerables.
+
+- **Manejo de información sensible**
+    - Tokens JWT poseen expiración definida y se transmiten únicamente por HTTPS.
+    - Las credenciales de acceso a la plataforma IoT (sensores, gateways, APIs) se gestionan mediante variables de entorno y no se almacenan en el repositorio.
+    - En la app móvil, los tokens se almacenan usando mecanismos seguros como `flutter_secure_storage`.
+
+- **Validación de entradas**
+    - Se validan los payloads en controladores del backend con `@Valid` y anotaciones de Bean Validation.
+    - En Angular y Next.js se validan formularios mediante Reactive Forms y validaciones del lado del cliente.
+    - En Flutter se implementan validadores antes de enviar cualquier dato al backend.
+
+---
+
+**3. Herramientas complementarias utilizadas**
+
+- **SonarQube**: análisis profundo del código en backend, frontend y mobile (bugs, vulnerabilidades, code smells, duplicación).
+- **SonarLint**: detección inmediata de problemas dentro de IntelliJ, VSCode y Android Studio.
+- **ESLint**: verificación de estilo, errores comunes y vulnerabilidades básicas en Angular y Next.js.
+- **dart analyze** y **flutter analyze**: aseguramiento de calidad en Flutter.
+- **Dependabot (GitHub)**: detección de dependencias desactualizadas o vulnerables en todos los repositorios.
+
+---
+
+**4. Resultados generales del proceso de análisis**
+
+- Reducción significativa de duplicación en componentes Angular y Next.js.
+- Identificación y refactorización de métodos con alta complejidad en servicios del backend (estrategias de optimización de rutas, cálculo de permanencia, etc.).
+- Eliminación de variables y archivos no utilizados en repositorios frontend.
+- Corrección de posibles puntos de XSS en Angular durante la manipulación de contenido dinámico.
+- Validación más estricta de payloads en endpoints críticos del backend (altas de sensores, telemetría, alertas).
+- Aseguramiento de que los tokens sean manejados bajo prácticas seguras en la app móvil y en los frontends.
+
+Estas acciones fortalecieron la calidad estructural del sistema y aseguraron que WasteTrack sea resistente a vulnerabilidades comunes, manteniendo la seguridad de los datos municipales y ambientales gestionados por la plataforma.
+
 ### 6.2.2. Reviews
+
+Para garantizar la calidad, consistencia y seguridad del código en WasteTrack, el equipo implementó un proceso riguroso de revisiones que combina evaluaciones manuales, revisiones entre pares y análisis automático. Este proceso asegura que cada cambio que entra al sistema sea seguro, mantenible y coherente con las buenas prácticas de desarrollo adoptadas para el backend (Spring Boot), web apps (Angular), landing page (Next.js) y mobile (Flutter).
+
+---
+
+**1. Tipos de revisión**
+
+- **Revisión entre pares (Peer Review)**
+    - Todo cambio debe ser revisado por al menos un miembro del equipo antes de integrarse.
+    - Se evalúa legibilidad, claridad, mantenibilidad, y adherencia a estándares específicos por tecnología.
+
+- **Revisión formal**
+    - Para funcionalidades críticas del dominio (optimización de rutas, alertas de desborde, procesamiento IoT), se realiza una revisión estructurada utilizando un checklist técnico.
+    - Participan al menos dos desarrolladores y, cuando corresponde, líderes de dominio.
+
+- **Revisión automática**
+    - Herramientas como **SonarQube**, **SonarLint**, **ESLint**, **dart analyze** y **GitHub Actions** detectan de manera automatizada errores, vulnerabilidades y code smells antes del merge.
+    - Permiten identificar complejidad elevada, duplicación, problemas de estilo o inseguridad en el manejo de datos.
+
+---
+
+**2. Proceso de revisión**
+
+- **Pull Requests (PR)**
+    - Cada cambio debe entrar mediante un PR con una descripción clara del alcance, el motivo del cambio y las pruebas realizadas.
+    - Los PR deben vincularse a una historia de usuario o issue del sistema (GitHub Projects o Jira).
+
+- **Checklist de revisión**
+    - Claridad y legibilidad del código.
+    - Cumplimiento de las convenciones de estilo (Java, TypeScript y Dart).
+    - Validación de datos y manejo adecuado de errores.
+    - Ausencia de duplicación y complejidad excesiva.
+    - Seguridad: sin puntos vulnerables a XSS, SQL Injection u otros ataques.
+    - Verificación de que los cambios no rompen flujos existentes.
+
+- **Comentarios y feedback constructivo**
+    - Los revisores deben justificar cada observación y sugerir alternativas viables.
+    - Se promueve una cultura de mejora continua y aprendizaje colaborativo.
+
+- **Aprobación de PR**
+    - Ningún cambio se fusiona a la rama develop o main sin al menos **una aprobación externa**.
+    - Los PR que afectan módulos sensibles requieren doble aprobación.
+    - Los cambios deben pasar los checks automáticos de CI/CD antes de poder aceptarse.
+
+---
+
+**3. Criterios de aceptación**
+
+- Cumplimiento de estándares de estilo y estructura definidos para cada tecnología.
+- Ausencia de vulnerabilidades detectadas por análisis estático (SQL Injection, XSS, malas prácticas de manejo de tokens).
+- Pruebas exitosas tanto en backend (JUnit) como en frontend/mobile.
+- Cobertura mínima recomendada: **superior al 80%** para módulos críticos.
+- No generar regresiones o fallos en módulos existentes.
+- Mantener coherencia con los principios de DDD en bounded contexts (Routing, Monitoring, Alerts, WasteBinManagement).
+
+---
+
+**4. Frecuencia de las revisiones**
+
+- Las revisiones se realizan constantemente como parte del flujo diario de trabajo.
+- Se intensifican durante el cierre de cada sprint para garantizar que todo el código que avance a releases mantenga el nivel esperado.
+- En funcionalidades clave del dominio, se aplican revisiones especiales antes de pasar al entorno de pruebas (staging).
+
+---
+
+**5. Resultados del proceso de revisión en WasteTrack**
+
+- Identificación temprana de duplicación en componentes Angular y Next.js.
+- Reducción de complejidad en servicios del backend relacionados con algoritmos de optimización de rutas.
+- Eliminación de prácticas inseguras en la manipulación del DOM en Angular.
+- Corrección del uso incorrecto de proveedores en Flutter y componentes mal estructurados.
+- Mejoras en la documentación interna del dominio y en la consistencia entre bounded contexts.
+
+Este proceso garantiza que WasteTrack mantenga una base de código robusta, segura y alineada con los estándares de ingeniería requeridos para una solución IoT crítica orientada a municipalidades.
 
 ## 6.3. Validation Interviews
 
@@ -6041,51 +6322,878 @@ echo "✅ Deployment completed successfully!"
 
 ### 7.4.1. Tools and Practices
 
+WasteTrack utiliza un conjunto de herramientas que permiten monitorear continuamente la salud del backend, el uso del frontend y la estabilidad de la app móvil. Estas prácticas ayudan a detectar problemas de rendimiento y asegurar una operación estable para municipalidades y operarios.
+
+- **Spring Boot Actuator:** expone métricas del estado del backend, latencia y uso de recursos.
+- **Prometheus + Grafana:** Prometheus recolecta métricas del backend y Grafana las visualiza en dashboards que permiten detectar anomalías.
+- **Google Analytics / GA4:** analiza navegación, interacción y tiempos de carga en las interfaces web (Angular y Next.js).
+- **Google Lighthouse:** audita rendimiento, accesibilidad y buenas prácticas del frontend.
+- **Crashlytics y Firebase Performance:** monitorean fallos y rendimiento de la app móvil desarrollada en Flutter.
+- **Log Stream del proveedor (Render/Azure):** muestra errores y eventos del backend en tiempo real.
+
+![Google Analytics](./assets/7.devops-practices/7.4.continuous-monitoring/7.4.1.tools-practices/google-analytics.png)
+
 ### 7.4.2. Monitoring Pipeline Components
+
+El pipeline de monitoreo de WasteTrack sigue un flujo que permite capturar, procesar y visualizar información crítica del sistema.
+
+1. **Recolección de datos**
+    - Backend: métricas expuestas por Actuator (/metrics, /health).
+    - Frontend: datos de uso capturados por GA4 y auditorías de Lighthouse.
+    - Mobile: errores y rendimiento enviados por Crashlytics/Performance.
+
+2. **Scraping y almacenamiento**
+    - Prometheus consulta periódicamente las métricas del backend y mantiene un historial para análisis.
+    - Los logs se almacenan en el panel del proveedor para facilitar diagnóstico.
+
+3. **Visualización**
+    - Grafana muestra métricas del backend en tiempo real.
+    - Firebase Console y GA4 muestran fallos y comportamiento de usuarios.
+
+![Google Lighthouse](./assets/7.devops-practices/7.4.continuous-monitoring/7.4.2.monitoring-pipeline-components/google-lighthouse.png)
 
 ### 7.4.3. Alerting Pipeline Components
 
+El sistema de alertas de WasteTrack permite detectar condiciones críticas y notificar al equipo antes de que afecten a los usuarios.
+
+- **Prometheus + Alertmanager:**
+    - Reglas para latencia elevada, errores 5xx, caídas del servicio o falta de telemetría de sensores.
+    - Alertmanager gestiona el envío de alertas según el nivel (warning, critical).
+
+- **Grafana Alerts:**
+    - Alertas definidas directamente en dashboards cuando una métrica supera umbrales (CPU, memoria, tasa de errores).
+
+- **Alertas de infraestructura:**
+    - Herramientas del proveedor notifican reinicios, fallos de despliegue o consumo excesivo de recursos.
+
+![Grafana](./assets/7.devops-practices/7.4.continuous-monitoring/7.4.3.alerting-pipeline-components/grafana.png)
+
 ### 7.4.4. Notification Pipeline Components
 
+El pipeline de notificaciones garantiza que los desarrolladores y responsables del sistema reciban información inmediata ante incidentes o resultados del pipeline CI/CD.
+
+- **Canales de notificación:**
+    - Correo electrónico, Slack, Teams o canales configurados desde Alertmanager.
+    - Notificaciones del proveedor (Render/Azure) por caída del servicio o consumo anómalo.
+
+- **Notificaciones de CI/CD (GitHub Actions):**
+    - Avisos automáticos cuando un build falla, un test no pasa o un despliegue no se completa correctamente.
+
+- **Reportes automáticos:**
+    - Resúmenes periódicos de métricas clave, uptime y errores críticos.
+
+![Github Actions](./assets/7.devops-practices/7.4.continuous-monitoring/7.4.4.notification-pipeline-components/github-actions.png)
 
 # Capítulo VIII: Experiment-Driven Development
 
-## 8.1.  Experiment Planning
 
-### 8.1.1. Tools and Practices
+## 8.1. Experiment Planning
+
+### 8.1.1. As-Is Summary
+WasteTrack es una plataforma municipal para la gestión operativa de residuos sólidos, orientada a optimizar la recolección, supervisión y trazabilidad de contenedores. El sistema actualmente permite registrar contenedores, visualizar rutas, gestionar reportes ciudadanos y monitorear la recolección según el distrito. Sin embargo, existen brechas que limitan su eficiencia y adopción por parte de operadores municipales y supervisores de campo.
+
+Problemas identificados:
+
+* Baja visibilidad operativa: No existe un módulo avanzado de analítica que permita identificar contenedores críticos, rutas saturadas o zonas con alta generación de residuos.
+* Escasez de herramientas predictivas: No se proyecta cuándo un contenedor alcanzará su capacidad máxima o cuándo fallará un sensor.
+* Interacción limitada con reportes ciudadanos: Los usuarios municipales tienen dificultades para priorizar reportes según criticidad y patrón histórico.
+* Carga inicial lenta: Algunos módulos presentan retrasos de 4–5 segundos sin un feedback claro, lo que afecta la experiencia de uso.
+
+Objetivos de mejora:
+
+* Implementar un sistema de analítica operativa que permita detectar contenedores críticos y predecir llenado.
+* Reducir tiempos de carga mediante optimización de consultas y caché.
+* Priorizar reportes ciudadanos mediante modelos básicos de severidad.
+* Mejorar la gestión de rutas mediante visualización inteligente y patrones de saturación.
+* Aumentar la adopción del sistema por parte de operadores municipales a través de una experiencia más clara y eficiente.
+
 
 ### 8.1.2. Raw Material: Assumptions, Knowledge Gaps, Ideas, Claims
 
+Assumptions:
+
+* Los administradores municipales necesitan visualizar contenedores críticos en tiempo real para mejorar la toma de decisiones.
+* Los supervisores requieren predicciones simples sobre llenado para planificar rutas más eficientes.
+* Los operadores móviles valoran vistas minimalistas y acciones rápidas al gestionar reportes ciudadanos.
+* Los sensores IoT tienen un patrón predecible de fallas o inconsistencias.
+
+Knowledge Gaps:
+
+* ¿Qué métricas son más relevantes para los administradores: volumen, peso, frecuencia de llenado o alertas por sensor?
+* ¿Qué factores determinan la priorización real de reportes ciudadanos?
+* ¿Qué tipo de dashboards facilitan la gestión diaria de residuos por distrito?
+* ¿Cómo influye la latencia o demora en la carga de la plataforma en la adopción del sistema?
+
+Ideas:
+
+* Implementar dashboards de contenedores críticos, tendencias de saturación y predicción de llenado.
+* Añadir un panel de priorización inteligente de reportes ciudadanos basado en severidad e historial.
+* Crear vistas optimizadas por distrito con métricas relevantes para la realidad de cada municipio.
+* Habilitar una etapa de precarga (skeleton loading) para reducir fricción en módulos lentos.
+
+Claims:
+
+* Un dashboard de contenedores críticos puede reducir el tiempo de respuesta a incidencias en un 35%.
+* La predicción de llenado puede optimizar rutas y disminuir desbordes en un 25%.
+* La priorización inteligente de reportes ciudadanos puede reducir la resolución tardía en un 40%.
+* Mejorar la experiencia de carga puede aumentar la adopción del sistema en un 20%.
+
+
 ### 8.1.3. Experiment-Ready Questions
+Las siguientes preguntas guían la validación de hipótesis a través de experimentos iterativos. Se evaluaron mediante los criterios de Confianza, Riesgo, Impacto e Interés para determinar su relevancia estratégica.
+
+| Pregunta                                                                           | Confianza | Riesgo | Impacto | Interés | Total |
+| ---------------------------------------------------------------------------------- | --------- | ------ | ------- | ------- | ----- |
+| ¿Mejorará la eficiencia operativa un dashboard de contenedores críticos?           | 7         | 3      | 9       | 8       | 27    |
+| ¿Reducirá desbordes la predicción de llenado basada en datos históricos?           | 6         | 4      | 9       | 7       | 26    |
+| ¿Aumentará la rapidez de gestión un módulo de priorización de reportes ciudadanos? | 7         | 3      | 8       | 7       | 25    |
+| ¿Mejorará la adopción la optimización de carga mediante skeleton loading?          | 8         | 2      | 7       | 6       | 23    |
+| ¿Incrementará la precisión de planificación segmentar métricas por distrito?       | 6         | 3      | 7       | 6       | 22    |
+
 
 ### 8.1.4. Question Backlog
+El Question Backlog prioriza las preguntas experimentales más relevantes para el desarrollo estratégico de WasteTrack. Representan las incertidumbres que, al resolverse, generan mayor aprendizaje y reducen riesgos.
+
+| # | Pregunta                                                                           | Prioridad |
+| - | ---------------------------------------------------------------------------------- | --------- |
+| 1 | ¿Mejorará la eficiencia operativa un dashboard de contenedores críticos?           | 2         |
+| 2 | ¿Reducirá desbordes la predicción de llenado basada en datos históricos?           | 3         |
+| 3 | ¿Aumentará la rapidez de gestión un módulo de priorización de reportes ciudadanos? | 4         |
+| 4 | ¿Mejorará la adopción la optimización de carga mediante skeleton loading?          | 5         |
+
 
 ### 8.1.5. Experiment Cards
+
+**Experimento 1: ¿Mejorará la eficiencia operativa un dashboard de contenedores críticos?**
+
+| Componente     | Descripción                                                                                                                                                                                                                                                                                                        |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Question**   | ¿Mejorará la eficiencia operativa un dashboard de contenedores críticos?                                                                                                                                                                                                                                           |
+| **Why**        | Los administradores municipales requieren identificar rápidamente contenedores con riesgo de desborde. Actualmente deben revisar múltiples vistas, lo que ralentiza la toma de decisiones. Un dashboard centralizado permitiría detectar anomalías, priorizar acciones y asignar personal de manera más eficiente. |
+| **What**       | Implementar un dashboard que muestre contenedores críticos según volumen, peso, frecuencia de llenado y fallas de sensor. Incluir alertas visuales, filtros, orden por severidad y un mapa con zonas de riesgo.                                                                                                    |
+| **Hypothesis** | Con este dashboard, el tiempo de respuesta ante contenedores críticos se reducirá en un 35%, mejorando la coordinación operativa entre distritos.                                                                                                                                                                  |
+
+
+**Experimento 2: ¿Reducirá desbordes la predicción de llenado basada en datos históricos?**
+
+| Componente     | Descripción                                                                                                                                                                                                                                                           |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Question**   | ¿Reducirá desbordes la predicción de llenado basada en datos históricos?                                                                                                                                                                                              |
+| **Why**        | Los desbordes generan costos adicionales, quejas ciudadanas y complicaciones operativas. Las rutas actuales no consideran el ritmo real de llenado de cada contenedor. Predecir el llenado permitiría planificar recolecciones más eficientes y evitar acumulaciones. |
+| **What**       | Entrenar un modelo simple (tendencias históricas o promedios móviles) que estime cuándo un contenedor alcanzará su capacidad máxima y mostrar esta predicción en el panel principal con indicadores de riesgo.                                                        |
+| **Hypothesis** | La predicción reducirá los desbordes en un 25% y permitirá optimizar las rutas de recolección.                                                                                                                                                                        |
+
+
+**Experimento 3: ¿Aumentará la rapidez de gestión un módulo de priorización de reportes ciudadanos?**
+
+| Componente     | Descripción                                                                                                                                                                                                                            |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Question**   | ¿Aumentará la rapidez de gestión un módulo de priorización de reportes ciudadanos?                                                                                                                                                     |
+| **Why**        | Los administradores gestionan los reportes sin un criterio claro de urgencia, lo que causa inconsistencia en los tiempos de resolución. Un sistema de priorización automática permitiría identificar casos críticos con mayor rapidez. |
+| **What**       | Implementar un algoritmo básico que clasifique los reportes en Alta, Media o Baja prioridad según tipo de reporte, zona, frecuencia histórica e impacto. Mostrar las prioridades mediante colores y ordenamiento.                      |
+| **Hypothesis** | La priorización reducirá en un 40% el tiempo promedio de resolución de reportes críticos.                                                                                                                                              |
+
+
+**Experimento 4: ¿Mejorará la adopción la optimización de carga mediante skeleton loading?**
+
+| Componente     | Descripción                                                                                                                                                                                                     |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Question**   | ¿Mejorará la adopción la optimización de carga mediante skeleton loading?                                                                                                                                       |
+| **Why**        | Algunos módulos tardan 4–5 segundos en cargar sin feedback visual, lo que genera incertidumbre y percepción de bajo rendimiento. Skeleton loading puede mejorar la experiencia percibida y reducir la fricción. |
+| **What**       | Implementar skeletons y estados de carga en los módulos de reportes ciudadanos, rutas y contenedores. Medir interacción, abandono y tiempos percibidos.                                                         |
+| **Hypothesis** | La adopción del sistema aumentará un 20% debido a una experiencia más fluida y clara durante la carga.                                                                                                          |
+
 
 ## 8.2.  Experiment Design
 
 ### 8.2.1. Hypotheses
 
+A continuación, se presentan las hipótesis experimentales para validar las principales suposiciones del sistema WasteTrack en relación con eficiencia operativa, confiabilidad de la información, adopción de usuarios municipales y experiencia del operario.
+
+---
+
+<table>
+  <tr>
+    <th colspan="2">Eficiencia de rutas de recolección</th>
+  </tr>
+  <tr>
+    <th>Question</th>
+    <th>¿La optimización automática de rutas basada en nivel de llenado y permanencia reducirá los costos operativos municipales?</th>
+  </tr>
+  <tr>
+    <td>Belief</td>
+    <td>Cremos que utilizar datos IoT en tiempo real permitirá reducir recorridos innecesarios y mejorar el uso de combustible y horas hombre.</td>
+  </tr>
+  <tr>
+    <td>Hypothesis</td>
+    <td>Si los administradores usan el dashboard de optimización, se reducirá en al menos un 15% el tiempo total de recolección en los puntos piloto.</td>
+  </tr>
+  <tr>
+    <td>Null Hypothesis</td>
+    <td>El uso del dashboard no generará una reducción significativa en los tiempos de recolección.</td>
+  </tr>
+</table>
+
+---
+
+<table>
+  <tr>
+    <th colspan="2">Confiabilidad de los datos IoT</th>
+  </tr>
+  <tr>
+    <th>Question</th>
+    <th>¿La información capturada por sensores IoT será percibida como confiable para la toma de decisiones operativas?</th>
+  </tr>
+  <tr>
+    <td>Belief</td>
+    <td>Si el sistema muestra historial, calibración y estado del sensor, los administradores confiarán más en decisiones basadas en datos.</td>
+  </tr>
+  <tr>
+    <td>Hypothesis</td>
+    <td>Mostrar indicadores de confiabilidad del sensor (porcentaje de precisión, frecuencia de lectura, estado) aumentará la percepción de confianza en un 30%.</td>
+  </tr>
+  <tr>
+    <td>Null Hypothesis</td>
+    <td>Los indicadores de confiabilidad no influirán en la percepción del usuario sobre la calidad del dato.</td>
+  </tr>
+</table>
+
+---
+
+<table>
+  <tr>
+    <th colspan="2">Adopción de la aplicación móvil de conductores</th>
+  </tr>
+  <tr>
+    <th>Question</th>
+    <th>¿Los conductores utilizarán de manera efectiva la app móvil para seguir rutas optimizadas durante sus recorridos?</th>
+  </tr>
+  <tr>
+    <td>Belief</td>
+    <td>Cremos que una interfaz simple con navegación paso a paso aumentará el uso diario de la app por parte de los operarios.</td>
+  </tr>
+  <tr>
+    <td>Hypothesis</td>
+    <td>Si la app móvil incluye rutas guiadas y alertas claras, al menos el 80% de los conductores la utilizará durante más del 70% de su recorrido.</td>
+  </tr>
+  <tr>
+    <td>Null Hypothesis</td>
+    <td>La funcionalidad de rutas guiadas no tendrá un impacto significativo en la adopción diaria de la app.</td>
+  </tr>
+</table>
+
+---
+
+<table>
+  <tr>
+    <th colspan="2">Percepción ciudadana del servicio de limpieza</th>
+  </tr>
+  <tr>
+    <th>Question</th>
+    <th>¿Ofrecer información transparente sobre la frecuencia de recolección mejora la satisfacción ciudadana?</th>
+  </tr>
+  <tr>
+    <td>Belief</td>
+    <td>Creemos que cuando los ciudadanos pueden visualizar horarios, estado de los contenedores y alertas, perciben un servicio más eficiente.</td>
+  </tr>
+  <tr>
+    <td>Hypothesis</td>
+    <td>La disponibilidad de información en la app ciudadana aumentará en 25% la percepción positiva del servicio en la zona piloto.</td>
+  </tr>
+  <tr>
+    <td>Null Hypothesis</td>
+    <td>Proveer información del servicio no influirá significativamente en la satisfacción ciudadana.</td>
+  </tr>
+</table>
+
 ### 8.2.2. Domain Business Metrics
+
+Las siguientes métricas representan los indicadores oficiales del dominio de WasteTrack. Todas las hipótesis y experimentos utilizarán únicamente estas métricas para asegurar consistencia, trazabilidad y evitar vanity metrics. Cada métrica incluye su fórmula, técnica de recolección y meta asociada.
+
+---
+
+**1. Operational Efficiency Metrics (Eficiencia Operativa)**
+
+**1.1. Reduction in Collection Time (RCT)**
+- Fórmula: RCT = ((Tiempo_baseline - Tiempo_post) / Tiempo_baseline) * 100
+- Recolección: GPS de camiones + timestamps de inicio/fin de ruta (app móvil).
+- Meta: Reducción ≥ 15% en zonas piloto.
+
+**1.2. Fuel Consumption Reduction (FCR)**
+- Fórmula: FCR = ((Combustible_baseline - Combustible_post) / Combustible_baseline) * 100
+- Recolección: Declaraciones municipales, sensores de odómetro, registros semanales.
+- Meta: Reducción ≥ 10%.
+
+**1.3. Route Deviation Rate (RDR)**
+- Fórmula: RDR = (Desviaciones_detectadas / Rutas_planificadas) * 100
+- Recolección: Comparación GPS vs ruta generada.
+- Meta: ≤ 5%.
+
+---
+
+**2. IoT Sensor Reliability Metrics (Calidad de Datos de Sensores)**
+
+**2.1. Sensor Uptime Rate (SUR)**
+- Fórmula: SUR = (Tiempo_sensor_activo / Tiempo_total) * 100
+- Recolección: Telemetría Actuator + gateway IoT.
+- Meta: ≥ 95%.
+
+**2.2. Valid Reading Rate (VRR)**
+- Fórmula: VRR = (Lecturas_validas / Lecturas_totales) * 100
+- Recolección: Filtros de señal, detección de outliers.
+- Meta: ≥ 90%.
+
+**2.3. Telemetry Frequency Consistency (TFC)**
+- Fórmula: TFC = (Lecturas_recibidas / Lecturas_esperadas) * 100
+- Recolección: Prometheus + logs de gateway.
+- Meta: ≥ 85%.
+
+---
+
+**3. User Adoption Metrics (Adopción Operativa)**
+
+**3.1. Driver App Adoption Rate (DAA)**
+- Fórmula: DAA = (Conductores_activos / Conductores_registrados) * 100
+- Recolección: Firebase Analytics + logs de sesiones.
+- Meta: ≥ 80%.
+
+**3.2. Task Completion Without Assistance (TCWA)**
+- Fórmula: TCWA = (Tareas_completadas_sin_ayuda / Tareas_totales) * 100
+- Recolección: Pruebas de usabilidad + formularios de feedback.
+- Meta: ≥ 90%.
+
+---
+
+**4. Citizen Experience Metrics (Satisfacción del Servicio)**
+
+**4.1. Citizen Satisfaction Index (CSI)**
+- Fórmula: Promedio ponderado de encuestas sobre percepción del servicio (escala 1–5)
+- Recolección: Encuestas antes y después del piloto.
+- Meta: Aumento ≥ 25%.
+
+**4.2. Information Transparency Score (ITS)**
+- Fórmula: ITS = (Funciones_transparentes_usadas / Funciones_transparentes_disponibles) * 100  
+  (Ej.: horarios, estado de contenedores, próximas rutas)
+- Recolección: GA4 + logs de la app ciudadana.
+- Meta: ≥ 60% de uso sostenido.
+
+---
+
+**5. System Stability & Performance Metrics**
+
+**5.1. API Response Time (ART)**
+- Fórmula: Promedio de latencia de los endpoints críticos (ms)
+- Recolección: Prometheus + APM.
+- Meta: ≤ 500 ms promedio.
+
+**5.2. Error Rate (ER)**
+- Fórmula: ER = (Errores_5xx / Requests_totales) * 100
+- Recolección: Logs del backend + Grafana.
+- Meta: ≤ 1%.
+
+**5.3. Mobile Crash-Free Users (CFU)**
+- Fórmula: CFU = (Usuarios_sin_crashes / Usuarios_totales) * 100
+- Recolección: Firebase Crashlytics.
+- Meta: ≥ 98%.
+
+---
+
+Estas métricas serán las únicas fuentes válidas para evaluar hipótesis, diseñar experimentos y tomar decisiones durante el desarrollo, piloto municipal y fases posteriores de adopción.
 
 ### 8.2.3. Measures
 
+Las siguientes medidas permiten validar empíricamente cada hipótesis planteada, conectando preguntas clave con los indicadores que serán monitoreados durante el experimento.
+
+---
+
+Medida 1: Eficiencia de rutas de recolección
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%;">
+  <tr>
+    <th style="width:20%;">Question</th>
+    <td>¿La optimización automática de rutas basada en nivel de llenado y permanencia reducirá los costos operativos municipales?</td>
+  </tr>
+  <tr>
+    <th>Measure</th>
+    <td>
+      Comparar los tiempos reales de recolección antes y después del uso del dashboard de optimización.  
+      Medir la reducción de duración de ruta, el consumo de combustible y el número de paradas innecesarias.  
+      Registrar desvíos respecto a la ruta sugerida mediante GPS y compararlos contra el baseline municipal.
+    </td>
+  </tr>
+</table>
+
+---
+
+Medida 2: Confiabilidad percibida de los datos IoT
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%;">
+  <tr>
+    <th style="width:20%;">Question</th>
+    <td>¿La información capturada por sensores IoT será percibida como confiable para la toma de decisiones operativas?</td>
+  </tr>
+  <tr>
+    <th>Measure</th>
+    <td>
+      Aplicar encuestas de percepción a administradores antes y después de mostrar indicadores de salud del sensor (uptime, frecuencia de lectura, precisión).  
+      Medir el uso de funciones de confiabilidad (historial del sensor, verificación de lecturas).  
+      Comparar el nivel de confianza reportado usando una escala Likert y el número de consultas a datos históricos.
+    </td>
+  </tr>
+</table>
+
+---
+
+Medida 3: Adopción de la app móvil por parte de conductores
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%;">
+  <tr>
+    <th style="width:20%;">Question</th>
+    <td>¿Los conductores utilizarán de manera efectiva la app móvil para seguir rutas optimizadas durante sus recorridos?</td>
+  </tr>
+  <tr>
+    <th>Measure</th>
+    <td>
+      Registrar sesiones activas, duración del uso y frecuencia con la que siguen rutas sugeridas (Firebase Analytics).  
+      Medir adherencia a rutas comparando rutas completadas vs. desvíos detectados por GPS.  
+      Realizar pruebas de usabilidad para validar tareas completadas sin asistencia.
+    </td>
+  </tr>
+</table>
+
+---
+
+Medida 4: Percepción ciudadana del servicio de limpieza
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%;">
+  <tr>
+    <th style="width:20%;">Question</th>
+    <td>¿Ofrecer información transparente sobre horarios y estado de contenedores mejora la satisfacción ciudadana?</td>
+  </tr>
+  <tr>
+    <th>Measure</th>
+    <td>
+      Realizar encuestas antes y después del piloto para medir cambios en satisfacción (escala 1–5).  
+      Analizar métricas de uso en la app ciudadana: vistas de estado del contenedor, consultas a horarios y revisiones de rutas próximas (GA4).  
+      Comparar zonas piloto vs. zonas sin acceso a esta información para evaluar impacto.
+    </td>
+  </tr>
+</table>
+
 ### 8.2.4. Conditions
+
+A continuación se definen las condiciones experimentales y de control para cada una de las hipótesis de WasteTrack. Estas condiciones orientan cómo se configurarán los pilotos y qué cambios se introducirán en cada escenario.
+
+---
+
+Condiciones para la hipótesis: Eficiencia de rutas de recolección
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%;">
+  <tr>
+    <th style="width:20%;">Question</th>
+    <td>¿La optimización automática de rutas basada en nivel de llenado y permanencia reducirá los costos operativos municipales?</td>
+  </tr>
+  <tr>
+    <th>Condición Experimental</th>
+    <td>
+      Las rutas se generan utilizando el algoritmo de optimización de WasteTrack.  
+      Los conductores siguen las rutas sugeridas desde la app móvil durante todo el piloto.
+    </td>
+  </tr>
+  <tr>
+    <th>Condición de Control</th>
+    <td>
+      Las rutas se planifican mediante el esquema tradicional de la municipalidad (rutas fijas o planificación manual), sin apoyo del algoritmo de WasteTrack.  
+      Los equipos no reciben instrucciones optimizadas en la app.
+    </td>
+  </tr>
+</table>
+
+---
+
+Condiciones para la hipótesis: Confiabilidad percibida de los datos IoT
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%;">
+  <tr>
+    <th style="width:20%;">Question</th>
+    <td>¿La información capturada por sensores IoT será percibida como confiable para la toma de decisiones operativas?</td>
+  </tr>
+  <tr>
+    <th>Condición Experimental</th>
+    <td>
+      El dashboard muestra indicadores de confiabilidad del sensor: uptime, frecuencia de lectura, histórico, alertas de fallos y último mantenimiento.  
+      Los administradores pueden revisar estos datos antes de tomar decisiones operativas.
+    </td>
+  </tr>
+  <tr>
+    <th>Condición de Control</th>
+    <td>
+      El dashboard solo muestra el nivel de llenado del contenedor sin indicadores de salud del sensor.  
+      No se presentan métricas de calidad de datos ni alertas de fallos.
+    </td>
+  </tr>
+</table>
+
+---
+
+Condiciones para la hipótesis: Adopción de la app móvil de conductores
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%;">
+  <tr>
+    <th style="width:20%;">Question</th>
+    <td>¿Los conductores utilizarán de manera efectiva la app móvil para seguir rutas optimizadas durante sus recorridos?</td>
+  </tr>
+  <tr>
+    <th>Condición Experimental</th>
+    <td>
+      La app incluye navegación guiada paso a paso, alertas de contenedores críticos y confirmación de cada parada.  
+      Se realiza una capacitación inicial y se mide el uso durante la operación real.
+    </td>
+  </tr>
+  <tr>
+    <th>Condición de Control</th>
+    <td>
+      La app solo muestra un listado simple de puntos sin navegación guiada ni alertas.  
+      Los conductores dependen de métodos tradicionales (mapas estáticos, rutas conocidas, instrucciones verbales).
+    </td>
+  </tr>
+</table>
+
+---
+
+Condiciones para la hipótesis: Percepción ciudadana del servicio de limpieza
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%;">
+  <tr>
+    <th style="width:20%;">Question</th>
+    <td>¿Ofrecer información transparente sobre horarios y estado de contenedores mejora la satisfacción del ciudadano?</td>
+  </tr>
+  <tr>
+    <th>Condición Experimental</th>
+    <td>
+      En la zona piloto, los ciudadanos acceden a la app o portal donde pueden ver:  
+      - horarios estimados de recolección  
+      - estado de los contenedores  
+      - alertas relevantes  
+      La municipalidad comunica activamente este acceso.
+    </td>
+  </tr>
+  <tr>
+    <th>Condición de Control</th>
+    <td>
+      En la zona de control, los ciudadanos no reciben acceso a información en tiempo real ni funcionalidades adicionales de transparencia.  
+      Se mantiene la comunicación tradicional existente.
+    </td>
+  </tr>
+</table>
 
 ### 8.2.5. Scale Calculations and Decisions
 
+Este enfoque utiliza métricas para evaluar el cumplimiento de las hipótesis en WasteTrack.  
+Cada hipótesis se asocia con un indicador de éxito:
+
+- Se considera **desfavorable** cuando el valor está por debajo del mínimo esperado.
+- **Aceptable** cuando se encuentra entre el mínimo y el valor objetivo.
+- **Ideal** cuando la métrica alcanza plenamente el objetivo planteado.
+- **Excelente** cuando el valor supera el objetivo en un 25% o más, indicando un éxito significativo.
+
+Este esquema permite tomar decisiones fundamentadas en métricas para validar, ajustar o escalar las hipótesis del proyecto.
+
+<table border="1" cellspacing="0" cellpadding="8" style="border-collapse:collapse; width:100%; text-align:center;">
+  <thead>
+    <tr>
+      <th style="width:30%;">Scale Calculation</th>
+      <th style="width:30%;">Decision</th>
+      <th style="width:10%;">Desfavorable</th>
+      <th style="width:10%;">Aceptable</th>
+      <th style="width:10%;">Ideal</th>
+      <th style="width:10%;">Excelente</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left;">
+        Creemos que al utilizar el algoritmo de optimización de rutas de WasteTrack, se reducirá el tiempo total de recolección (RCT) en al menos 15% y el consumo de combustible (FCR) en al menos 10% en las zonas piloto.  
+        Sabremos que esto es cierto cuando los indicadores RCT y FCR se mantengan dentro o por encima de esas metas durante el piloto.
+      </td>
+      <td style="text-align:left;">
+        Si los resultados alcanzan o superan los objetivos, se recomienda escalar el uso de WasteTrack a más rutas y distritos municipales. En caso contrario, revisar parámetros del algoritmo y la capacitación a conductores.
+      </td>
+      <td></td>
+      <td></td>
+      <td><strong>X</strong></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td style="text-align:left;">
+        Creemos que al mostrar indicadores de confiabilidad de sensores (SUR, VRR, TFC) los administradores percibirán los datos como más confiables y usarán con mayor frecuencia el dashboard para la toma de decisiones.  
+        Sabremos que esto es cierto cuando SUR ≥ 95%, VRR ≥ 90% y aumente la frecuencia de consultas al dashboard.
+      </td>
+      <td style="text-align:left;">
+        Si las métricas de confiabilidad se mantienen altas y la percepción de confianza mejora, se consolidará esta vista como estándar y se priorizará inversión en mantenimiento preventivo de sensores.
+      </td>
+      <td></td>
+      <td><strong>X</strong></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td style="text-align:left;">
+        Creemos que al ofrecer rutas guiadas y una app móvil simple, la tasa de adopción de conductores (DAA) será de al menos 80% y el porcentaje de rutas completadas siguiendo la optimización será mayor al 70%.  
+        Sabremos que esto es cierto cuando la mayoría de conductores utilice activamente la app durante sus recorridos.
+      </td>
+      <td style="text-align:left;">
+        Si la adopción es alta, se validará el diseño actual de la app y se podrá introducir gradualmente funcionalidades avanzadas. Si es baja, se revisarán la interfaz, la capacitación y las condiciones de uso en campo.
+      </td>
+      <td></td>
+      <td><strong>X</strong></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td style="text-align:left;">
+        Creemos que al brindar información transparente al ciudadano (estado de contenedores y horarios de recolección), el Citizen Satisfaction Index (CSI) aumentará al menos en 25% en las zonas piloto frente a la línea base.  
+        Sabremos que esto es cierto cuando las encuestas de satisfacción muestren esta mejora sostenida.
+      </td>
+      <td style="text-align:left;">
+        Si la satisfacción mejora, se recomendará integrar WasteTrack como herramienta de transparencia y comunicación estándar en el distrito, y considerar nuevas funcionalidades de participación ciudadana.
+      </td>
+      <td></td>
+      <td></td>
+      <td><strong>X</strong></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
 ### 8.2.6. Methods Selection
+
+Para evaluar las hipótesis de WasteTrack se seleccionan métodos sencillos, medibles y adecuados al contexto municipal e IoT. El objetivo es identificar cambios reales en eficiencia, adopción y percepción sin requerir experimentos excesivamente complejos.
+
+---
+
+Métodos principales seleccionados
+
+- **A/B Testing:**  
+  Se utilizará para comparar versiones del dashboard (con indicadores de confiabilidad vs sin indicadores) y variaciones en la app ciudadana (con información transparente vs sin ella).
+
+- **Comparación pre/post piloto:**  
+  Método central para medir la reducción en tiempo de ruta, consumo de combustible y desviaciones. Las métricas operativas (RCT, FCR, RDR) se comparan antes y después de usar WasteTrack.
+
+- **Tracking basado en eventos:**  
+  Firebase Analytics y GA4 registrarán adopción de conductores, rutas completadas, uso de funcionalidades ciudadanas y consultas al dashboard.
+
+- **Muestreo por zonas (estratificado):**  
+  Se seleccionan rutas representativas (residencial, comercial, alta densidad) para asegurar que los resultados no dependan de una única zona.
+
+- **Encuestas breves (pre y post):**  
+  Para medir satisfacción ciudadana (CSI) y percepción de confiabilidad del dato entre administradores municipales.
+
+---
+
+Parámetros estadísticos básicos
+
+- **Nivel de significancia (α):** 0.05
+- **Potencia estadística:** 80%
+- **Efecto mínimo detectable (MDE):**
+    - Rutas: 15% reducción en tiempo
+    - Combustible: 10% reducción
+    - Adopción conductores: +20%
+    - Satisfacción ciudadana: +25%
+
+---
+
+Herramientas recomendadas
+
+- Firebase Analytics (conductores y ciudadanos)
+- Google Analytics (landing page / portal informativo)
+- Prometheus + Grafana (métricas IoT y backend)
+- Google Forms o Typeform (encuestas pre/post)
+
+Estas herramientas y métodos permiten evaluar de manera práctica, rápida y confiable el impacto de WasteTrack en las zonas piloto.
 
 ### 8.2.7. Data Analytics: Goals, KPIs and Metrics Selection
 
+El objetivo de esta sección es definir una estrategia analítica clara para medir el impacto de WasteTrack en eficiencia operativa, adopción tecnológica y percepción ciudadana. Cada KPI está alineado a un objetivo estratégico del producto y utiliza las métricas oficiales definidas previamente.
+
+---
+
+Objetivos del Producto (Goals)
+
+| Objetivo Clave | Descripción |
+|----------------|-------------|
+| Optimizar la eficiencia operativa municipal | Reducir tiempos de ruta, consumo de combustible y desviaciones mediante rutas inteligentes. |
+| Garantizar calidad y confiabilidad de datos IoT | Monitorear estabilidad, precisión y frecuencia de lectura de sensores para toma de decisiones. |
+| Aumentar la adopción de la app de conductores | Lograr que la mayoría de operarios utilicen WasteTrack como herramienta principal en campo. |
+| Mejorar la percepción ciudadana del servicio de limpieza | Incrementar satisfacción mediante información transparente y en tiempo real. |
+| Monitorear comportamiento en web y app | Analizar uso de landing page, portal ciudadano y app móvil. |
+
+---
+
+KPIs y Métricas Seleccionadas
+
+| Objetivo Estratégico | KPI | Métricas Específicas | Herramienta |
+|----------------------|-----|----------------------|-------------|
+| **Eficiencia operativa** | Reducción de tiempo de ruta (RCT) | Variación % pre/post; minutos reducidos por recorrido | Backend + GPS + Grafana |
+| | Reducción de consumo de combustible (FCR) | % de combustible ahorrado | Registros municipales |
+| | Desviaciones de ruta (RDR) | % de desvíos por ruta | GPS + Prometheus |
+| **Confiabilidad IoT** | Uptime de sensores (SUR) | % de tiempo activo | Prometheus |
+| | Lecturas válidas (VRR) | % lecturas no erróneas | Backend IoT |
+| | Consistencia de telemetría (TFC) | % lecturas recibidas vs esperadas | Gateway IoT |
+| **Adopción conductores** | Tasa de adopción (DAA) | % conductores activos | Firebase Analytics |
+| | Rutas completadas según optimización | % rutas completadas sin desviación relevante | GPS tracking |
+| **Percepción ciudadana** | Citizen Satisfaction Index (CSI) | Promedio encuestas 1–5 | Formularios pre/post |
+| | Information Transparency Score (ITS) | % uso de funciones de transparencia | GA4 + App logs |
+| **Uso de plataforma web/móvil** | Usuarios activos (DAU/WAU) | Actividad diaria/semanal | GA4 + Firebase |
+| | Interacción en portal ciudadano | Vistas de horarios, estado contenedores | GA4 |
+| | Tasa de rebote landing page | % sesiones sin interacción | GA4 |
+
+---
+
+Visualización de Datos
+
+Se utilizarán dashboards centralizados para análisis continuo:
+
+- **Grafana:** métricas IoT, sensores, backend, rutas.
+- **GA4 dashboards:** comportamiento web y portal ciudadano.
+- **Firebase Dashboards:** uso móvil y adopción conductores.
+- **Google Data Studio:** reportes ejecutivos para municipalidades.
+
+---
+
+Frecuencia de Análisis
+
+- **Diario:** DAU, ITS, DAA, estado de sensores.
+- **Semanal:** RCT, FCR, RDR, tendencias de uso y adopción.
+- **Mensual:** CSI, análisis comparativo zona piloto vs control, reportes de confiabilidad IoT.
+
+---
+
+Estos KPIs permiten evaluar de manera clara, continua y basada en datos si WasteTrack está generando el impacto esperado en eficiencia municipal, calidad técnica y experiencia de usuarios.
+
 ### 8.2.8. Web and Mobile Tracking Plan.
 
-## 8.2.  Experimentation
+El objetivo del plan de tracking es asegurar una medición consistente del comportamiento de usuarios (conductores, administradores y ciudadanos) en la web y en la app móvil de WasteTrack, permitiendo evaluar adopción, eficiencia operativa y uso de funcionalidades clave.
 
-### 8.2.1. To-Be User Stories
+---
 
-### 8.2.2. To-Be Product Backlog
+Objetivo del Tracking Plan
 
+- Medir interacciones clave de conductores y administradores.
+- Evaluar el uso del portal ciudadano y la landing page.
+- Detectar fricción en rutas, consultas y flujo operativo.
+- Respaldar KPIs definidos (RCT, DAA, ITS, etc.).
+
+---
+
+Herramientas Utilizadas
+
+- **Firebase Analytics** (Android/iOS)
+- **Google Analytics 4 (GA4)** (web y landing page)
+- **Google Tag Manager** (web)
+- **Prometheus / Grafana** (tracking técnico: telemetría, uptime, rendimiento)
+
+---
+
+Eventos Principales
+
+| Plataforma | Evento | Descripción | Parámetros Clave | Objetivo |
+|-----------|--------|-------------|------------------|----------|
+| Web/Móvil | `app_open` | Inicio de sesión o apertura | `platform`, `user_role` | Medir DAU/WAU |
+| Móvil (conductores) | `route_started` | Inicio de ruta optimizada | `route_id`, `vehicle_id` | Medir adopción del sistema |
+| Móvil (conductores) | `stop_completed` | Parada completada | `stop_id`, `timestamp` | Evaluar cumplimiento de rutas |
+| Web/Móvil | `container_status_viewed` | Ciudadano o admin ve estado de contenedor | `container_id`, `fill_level` | Medir interés y transparencia |
+| Web/Móvil | `schedule_checked` | Consulta de horarios | `district`, `timestamp` | Usabilidad del portal ciudadano |
+| Web | `cta_click` | Clicks en botones clave de la landing | `cta_type` | Medir conversión web |
+| Web/Móvil | `sensor_alert_viewed` | Visualización de alerta IoT | `alert_type`, `severity` | Evaluar atención a incidencias |
+| Web/Móvil | `session_duration` | Duración de sesión | `duration_sec`, `user_role` | Engagement general |
+
+---
+
+Convenciones de Nombres
+
+- Formato: **snake_case**.
+- Evitar abreviaturas confusas.
+- Parámetros siempre en minúscula.
+
+Ejemplos correctos: `route_started`, `schedule_checked`, `container_status_viewed`.
+
+---
+
+Reglas de Calidad y Validación
+
+- Todos los eventos se prueban en **ambiente staging**.
+- Validación con **Firebase DebugView** y **GA4 Debugger**.
+- Auditoría mensual para evitar duplicados o pérdidas de datos.
+
+---
+
+Mapeo a KPIs
+
+| Evento | KPI Asociado |
+|--------|--------------|
+| `route_started`, `stop_completed` | DAA, RCT, RDR |
+| `container_status_viewed` | ITS, CSI |
+| `schedule_checked` | ITS |
+| `cta_click` | Conversión landing |
+| `session_duration` | Engagement (DAU/WAU) |
+| `sensor_alert_viewed` | Calidad de respuesta operativa |
+
+---
+
+Este tracking plan garantiza que WasteTrack pueda medir con precisión el uso real del sistema, compararlo con los KPIs definidos y orientar decisiones de diseño, producto y operación municipal.
+
+## 8.3.  Experimentation
+
+### 8.3.1. To-Be User Stories
+
+| ID   | Nombre                            | Descripción                                                                                                                         | Criterios de aceptación                                                                                                             |
+|------|-----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| US01 | Dashboard de contenedores         | Como administrador municipal, quiero visualizar el estado de llenado de los contenedores para priorizar rutas.                      | Dado que ingreso al dashboard, cuando se cargan las lecturas IoT, entonces visualizo niveles de llenado ordenados por criticidad.   |
+| US02 | Generación de rutas optimizadas   | Como administrador, quiero generar rutas optimizadas basadas en sensores e históricos para reducir tiempo y combustible.            | Dado que abro el módulo de rutas, cuando solicito una nueva ruta, entonces obtengo un recorrido optimizado disponible para asignar. |
+| US03 | Alertas por contenedores críticos | Como administrador, quiero recibir alertas cuando un contenedor supere su nivel crítico para actuar rápidamente.                    | Dado un contenedor monitoreado, cuando supera el umbral, entonces recibo una alerta en el dashboard y correo.                       |
+| US04 | Métricas operativas               | Como administrador, quiero revisar métricas diarias (tiempo por ruta, desvíos, combustible) para evaluar el desempeño del servicio. | Dado que accedo al panel analítico, cuando selecciono un periodo, entonces visualizo KPIs comparados contra el baseline.            |
+| US05 | Exportación de reportes           | Como administrador, quiero exportar reportes operativos en PDF o Excel para presentarlos en reuniones.                              | Dado que genero un reporte, cuando selecciono “exportar”, entonces descargo el archivo con métricas y gráficos.                     |
+| US06 | Visualizar ruta asignada          | Como conductor, quiero ver mi ruta asignada con paradas para completar mi jornada de recolección.                                   | Dado que abro la app móvil, cuando entro a "Ruta del día", entonces veo las paradas georreferenciadas.                              |
+| US07 | Notificaciones de cambios         | Como conductor, quiero recibir notificaciones ante cambios de ruta o emergencias para adaptarme.                                    | Dado un cambio operativo, cuando lo envío el administrador, entonces recibo una notificación clara en la app.                       |
+| US08 | Marcar punto atendido             | Como conductor, quiero marcar cada punto como atendido para actualizar mi progreso.                                                 | Dado que llego a una parada, cuando marco “Atendido”, entonces el estado se refleja en el dashboard municipal.                      |
+| US09 | Reportar incidencias              | Como conductor, quiero reportar incidencias (daño, bloqueo) para informar problemas en campo.                                       | Dado un punto de recolección, cuando selecciono “Reportar incidencia”, entonces puedo enviar foto y descripción.                    |
+| US10 | Consultar horarios                | Como ciudadano, quiero ver horarios de recolección por calle para saber cuándo sacar mis residuos.                                  | Dado que ingreso al portal, cuando escribo mi dirección, entonces obtengo el horario correspondiente.                               |
+| US11 | Estado de contenedores            | Como ciudadano, quiero ver el estado de contenedores cercanos para evitar puntos saturados.                                         | Dado que abro el mapa ciudadano, cuando visualizo contenedores, entonces veo colores indicando el nivel actual.                     |
+| US12 | Transparencia del servicio        | Como ciudadano, quiero ver cuántas rutas fueron completadas en mi distrito para aumentar mi confianza.                              | Dado que accedo a transparencia, cuando selecciono un periodo, entonces veo estadísticas oficiales del distrito.                    |
+| US13 | Mapa de calor de incidencias      | Como administrador, quiero un mapa de calor de incidencias para reconocer zonas críticas.                                           | Dado que abro el mapa de calor, cuando selecciono una fecha, entonces visualizo zonas con mayor recurrencia.                        |
+| US14 | Configuración de umbrales         | Como administrador, quiero configurar umbrales de alerta para adecuarlos a mi política.                                             | Dado que accedo a configuraciones, cuando guardo un nuevo umbral, entonces se aplica a los sensores.                                |
+| US15 | Gestión de usuarios               | Como administrador, quiero gestionar usuarios y roles municipales para garantizar accesos correctos.                                | Dado que abro el módulo de usuarios, cuando edito o agrego roles, entonces los cambios se guardan correctamente.                    |
+| US16 | Ver rutas completadas             | Como ciudadano, quiero revisar un mapa de rutas completadas para validar cumplimiento municipal.                                    | Dado que abro rutas completadas, cuando selecciono un periodo, entonces veo recorridos finalizados.                                 |
+| US17 | Salud de sensores                 | Como administrador, quiero monitorear la salud de los sensores (uptime, lecturas válidas) para detectar fallas.                     | Dado que accedo al panel IoT, cuando visualizo métricas, entonces identifico sensores caídos o inconsistentes.                      |
+| US18 | Modo offline                      | Como conductor, quiero usar la app incluso sin internet para continuar mi registro.                                                 | Dado que no tengo señal, cuando marco una parada, entonces la app la almacena localmente y la sincroniza luego.                     |
+| US19 | Información clara de producto     | Como visitante, quiero una landing clara para entender qué ofrece WasteTrack.                                                       | Dado que ingreso a la landing, cuando leo la sección principal, entonces entiendo beneficios y módulos.                             |
+| US20 | Solicitar demo                    | Como visitante, quiero pedir una demo municipal mediante un formulario rápido.                                                      | Dado que abro el formulario, cuando lo completo, entonces recibo confirmación y el registro llega al equipo.                        |
+
+### 8.3.2. To-Be Product Backlog
+
+| Orden | ID   | Título                            | Descripción                                                                                                              | Story Points |
+|-------|------|-----------------------------------|--------------------------------------------------------------------------------------------------------------------------|--------------|
+| 1     | US02 | Generación de rutas optimizadas   | Como administrador, quiero generar rutas optimizadas basadas en sensores e históricos para reducir tiempo y combustible. | 5            |
+| 2     | US06 | Visualizar ruta asignada          | Como conductor, quiero ver mi ruta asignada con paradas para completar mi jornada de recolección.                        | 5            |
+| 3     | US03 | Alertas por contenedores críticos | Como administrador, quiero recibir alertas cuando un contenedor supere su nivel crítico para actuar rápidamente.         | 3            |
+| 4     | US01 | Dashboard de contenedores         | Como administrador, quiero visualizar el estado de llenado de los contenedores para priorizar rutas.                     | 3            |
+| 5     | US08 | Marcar punto atendido             | Como conductor, quiero marcar cada punto como atendido para actualizar mi progreso.                                      | 3            |
+| 6     | US09 | Reportar incidencias              | Como conductor, quiero reportar incidencias (daño, bloqueo) para informar problemas en campo.                            | 2            |
+| 7     | US14 | Configuración de umbrales         | Como administrador, quiero configurar umbrales de alerta para adecuarlos a mi política.                                  | 2            |
+| 8     | US17 | Salud de sensores                 | Como administrador, quiero monitorear la salud de sensores (uptime, lecturas válidas) para detectar fallas.              | 3            |
+| 9     | US04 | Métricas operativas               | Como administrador, quiero revisar métricas diarias (tiempo por ruta, desvíos, combustible) para evaluar desempeño.      | 5            |
+| 10    | US05 | Exportación de reportes           | Como administrador, quiero exportar reportes operativos en PDF o Excel para presentarlos en reuniones.                   | 2            |
+| 11    | US07 | Notificaciones de cambios         | Como conductor, quiero recibir notificaciones ante cambios de ruta o emergencias.                                        | 2            |
+| 12    | US18 | Modo offline                      | Como conductor, quiero usar la app sin internet para continuar mi registro.                                              | 3            |
+| 13    | US13 | Mapa de calor de incidencias      | Como administrador, quiero visualizar un mapa de calor para identificar zonas críticas.                                  | 3            |
+| 14    | US10 | Consultar horarios                | Como ciudadano, quiero ver horarios de recolección por calle para saber cuándo sacar mis residuos.                       | 2            |
+| 15    | US11 | Estado de contenedores            | Como ciudadano, quiero ver el estado de contenedores cercanos para evitar puntos saturados.                              | 2            |
+| 16    | US12 | Transparencia del servicio        | Como ciudadano, quiero ver rutas completadas en mi distrito para aumentar mi confianza.                                  | 2            |
+| 17    | US19 | Información clara de producto     | Como visitante, quiero una landing clara para entender qué ofrece WasteTrack.                                            | 1            |
+| 18    | US20 | Solicitar demo                    | Como visitante, quiero solicitar una demo municipal mediante un formulario rápido.                                       | 1            |
+| 19    | US15 | Gestión de usuarios               | Como administrador, quiero gestionar usuarios y roles municipales para garantizar accesos correctos.                     | 2            |
+| 20    | US16 | Ver rutas completadas             | Como ciudadano, quiero revisar rutas completadas para validar cumplimiento municipal.                                    | 2            |
 
 # Conclusiones
 
