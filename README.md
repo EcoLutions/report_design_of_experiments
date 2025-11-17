@@ -5672,7 +5672,101 @@ En esta sección se presentan las entrevistas de validación realizadas con los 
 
 ### 6.3.3. Evaluaciones según heurísticas
 
+#### UX Heuristics & Principles Evaluation
+#### Usability – Inclusive Design – Information Architecture
 
+**CARRERA** : Ingeniería de Software  
+**CURSO** : Diseño de Experimentos de Ingeniería de Software  
+**SECCIÓN** : 7491  
+**PROFESOR** : Iván Robles  
+**AUDITOR** : EcoLutios  
+**CLIENTES** : Elmer Riva, Salim Ramirez, Joshepmyr Gutierrez, Paul Sulca, Eric Hernandez
+
+---
+
+### SITE o APP A EVALUAR:
+**WasteTrack**
+
+---
+
+### TAREAS A EVALUAR:
+
+El alcance de esta evaluación incluye la revisión de usabilidad de las siguientes tareas:
+
+**Web Application – WasteTrack Admin**
+1. Inicio de sesión
+2. Ver y gestionar contenedores
+3. Registrar incidencias reportadas por ciudadanos
+4. Gestionar conductores
+5. Gestionar vehículos
+6. Gestionar rutas
+7. Asignar recorridos diarios
+8. Gestionar periodos y zonas de recolección
+9. Registrar nuevos ciudadanos o supervisores
+10. Consultar estado de contenedores
+11. Consultar incidencias por periodo
+12. Consultar métricas y finanzas municipales
+
+---
+
+### FUERA DE ALCANCE:
+
+**Landing Page**
+1. Redes sociales asociadas a la startup
+2. Política de privacidad y condiciones de uso
+
+**Web Application**
+1. Recuperación de contraseña
+2. Política de privacidad y condiciones de uso
+
+---
+
+### ESCALA DE SEVERIDAD:
+
+| Nivel | Descripción |
+|------|-------------|
+| 1 | **Problema superficial**: puede ser fácilmente superado por el usuario o ocurre con muy poca frecuencia. No necesita ser arreglado salvo que haya tiempo disponible. |
+| 2 | **Problema menor**: ocurre con más frecuencia o cuesta más superarlo. Se recomienda resolverlo en el siguiente release. |
+| 3 | **Problema mayor**: ocurre frecuentemente o los usuarios no pueden resolverlo. Requiere atención prioritaria. |
+| 4 | **Problema muy grave**: impide continuar el flujo. Debe corregirse antes del lanzamiento. |
+
+---
+
+### TABLA RESUMEN – Landing Page WasteTrack
+
+| # | Problema | Severidad | Heurística / Principio Violado |
+|---|----------|-----------|-------------------------------|
+| 1 | El botón “Comenzar ahora” no redirige a ninguna sección funcional | 2 | Usability: Control y libertad del usuario |
+| 2 | Los precios no están mostrados en soles, lo cual genera confusión en usuarios locales | 1 | Usability: Aesthetic & minimalist design |
+| 3 | Al elegir un plan, la página solo redirige al encabezado y no al flujo de pago | 2 | Usability: Control y libertad del usuario |
+
+---
+
+### DESCRIPCIÓN DE PROBLEMAS
+
+---
+
+### **PROBLEMA #1 – El botón “Comenzar ahora” no redirige a ninguna sección funcional**
+**Severidad:** 2  
+**Heurística violada:** Control y libertad del usuario
+
+**Problema:**  
+El botón principal del landing page de WasteTrack no tiene acción asignada. Esto genera confusión, ya que los usuarios esperan iniciar el flujo de registro o conocer las funcionalidades principales.
+
+**Recomendación:**  
+Configurar una redirección al registro, login o pantalla principal informativa de WasteTrack.
+
+---
+
+### **PROBLEMA #2 – Los precios no están en soles**
+**Severidad:** 1  
+**Heurística violada:** Aesthetic & minimalist design
+
+**Problema:**  
+Los precios se muestran en dólares, lo cual no está alineado al público objetivo peruano. Puede generar confusión al momento de evaluar los planes.
+
+**Recomendación:**  
+Mostrar precios en PEN o permitir alternar entre monedas.
 
 ## 6.4. Auditoría de Experiencias de Usuario
 
