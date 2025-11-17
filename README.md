@@ -5578,11 +5578,195 @@ Este proceso garantiza que WasteTrack mantenga una base de código robusta, segu
 
 ## 6.3. Validation Interviews
 
+En esta sección se presentan las entrevistas de validación realizadas con los segmentos objetivos, correspondiente a la aplicación WasteTrack Citizen App. El propósito de estas entrevistas fue evaluar la claridad de la landing page, la facilidad de uso de la aplicación móvil y de las aplicaciones web.
+
 ### 6.3.1. Diseño de Entrevistas
+
+**CITIZEN**
+
+**1. Preguntas generales**
+
+1. ¿Cuál es su nombre, edad y distrito de residencia?
+2. ¿A qué se dedica actualmente y cuánto interactúa con servicios municipales o de limpieza pública?
+3. ¿Ha utilizado antes alguna aplicación o plataforma para reportar incidencias en su distrito?
+
+**2. Preguntas sobre el Landing Page**
+
+4. ¿Qué impresión le genera el diseño visual del landing page (colores, imágenes, distribución)?
+5. ¿Le resultó clara la información sobre el propósito y funcionamiento de WasteTrack?
+6. ¿Hubo alguna sección del landing page que le generó confusión o le pareció incompleta?
+
+**3. Preguntas sobre la App — Usabilidad y navegación**
+
+7. ¿La aplicación le pareció intuitiva y fácil de usar? ¿Por qué?
+8. ¿Le fue sencillo identificar las funciones principales como mapa, reportes o historial?
+9. ¿Cómo evalúa la navegación entre pantallas? ¿Le resultó fluida y lógica?
+10. ¿Los iconos, colores y etiquetas utilizados le parecieron suficientemente claros para entender su función?
+
+**4. Preguntas sobre funcionalidades clave**
+
+11. ¿Le resultó claro el proceso para crear y enviar un reporte ciudadano (ubicación, foto, descripción)?
+12. ¿Considera útil visualizar el estado y capacidad de los contenedores cercanos a su domicilio?
+13. ¿Le parece valiosa la opción de recibir notificaciones sobre el progreso de su reporte?
+
+**5. Preguntas sobre valoración y mejora**
+
+14. Desde su perspectiva, ¿cuáles son los puntos más fuertes de la aplicación WasteTrack?
+15. ¿Qué mejoras sugeriría y recomendaría esta plataforma a otros vecinos de su comunidad?
+
+**ADMINISTRADOR MUNICIPAL**
+
+**1. Preguntas generales**
+
+1. ¿Cuál es su nombre, edad y distrito de residencia?
+2. ¿A qué se dedica actualmente y cuánto interactúa con servicios municipales o de limpieza pública?
+3. ¿Ha utilizado antes alguna aplicación o plataforma para reportar incidencias en su distrito?
+
+**2. Preguntas sobre el Landing Page**
+
+4. ¿Qué impresión le genera el diseño visual del landing page (colores, imágenes, distribución)?
+5. ¿Le resultó clara la información sobre el propósito y funcionamiento de WasteTrack?
+6. ¿Hubo alguna sección del landing page que le generó confusión o le pareció incompleta?
+
+**3. Preguntas sobre la App — Usabilidad y navegación**
+
+7. ¿La aplicación le pareció intuitiva y fácil de usar? ¿Por qué?
+8. ¿Le fue sencillo identificar las funciones principales como conductor, contenedor, vehículo
+9. ¿Cómo evalúa la navegación entre pantallas? ¿Le resultó fluida y lógica?
+10. ¿Los iconos, colores y etiquetas utilizados le parecieron suficientemente claros para entender su función?
+
+**4. Preguntas sobre funcionalidades clave**
+
+11. ¿Le resultó claro el proceso para crear un nuevo conductor, contenedor o vehículo?
+
+**5. Preguntas sobre valoración y mejora**
+
+12. Desde su perspectiva, ¿cuáles son los puntos más fuertes de la aplicación WasteTrack?
+13. ¿Qué mejoras sugeriría y recomendaría esta plataforma a otros vecinos de su comunidad?
 
 ### 6.3.2. Registro de Entrevistas
 
+| **Atributo**            | **Detalle**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| ----------------------- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Nombre**              | Daniel Crispín                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| **Edad**                | 22                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| **Sexo**                | Masculino                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| **Distrito**            | San Juan de Lurigancho                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| **Ocupación**           | Estudiante universitario                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **Fecha de entrevista** | 15/11/2025                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| **Captura**             | ![Captura](assets/6.product-verification-validation/6.3.validation-interviews/6.3.2.registro-de-entrevistas/screenshotCitizen.png)|
+| **Resumen**             | Durante la entrevista, Daniel mencionó que rara vez interactúa con los servicios municipales y que usualmente reporta incidencias mediante redes sociales. Tras observar la landing page, afirmó que el diseño transmite confianza y que los colores evocan limpieza y naturaleza. Indicó que la información es clara, la tipografía es legible y no encontró secciones confusas.<br><br> Al interactuar con la aplicación de ciudadano, consideró intuitivo el proceso de registro y destacó la claridad del flujo paso a paso. Identificó correctamente los botones principales (mapa y creación de reportes) y señaló que llenar el formulario de incidencias fue sencillo gracias a la estructura clara: tipo de incidencia, ubicación, descripción y fotos. Valoró especialmente la posibilidad de adjuntar evidencias para evitar reportes falsos.<br><br> Indicó que la navegación entre pantallas es lógica y no abrumadora, y que la distribución de opciones facilita el uso incluso para usuarios sin experiencia tecnológica. Consideró muy útil visualizar el estado de contenedores cercanos y recibir notificaciones sobre el progreso del reporte, ya que esto evita pérdidas de tiempo y genera confianza en la gestión municipal.<br><br> Entre los puntos fuertes que mencionó destacan la facilidad de uso, la elección adecuada de íconos y textos, y un flujo claro en todo momento. Finalmente, recomendó la aplicación a otros vecinos al considerarla una herramienta necesaria para mejorar la comunicación con el municipio y gestionar problemas frecuentes en su distrito. |
+
+
+| **Atributo**            | **Detalle**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| ----------------------- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Nombre**              | Diego Meléndez                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| **Edad**                | 35                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| **Sexo**                | Masculino                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| **Distrito**            | Surquillo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| **Ocupación**           | Estudiante universitario                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **Fecha de entrevista** | 15/11/2025                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| **Captura**             | ![Captura](assets/6.product-verification-validation/6.3.validation-interviews/6.3.2.registro-de-entrevistas/screenshotCitizen)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| **Resumen**             | Durante la entrevista, Daniel mencionó que rara vez interactúa con los servicios municipales y que usualmente reporta incidencias mediante redes sociales. Tras observar la landing page, afirmó que el diseño transmite confianza y que los colores evocan limpieza y naturaleza. Indicó que la información es clara, la tipografía es legible y no encontró secciones confusas.<br><br> Al interactuar con la aplicación de ciudadano, consideró intuitivo el proceso de registro y destacó la claridad del flujo paso a paso. Identificó correctamente los botones principales (mapa y creación de reportes) y señaló que llenar el formulario de incidencias fue sencillo gracias a la estructura clara: tipo de incidencia, ubicación, descripción y fotos. Valoró especialmente la posibilidad de adjuntar evidencias para evitar reportes falsos.<br><br> Indicó que la navegación entre pantallas es lógica y no abrumadora, y que la distribución de opciones facilita el uso incluso para usuarios sin experiencia tecnológica. Consideró muy útil visualizar el estado de contenedores cercanos y recibir notificaciones sobre el progreso del reporte, ya que esto evita pérdidas de tiempo y genera confianza en la gestión municipal.<br><br> Entre los puntos fuertes que mencionó destacan la facilidad de uso, la elección adecuada de íconos y textos, y un flujo claro en todo momento. Finalmente, recomendó la aplicación a otros vecinos al considerarla una herramienta necesaria para mejorar la comunicación con el municipio y gestionar problemas frecuentes en su distrito. |
+
+
 ### 6.3.3. Evaluaciones según heurísticas
+
+#### UX Heuristics & Principles Evaluation
+#### Usability – Inclusive Design – Information Architecture
+
+**CARRERA** : Ingeniería de Software  
+**CURSO** : Diseño de Experimentos de Ingeniería de Software  
+**SECCIÓN** : 7491  
+**PROFESOR** : Iván Robles  
+**AUDITOR** : EcoLutios  
+**CLIENTES** : Elmer Riva, Salim Ramirez, Joshepmyr Gutierrez, Paul Sulca, Eric Hernandez
+
+---
+
+### SITE o APP A EVALUAR:
+**WasteTrack**
+
+---
+
+### TAREAS A EVALUAR:
+
+El alcance de esta evaluación incluye la revisión de usabilidad de las siguientes tareas:
+
+**Web Application – WasteTrack Admin**
+1. Inicio de sesión
+2. Ver y gestionar contenedores
+3. Registrar incidencias reportadas por ciudadanos
+4. Gestionar conductores
+5. Gestionar vehículos
+6. Gestionar rutas
+7. Asignar recorridos diarios
+8. Gestionar periodos y zonas de recolección
+9. Registrar nuevos ciudadanos o supervisores
+10. Consultar estado de contenedores
+11. Consultar incidencias por periodo
+12. Consultar métricas y finanzas municipales
+
+---
+
+### FUERA DE ALCANCE:
+
+**Landing Page**
+1. Redes sociales asociadas a la startup
+2. Política de privacidad y condiciones de uso
+
+**Web Application**
+1. Recuperación de contraseña
+2. Política de privacidad y condiciones de uso
+
+---
+
+### ESCALA DE SEVERIDAD:
+
+| Nivel | Descripción |
+|------|-------------|
+| 1 | **Problema superficial**: puede ser fácilmente superado por el usuario o ocurre con muy poca frecuencia. No necesita ser arreglado salvo que haya tiempo disponible. |
+| 2 | **Problema menor**: ocurre con más frecuencia o cuesta más superarlo. Se recomienda resolverlo en el siguiente release. |
+| 3 | **Problema mayor**: ocurre frecuentemente o los usuarios no pueden resolverlo. Requiere atención prioritaria. |
+| 4 | **Problema muy grave**: impide continuar el flujo. Debe corregirse antes del lanzamiento. |
+
+---
+
+### TABLA RESUMEN – Landing Page WasteTrack
+
+| # | Problema | Severidad | Heurística / Principio Violado |
+|---|----------|-----------|-------------------------------|
+| 1 | El botón “Comenzar ahora” no redirige a ninguna sección funcional | 2 | Usability: Control y libertad del usuario |
+| 2 | Los precios no están mostrados en soles, lo cual genera confusión en usuarios locales | 1 | Usability: Aesthetic & minimalist design |
+| 3 | Al elegir un plan, la página solo redirige al encabezado y no al flujo de pago | 2 | Usability: Control y libertad del usuario |
+
+---
+
+### DESCRIPCIÓN DE PROBLEMAS
+
+---
+
+### **PROBLEMA #1 – El botón “Comenzar ahora” no redirige a ninguna sección funcional**
+**Severidad:** 2  
+**Heurística violada:** Control y libertad del usuario
+
+**Problema:**  
+El botón principal del landing page de WasteTrack no tiene acción asignada. Esto genera confusión, ya que los usuarios esperan iniciar el flujo de registro o conocer las funcionalidades principales.
+
+**Recomendación:**  
+Configurar una redirección al registro, login o pantalla principal informativa de WasteTrack.
+
+---
+
+### **PROBLEMA #2 – Los precios no están en soles**
+**Severidad:** 1  
+**Heurística violada:** Aesthetic & minimalist design
+
+**Problema:**  
+Los precios se muestran en dólares, lo cual no está alineado al público objetivo peruano. Puede generar confusión al momento de evaluar los planes.
+
+**Recomendación:**  
+Mostrar precios en PEN o permitir alternar entre monedas.
 
 ## 6.4. Auditoría de Experiencias de Usuario
 
