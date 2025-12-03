@@ -6981,6 +6981,75 @@ Este tracking plan garantiza que WasteTrack pueda medir con precisión el uso re
 | 19    | US15 | Gestión de usuarios               | Como administrador, quiero gestionar usuarios y roles municipales para garantizar accesos correctos.                     | 2            |
 | 20    | US16 | Ver rutas completadas             | Como ciudadano, quiero revisar rutas completadas para validar cumplimiento municipal.                                    | 2            |
 
+### 8.3.3. Pipeline-supported, Experiment-Driven To-Be Software Platform Lifecycle
+
+#### 8.3.3.1. To-Be Sprint Backlogs
+
+**Sprint 1 — Municipal**
+
+Objetivo: Habilitar el núcleo funcional del producto para administradores municipales: dashboard, alertas críticas y rutas optimizadas.
+
+| ID   | Título                            | Descripción                                                                       | Story Points |
+| ---- | --------------------------------- | --------------------------------------------------------------------------------- | ------------ |
+| US02 | Generación de rutas optimizadas   | Generar rutas basadas en data IoT + históricos para reducir tiempo y combustible. | 5            |
+| US01 | Dashboard de contenedores         | Visualizar niveles de llenado ordenados por criticidad.                           | 3            |
+| US03 | Alertas por contenedores críticos | Alertas automáticas cuando un contenedor supera umbral.                           | 3            |
+| US14 | Configuración de umbrales         | Configurar niveles críticos personalizados para contenedores.                     | 2            |
+
+
+**Sprint 2 — Conductor**
+
+Objetivo: Permitir a los conductores ejecutar rutas en tiempo real y actualizar el estado operativo desde la app móvil.
+
+| ID   | Título                    | Descripción                                                              | Story Points |
+| ---- | ------------------------- | ------------------------------------------------------------------------ | ------------ |
+| US06 | Visualizar ruta asignada  | Mostrar recorrido y paradas del día en app móvil.                        | 5            |
+| US08 | Marcar punto atendido     | Marcar cada parada como “Atendida” y sincronizar al dashboard municipal. | 3            |
+| US07 | Notificaciones de cambios | Notificar a conductores cambios de ruta y emergencias.                   | 2            |
+| US18 | Modo offline              | Registrar paradas sin conexión y sincronizar posteriormente.             | 3            |
+| US09 | Reportar incidencias      | Reportar fotos y descripciones de problemas en campo.                    | 2            |
+
+**Sprint 3 — Analítica, Métricas y Transparencia**
+
+Objetivo: Construir capa analítica, salud de sensores y reportes operativos/ciudadanos.
+
+| ID   | Título                       | Descripción                                                               | Story Points |
+| ---- | ---------------------------- | ------------------------------------------------------------------------- | ------------ |
+| US17 | Salud de sensores            | Monitorear uptime, lecturas válidas, sensores caídos o inconsistentes.    | 3            |
+| US04 | Métricas operativas          | KPIs diarios: tiempo por ruta, desvíos, combustible, performance general. | 5            |
+| US05 | Exportación de reportes      | Exportación en PDF/Excel para reuniones técnicas o municipales.           | 2            |
+| US13 | Mapa de calor de incidencias | Zonas críticas con mayor recurrencia de problemas.                        | 3            |
+
+
+**Sprint 4 — Ciudadano, Información Pública y Engagement**
+Objetivo: Crear ecosistema orientado a transparencia municipal y comunicación ciudadana.
+
+| ID   | Título                        | Descripción                                                    | Story Points |
+| ---- | ----------------------------- | -------------------------------------------------------------- | ------------ |
+| US10 | Consultar horarios            | Buscar horarios de recolección por calle.                      | 2            |
+| US11 | Estado de contenedores        | Visualizar en mapa ciudadano el nivel de ocupación (colores).  | 2            |
+| US12 | Transparencia del servicio    | Mostrar rutas completadas por periodo.                         | 2            |
+| US16 | Ver rutas completadas         | Visualización pública de recorridos finales por fecha/periodo. | 2            |
+| US19 | Información clara de producto | Landing explicando módulos y beneficios.                       | 1            |
+| US20 | Solicitar demo                | Formulario para solicitud de demo municipal.                   | 1            |
+| US15 | Gestión de usuarios           | Gestión de roles y accesos municipales.                        | 2            |
+
+#### 8.3.3.2. Implemented To-Be Landing Page Evidence
+
+#### 8.3.3.3. Implemented To-Be Frontend-Web Application Evidence
+
+#### 8.3.3.4. *Implemented To-Be Native-Mobile Application Evidence*
+
+#### 8.3.3.5. Implemented To-Be RESTful API and/or Serverless Backend Evidence
+
+### 8.3.3.6. Team Collaboration Insights
+
+### 8.3.4. To-Be Validation Interviews
+
+#### 8.3.4.1. Diseño de Entrevistas
+
+#### 8.3.4.2. Registro de Entrevistas
+
 # Conclusiones
 
 Este proyecto demuestra la capacidad del equipo para abordar un problema complejo de manera integral y metódica. Al seguir un proceso de diseño de software bien estructurado, el grupo no solo identificó y analizó una problemática real en la gestión de residuos, sino que también propuso una solución tecnológica viable y centrada en las necesidades del usuario.
