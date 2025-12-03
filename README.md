@@ -6471,7 +6471,8 @@ El Question Backlog prioriza las preguntas experimentales más relevantes para e
 | **Question**   | ¿Mejorará la eficiencia operativa un dashboard de contenedores críticos?                                                                                                                                                                                                                                           |
 | **Why**        | Los administradores municipales requieren identificar rápidamente contenedores con riesgo de desborde. Actualmente deben revisar múltiples vistas, lo que ralentiza la toma de decisiones. Un dashboard centralizado permitiría detectar anomalías, priorizar acciones y asignar personal de manera más eficiente. |
 | **What**       | Implementar un dashboard que muestre contenedores críticos según volumen, peso, frecuencia de llenado y fallas de sensor. Incluir alertas visuales, filtros, orden por severidad y un mapa con zonas de riesgo.                                                                                                    |
-| **Hypothesis** | Con este dashboard, el tiempo de respuesta ante contenedores críticos se reducirá en un 35%, mejorando la coordinación operativa entre distritos.                                                                                                                                                                  |
+| **Hypothesis** | La incorporación de un dashboard centralizado tiene un efecto en la eficiencia con la que los administradores identifican y gestionan contenedores críticos.                                                                                                                                                       |
+| **Method**     | Prueba A/B entre equipos operativos: un grupo usa el proceso actual y otro utiliza el dashboard. Se comparan tiempos de gestión, coherencia en priorización y número de incidencias atendidas.                                                                                                                     |
 
 
 **Experimento 2: ¿Reducirá desbordes la predicción de llenado basada en datos históricos?**
@@ -6481,7 +6482,8 @@ El Question Backlog prioriza las preguntas experimentales más relevantes para e
 | **Question**   | ¿Reducirá desbordes la predicción de llenado basada en datos históricos?                                                                                                                                                                                              |
 | **Why**        | Los desbordes generan costos adicionales, quejas ciudadanas y complicaciones operativas. Las rutas actuales no consideran el ritmo real de llenado de cada contenedor. Predecir el llenado permitiría planificar recolecciones más eficientes y evitar acumulaciones. |
 | **What**       | Entrenar un modelo simple (tendencias históricas o promedios móviles) que estime cuándo un contenedor alcanzará su capacidad máxima y mostrar esta predicción en el panel principal con indicadores de riesgo.                                                        |
-| **Hypothesis** | La predicción reducirá los desbordes en un 25% y permitirá optimizar las rutas de recolección.                                                                                                                                                                        |
+| **Hypothesis** | La introducción de un modelo predictivo tiene un efecto en la planificación y prevención de desbordes en los contenedores.                                                                                                                                            |
+| **Method**     | Comparación entre zonas: una gestiona rutas con el método tradicional y otra usa predicciones. Se registran cambios en recolecciones anticipadas, incidencias evitadas y decisiones tomadas por los operadores.                                                       |
 
 
 **Experimento 3: ¿Aumentará la rapidez de gestión un módulo de priorización de reportes ciudadanos?**
@@ -6491,7 +6493,8 @@ El Question Backlog prioriza las preguntas experimentales más relevantes para e
 | **Question**   | ¿Aumentará la rapidez de gestión un módulo de priorización de reportes ciudadanos?                                                                                                                                                     |
 | **Why**        | Los administradores gestionan los reportes sin un criterio claro de urgencia, lo que causa inconsistencia en los tiempos de resolución. Un sistema de priorización automática permitiría identificar casos críticos con mayor rapidez. |
 | **What**       | Implementar un algoritmo básico que clasifique los reportes en Alta, Media o Baja prioridad según tipo de reporte, zona, frecuencia histórica e impacto. Mostrar las prioridades mediante colores y ordenamiento.                      |
-| **Hypothesis** | La priorización reducirá en un 40% el tiempo promedio de resolución de reportes críticos.                                                                                                                                              |
+| **Hypothesis** | La implementación de un sistema de priorización automática tiene un efecto en los tiempos de resolución de reportes ciudadanos.                                                                                                        |
+| **Method**     | Prueba A/B por equipos: uno gestiona reportes sin priorización y otro con el módulo activo. Se comparan tiempos de resolución, consistencia entre operadores y carga operativa por nivel de prioridad.                                 |
 
 
 **Experimento 4: ¿Mejorará la adopción la optimización de carga mediante skeleton loading?**
@@ -6501,7 +6504,8 @@ El Question Backlog prioriza las preguntas experimentales más relevantes para e
 | **Question**   | ¿Mejorará la adopción la optimización de carga mediante skeleton loading?                                                                                                                                       |
 | **Why**        | Algunos módulos tardan 4–5 segundos en cargar sin feedback visual, lo que genera incertidumbre y percepción de bajo rendimiento. Skeleton loading puede mejorar la experiencia percibida y reducir la fricción. |
 | **What**       | Implementar skeletons y estados de carga en los módulos de reportes ciudadanos, rutas y contenedores. Medir interacción, abandono y tiempos percibidos.                                                         |
-| **Hypothesis** | La adopción del sistema aumentará un 20% debido a una experiencia más fluida y clara durante la carga.                                                                                                          |
+| **Hypothesis** | La introducción de skeleton loading tiene un efecto en la percepción de rendimiento y en la adopción del sistema por parte de los usuarios.                                                                     |
+| **Method**     | Sesiones controladas: un grupo ve las pantallas sin skeletons y otro con skeleton loading. Se mide interacción, abandono y percepción reportada en encuestas breves post-uso.                                   |
 
 
 ## 8.2.  Experiment Design
