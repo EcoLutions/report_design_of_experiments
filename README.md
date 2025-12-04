@@ -7036,17 +7036,67 @@ Objetivo: Crear ecosistema orientado a transparencia municipal y comunicación c
 
 #### 8.3.3.2. Implemented To-Be Landing Page Evidence
 
+
 #### 8.3.3.3. Implemented To-Be Frontend-Web Application Evidence
 
-#### 8.3.3.4. *Implemented To-Be Native-Mobile Application Evidence*
+
+#### 8.3.3.4. Implemented To-Be Native-Mobile Application Evidence
 
 #### 8.3.3.5. Implemented To-Be RESTful API and/or Serverless Backend Evidence
 
 ### 8.3.3.6. Team Collaboration Insights
 
+
 ### 8.3.4. To-Be Validation Interviews
 
+El diseño metodológico de las entrevistas fueron aplicadas a los tres segmentos objetivo. La estructura garantiza consistencia comparativa, evidencia utilizable y alineación con los experimentos clave diseñados previamente.
+
 #### 8.3.4.1. Diseño de Entrevistas
+
+Preguntas generales:
+
+* ¿Podría decirme su nombre completo, por favor?
+* ¿Cuál es su edad y en qué distrito reside actualmente?
+* ¿A qué se dedica actualmente (ocupación o rol profesional)?
+
+**ADMINISTRADOR MUNICIPAL**
+
+* Pensando en la landing page de WasteTrack, ¿qué impresión le genera la propuesta de valor y el mensaje principal? ¿Le queda claro qué hace la plataforma?
+* ¿Qué impresión le genera el diseño visual del dashboard (colores, distribución de tarjetas, gráficos y mapa)?
+* ¿Le parece que la aplicación web administrativa es intuitiva y fácil de usar? ¿Por qué?
+* ¿Cómo evalúa la experiencia de navegación dentro del panel municipal? ¿Le resulta sencillo moverse entre las diferentes secciones?
+* ¿El flujo para identificar contenedores críticos le resultó claro? ¿Sintió que podía priorizar rápidamente dónde actuar primero?
+* ¿La configuración de umbrales de alerta le pareció comprensible? ¿Cambiaría algo de ese proceso?
+* ¿Las pantallas disponibles le permiten cubrir las acciones que realiza hoy en la gestión de residuos (monitoreo, rutas, incidencias, reportes)? ¿Qué le faltaría?
+* Desde su perspectiva, ¿cuál considera que es el punto más fuerte o destacado del dashboard municipal de WasteTrack?
+* ¿Qué beneficios cree que esta plataforma puede aportar a su municipio en términos de operación, costos y transparencia?
+* ¿Ha podido acceder fácilmente a la información que buscaba mediante los distintos botones, filtros y secciones? ¿Hubo algo confuso o poco visible?
+
+**CONDUCTOR DE RECOLECCIÓN**
+
+* ¿Qué impresión le genera el diseño visual de la app del conductor (colores, iconos, mapa, lista de paradas)?
+* ¿Le parece que la app es intuitiva para usarla mientras trabaja en ruta? ¿Por qué?
+* ¿Cómo evalúa la experiencia de navegación entre las pantallas de “Ruta del día”, detalle de parada e incidencias? ¿Le resultó fácil entender qué hacer en cada una?
+* ¿El proceso para ver la ruta asignada y seguir las paradas le resultó claro? ¿Cambiaría algo del mapa o de la lista de puntos?
+* Cuando marcó un punto como “Atendido”, ¿la acción y el feedback de la app fueron suficientemente claros? ¿Sintió que el sistema registró bien su avance?
+* ¿Qué tan sencillo le resultó reportar una incidencia (subir foto, escribir descripción, enviar)? ¿Le faltó alguna opción o información en ese proceso?
+* En el escenario sin conexión (modo offline), ¿entendió qué estaba pasando y qué iba a ocurrir con los datos cuando volviera la señal?
+* Desde su perspectiva, ¿cuál considera que es el punto más fuerte o útil de la app para ayudarle en su trabajo diario?
+* ¿Qué beneficios cree que esta app puede aportar a su jornada (tiempos, esfuerzo, comunicación con el área municipal)?
+* ¿Encontró algún momento en el que no supiera qué botón presionar o a dónde ir dentro de la app? Si es así, ¿en qué parte ocurrió?
+
+**CIUDADANO**
+
+* Pensando en la landing page y en el portal ciudadano, ¿qué impresión le genera el diseño visual (colores, ilustraciones, organización del contenido)?
+* ¿Le parece que el sitio es intuitivo y fácil de entender para alguien que quiere informarse sobre el servicio de recolección? ¿Por qué?
+* ¿Cómo evalúa la experiencia de navegación al buscar información sobre horarios de recolección en su calle o zona? ¿Le resultó sencillo completar esa tarea?
+* Cuando revisó el estado de los contenedores cercanos en el mapa, ¿entendió rápidamente qué significaban los colores y símbolos?
+* ¿La sección de transparencia y rutas completadas le ayudó a entender qué está haciendo la municipalidad respecto a la gestión de residuos? ¿Qué mejoraría ahí?
+* ¿Siente que la información mostrada (horarios, estado de contenedores, rutas completadas) es suficiente para tomar decisiones como “cuándo sacar la basura” o “a qué punto acercarse”?
+* Desde su perspectiva, ¿cuál considera que es el punto más fuerte o más valioso del portal ciudadano de WasteTrack?
+* ¿Qué beneficios cree que esta plataforma puede aportar a su barrio o comunidad en términos de limpieza, orden y confianza en la gestión municipal?
+* ¿Hubo algún texto, ícono o pantalla que le haya parecido confusa, poco clara o difícil de encontrar? ¿Cuál y por qué?
+
 
 #### 8.3.4.2. Registro de Entrevistas
 
