@@ -5996,9 +5996,60 @@ umeración automática**, ponerlo en **formato PDF**, o convertirlo en tu **secc
 
 #### 6.4.2.1. Información del grupo auditor
 
+El proceso de auditoría externa fue realizado por el equipo del proyecto OnControl, conformado por estudiantes del curso de Diseño de Experimentos de Ingeniería de Software. Este grupo, especializado en soluciones tecnológicas para el sector salud, aplicó su experiencia en usabilidad y flujos críticos para evaluar la plataforma WasteTrack.
+
+Datos del equipo auditor:
+
+**Proyecto:** OnControl (Plataforma de gestión oncológica y monitoreo IoT).
+
+**Institución:** Universidad Peruana de Ciencias Aplicadas (UPC).
+
+**Enfoque de la auditoría:** Evaluación heurística de Nielsen enfocada en el Panel Administrativo (Web) y la Aplicación Móvil del Ciudadano.
+
 #### 6.4.2.2. Cronograma de auditoría recibida
 
+La recepción y procesamiento de la auditoría se llevó a cabo siguiendo el siguiente cronograma, coordinado con el equipo auditor para no interrumpir los sprints de desarrollo de WasteTrack.
+
+| Fecha      | Actividad                      | Descripción                                                                                                                                        |
+|------------|--------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| 27/11/2025 | Entrega de accesos             | El equipo EcoLutions proporcionó al grupo OnControl las credenciales de prueba para el Admin Dashboard y el APK de la Citizen App (v1.0.0-beta).   |
+| 28/11/2025 | Ejecución de la auditoría      | El equipo OnControl realizó las pruebas de usabilidad y recorridos cognitivos sobre los flujos principales (Gestión de rutas y Reporte ciudadano). |
+| 29/11/2025 | Recepción del informe          | Recepción del documento formal de hallazgos con la clasificación de severidad y heurísticas violadas.                                              |
+| 30/11/2025 | Planificación de correcciones  | El equipo EcoLutions analizó el feedback y generó los tickets correspondientes en Jira para el Sprint de estabilización.                           |
+
+
 #### 6.4.2.3. Resumen de modificaciones para subsanar hallazgos
+
+A continuación, se detallan los hallazgos reportados por el grupo OnControl y las acciones correctivas implementadas por el equipo de EcoLutions. Se priorizaron los problemas con severidad 3 y 4 (Mayor y Muy Grave).
+
+TABLA RESUMEN DE HALLAZGOS Y SOLUCIONES
+
+ | Nº | Problema Identificado (Hallazgo)                                                                                                                                          | Severidad   | Heurística Violada	                  | Acción Correctiva Implementada                                                                                                                                       |
+ |----|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|--------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+ | 1  | Falta de confirmación en acciones destructivas (Admin). En el módulo de Gestión de Contenedores, el botón "Eliminar" borraba el registro inmediatamente sin preguntar.	   | 3 (Mayor)	  | Prevención de errores                | 	Se implementó el componente Modal de Confirmación (ya existente en el UI Kit) antes de ejecutar la acción de borrado en la API                                      |
+ | 2  | Saturación visual en el Mapa de Ciudadanos. Al tener muchos contenedores en un distrito (ej. La Victoria), los marcadores se solapaban impidiendo hacer clic.	            | 2 (Menor)	  | Estética y diseño minimalista        | 	Se aplicó lógica de Clustering en Google Maps Flutter. Ahora los contenedores se agrupan en un solo círculo con un contador cuando el zoom es lejano.               |
+ | 3  | Sidebar del Admin confuso en móviles. El menú lateral ocupaba mucho espacio en pantallas pequeñas y no se podía colapsar fácilmente.                                      | 	3 (Mayor)  | 	Flexibilidad y eficiencia de uso	   | Se ajustó la responsividad del AdminLayoutComponent.  Ahora el sidebar se oculta automáticamente en resoluciones móviles y aparece con un botón "hamburguesa".       |
+ | 4  | Feedback invisible en Login fallido. Al ingresar una contraseña incorrecta en la App Ciudadano, no aparecía ningún mensaje de error, solo se detenía la carga.            | 	4 (Grave)  | 	Visibilidad del estado del sistema	 | Se integró el manejo de errores del BLoC para mostrar un Snackbar (Toast) rojo indicando "Credenciales incorrectas" o "Error de conexión".                           |
+
+Evidencias de las modificaciones (UX/UI)
+
+Figura 6.1. Implementación de Modal de Confirmación (Admin App)
+
+![img.png](assets/6.product-verification-validation/6.4.auditoria-experiencias-de-usuario/img.png)
+
+Descripción: Se corrigió la eliminación accidental integrando el componente modal estándar del sistema de diseño para acciones críticas.
+
+Figura 6.2. Clustering en Mapa de Contenedores (Citizen App)
+
+![img_1.png](assets/6.product-verification-validation/6.4.auditoria-experiencias-de-usuario/img_1.png)
+
+Descripción: Mejora en la visualización del mapa para evitar la sobrecarga cognitiva del usuario cuando explora zonas con alta densidad de contenedores.
+
+Figura 6.3. Feedback de Error en Login
+
+![img_2.png](assets/6.product-verification-validation/6.4.auditoria-experiencias-de-usuario/img_2.png)
+
+Descripción: Se añadió feedback visual inmediato ante errores de autenticación, cumpliendo con la heurística de visibilidad del estado del sistema.
 
 # Capítulo VII: DevOps Practices
 
