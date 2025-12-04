@@ -7036,15 +7036,233 @@ Objetivo: Crear ecosistema orientado a transparencia municipal y comunicación c
 
 #### 8.3.3.2. Implemented To-Be Landing Page Evidence
 
+###  Implemented Landing Page Evidence
+
+**Enlace de la landing page:** [https://waste-track-landing-page.netlify.app/municipal-admin](https://waste-track-landing-page.netlify.app/municipal-admin)
+
+![landing page](./assets/5.product-implementation/5.2.implementation&deployment/landingPageEcolution.png)
+
+Pasos para desplegar un landing page en Vercel
+
+![vercel](./assets/5.product-implementation/5.2.implementation&deployment/vercel.png)
+
+1. Preparación del repositorio funcional en ambiente local
+2. Crear una cuenta en Vercel
+3. Desplegar desde GitHub
+    - Build command: `npm run build` o `yarn build`
+    - Publish directory: `build`
+4. Desplegar la aplicación
 
 #### 8.3.3.3. Implemented To-Be Frontend-Web Application Evidence
 
+A continuación, se presentan las evidencias de implementación y despliegue de los distintos componentes desarrollados durante el **Sprint 3**, correspondientes a Frontend, Backend e IoT del sistema **WasteTrack**.
+
+###  Implemented Frontend-Web Application Evidence
+
+**Enlace de la aplicacion web de administrador municipal** [https://waste-track-admin-app.netlify.app/dashboard](https://waste-track-admin-app.netlify.app/dashboard)
+
+#### Imagenes de la aplicación web para administrador municipal
+
+Vista del dashboard principal
+![dashboard.png](assets/sprint-3/dashboard.png)
+
+Vista de monitoreo de contenedores inteligentes
+![containerMonitoring.png](assets/sprint-3/containerMonitoring.png)
+
+Vista modal para editar contenedor inteligente
+![editContainer.png](assets/sprint-3/editContainer.png)
+
+Vista de la barra de filt visualizacion de contenedores inteligentes
+![filtersOnContainers.png](assets/sprint-3/filtersOnContainers.png)
+
+Vista de creacion de contenedor (paso 1)
+![createContainerStep1.png](assets/sprint-3/createContainerStep1.png)
+
+Vista de creacion de contenedor (paso 2)
+![createContainerStep2.png](assets/sprint-3/createContainerStep2.png)
+
+Vista de creacion de contenedor (paso 3)
+![createContainerStep3.png](assets/sprint-3/createContainerStep3.png)
+
+Vista de creacion de contenedor (paso 4)
+![createContainerStep4.png](assets/sprint-3/createContainerStep4.png)
+
+Vista de creacion de ruta de recoleccion
+![createRouteView.png](assets/sprint-3/createRouteView.png)
+
+Vista de rutas activas
+![activeRoute.png](assets/sprint-3/activeRoute.png)
+
+Vista de rutas activas con detalle de un ruta
+![activeRouteDetail.png](assets/sprint-3/activeRouteDetail.png)
+
+Vista de Gestion de flota (camiones de recoleccion)
+![fleetManagementView.png](assets/sprint-3/fleetManagementView.png)
+
+Vista de creacion de camiones de recoleccion
+![createNewVehicleView.png](assets/sprint-3/createNewVehicleView.png)
+
+Vista de reporte de incidencias
+![citizenReportsView.png](assets/sprint-3/citizenReportsView.png)
+
+Vista de creacion de reporte de incidencias
+![createReportView.png](assets/sprint-3/createReportView.png)
+
+Vista de usuarios conductores registrados
+![DriversListView.png](assets/sprint-3/DriversListView.png)
+
+Vista de creacion de nuevo usuario conductor
+![createNewDriver.png](assets/sprint-3/createNewDriver.png)
+
+Vista de usuarios ciudadanos registrados
+![citizensListView.png](assets/sprint-3/citizensListView.png)
 
 #### 8.3.3.4. Implemented To-Be Native-Mobile Application Evidence
 
+#### WasteTrack Driver Mobile Application
+
+Vista de inicio de sesion
+![loginView.png](assets/sprint-3/mobile/loginView.png)
+
+Vista principal de la aplicacion movil para conductores
+![mainView.png](assets/sprint-3/mobile/mainView.png)
+
+Vista del perfil de usuario
+![profileView.png](assets/sprint-3/mobile/profileView.png)
+
+Vista de ruta asignada al conductor, inciada
+![mapRoute.png](assets/sprint-3/mobile/mapRoute.png)
+
+Vista de confirmr recoleccion de contenedor
+![img.png](assets/sprint-3/mobile/img.png)
+
+Vista de ruta completada
+![img_1.png](assets/sprint-3/mobile/img_1.png)
+
+#### WasteTrack Citizen mobile app
+
+![splashImage.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/splashImage.png)
+
+![welcomeView.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/welcomeView.png)
+
+![selectMunicipality1.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/selectMunicipality1.png)
+
+![selectMunicipality2.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/selectMunicipality2.png)
+
+![home_view.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/home_view.png)
+
+![changeMunicipality.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/changeMunicipality.png)
+
+![notifications.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/notifications.png)
+
+![report.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/report.png)
+
 #### 8.3.3.5. Implemented To-Be RESTful API and/or Serverless Backend Evidence
 
-### 8.3.3.6. Team Collaboration Insights
+##### **Capturas de Documentación en Swagger UI**
+
+###### **Vista General de Swagger UI**
+
+La siguiente imagen muestra la interfaz principal de Swagger UI con todos los controladores documentados:
+
+![Swagger UI - Vista General](./assets/sprint-2/swagger-overview.png)
+
+*Descripción*: Vista general de la documentación OpenAPI desplegada en Swagger UI, mostrando los grupos de endpoints organizados por dominio (Authentication, Users, Districts, Citizens, Containers, Vehicles, Routes, etc.).
+
+###### **Endpoints de Autenticación**
+
+![Swagger UI - Authentication Endpoints](./assets/sprint-2/swagger-authentication.png)
+
+*Descripción*: Detalle de los endpoints del módulo de autenticación, incluyendo registro (`sign-up`), inicio de sesión (`sign-in`), recuperación de contraseña (`forgot-password`, `reset-password`) y gestión de tokens de activación.
+
+**Ejemplo de Request - Sign In:**
+```json
+{
+  "email": "user@wastetrack.com",
+  "password": "SecurePass123!"
+}
+```
+
+**Ejemplo de Response - Sign In (200 OK):**
+```json
+{
+  "id": 1,
+  "username": "user@wastetrack.com",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "roles": ["ROLE_CITIZEN"]
+}
+```
+
+###### **Endpoints de Contenedores**
+
+![Swagger UI - Container Endpoints](./assets/sprint-2/swagger-containers.png)
+
+*Descripción*: Endpoints del módulo de gestión de contenedores, incluyendo operaciones CRUD completas, filtrado por distrito y consulta de contenedores en estado de alerta.
+
+**Ejemplo de Request - Create Container:**
+```json
+{
+  "code": "CONT-001",
+  "type": "ORGANIC",
+  "capacity": 1000,
+  "currentFillLevel": 0,
+  "latitude": -12.046374,
+  "longitude": -77.042793,
+  "districtId": 1,
+  "status": "ACTIVE"
+}
+```
+
+**Ejemplo de Response - Get Containers by District (200 OK):**
+```json
+[
+  {
+    "id": 1,
+    "code": "CONT-001",
+    "type": "ORGANIC",
+    "capacity": 1000,
+    "currentFillLevel": 750,
+    "fillPercentage": 75.0,
+    "latitude": -12.046374,
+    "longitude": -77.042793,
+    "status": "ACTIVE",
+    "districtId": 1
+  }
+]
+```
+
+###### **Endpoints de Rutas y Waypoints**
+
+![Swagger UI - Routes Endpoints](./assets/sprint-2/swagger-routes.png)
+
+*Descripción*: Endpoints del módulo de rutas, incluyendo generación automática de waypoints optimizados, actualización de ubicación en tiempo real y consulta de rutas activas por distrito.
+
+**Ejemplo de Response - Generate Waypoints (200 OK):**
+```json
+{
+  "routeId": 1,
+  "waypoints": [
+    {
+      "id": 1,
+      "sequence": 1,
+      "containerId": 5,
+      "latitude": -12.046374,
+      "longitude": -77.042793,
+      "estimatedArrival": "2024-11-15T08:30:00",
+      "status": "PENDING"
+    },
+    {
+      "id": 2,
+      "sequence": 2,
+      "containerId": 8,
+      "latitude": -12.048521,
+      "longitude": -77.045123,
+      "estimatedArrival": "2024-11-15T08:45:00",
+      "status": "PENDING"
+    }
+  ]
+}
+```
 
 ### 8.3.4. To-Be Validation Interviews
 
