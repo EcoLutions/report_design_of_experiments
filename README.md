@@ -7046,7 +7046,6 @@ Objetivo: Crear ecosistema orientado a transparencia municipal y comunicación c
 
 ### 8.3.3.6. Team Collaboration Insights
 
-
 ### 8.3.4. To-Be Validation Interviews
 
 El diseño metodológico de las entrevistas fueron aplicadas a los tres segmentos objetivo. La estructura garantiza consistencia comparativa, evidencia utilizable y alineación con los experimentos clave diseñados previamente.
@@ -7154,6 +7153,149 @@ Usabilidad (heurísticas):
 * Los hallazgos de la evaluación heurística (problemas de navegación, etiquetado o visibilidad del estado del sistema) se consideran corregibles sin necesidad de replantear por completo la propuesta de interacción.
 
 #### 8.3.4.2. Registro de Entrevistas
+
+## 8.4. Experiment Aftermath & Analysis
+
+### 8.4.1. Analysis and Interpretation of Results
+Experiment Card 1: Dashboard de contenedores críticos
+
+Pregunta:
+¿Mejorará la eficiencia operativa un dashboard de contenedores críticos?
+
+Hipótesis:
+La incorporación de un dashboard centralizado tiene un efecto en la eficiencia con la que los administradores identifican y gestionan contenedores críticos.
+
+Participantes del experimento
+
+| Participante               | Segmento                | Grupo   | Comportamiento observado                                                                                                                                           |
+| -------------------------- | ----------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Alejandro Becerril Puerta  | Administrador municipal | Test    | Utiliza el dashboard para identificar rápidamente contenedores críticos y reordenar prioridades sin recurrir a múltiples archivos de Excel ni llamadas.            |
+| Angie Vivian Yancás Celada | Administrador municipal | Test    | Explora el mapa y la lista ordenada por criticidad; comenta que puede “ver de un vistazo” dónde empezar y qué zonas requieren más atención inmediata.              |
+| Pamela Rojas Aramburú      | Administrador municipal | Control | Trabaja con el método actual (Excel + WhatsApp); tarda más en consolidar información dispersa y se mantiene en un modo reactivo ante quejas y llamadas ciudadanas. |
+
+Resultados obtenidos
+
+En el grupo Test (Alejandro y Angie), el uso del dashboard de contenedores críticos permitió que los administradores identificaran en menos pasos qué zonas debían ser atendidas primero. La visualización centralizada de niveles de llenado, alertas y mapa facilitó que prioricen sectores sin necesidad de revisar varios documentos o depender únicamente de reportes telefónicos. Ambos describieron la experiencia como “más clara” y alineada con el trabajo diario de planificación.
+
+En el grupo Control (Pamela), al aplicar el flujo actual basado en hojas de cálculo y mensajes de WhatsApp, se evidenció una mayor carga operativa para reunir la información necesaria antes de tomar decisiones. La priorización de zonas críticas siguió dependiendo de quejas ciudadanas y de la experiencia previa, manteniendo el patrón de reacción más que de prevención.
+
+Interpretación de Resultados
+
+* Hipótesis respaldada: Los comportamientos observados muestran que el dashboard tiene un efecto positivo en la eficiencia operativa, al reducir la fragmentación de la información y soportar decisiones más rápidas.
+* Menos trabajo reactivo: El grupo Test pudo anticipar focos de riesgo antes de recibir quejas, mientras que el grupo Control continuó respondiendo principalmente a incidentes ya ocurridos.
+* Mejora en la visibilidad del sistema: La vista unificada de contenedores, criticidad y mapa permitió entender mejor el estado del servicio, algo que no se logra fácilmente solo con Excel o reportes dispersos.
+* Alineación con necesidades reales: Las frustraciones expresadas en las entrevistas (falta de datos en tiempo real, planificación manual) se ven directamente mitigadas por la funcionalidad evaluada.
+* Implicación para el producto: El dashboard de contenedores críticos se confirma como un componente central de WasteTrack – EcoLutions para el segmento municipal y debe priorizarse en las siguientes iteraciones.
+
+---
+
+Experiment Card 2: Predicción de llenado basada en datos históricos
+
+Pregunta:
+¿Reducirá desbordes la predicción de llenado basada en datos históricos?
+
+Hipótesis:
+La introducción de un modelo predictivo tiene un efecto en la planificación y prevención de desbordes en los contenedores.
+
+Participantes del experimento
+
+| Participante               | Segmento                | Grupo   | Comportamiento observado                                                                                                                                                 |
+| -------------------------- | ----------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Alejandro Becerril Puerta  | Administrador municipal | Test    | Utiliza las predicciones de llenado para adelantar la recolección en contenedores con alta velocidad de llenado; ajusta la ruta antes de que se reporten desbordes.      |
+| Angie Vivian Yancás Celada | Administrador municipal | Test    | Revisa el panel de riesgo anticipado y decide reforzar ciertas zonas; indica que “ayuda a priorizar dónde no podemos darnos el lujo de llegar tarde”.                    |
+| Pamela Rojas Aramburú      | Administrador municipal | Control | Opera sin predicción, basándose solo en niveles actuales y quejas; algunos contenedores simulados llegan a situación crítica antes de ser incluidos en la planificación. |
+
+Resultados obtenidos
+
+En el grupo Test, los administradores integraron la predicción como un criterio adicional de decisión. En los escenarios simulados, tendieron a adelantar la atención de contenedores catalogados como de “alto riesgo futuro”, incluso si su nivel actual no era todavía crítico. Reportaron que esta información les permitió “jugar a favor del tiempo” y no únicamente reaccionar a la situación del día.
+
+En el grupo Control, la planificación permaneció centrada en el estado actual o en la presión de las quejas ciudadanas. Los escenarios con contenedores de crecimiento rápido de llenado terminaron en situaciones cercanas al desborde antes de entrar en la ruta, reforzando la sensación de operar “siempre corriendo detrás del problema”.
+
+Interpretación de Resultados
+
+* Hipótesis respaldada: La predicción de llenado tuvo un efecto claro en la manera en que los administradores ordenaron prioridades y seleccionaron contenedores para sus rutas.
+* Cambio de mentalidad: El grupo Test pasó de un enfoque puramente reactivo a uno preventivo, utilizando la información histórica y proyectada para decidir dónde intervenir antes.
+* Mejor uso de recursos limitados: Tanto Alejandro como Angie percibieron que la predicción ayuda a enfocar los pocos camiones disponibles en los puntos de mayor impacto potencial.
+* Dependencia actual de señales tardías: El comportamiento del grupo Control evidenció que sin predicción el sistema sigue dependiendo de quejas, llamadas e inspecciones tardías.
+* Relevancia estratégica: La funcionalidad de predicción se confirma como un diferenciador clave de WasteTrack, alineado con el objetivo de reducir desbordes y optimizar el uso de la flota.
+
+---
+
+Experiment Card 3: Priorización de reportes ciudadanos
+
+Pregunta:
+¿Aumentará la rapidez de gestión un módulo de priorización de reportes ciudadanos?
+
+Hipótesis:
+La implementación de un sistema de priorización automática tiene un efecto en los tiempos de resolución de reportes ciudadanos.
+
+Participantes del experimento
+
+| Participante                | Segmento                | Grupo   | Comportamiento observado                                                                                                                                                     |
+| --------------------------- | ----------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Pamela Rojas Aramburú       | Administrador municipal | Test    | Usa la cola de reportes con etiquetas Alta/Media/Baja; atiende primero desbordes y puntos cercanos a colegios; percibe “orden” en lugar de revisar caso por caso sin filtro. |
+| Alejandro Becerril Puerta   | Administrador municipal | Control | Gestiona reportes en orden de llegada; tarda más en identificar cuáles son realmente críticos y cuáles pueden esperar.                                                       |
+| Leonardo Meléndez Álvarez   | Ciudadano               | Test    | Envía un reporte de acumulación; observa que el caso se atiende con rapidez en el escenario simulado y valora tener visibilidad del estado de su reporte.                    |
+| Miguel Ángel López Sandoval | Ciudadano               | Control | Reporta un problema por el canal tradicional; percibe demora y falta de información sobre qué está pasando con su reclamo.                                                   |
+
+Resultados obtenidos
+
+En el grupo Test, el módulo de priorización permitió que los administradores enfocaran sus esfuerzos en reportes de alta severidad (desbordes, zonas escolares, áreas de alto tránsito peatonal) antes de revisar casos menos urgentes. Pamela describió la experiencia como más estructurada y consistente, con menos sensación de “estar apagando incendios al azar”. Desde el lado ciudadano, Leonardo valoró que su reporte crítico reciba atención visible dentro del flujo simulado.
+
+En el grupo Control, la revisión en orden cronológico llevó a que reportes menos urgentes compitieran por atención con casos realmente críticos. Alejandro expresó que sin un criterio automático, la identificación de prioridades dependía demasiado de memoria, intuición y tiempo disponible, generando mayores retrasos percibidos por los ciudadanos en problemas graves.
+
+Interpretación de Resultados
+
+* Hipótesis respaldada: La priorización automática muestra un efecto positivo en la gestión de reportes, al orientar más rápidamente recursos hacia los casos críticos.
+* Aumento de consistencia: El grupo Test evidenció decisiones más homogéneas, ya que el sistema sugiere qué atender primero, reduciendo la variabilidad entre administradores.
+* Mejora en la percepción ciudadana: El comportamiento observado en el caso de Leonardo sugiere que ver su problema atendido con mayor rapidez mejora la confianza en el sistema municipal.
+* Riesgos a considerar: La efectividad del módulo depende de reglas de clasificación bien diseñadas; un mal etiquetado podría invisibilizar casos importantes, por lo que se requiere monitoreo continuo.
+* Implicación para el roadmap: La priorización de reportes debe integrarse con métricas de satisfacción ciudadana y tiempos de respuesta para consolidarse como pilar de valor público de WasteTrack.
+
+---
+
+Experiment Card 4: Skeleton loading y percepción de rendimiento
+
+Pregunta:
+¿Mejorará la adopción la optimización de carga mediante skeleton loading?
+
+Hipótesis:
+La introducción de skeleton loading tiene un efecto en la percepción de rendimiento y en la adopción del sistema por parte de los usuarios.
+
+Participantes del experimento
+
+| Participante                | Segmento                 | Grupo   | Comportamiento observado                                                                                                               |
+| --------------------------- | ------------------------ | ------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Irving Allca                | Conductor de recolección | Test    | Ve skeletons mientras carga la ruta del día; comenta que “parece que la app está trabajando” y espera sin cerrar ni recargar.          |
+| Mateo Sánchez               | Conductor de recolección | Control | Observa una pantalla en blanco durante la carga; piensa que la app se congeló y considera cerrar o retroceder.                         |
+| Angie Vivian Yancás Celada  | Administrador municipal  | Test    | Interactúa con el dashboard con skeletons; percibe la carga como más fluida y entiende que la información aún se está preparando.      |
+| Pamela Rojas Aramburú       | Administrador municipal  | Control | Durante la carga sin skeletons, menciona que “no sabe si el sistema respondió” y tiende a recargar la página innecesariamente.         |
+| Leonardo Meléndez Álvarez   | Ciudadano                | Test    | Navega el mapa ciudadano; con skeletons entiende que los datos están cargando y mantiene la sesión abierta hasta ver los contenedores. |
+| Miguel Ángel López Sandoval | Ciudadano                | Control | Ante la ausencia de feedback visual, interpreta el retraso como un error y abandona la página en uno de los escenarios simulados.      |
+
+Resultados obtenidos
+
+En el grupo Test, los usuarios de los tres segmentos interpretaron la presencia de skeletons como una señal clara de que el sistema estaba respondiendo. Tanto conductores como administradores y ciudadanos manifestaron que, aunque el tiempo de carga fuese similar al escenario Control, la sensación era de mayor fluidez y menor incertidumbre. La mayoría esperó a que apareciera la información sin recurrir a recargas o cierres prematuros.
+
+En el grupo Control, la falta de feedback durante la carga generó dudas sobre si el sistema estaba funcionando. Algunos participantes intentaron recargar la página o cerrar la aplicación, lo que introduce fricción y riesgo de abandono. La experiencia fue descrita como “lenta” o “incómoda”, aun cuando el tiempo objetivo de carga no fuera mayor que en el grupo Test.
+
+Interpretación de Resultados
+
+* Hipótesis respaldada: La introducción de skeleton loading tiene un efecto positivo en la percepción de rendimiento y reduce la probabilidad de abandono durante la carga.
+* Reducción de incertidumbre: Los skeletons comunican que el sistema está activo, lo que disminuye la sensación de error y mejora la confianza del usuario en la plataforma.
+* Beneficio transversal a segmentos: El efecto favorable se observó en administradores, conductores y ciudadanos, lo que refuerza la relevancia de esta mejora de UX a nivel global del producto.
+* Importancia del diseño coherente: Para maximizar el beneficio, los skeletons deben reflejar la estructura real del contenido final; cualquier desalineación puede generar confusión adicional.
+* Justificación de priorización: Dado que no implica cambios funcionales profundos y tiene impacto directo en adopción y satisfacción, el skeleton loading se justifica como mejora prioritaria de la experiencia de WasteTrack – EcoLutions.
+
+### 8.4.2. Re-scored and Re-prioritized Question Backlog
+
+## 8.5. Continuous Learning
+
+### 8.5.1. Shareback Session Artifacts: Learning Workflow
+
+## 8.6. To-Be Software Platform Pre-launch
+
+### 8.6.1. About-the-Product Intro Video
 
 # Conclusiones
 
