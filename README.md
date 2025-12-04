@@ -7289,6 +7289,22 @@ Interpretación de Resultados
 
 ### 8.4.2. Re-scored and Re-prioritized Question Backlog
 
+A partir de los resultados de las entrevistas de validación y de los cuatro experimentos, el Question Backlog se reordenó considerando dos criterios principales:
+
+* (a) **Impacto estratégico en WasteTrack – EcoLutions** (reducción de desbordes, eficiencia operativa, valor público)
+* (b) **Grado de incertidumbre remanente** (qué tan necesario es seguir experimentando / afinando esa pregunta).
+
+Nuevo Question Backlog
+
+| Nueva prioridad | Pregunta                                                                           | Comentario síntesis                                                                                                  |
+|-----------------| ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Alta            | ¿Reducirá desbordes la predicción de llenado basada en datos históricos?           | Alta palanca operativa y aún con incertidumbre técnica (calidad de datos, modelos, adopción en planificación).       |
+| Alta            | ¿Aumentará la rapidez de gestión un módulo de priorización de reportes ciudadanos? | Impacto directo en tiempos de atención y percepción ciudadana; reglas de priorización requieren más iteraciones.     |
+| Media           | ¿Mejorará la eficiencia operativa un dashboard de contenedores críticos?           | Hipótesis fuertemente respaldada; se mantiene clave, pero con menor riesgo que predicción y priorización.            |
+| Media           | ¿Mejorará la adopción la optimización de carga mediante skeleton loading?          | Experimento exitoso y de bajo riesgo; ya se considera una mejora táctica más que una gran incertidumbre estratégica. |
+
+
+
 ## 8.5. Continuous Learning
 
 ### 8.5.1. Shareback Session Artifacts: Learning Workflow
