@@ -7309,6 +7309,87 @@ Nuevo Question Backlog
 
 ### 8.5.1. Shareback Session Artifacts: Learning Workflow
 
+El workflow de WasteTrack – EcoLutions tiene como finalidad que todo lo descubierto en entrevistas, experimentos y validaciones de usabilidad no se quede “en la cabeza” de unos pocos, sino que se transforme en decisiones claras sobre el producto. Las sesiones de *shareback* son el espacio donde el equipo consolida evidencias de los tres segmentos (administrador municipal, conductor y ciudadano), revisa el avance de las Experiment Cards y ajusta el rumbo del proyecto de forma continua.
+
+Objetivos del flujo de aprendizaje
+
+* Alinear al equipo sobre qué está funcionando y qué no en los flujos clave:
+  dashboard de contenedores, predicción de llenado, priorización de reportes y experiencia de carga (skeleton loading).
+* Transformar las entrevistas de validación y heurísticas de UX en cambios concretos en el Product Backlog, Question Backlog y Experiment Cards.
+* Evitar repetir errores o fricciones detectadas en pilotos con municipios y conductores, documentando buenas prácticas y anti-patrones.
+* Mantener una visión compartida del impacto de WasteTrack en la reducción de desbordes, la eficiencia operativa y la confianza ciudadana.
+
+Flujo de trabajo de aprendizaje y shareback
+
+1. Captura sistemática de insumos
+
+    * Fuentes:
+
+        * Entrevistas grabadas y resúmenes con administradores municipales, conductores y ciudadanos.
+        * Resultados de los experimentos (dashboard, predicción, priorización, skeleton loading).
+        * Evaluaciones heurísticas de las interfaces municipal, conductor y ciudadana.
+        * Datos de uso de los prototipos (tiempos de tarea, pantallas abandonadas, rutas completadas en simulaciones).
+    * Artefactos generados:
+
+        * Fichas de entrevista por participante (como las de Alejandro, Irving, Leonardo, etc.).
+        * Notas rápidas de observación durante pruebas de usabilidad.
+        * Tablas de resultados por experimento (grupo Test vs Control).
+
+2. Análisis y síntesis por segmento
+
+    * El equipo resume aprendizajes por cada rol:
+
+        * Municipal: decisiones más rápidas con dashboard, interés en predicción, necesidad de reglas claras de priorización.
+        * Conductor: estrés por tráfico, valor de rutas claras y feedback visual durante la carga, importancia del modo offline.
+        * Ciudadano: demanda de transparencia, necesidad de ver horarios y estado de contenedores, frustración por quejas no atendidas.
+    * Los hallazgos se condensan en artefactos de síntesis:
+
+        * “Matriz de insights” organizada en tres ejes: Operación (back-office), Campo (conductor), Ciudadanía (front-office).
+        * Lista de problemas recurrentes (ej. falta de feedback, dificultad para priorizar, incertidumbre sobre estado del servicio).
+        * Conjunto de oportunidades de mejora vinculadas a historias de usuario y a las Experiment Cards.
+
+3. Sesiones de shareback por sprint
+
+    * Al final de cada sprint, el equipo realiza una sesión interna de *shareback* con este formato:
+
+        * Presentación corta de resultados de entrevistas y experimentos (qué se probó, qué observamos).
+        * Revisión conjunta de las 4 Experiment Cards y del Question Backlog re-priorizado.
+        * Identificación de aprendizajes clave:
+
+            * Ejemplo: “El dashboard ya está validado como útil, pero la verdadera incertidumbre ahora está en la predicción de llenado”.
+            * Ejemplo: “La priorización de reportes mejora la rapidez, pero necesitamos ajustar las reglas de severidad por contexto”.
+        * Discusión y registro de decisiones:
+
+            * Qué se mantiene, qué se cambia y qué se descarta en la siguiente iteración.
+    * Artefactos de salida de cada sesión:
+
+        * Minuta de aprendizaje del sprint (1 página).
+        * Product Backlog ajustado (reordenación de historias, creación de nuevas).
+        * Question Backlog actualizado con nueva prioridad.
+        * Experiment Cards refinadas (nueva versión de hipótesis, método o métricas de observación).
+
+4. Implementación y cierre del ciclo de aprendizaje
+
+    * Las mejoras acordadas se traducen en:
+
+        * Ajustes en las interfaces (dashboard, app del conductor, portal ciudadano).
+        * Cambios en reglas de negocio (umbrales, criterios de priorización de reportes, parametrización de predicción).
+        * Nuevos experimentos o variantes A/B cuando aún persiste incertidumbre.
+    * En el siguiente sprint, el equipo vuelve a:
+
+        * Observar cómo reaccionan administradores, conductores y ciudadanos a los cambios.
+        * Verificar si los problemas detectados disminuyen (menos desbordes simulados, menos abandono en la app, menos ambigüedad en la carga).
+        * Registrar nuevos aprendizajes que alimentan la siguiente sesión de *shareback*.
+
+5. Cultura de mejora continua
+
+    * Las sesiones de *shareback* se convierten en una práctica recurrente, no solo un hito puntual del proyecto:
+
+        * Después de cada experimento importante (p. ej. nueva versión de predicción de llenado) se ejecuta un mini-shareback para registrar qué se aprendió.
+        * Se incentiva que todos los roles del equipo (negocio, UX, data, desarrollo) traigan evidencia y no solo opiniones.
+        * Los aprendizajes más relevantes se consolidan en una “línea de tiempo de aprendizaje” del proyecto, que muestra cómo WasteTrack – EcoLutions ha ido evolucionando a partir de datos reales y feedback de usuarios.
+
+
 ## 8.6. To-Be Software Platform Pre-launch
 
 ### 8.6.1. About-the-Product Intro Video
