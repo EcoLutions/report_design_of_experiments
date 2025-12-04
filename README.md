@@ -7459,6 +7459,637 @@ Este tracking plan garantiza que WasteTrack pueda medir con precisión el uso re
 | 19    | US15 | Gestión de usuarios               | Como administrador, quiero gestionar usuarios y roles municipales para garantizar accesos correctos.                     | 2            |
 | 20    | US16 | Ver rutas completadas             | Como ciudadano, quiero revisar rutas completadas para validar cumplimiento municipal.                                    | 2            |
 
+### 8.3.3. Pipeline-supported, Experiment-Driven To-Be Software Platform Lifecycle
+
+#### 8.3.3.1. To-Be Sprint Backlogs
+
+**Sprint 1 — Municipal**
+
+Objetivo: Habilitar el núcleo funcional del producto para administradores municipales: dashboard, alertas críticas y rutas optimizadas.
+
+| ID   | Título                            | Descripción                                                                       | Story Points |
+| ---- | --------------------------------- | --------------------------------------------------------------------------------- | ------------ |
+| US02 | Generación de rutas optimizadas   | Generar rutas basadas en data IoT + históricos para reducir tiempo y combustible. | 5            |
+| US01 | Dashboard de contenedores         | Visualizar niveles de llenado ordenados por criticidad.                           | 3            |
+| US03 | Alertas por contenedores críticos | Alertas automáticas cuando un contenedor supera umbral.                           | 3            |
+| US14 | Configuración de umbrales         | Configurar niveles críticos personalizados para contenedores.                     | 2            |
+
+
+**Sprint 2 — Conductor**
+
+Objetivo: Permitir a los conductores ejecutar rutas en tiempo real y actualizar el estado operativo desde la app móvil.
+
+| ID   | Título                    | Descripción                                                              | Story Points |
+| ---- | ------------------------- | ------------------------------------------------------------------------ | ------------ |
+| US06 | Visualizar ruta asignada  | Mostrar recorrido y paradas del día en app móvil.                        | 5            |
+| US08 | Marcar punto atendido     | Marcar cada parada como “Atendida” y sincronizar al dashboard municipal. | 3            |
+| US07 | Notificaciones de cambios | Notificar a conductores cambios de ruta y emergencias.                   | 2            |
+| US18 | Modo offline              | Registrar paradas sin conexión y sincronizar posteriormente.             | 3            |
+| US09 | Reportar incidencias      | Reportar fotos y descripciones de problemas en campo.                    | 2            |
+
+**Sprint 3 — Analítica, Métricas y Transparencia**
+
+Objetivo: Construir capa analítica, salud de sensores y reportes operativos/ciudadanos.
+
+| ID   | Título                       | Descripción                                                               | Story Points |
+| ---- | ---------------------------- | ------------------------------------------------------------------------- | ------------ |
+| US17 | Salud de sensores            | Monitorear uptime, lecturas válidas, sensores caídos o inconsistentes.    | 3            |
+| US04 | Métricas operativas          | KPIs diarios: tiempo por ruta, desvíos, combustible, performance general. | 5            |
+| US05 | Exportación de reportes      | Exportación en PDF/Excel para reuniones técnicas o municipales.           | 2            |
+| US13 | Mapa de calor de incidencias | Zonas críticas con mayor recurrencia de problemas.                        | 3            |
+
+
+**Sprint 4 — Ciudadano, Información Pública y Engagement**
+Objetivo: Crear ecosistema orientado a transparencia municipal y comunicación ciudadana.
+
+| ID   | Título                        | Descripción                                                    | Story Points |
+| ---- | ----------------------------- | -------------------------------------------------------------- | ------------ |
+| US10 | Consultar horarios            | Buscar horarios de recolección por calle.                      | 2            |
+| US11 | Estado de contenedores        | Visualizar en mapa ciudadano el nivel de ocupación (colores).  | 2            |
+| US12 | Transparencia del servicio    | Mostrar rutas completadas por periodo.                         | 2            |
+| US16 | Ver rutas completadas         | Visualización pública de recorridos finales por fecha/periodo. | 2            |
+| US19 | Información clara de producto | Landing explicando módulos y beneficios.                       | 1            |
+| US20 | Solicitar demo                | Formulario para solicitud de demo municipal.                   | 1            |
+| US15 | Gestión de usuarios           | Gestión de roles y accesos municipales.                        | 2            |
+
+#### 8.3.3.2. Implemented To-Be Landing Page Evidence
+
+###  Implemented Landing Page Evidence
+
+**Enlace de la landing page:** [https://waste-track-landing-page.netlify.app/municipal-admin](https://waste-track-landing-page.netlify.app/municipal-admin)
+
+![landing page](./assets/5.product-implementation/5.2.implementation&deployment/landingPageEcolution.png)
+
+Pasos para desplegar un landing page en Vercel
+
+![vercel](./assets/5.product-implementation/5.2.implementation&deployment/vercel.png)
+
+1. Preparación del repositorio funcional en ambiente local
+2. Crear una cuenta en Vercel
+3. Desplegar desde GitHub
+    - Build command: `npm run build` o `yarn build`
+    - Publish directory: `build`
+4. Desplegar la aplicación
+
+#### 8.3.3.3. Implemented To-Be Frontend-Web Application Evidence
+
+A continuación, se presentan las evidencias de implementación y despliegue de los distintos componentes desarrollados durante el **Sprint 3**, correspondientes a Frontend, Backend e IoT del sistema **WasteTrack**.
+
+###  Implemented Frontend-Web Application Evidence
+
+**Enlace de la aplicacion web de administrador municipal** [https://waste-track-admin-app.netlify.app/dashboard](https://waste-track-admin-app.netlify.app/dashboard)
+
+#### Imagenes de la aplicación web para administrador municipal
+
+Vista del dashboard principal
+![dashboard.png](assets/sprint-3/dashboard.png)
+
+Vista de monitoreo de contenedores inteligentes
+![containerMonitoring.png](assets/sprint-3/containerMonitoring.png)
+
+Vista modal para editar contenedor inteligente
+![editContainer.png](assets/sprint-3/editContainer.png)
+
+Vista de la barra de filt visualizacion de contenedores inteligentes
+![filtersOnContainers.png](assets/sprint-3/filtersOnContainers.png)
+
+Vista de creacion de contenedor (paso 1)
+![createContainerStep1.png](assets/sprint-3/createContainerStep1.png)
+
+Vista de creacion de contenedor (paso 2)
+![createContainerStep2.png](assets/sprint-3/createContainerStep2.png)
+
+Vista de creacion de contenedor (paso 3)
+![createContainerStep3.png](assets/sprint-3/createContainerStep3.png)
+
+Vista de creacion de contenedor (paso 4)
+![createContainerStep4.png](assets/sprint-3/createContainerStep4.png)
+
+Vista de creacion de ruta de recoleccion
+![createRouteView.png](assets/sprint-3/createRouteView.png)
+
+Vista de rutas activas
+![activeRoute.png](assets/sprint-3/activeRoute.png)
+
+Vista de rutas activas con detalle de un ruta
+![activeRouteDetail.png](assets/sprint-3/activeRouteDetail.png)
+
+Vista de Gestion de flota (camiones de recoleccion)
+![fleetManagementView.png](assets/sprint-3/fleetManagementView.png)
+
+Vista de creacion de camiones de recoleccion
+![createNewVehicleView.png](assets/sprint-3/createNewVehicleView.png)
+
+Vista de reporte de incidencias
+![citizenReportsView.png](assets/sprint-3/citizenReportsView.png)
+
+Vista de creacion de reporte de incidencias
+![createReportView.png](assets/sprint-3/createReportView.png)
+
+Vista de usuarios conductores registrados
+![DriversListView.png](assets/sprint-3/DriversListView.png)
+
+Vista de creacion de nuevo usuario conductor
+![createNewDriver.png](assets/sprint-3/createNewDriver.png)
+
+Vista de usuarios ciudadanos registrados
+![citizensListView.png](assets/sprint-3/citizensListView.png)
+
+#### 8.3.3.4. Implemented To-Be Native-Mobile Application Evidence
+
+#### WasteTrack Driver Mobile Application
+
+Vista de inicio de sesion
+![loginView.png](assets/sprint-3/mobile/loginView.png)
+
+Vista principal de la aplicacion movil para conductores
+![mainView.png](assets/sprint-3/mobile/mainView.png)
+
+Vista del perfil de usuario
+![profileView.png](assets/sprint-3/mobile/profileView.png)
+
+Vista de ruta asignada al conductor, inciada
+![mapRoute.png](assets/sprint-3/mobile/mapRoute.png)
+
+Vista de confirmr recoleccion de contenedor
+![img.png](assets/sprint-3/mobile/img.png)
+
+Vista de ruta completada
+![img_1.png](assets/sprint-3/mobile/img_1.png)
+
+#### WasteTrack Citizen mobile app
+
+![splashImage.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/splashImage.png)
+
+![welcomeView.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/welcomeView.png)
+
+![selectMunicipality1.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/selectMunicipality1.png)
+
+![selectMunicipality2.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/selectMunicipality2.png)
+
+![home_view.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/home_view.png)
+
+![changeMunicipality.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/changeMunicipality.png)
+
+![notifications.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/notifications.png)
+
+![report.png](assets/5.product-implementation/mobile_application/citizen_mobile_app/report.png)
+
+#### 8.3.3.5. Implemented To-Be RESTful API and/or Serverless Backend Evidence
+
+##### **Capturas de Documentación en Swagger UI**
+
+###### **Vista General de Swagger UI**
+
+La siguiente imagen muestra la interfaz principal de Swagger UI con todos los controladores documentados:
+
+![Swagger UI - Vista General](./assets/sprint-2/swagger-overview.png)
+
+*Descripción*: Vista general de la documentación OpenAPI desplegada en Swagger UI, mostrando los grupos de endpoints organizados por dominio (Authentication, Users, Districts, Citizens, Containers, Vehicles, Routes, etc.).
+
+###### **Endpoints de Autenticación**
+
+![Swagger UI - Authentication Endpoints](./assets/sprint-2/swagger-authentication.png)
+
+*Descripción*: Detalle de los endpoints del módulo de autenticación, incluyendo registro (`sign-up`), inicio de sesión (`sign-in`), recuperación de contraseña (`forgot-password`, `reset-password`) y gestión de tokens de activación.
+
+**Ejemplo de Request - Sign In:**
+```json
+{
+  "email": "user@wastetrack.com",
+  "password": "SecurePass123!"
+}
+```
+
+**Ejemplo de Response - Sign In (200 OK):**
+```json
+{
+  "id": 1,
+  "username": "user@wastetrack.com",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "roles": ["ROLE_CITIZEN"]
+}
+```
+
+###### **Endpoints de Contenedores**
+
+![Swagger UI - Container Endpoints](./assets/sprint-2/swagger-containers.png)
+
+*Descripción*: Endpoints del módulo de gestión de contenedores, incluyendo operaciones CRUD completas, filtrado por distrito y consulta de contenedores en estado de alerta.
+
+**Ejemplo de Request - Create Container:**
+```json
+{
+  "code": "CONT-001",
+  "type": "ORGANIC",
+  "capacity": 1000,
+  "currentFillLevel": 0,
+  "latitude": -12.046374,
+  "longitude": -77.042793,
+  "districtId": 1,
+  "status": "ACTIVE"
+}
+```
+
+**Ejemplo de Response - Get Containers by District (200 OK):**
+```json
+[
+  {
+    "id": 1,
+    "code": "CONT-001",
+    "type": "ORGANIC",
+    "capacity": 1000,
+    "currentFillLevel": 750,
+    "fillPercentage": 75.0,
+    "latitude": -12.046374,
+    "longitude": -77.042793,
+    "status": "ACTIVE",
+    "districtId": 1
+  }
+]
+```
+
+###### **Endpoints de Rutas y Waypoints**
+
+![Swagger UI - Routes Endpoints](./assets/sprint-2/swagger-routes.png)
+
+*Descripción*: Endpoints del módulo de rutas, incluyendo generación automática de waypoints optimizados, actualización de ubicación en tiempo real y consulta de rutas activas por distrito.
+
+**Ejemplo de Response - Generate Waypoints (200 OK):**
+```json
+{
+  "routeId": 1,
+  "waypoints": [
+    {
+      "id": 1,
+      "sequence": 1,
+      "containerId": 5,
+      "latitude": -12.046374,
+      "longitude": -77.042793,
+      "estimatedArrival": "2024-11-15T08:30:00",
+      "status": "PENDING"
+    },
+    {
+      "id": 2,
+      "sequence": 2,
+      "containerId": 8,
+      "latitude": -12.048521,
+      "longitude": -77.045123,
+      "estimatedArrival": "2024-11-15T08:45:00",
+      "status": "PENDING"
+    }
+  ]
+}
+```
+
+### 8.3.4. To-Be Validation Interviews
+
+El diseño metodológico de las entrevistas fueron aplicadas a los tres segmentos objetivo. La estructura garantiza consistencia comparativa, evidencia utilizable y alineación con los experimentos clave diseñados previamente.
+
+#### 8.3.4.1. Diseño de Entrevistas
+
+Dado que WasteTrack conecta tres roles fundamentales en el ecosistema de gestión de residuos (administradores municipales, conductores de recolección y ciudadanos), se han diseñado tres guías de entrevista diferenciadas, cada una centrada en la interacción con el landing page y con los prototipos específicos de su segmento.
+
+A. Guía de Entrevista: Segmento Administrador Municipal
+
+Objetivo:
+Validar si el dashboard municipal, la configuración de umbrales, las rutas optimizadas y los reportes operativos mejoran la capacidad del administrador para tomar decisiones informadas, reducir trabajo reactivo y aumentar la percepción de control sobre el servicio.
+
+Introducción:
+“Buenos días. Estamos desarrollando WasteTrack, una plataforma diseñada por estudiantes de la UPC para ayudar a las , conductores y ciudadanos a gestionar de forma más inteligente la recolección de residuos. Nos gustaría mostrarle la landing page y algunos pantallazos del sistema para conocer su opinión honesta sobre si esto mejoraría la forma en que hoy planifica y supervisa el servicio de limpieza.”
+
+Bloque 1: Validación de la Propuesta de Valor (Landing Page y visión del producto)
+
+* Al revisar esta página principal (landing page), ¿qué entiende que hace WasteTrack?
+* ¿Le queda claro que la solución combina sensores IoT, rutas optimizadas y paneles de monitoreo?
+* ¿La información presentada en esta landing le resulta suficiente y creíble para considerar pedir una demo o más información?
+
+Bloque 2: Gestión Operativa (Dashboard, alertas y rutas)
+
+* Le mostramos el “Dashboard Municipal” con contenedores en diferentes niveles de llenado. ¿Considera que esta visualización le ayudaría a detectar problemas antes de que los contenedores se desborden?
+* Aquí puede ver la generación de una ruta optimizada a partir de los contenedores críticos. ¿Cree que este enfoque reemplazaría o complementaría la forma en que hoy define sus rutas?
+* ¿Qué tan útil le resulta poder ajustar los umbrales de alerta (porcentaje de llenado, tiempo de permanencia, etc.) desde una pantalla de configuración?
+
+Bloque 3: Cierre y Adopción
+
+* Comparado con cómo supervisa hoy la recolección de residuos (hojas de cálculo, llamadas, reportes manuales), ¿cree que WasteTrack mejoraría su capacidad para justificar decisiones frente a sus superiores o a la ciudadanía?
+* Si el piloto demostrara mejoras operativas claras, ¿vería viable impulsar la adopción de una solución como WasteTrack en su municipalidad?
+
+B. Guía de Entrevista: Segmento Conductores de Recolección
+
+Objetivo:
+Validar si la aplicación móvil del conductor (rutas asignadas, marcación de puntos atendidos, reporte de incidencias y modo offline) facilita la ejecución diaria de la recolección, reduce confusiones en campo y mejora la comunicación con la municipalidad.
+
+Introducción:
+“Buenos días/tardes. Como parte de un proyecto de ingeniería, estamos diseñando WasteTrack, una aplicación que busca organizar mejor las rutas de recolección y la comunicación entre la municipalidad y los conductores. Queremos mostrarle algunos ejemplos de cómo vería su ruta y cómo reportaría problemas, para saber si esto encaja con su trabajo real de todos los días.”
+
+Bloque 1: Ruta y Progreso en Campo
+
+* Aquí puede ver la pantalla de ‘Ruta del día’, con las paradas marcadas en un mapa. ¿Le resulta clara la forma en que se muestra el recorrido?
+* ¿Le sería útil poder ver el orden de las paradas y la distancia aproximada entre cada punto desde la aplicación?
+* Cuando llega a un punto de recolección, esta opción permite marcarlo como “Atendido”. ¿Cree que esta forma de registrar su avance es sencilla y realista para su jornada?
+
+Bloque 2: Incidencias y Modo Offline
+
+* Si encuentra un contenedor bloqueado o dañado, desde esta pantalla puede tomar una foto y escribir una breve descripción. ¿Ve viable usar esta función durante su turno?
+* En muchos lugares no hay buena señal. Aquí la app guarda la información y la envía cuando vuelve el internet. ¿Este comportamiento se ajusta a lo que vive en sus rutas?
+* ¿Qué tipo de mensajes o alertas le gustaría recibir en el celular cuando la municipalidad cambie su ruta o añada un punto de emergencia?
+
+Bloque 3: Cierre y Adopción
+
+* Comparado con recibir una hoja impresa o solo un mensaje por WhatsApp, ¿cree que una app como esta le ayudaría a sentirse más organizado o a terminar antes su ruta?
+* Si la municipalidad le proporcionara un celular con la aplicación instalada y una breve capacitación, ¿estaría dispuesto a usar WasteTrack diariamente?
+
+C. Guía de Entrevista: Segmento Ciudadanos
+
+Objetivo:
+Validar si el portal/landing ciudadana (consultar horarios, estado de contenedores, rutas completadas y transparencia del servicio) mejora la percepción de organización, confianza y participación ciudadana en la gestión de residuos.
+
+Introducción:
+“Hola, gracias por su tiempo. Estamos desarrollando WasteTrack, una plataforma que busca que la recolección de basura en el distrito sea más predecible y transparente. Nos gustaría mostrarle una página donde puede ver horarios, contenedores cercanos y rutas completadas, para saber si esto le resultaría útil en su día a día.”
+
+Bloque 1: Horarios y Organización
+
+* En esta sección puede escribir su dirección y ver los horarios de recolección de su calle. ¿Qué tan claro le resulta el horario mostrado?
+* ¿Cree que tener esta información accesible desde una página web o desde su celular le ayudaría a organizar mejor el momento de sacar sus residuos?
+
+Bloque 2: Estado de Contenedores y Transparencia
+
+* Aquí se muestra un mapa con contenedores cercanos, usando colores para indicar si están vacíos, casi llenos o críticos. ¿Entiende fácilmente lo que significan los colores?
+* ¿Le resultaría útil revisar este mapa antes de salir de casa para evitar llevar su basura a un contenedor que ya está desbordado?
+* En esta otra sección se muestran rutas completadas y métricas básicas del servicio (por ejemplo, cuántas rutas se realizaron en la semana). ¿Cree que este tipo de información aumenta su confianza en el trabajo de la municipalidad?
+
+Bloque 3: Cierre y Adopción
+
+* Si la municipalidad lanzara oficialmente WasteTrack y difundiera esta página, ¿usted la usaría para informarse sobre el servicio de limpieza de su zona?
+* ¿Qué información adicional le gustaría encontrar para sentir que la municipalidad está siendo transparente con usted?
+
+Criterios de Éxito para la Validación
+
+Para considerar validada la propuesta “To-Be” de WasteTrack – EcoLutions, se esperan los siguientes resultados cualitativos y cuantitativos derivados de las entrevistas:
+
+Administradores municipales:
+
+* La mayoría de los entrevistados indica que el dashboard, las alertas y las rutas optimizadas les permitirían tomar decisiones más informadas y menos reactivas.
+* Se reconoce que la visualización centralizada de contenedores y métricas operativas es más clara y eficiente que los métodos actuales basados en reportes dispersos o hojas de cálculo.
+
+Conductores de recolección:
+
+* La mayoría expresa que ver la ruta del día en una app, marcar puntos atendidos y reportar incidencias es más práctico que los esquemas actuales basados en papel o mensajes informales.
+* Se valida que el flujo de uso (incluyendo modo offline) es compatible con las condiciones reales de trabajo en campo.
+
+Ciudadanos:
+
+* La mayoría manifiesta que la posibilidad de consultar horarios de recolección, revisar el estado de contenedores cercanos y ver rutas completadas mejora su percepción de orden y transparencia del servicio.
+* Se identifica disposición a utilizar el portal/landing ciudadana si la municipalidad comunica adecuadamente su existencia.
+
+Usabilidad (heurísticas):
+
+* Se confirma que, en términos generales, la interfaz es comprensible para usuarios no técnicos, con textos claros, iconografía adecuada y feedback visible.
+* Los hallazgos de la evaluación heurística (problemas de navegación, etiquetado o visibilidad del estado del sistema) se consideran corregibles sin necesidad de replantear por completo la propuesta de interacción.
+
+#### 8.3.4.2. Registro de Entrevistas
+
+## 8.4. Experiment Aftermath & Analysis
+
+### 8.4.1. Analysis and Interpretation of Results
+Experiment Card 1: Dashboard de contenedores críticos
+
+Pregunta:
+¿Mejorará la eficiencia operativa un dashboard de contenedores críticos?
+
+Hipótesis:
+La incorporación de un dashboard centralizado tiene un efecto en la eficiencia con la que los administradores identifican y gestionan contenedores críticos.
+
+Participantes del experimento
+
+| Participante               | Segmento                | Grupo   | Comportamiento observado                                                                                                                                           |
+| -------------------------- | ----------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Alejandro Becerril Puerta  | Administrador municipal | Test    | Utiliza el dashboard para identificar rápidamente contenedores críticos y reordenar prioridades sin recurrir a múltiples archivos de Excel ni llamadas.            |
+| Angie Vivian Yancás Celada | Administrador municipal | Test    | Explora el mapa y la lista ordenada por criticidad; comenta que puede “ver de un vistazo” dónde empezar y qué zonas requieren más atención inmediata.              |
+| Pamela Rojas Aramburú      | Administrador municipal | Control | Trabaja con el método actual (Excel + WhatsApp); tarda más en consolidar información dispersa y se mantiene en un modo reactivo ante quejas y llamadas ciudadanas. |
+
+Resultados obtenidos
+
+En el grupo Test (Alejandro y Angie), el uso del dashboard de contenedores críticos permitió que los administradores identificaran en menos pasos qué zonas debían ser atendidas primero. La visualización centralizada de niveles de llenado, alertas y mapa facilitó que prioricen sectores sin necesidad de revisar varios documentos o depender únicamente de reportes telefónicos. Ambos describieron la experiencia como “más clara” y alineada con el trabajo diario de planificación.
+
+En el grupo Control (Pamela), al aplicar el flujo actual basado en hojas de cálculo y mensajes de WhatsApp, se evidenció una mayor carga operativa para reunir la información necesaria antes de tomar decisiones. La priorización de zonas críticas siguió dependiendo de quejas ciudadanas y de la experiencia previa, manteniendo el patrón de reacción más que de prevención.
+
+Interpretación de Resultados
+
+* Hipótesis respaldada: Los comportamientos observados muestran que el dashboard tiene un efecto positivo en la eficiencia operativa, al reducir la fragmentación de la información y soportar decisiones más rápidas.
+* Menos trabajo reactivo: El grupo Test pudo anticipar focos de riesgo antes de recibir quejas, mientras que el grupo Control continuó respondiendo principalmente a incidentes ya ocurridos.
+* Mejora en la visibilidad del sistema: La vista unificada de contenedores, criticidad y mapa permitió entender mejor el estado del servicio, algo que no se logra fácilmente solo con Excel o reportes dispersos.
+* Alineación con necesidades reales: Las frustraciones expresadas en las entrevistas (falta de datos en tiempo real, planificación manual) se ven directamente mitigadas por la funcionalidad evaluada.
+* Implicación para el producto: El dashboard de contenedores críticos se confirma como un componente central de WasteTrack – EcoLutions para el segmento municipal y debe priorizarse en las siguientes iteraciones.
+
+---
+
+Experiment Card 2: Predicción de llenado basada en datos históricos
+
+Pregunta:
+¿Reducirá desbordes la predicción de llenado basada en datos históricos?
+
+Hipótesis:
+La introducción de un modelo predictivo tiene un efecto en la planificación y prevención de desbordes en los contenedores.
+
+Participantes del experimento
+
+| Participante               | Segmento                | Grupo   | Comportamiento observado                                                                                                                                                 |
+| -------------------------- | ----------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Alejandro Becerril Puerta  | Administrador municipal | Test    | Utiliza las predicciones de llenado para adelantar la recolección en contenedores con alta velocidad de llenado; ajusta la ruta antes de que se reporten desbordes.      |
+| Angie Vivian Yancás Celada | Administrador municipal | Test    | Revisa el panel de riesgo anticipado y decide reforzar ciertas zonas; indica que “ayuda a priorizar dónde no podemos darnos el lujo de llegar tarde”.                    |
+| Pamela Rojas Aramburú      | Administrador municipal | Control | Opera sin predicción, basándose solo en niveles actuales y quejas; algunos contenedores simulados llegan a situación crítica antes de ser incluidos en la planificación. |
+
+Resultados obtenidos
+
+En el grupo Test, los administradores integraron la predicción como un criterio adicional de decisión. En los escenarios simulados, tendieron a adelantar la atención de contenedores catalogados como de “alto riesgo futuro”, incluso si su nivel actual no era todavía crítico. Reportaron que esta información les permitió “jugar a favor del tiempo” y no únicamente reaccionar a la situación del día.
+
+En el grupo Control, la planificación permaneció centrada en el estado actual o en la presión de las quejas ciudadanas. Los escenarios con contenedores de crecimiento rápido de llenado terminaron en situaciones cercanas al desborde antes de entrar en la ruta, reforzando la sensación de operar “siempre corriendo detrás del problema”.
+
+Interpretación de Resultados
+
+* Hipótesis respaldada: La predicción de llenado tuvo un efecto claro en la manera en que los administradores ordenaron prioridades y seleccionaron contenedores para sus rutas.
+* Cambio de mentalidad: El grupo Test pasó de un enfoque puramente reactivo a uno preventivo, utilizando la información histórica y proyectada para decidir dónde intervenir antes.
+* Mejor uso de recursos limitados: Tanto Alejandro como Angie percibieron que la predicción ayuda a enfocar los pocos camiones disponibles en los puntos de mayor impacto potencial.
+* Dependencia actual de señales tardías: El comportamiento del grupo Control evidenció que sin predicción el sistema sigue dependiendo de quejas, llamadas e inspecciones tardías.
+* Relevancia estratégica: La funcionalidad de predicción se confirma como un diferenciador clave de WasteTrack, alineado con el objetivo de reducir desbordes y optimizar el uso de la flota.
+
+---
+
+Experiment Card 3: Priorización de reportes ciudadanos
+
+Pregunta:
+¿Aumentará la rapidez de gestión un módulo de priorización de reportes ciudadanos?
+
+Hipótesis:
+La implementación de un sistema de priorización automática tiene un efecto en los tiempos de resolución de reportes ciudadanos.
+
+Participantes del experimento
+
+| Participante                | Segmento                | Grupo   | Comportamiento observado                                                                                                                                                     |
+| --------------------------- | ----------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Pamela Rojas Aramburú       | Administrador municipal | Test    | Usa la cola de reportes con etiquetas Alta/Media/Baja; atiende primero desbordes y puntos cercanos a colegios; percibe “orden” en lugar de revisar caso por caso sin filtro. |
+| Alejandro Becerril Puerta   | Administrador municipal | Control | Gestiona reportes en orden de llegada; tarda más en identificar cuáles son realmente críticos y cuáles pueden esperar.                                                       |
+| Leonardo Meléndez Álvarez   | Ciudadano               | Test    | Envía un reporte de acumulación; observa que el caso se atiende con rapidez en el escenario simulado y valora tener visibilidad del estado de su reporte.                    |
+| Miguel Ángel López Sandoval | Ciudadano               | Control | Reporta un problema por el canal tradicional; percibe demora y falta de información sobre qué está pasando con su reclamo.                                                   |
+
+Resultados obtenidos
+
+En el grupo Test, el módulo de priorización permitió que los administradores enfocaran sus esfuerzos en reportes de alta severidad (desbordes, zonas escolares, áreas de alto tránsito peatonal) antes de revisar casos menos urgentes. Pamela describió la experiencia como más estructurada y consistente, con menos sensación de “estar apagando incendios al azar”. Desde el lado ciudadano, Leonardo valoró que su reporte crítico reciba atención visible dentro del flujo simulado.
+
+En el grupo Control, la revisión en orden cronológico llevó a que reportes menos urgentes compitieran por atención con casos realmente críticos. Alejandro expresó que sin un criterio automático, la identificación de prioridades dependía demasiado de memoria, intuición y tiempo disponible, generando mayores retrasos percibidos por los ciudadanos en problemas graves.
+
+Interpretación de Resultados
+
+* Hipótesis respaldada: La priorización automática muestra un efecto positivo en la gestión de reportes, al orientar más rápidamente recursos hacia los casos críticos.
+* Aumento de consistencia: El grupo Test evidenció decisiones más homogéneas, ya que el sistema sugiere qué atender primero, reduciendo la variabilidad entre administradores.
+* Mejora en la percepción ciudadana: El comportamiento observado en el caso de Leonardo sugiere que ver su problema atendido con mayor rapidez mejora la confianza en el sistema municipal.
+* Riesgos a considerar: La efectividad del módulo depende de reglas de clasificación bien diseñadas; un mal etiquetado podría invisibilizar casos importantes, por lo que se requiere monitoreo continuo.
+* Implicación para el roadmap: La priorización de reportes debe integrarse con métricas de satisfacción ciudadana y tiempos de respuesta para consolidarse como pilar de valor público de WasteTrack.
+
+---
+
+Experiment Card 4: Skeleton loading y percepción de rendimiento
+
+Pregunta:
+¿Mejorará la adopción la optimización de carga mediante skeleton loading?
+
+Hipótesis:
+La introducción de skeleton loading tiene un efecto en la percepción de rendimiento y en la adopción del sistema por parte de los usuarios.
+
+Participantes del experimento
+
+| Participante                | Segmento                 | Grupo   | Comportamiento observado                                                                                                               |
+| --------------------------- | ------------------------ | ------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Irving Allca                | Conductor de recolección | Test    | Ve skeletons mientras carga la ruta del día; comenta que “parece que la app está trabajando” y espera sin cerrar ni recargar.          |
+| Mateo Sánchez               | Conductor de recolección | Control | Observa una pantalla en blanco durante la carga; piensa que la app se congeló y considera cerrar o retroceder.                         |
+| Angie Vivian Yancás Celada  | Administrador municipal  | Test    | Interactúa con el dashboard con skeletons; percibe la carga como más fluida y entiende que la información aún se está preparando.      |
+| Pamela Rojas Aramburú       | Administrador municipal  | Control | Durante la carga sin skeletons, menciona que “no sabe si el sistema respondió” y tiende a recargar la página innecesariamente.         |
+| Leonardo Meléndez Álvarez   | Ciudadano                | Test    | Navega el mapa ciudadano; con skeletons entiende que los datos están cargando y mantiene la sesión abierta hasta ver los contenedores. |
+| Miguel Ángel López Sandoval | Ciudadano                | Control | Ante la ausencia de feedback visual, interpreta el retraso como un error y abandona la página en uno de los escenarios simulados.      |
+
+Resultados obtenidos
+
+En el grupo Test, los usuarios de los tres segmentos interpretaron la presencia de skeletons como una señal clara de que el sistema estaba respondiendo. Tanto conductores como administradores y ciudadanos manifestaron que, aunque el tiempo de carga fuese similar al escenario Control, la sensación era de mayor fluidez y menor incertidumbre. La mayoría esperó a que apareciera la información sin recurrir a recargas o cierres prematuros.
+
+En el grupo Control, la falta de feedback durante la carga generó dudas sobre si el sistema estaba funcionando. Algunos participantes intentaron recargar la página o cerrar la aplicación, lo que introduce fricción y riesgo de abandono. La experiencia fue descrita como “lenta” o “incómoda”, aun cuando el tiempo objetivo de carga no fuera mayor que en el grupo Test.
+
+Interpretación de Resultados
+
+* Hipótesis respaldada: La introducción de skeleton loading tiene un efecto positivo en la percepción de rendimiento y reduce la probabilidad de abandono durante la carga.
+* Reducción de incertidumbre: Los skeletons comunican que el sistema está activo, lo que disminuye la sensación de error y mejora la confianza del usuario en la plataforma.
+* Beneficio transversal a segmentos: El efecto favorable se observó en administradores, conductores y ciudadanos, lo que refuerza la relevancia de esta mejora de UX a nivel global del producto.
+* Importancia del diseño coherente: Para maximizar el beneficio, los skeletons deben reflejar la estructura real del contenido final; cualquier desalineación puede generar confusión adicional.
+* Justificación de priorización: Dado que no implica cambios funcionales profundos y tiene impacto directo en adopción y satisfacción, el skeleton loading se justifica como mejora prioritaria de la experiencia de WasteTrack – EcoLutions.
+
+### 8.4.2. Re-scored and Re-prioritized Question Backlog
+
+A partir de los resultados de las entrevistas de validación y de los cuatro experimentos, el Question Backlog se reordenó considerando dos criterios principales:
+
+* (a) **Impacto estratégico en WasteTrack – EcoLutions** (reducción de desbordes, eficiencia operativa, valor público)
+* (b) **Grado de incertidumbre remanente** (qué tan necesario es seguir experimentando / afinando esa pregunta).
+
+Nuevo Question Backlog
+
+| Nueva prioridad | Pregunta                                                                           | Comentario síntesis                                                                                                  |
+|-----------------| ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Alta            | ¿Reducirá desbordes la predicción de llenado basada en datos históricos?           | Alta palanca operativa y aún con incertidumbre técnica (calidad de datos, modelos, adopción en planificación).       |
+| Alta            | ¿Aumentará la rapidez de gestión un módulo de priorización de reportes ciudadanos? | Impacto directo en tiempos de atención y percepción ciudadana; reglas de priorización requieren más iteraciones.     |
+| Media           | ¿Mejorará la eficiencia operativa un dashboard de contenedores críticos?           | Hipótesis fuertemente respaldada; se mantiene clave, pero con menor riesgo que predicción y priorización.            |
+| Media           | ¿Mejorará la adopción la optimización de carga mediante skeleton loading?          | Experimento exitoso y de bajo riesgo; ya se considera una mejora táctica más que una gran incertidumbre estratégica. |
+
+
+
+## 8.5. Continuous Learning
+
+### 8.5.1. Shareback Session Artifacts: Learning Workflow
+
+El workflow de WasteTrack – EcoLutions tiene como finalidad que todo lo descubierto en entrevistas, experimentos y validaciones de usabilidad no se quede “en la cabeza” de unos pocos, sino que se transforme en decisiones claras sobre el producto. Las sesiones de *shareback* son el espacio donde el equipo consolida evidencias de los tres segmentos (administrador municipal, conductor y ciudadano), revisa el avance de las Experiment Cards y ajusta el rumbo del proyecto de forma continua.
+
+Objetivos del flujo de aprendizaje
+
+* Alinear al equipo sobre qué está funcionando y qué no en los flujos clave:
+  dashboard de contenedores, predicción de llenado, priorización de reportes y experiencia de carga (skeleton loading).
+* Transformar las entrevistas de validación y heurísticas de UX en cambios concretos en el Product Backlog, Question Backlog y Experiment Cards.
+* Evitar repetir errores o fricciones detectadas en pilotos con municipios y conductores, documentando buenas prácticas y anti-patrones.
+* Mantener una visión compartida del impacto de WasteTrack en la reducción de desbordes, la eficiencia operativa y la confianza ciudadana.
+
+Flujo de trabajo de aprendizaje y shareback
+
+1. Captura sistemática de insumos
+
+    * Fuentes:
+
+        * Entrevistas grabadas y resúmenes con administradores municipales, conductores y ciudadanos.
+        * Resultados de los experimentos (dashboard, predicción, priorización, skeleton loading).
+        * Evaluaciones heurísticas de las interfaces municipal, conductor y ciudadana.
+        * Datos de uso de los prototipos (tiempos de tarea, pantallas abandonadas, rutas completadas en simulaciones).
+    * Artefactos generados:
+
+        * Fichas de entrevista por participante (como las de Alejandro, Irving, Leonardo, etc.).
+        * Notas rápidas de observación durante pruebas de usabilidad.
+        * Tablas de resultados por experimento (grupo Test vs Control).
+
+2. Análisis y síntesis por segmento
+
+    * El equipo resume aprendizajes por cada rol:
+
+        * Municipal: decisiones más rápidas con dashboard, interés en predicción, necesidad de reglas claras de priorización.
+        * Conductor: estrés por tráfico, valor de rutas claras y feedback visual durante la carga, importancia del modo offline.
+        * Ciudadano: demanda de transparencia, necesidad de ver horarios y estado de contenedores, frustración por quejas no atendidas.
+    * Los hallazgos se condensan en artefactos de síntesis:
+
+        * “Matriz de insights” organizada en tres ejes: Operación (back-office), Campo (conductor), Ciudadanía (front-office).
+        * Lista de problemas recurrentes (ej. falta de feedback, dificultad para priorizar, incertidumbre sobre estado del servicio).
+        * Conjunto de oportunidades de mejora vinculadas a historias de usuario y a las Experiment Cards.
+
+3. Sesiones de shareback por sprint
+
+    * Al final de cada sprint, el equipo realiza una sesión interna de *shareback* con este formato:
+
+        * Presentación corta de resultados de entrevistas y experimentos (qué se probó, qué observamos).
+        * Revisión conjunta de las 4 Experiment Cards y del Question Backlog re-priorizado.
+        * Identificación de aprendizajes clave:
+
+            * Ejemplo: “El dashboard ya está validado como útil, pero la verdadera incertidumbre ahora está en la predicción de llenado”.
+            * Ejemplo: “La priorización de reportes mejora la rapidez, pero necesitamos ajustar las reglas de severidad por contexto”.
+        * Discusión y registro de decisiones:
+
+            * Qué se mantiene, qué se cambia y qué se descarta en la siguiente iteración.
+    * Artefactos de salida de cada sesión:
+
+        * Minuta de aprendizaje del sprint (1 página).
+        * Product Backlog ajustado (reordenación de historias, creación de nuevas).
+        * Question Backlog actualizado con nueva prioridad.
+        * Experiment Cards refinadas (nueva versión de hipótesis, método o métricas de observación).
+
+4. Implementación y cierre del ciclo de aprendizaje
+
+    * Las mejoras acordadas se traducen en:
+
+        * Ajustes en las interfaces (dashboard, app del conductor, portal ciudadano).
+        * Cambios en reglas de negocio (umbrales, criterios de priorización de reportes, parametrización de predicción).
+        * Nuevos experimentos o variantes A/B cuando aún persiste incertidumbre.
+    * En el siguiente sprint, el equipo vuelve a:
+
+        * Observar cómo reaccionan administradores, conductores y ciudadanos a los cambios.
+        * Verificar si los problemas detectados disminuyen (menos desbordes simulados, menos abandono en la app, menos ambigüedad en la carga).
+        * Registrar nuevos aprendizajes que alimentan la siguiente sesión de *shareback*.
+
+5. Cultura de mejora continua
+
+    * Las sesiones de *shareback* se convierten en una práctica recurrente, no solo un hito puntual del proyecto:
+
+        * Después de cada experimento importante (p. ej. nueva versión de predicción de llenado) se ejecuta un mini-shareback para registrar qué se aprendió.
+        * Se incentiva que todos los roles del equipo (negocio, UX, data, desarrollo) traigan evidencia y no solo opiniones.
+        * Los aprendizajes más relevantes se consolidan en una “línea de tiempo de aprendizaje” del proyecto, que muestra cómo WasteTrack – EcoLutions ha ido evolucionando a partir de datos reales y feedback de usuarios.
+
+
+## 8.6. To-Be Software Platform Pre-launch
+
+### 8.6.1. About-the-Product Intro Video
+
 # Conclusiones
 
 Este proyecto demuestra la capacidad del equipo para abordar un problema complejo de manera integral y metódica. Al seguir un proceso de diseño de software bien estructurado, el grupo no solo identificó y analizó una problemática real en la gestión de residuos, sino que también propuso una solución tecnológica viable y centrada en las necesidades del usuario.
