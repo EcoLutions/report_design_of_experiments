@@ -7053,50 +7053,105 @@ El diseño metodológico de las entrevistas fueron aplicadas a los tres segmento
 
 #### 8.3.4.1. Diseño de Entrevistas
 
-Preguntas generales:
+Dado que WasteTrack conecta tres roles fundamentales en el ecosistema de gestión de residuos (administradores municipales, conductores de recolección y ciudadanos), se han diseñado tres guías de entrevista diferenciadas, cada una centrada en la interacción con el landing page y con los prototipos específicos de su segmento.
 
-* ¿Podría decirme su nombre completo, por favor?
-* ¿Cuál es su edad y en qué distrito reside actualmente?
-* ¿A qué se dedica actualmente (ocupación o rol profesional)?
+A. Guía de Entrevista: Segmento Administrador Municipal
 
-**ADMINISTRADOR MUNICIPAL**
+Objetivo:
+Validar si el dashboard municipal, la configuración de umbrales, las rutas optimizadas y los reportes operativos mejoran la capacidad del administrador para tomar decisiones informadas, reducir trabajo reactivo y aumentar la percepción de control sobre el servicio.
 
-* Pensando en la landing page de WasteTrack, ¿qué impresión le genera la propuesta de valor y el mensaje principal? ¿Le queda claro qué hace la plataforma?
-* ¿Qué impresión le genera el diseño visual del dashboard (colores, distribución de tarjetas, gráficos y mapa)?
-* ¿Le parece que la aplicación web administrativa es intuitiva y fácil de usar? ¿Por qué?
-* ¿Cómo evalúa la experiencia de navegación dentro del panel municipal? ¿Le resulta sencillo moverse entre las diferentes secciones?
-* ¿El flujo para identificar contenedores críticos le resultó claro? ¿Sintió que podía priorizar rápidamente dónde actuar primero?
-* ¿La configuración de umbrales de alerta le pareció comprensible? ¿Cambiaría algo de ese proceso?
-* ¿Las pantallas disponibles le permiten cubrir las acciones que realiza hoy en la gestión de residuos (monitoreo, rutas, incidencias, reportes)? ¿Qué le faltaría?
-* Desde su perspectiva, ¿cuál considera que es el punto más fuerte o destacado del dashboard municipal de WasteTrack?
-* ¿Qué beneficios cree que esta plataforma puede aportar a su municipio en términos de operación, costos y transparencia?
-* ¿Ha podido acceder fácilmente a la información que buscaba mediante los distintos botones, filtros y secciones? ¿Hubo algo confuso o poco visible?
+Introducción:
+“Buenos días. Estamos desarrollando WasteTrack, una plataforma diseñada por estudiantes de la UPC para ayudar a las , conductores y ciudadanos a gestionar de forma más inteligente la recolección de residuos. Nos gustaría mostrarle la landing page y algunos pantallazos del sistema para conocer su opinión honesta sobre si esto mejoraría la forma en que hoy planifica y supervisa el servicio de limpieza.”
 
-**CONDUCTOR DE RECOLECCIÓN**
+Bloque 1: Validación de la Propuesta de Valor (Landing Page y visión del producto)
 
-* ¿Qué impresión le genera el diseño visual de la app del conductor (colores, iconos, mapa, lista de paradas)?
-* ¿Le parece que la app es intuitiva para usarla mientras trabaja en ruta? ¿Por qué?
-* ¿Cómo evalúa la experiencia de navegación entre las pantallas de “Ruta del día”, detalle de parada e incidencias? ¿Le resultó fácil entender qué hacer en cada una?
-* ¿El proceso para ver la ruta asignada y seguir las paradas le resultó claro? ¿Cambiaría algo del mapa o de la lista de puntos?
-* Cuando marcó un punto como “Atendido”, ¿la acción y el feedback de la app fueron suficientemente claros? ¿Sintió que el sistema registró bien su avance?
-* ¿Qué tan sencillo le resultó reportar una incidencia (subir foto, escribir descripción, enviar)? ¿Le faltó alguna opción o información en ese proceso?
-* En el escenario sin conexión (modo offline), ¿entendió qué estaba pasando y qué iba a ocurrir con los datos cuando volviera la señal?
-* Desde su perspectiva, ¿cuál considera que es el punto más fuerte o útil de la app para ayudarle en su trabajo diario?
-* ¿Qué beneficios cree que esta app puede aportar a su jornada (tiempos, esfuerzo, comunicación con el área municipal)?
-* ¿Encontró algún momento en el que no supiera qué botón presionar o a dónde ir dentro de la app? Si es así, ¿en qué parte ocurrió?
+* Al revisar esta página principal (landing page), ¿qué entiende que hace WasteTrack?
+* ¿Le queda claro que la solución combina sensores IoT, rutas optimizadas y paneles de monitoreo?
+* ¿La información presentada en esta landing le resulta suficiente y creíble para considerar pedir una demo o más información?
 
-**CIUDADANO**
+Bloque 2: Gestión Operativa (Dashboard, alertas y rutas)
 
-* Pensando en la landing page y en el portal ciudadano, ¿qué impresión le genera el diseño visual (colores, ilustraciones, organización del contenido)?
-* ¿Le parece que el sitio es intuitivo y fácil de entender para alguien que quiere informarse sobre el servicio de recolección? ¿Por qué?
-* ¿Cómo evalúa la experiencia de navegación al buscar información sobre horarios de recolección en su calle o zona? ¿Le resultó sencillo completar esa tarea?
-* Cuando revisó el estado de los contenedores cercanos en el mapa, ¿entendió rápidamente qué significaban los colores y símbolos?
-* ¿La sección de transparencia y rutas completadas le ayudó a entender qué está haciendo la municipalidad respecto a la gestión de residuos? ¿Qué mejoraría ahí?
-* ¿Siente que la información mostrada (horarios, estado de contenedores, rutas completadas) es suficiente para tomar decisiones como “cuándo sacar la basura” o “a qué punto acercarse”?
-* Desde su perspectiva, ¿cuál considera que es el punto más fuerte o más valioso del portal ciudadano de WasteTrack?
-* ¿Qué beneficios cree que esta plataforma puede aportar a su barrio o comunidad en términos de limpieza, orden y confianza en la gestión municipal?
-* ¿Hubo algún texto, ícono o pantalla que le haya parecido confusa, poco clara o difícil de encontrar? ¿Cuál y por qué?
+* Le mostramos el “Dashboard Municipal” con contenedores en diferentes niveles de llenado. ¿Considera que esta visualización le ayudaría a detectar problemas antes de que los contenedores se desborden?
+* Aquí puede ver la generación de una ruta optimizada a partir de los contenedores críticos. ¿Cree que este enfoque reemplazaría o complementaría la forma en que hoy define sus rutas?
+* ¿Qué tan útil le resulta poder ajustar los umbrales de alerta (porcentaje de llenado, tiempo de permanencia, etc.) desde una pantalla de configuración?
 
+Bloque 3: Cierre y Adopción
+
+* Comparado con cómo supervisa hoy la recolección de residuos (hojas de cálculo, llamadas, reportes manuales), ¿cree que WasteTrack mejoraría su capacidad para justificar decisiones frente a sus superiores o a la ciudadanía?
+* Si el piloto demostrara mejoras operativas claras, ¿vería viable impulsar la adopción de una solución como WasteTrack en su municipalidad?
+
+B. Guía de Entrevista: Segmento Conductores de Recolección
+
+Objetivo:
+Validar si la aplicación móvil del conductor (rutas asignadas, marcación de puntos atendidos, reporte de incidencias y modo offline) facilita la ejecución diaria de la recolección, reduce confusiones en campo y mejora la comunicación con la municipalidad.
+
+Introducción:
+“Buenos días/tardes. Como parte de un proyecto de ingeniería, estamos diseñando WasteTrack, una aplicación que busca organizar mejor las rutas de recolección y la comunicación entre la municipalidad y los conductores. Queremos mostrarle algunos ejemplos de cómo vería su ruta y cómo reportaría problemas, para saber si esto encaja con su trabajo real de todos los días.”
+
+Bloque 1: Ruta y Progreso en Campo
+
+* Aquí puede ver la pantalla de ‘Ruta del día’, con las paradas marcadas en un mapa. ¿Le resulta clara la forma en que se muestra el recorrido?
+* ¿Le sería útil poder ver el orden de las paradas y la distancia aproximada entre cada punto desde la aplicación?
+* Cuando llega a un punto de recolección, esta opción permite marcarlo como “Atendido”. ¿Cree que esta forma de registrar su avance es sencilla y realista para su jornada?
+
+Bloque 2: Incidencias y Modo Offline
+
+* Si encuentra un contenedor bloqueado o dañado, desde esta pantalla puede tomar una foto y escribir una breve descripción. ¿Ve viable usar esta función durante su turno?
+* En muchos lugares no hay buena señal. Aquí la app guarda la información y la envía cuando vuelve el internet. ¿Este comportamiento se ajusta a lo que vive en sus rutas?
+* ¿Qué tipo de mensajes o alertas le gustaría recibir en el celular cuando la municipalidad cambie su ruta o añada un punto de emergencia?
+
+Bloque 3: Cierre y Adopción
+
+* Comparado con recibir una hoja impresa o solo un mensaje por WhatsApp, ¿cree que una app como esta le ayudaría a sentirse más organizado o a terminar antes su ruta?
+* Si la municipalidad le proporcionara un celular con la aplicación instalada y una breve capacitación, ¿estaría dispuesto a usar WasteTrack diariamente?
+
+C. Guía de Entrevista: Segmento Ciudadanos
+
+Objetivo:
+Validar si el portal/landing ciudadana (consultar horarios, estado de contenedores, rutas completadas y transparencia del servicio) mejora la percepción de organización, confianza y participación ciudadana en la gestión de residuos.
+
+Introducción:
+“Hola, gracias por su tiempo. Estamos desarrollando WasteTrack, una plataforma que busca que la recolección de basura en el distrito sea más predecible y transparente. Nos gustaría mostrarle una página donde puede ver horarios, contenedores cercanos y rutas completadas, para saber si esto le resultaría útil en su día a día.”
+
+Bloque 1: Horarios y Organización
+
+* En esta sección puede escribir su dirección y ver los horarios de recolección de su calle. ¿Qué tan claro le resulta el horario mostrado?
+* ¿Cree que tener esta información accesible desde una página web o desde su celular le ayudaría a organizar mejor el momento de sacar sus residuos?
+
+Bloque 2: Estado de Contenedores y Transparencia
+
+* Aquí se muestra un mapa con contenedores cercanos, usando colores para indicar si están vacíos, casi llenos o críticos. ¿Entiende fácilmente lo que significan los colores?
+* ¿Le resultaría útil revisar este mapa antes de salir de casa para evitar llevar su basura a un contenedor que ya está desbordado?
+* En esta otra sección se muestran rutas completadas y métricas básicas del servicio (por ejemplo, cuántas rutas se realizaron en la semana). ¿Cree que este tipo de información aumenta su confianza en el trabajo de la municipalidad?
+
+Bloque 3: Cierre y Adopción
+
+* Si la municipalidad lanzara oficialmente WasteTrack y difundiera esta página, ¿usted la usaría para informarse sobre el servicio de limpieza de su zona?
+* ¿Qué información adicional le gustaría encontrar para sentir que la municipalidad está siendo transparente con usted?
+
+Criterios de Éxito para la Validación
+
+Para considerar validada la propuesta “To-Be” de WasteTrack – EcoLutions, se esperan los siguientes resultados cualitativos y cuantitativos derivados de las entrevistas:
+
+Administradores municipales:
+
+* La mayoría de los entrevistados indica que el dashboard, las alertas y las rutas optimizadas les permitirían tomar decisiones más informadas y menos reactivas.
+* Se reconoce que la visualización centralizada de contenedores y métricas operativas es más clara y eficiente que los métodos actuales basados en reportes dispersos o hojas de cálculo.
+
+Conductores de recolección:
+
+* La mayoría expresa que ver la ruta del día en una app, marcar puntos atendidos y reportar incidencias es más práctico que los esquemas actuales basados en papel o mensajes informales.
+* Se valida que el flujo de uso (incluyendo modo offline) es compatible con las condiciones reales de trabajo en campo.
+
+Ciudadanos:
+
+* La mayoría manifiesta que la posibilidad de consultar horarios de recolección, revisar el estado de contenedores cercanos y ver rutas completadas mejora su percepción de orden y transparencia del servicio.
+* Se identifica disposición a utilizar el portal/landing ciudadana si la municipalidad comunica adecuadamente su existencia.
+
+Usabilidad (heurísticas):
+
+* Se confirma que, en términos generales, la interfaz es comprensible para usuarios no técnicos, con textos claros, iconografía adecuada y feedback visible.
+* Los hallazgos de la evaluación heurística (problemas de navegación, etiquetado o visibilidad del estado del sistema) se consideran corregibles sin necesidad de replantear por completo la propuesta de interacción.
 
 #### 8.3.4.2. Registro de Entrevistas
 
